@@ -5,33 +5,35 @@ import hmac
 from dotenv import load_dotenv
 import os
 
-load_dotenv()
-# Your API key and API secret
-api_key = os.environ.get('API_KEY_MFMP')
-api_secret = os.environ.get('API_SECRET_MFMP')
+try:
+    load_dotenv()
+    api_key = os.environ.get('API_KEY_MFMP')
+    api_secret = os.environ.get('API_SECRET_MFMP')
 
-# Create a timestamp
-timestamp = str(int(time.time() * 1000))
+    timestamp = str(int(time.time() * 1000))
+    params = {'timestamp': timestamp}
+    query_string = '&'.join([f"{k}={v}" for k, v in params.items()])
+    signature = hmac.new(api_secret.encode('utf-8'), query_string.encode('utf-8'), hashlib.sha256).hexdigest()
+    params['signature'] = signature
 
-# Define your parameters and create a query string
-params = {
-    'timestamp': timestamp
-}
-query_string = '&'.join([f"{k}={v}" for k, v in params.items()])
+    headers = {
+        'X-MBX-APIKEY': api_key,
+        'clientType': 'YOUR_CLIENT_TYPE_HERE'  # Replace with your client type
+        # Optionally add 'x-gray-env', 'x-trace-id', and 'x-user-id'
+    }
 
-# Create the signature
-signature = hmac.new(api_secret.encode('utf-8'), query_string.encode('utf-8'), hashlib.sha256).hexdigest()
+    response = requests.get(
+        "https://api.binance.com/sapi/v1/c2c/chat/retrieveChatCredential", 
+        headers=headers, 
+        params=params
+    )
+    
+    if response.status_code == 200:
+        print(response.json())
+    else:
+        print(f"Failed to get data: {response.content}")
 
-# Add the signature to your parameters
-params['signature'] = signature
+except requests.exceptions.RequestException as e:
+    print(f"An error occurred: {e}")
 
-# Create headers
-headers = {
-    'X-MBX-APIKEY': api_key
-}
 
-# Make the GET request
-response = requests.get("https://api.binance.com/sapi/v1/c2c/chat/retrieveChatCredential", headers=headers, params=params)
-
-# Print the response (or process it)
-print(response.json())
