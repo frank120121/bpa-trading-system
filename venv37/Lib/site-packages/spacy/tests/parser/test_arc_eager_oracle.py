@@ -1,23 +1,24 @@
-# coding: utf8
-from __future__ import unicode_literals
-
 import pytest
-from spacy.vocab import Vocab
+
+from spacy import registry
 from spacy.pipeline import DependencyParser
+from spacy.pipeline._parser_internals.arc_eager import ArcEager
+from spacy.pipeline._parser_internals.nonproj import projectivize
+from spacy.pipeline.dep_parser import DEFAULT_PARSER_MODEL
 from spacy.tokens import Doc
-from spacy.gold import GoldParse
-from spacy.syntax.nonproj import projectivize
-from spacy.syntax.stateclass import StateClass
-from spacy.syntax.arc_eager import ArcEager
+from spacy.training import Example
+from spacy.vocab import Vocab
 
 
 def get_sequence_costs(M, words, heads, deps, transitions):
     doc = Doc(Vocab(), words=words)
-    gold = GoldParse(doc, heads=heads, deps=deps)
-    state = StateClass(doc)
-    M.preprocess_gold(gold)
+    example = Example.from_dict(doc, {"heads": heads, "deps": deps})
+    states, golds, _ = M.init_gold_batch([example])
+    state = states[0]
+    gold = golds[0]
     cost_history = []
     for gold_action in transitions:
+        gold.update(state)
         state_costs = {}
         for i in range(M.n_moves):
             name = M.class_name(i)
@@ -40,40 +41,53 @@ def arc_eager(vocab):
     return moves
 
 
-@pytest.fixture
-def words():
-    return ["a", "b"]
+@pytest.mark.issue(7056)
+def test_issue7056():
+    """Test that the Unshift transition works properly, and doesn't cause
+    sentence segmentation errors."""
+    vocab = Vocab()
+    ae = ArcEager(
+        vocab.strings, ArcEager.get_actions(left_labels=["amod"], right_labels=["pobj"])
+    )
+    doc = Doc(vocab, words="Severe pain , after trauma".split())
+    state = ae.init_batch([doc])[0]
+    ae.apply_transition(state, "S")
+    ae.apply_transition(state, "L-amod")
+    ae.apply_transition(state, "S")
+    ae.apply_transition(state, "S")
+    ae.apply_transition(state, "S")
+    ae.apply_transition(state, "R-pobj")
+    ae.apply_transition(state, "D")
+    ae.apply_transition(state, "D")
+    ae.apply_transition(state, "D")
+    assert not state.eol()
 
 
-@pytest.fixture
-def doc(words, vocab):
-    if vocab is None:
-        vocab = Vocab()
-    return Doc(vocab, words=list(words))
-
-
-@pytest.fixture
-def gold(doc, words):
-    if len(words) == 2:
-        return GoldParse(doc, words=["a", "b"], heads=[0, 0], deps=["ROOT", "right"])
-    else:
-        raise NotImplementedError
-
-
-@pytest.mark.xfail
 def test_oracle_four_words(arc_eager, vocab):
     words = ["a", "b", "c", "d"]
     heads = [1, 1, 3, 3]
     deps = ["left", "ROOT", "left", "ROOT"]
-    actions = ["L-left", "B-ROOT", "L-left"]
+    for dep in deps:
+        arc_eager.add_action(2, dep)  # Left
+        arc_eager.add_action(3, dep)  # Right
+    actions = ["S", "L-left", "B-ROOT", "S", "D", "S", "L-left", "S", "D"]
     state, cost_history = get_sequence_costs(arc_eager, words, heads, deps, actions)
+    expected_gold = [
+        ["S"],
+        ["B-ROOT", "L-left"],
+        ["B-ROOT"],
+        ["S"],
+        ["D"],
+        ["S"],
+        ["L-left"],
+        ["S"],
+        ["D"],
+    ]
     assert state.is_final()
     for i, state_costs in enumerate(cost_history):
         # Check gold moves is 0 cost
-        assert state_costs[actions[i]] == 0.0, actions[i]
-        for other_action, cost in state_costs.items():
-            if other_action != actions[i]:
-                assert cost >= 1
+        golds = [act for act, cost in state_costs.items() if cost < 1]
+        assert golds == expected_gold[i], (i, golds, expected_gold[i])
 
 
 annot_tuples = [
@@ -130,19 +144,151 @@ annot_tuples = [
 
 
 def test_get_oracle_actions():
+    ids, words, tags, heads, deps, ents = [], [], [], [], [], []
+    for id_, word, tag, head, dep, ent in annot_tuples:
+        ids.append(id_)
+        words.append(word)
+        tags.append(tag)
+        heads.append(head)
+        deps.append(dep)
+        ents.append(ent)
     doc = Doc(Vocab(), words=[t[1] for t in annot_tuples])
-    parser = DependencyParser(doc.vocab)
+    cfg = {"model": DEFAULT_PARSER_MODEL}
+    model = registry.resolve(cfg, validate=True)["model"]
+    parser = DependencyParser(doc.vocab, model)
     parser.moves.add_action(0, "")
     parser.moves.add_action(1, "")
     parser.moves.add_action(1, "")
     parser.moves.add_action(4, "ROOT")
-    for i, (id_, word, tag, head, dep, ent) in enumerate(annot_tuples):
+    heads, deps = projectivize(heads, deps)
+    for i, (head, dep) in enumerate(zip(heads, deps)):
         if head > i:
             parser.moves.add_action(2, dep)
         elif head < i:
             parser.moves.add_action(3, dep)
-    ids, words, tags, heads, deps, ents = zip(*annot_tuples)
-    heads, deps = projectivize(heads, deps)
-    gold = GoldParse(doc, words=words, tags=tags, heads=heads, deps=deps)
-    parser.moves.preprocess_gold(gold)
-    parser.moves.get_oracle_sequence(doc, gold)
+    example = Example.from_dict(
+        doc, {"words": words, "tags": tags, "heads": heads, "deps": deps}
+    )
+    parser.moves.get_oracle_sequence(example)
+
+
+def test_oracle_dev_sentence(vocab, arc_eager):
+    words_deps_heads = """
+        Rolls-Royce nn Inc.
+        Motor nn Inc.
+        Cars nn Inc.
+        Inc. nsubj said
+        said ROOT said
+        it nsubj expects
+        expects ccomp said
+        its poss sales
+        U.S. nn sales
+        sales nsubj steady
+        to aux steady
+        remain cop steady
+        steady xcomp expects
+        at prep steady
+        about quantmod 1,200
+        1,200 num cars
+        cars pobj at
+        in prep steady
+        1990 pobj in
+        . punct said
+    """
+    expected_transitions = [
+        "S",  # Shift "Rolls-Royce"
+        "S",  # Shift 'Motor'
+        "S",  # Shift 'Cars'
+        "L-nn",  # Attach 'Cars' to 'Inc.'
+        "L-nn",  # Attach 'Motor' to 'Inc.'
+        "L-nn",  # Attach 'Rolls-Royce' to 'Inc.'
+        "S",  # Shift "Inc."
+        "L-nsubj",  # Attach 'Inc.' to 'said'
+        "S",  # Shift 'said'
+        "S",  # Shift 'it'
+        "L-nsubj",  # Attach 'it.' to 'expects'
+        "R-ccomp",  # Attach 'expects' to 'said'
+        "S",  # Shift 'its'
+        "S",  # Shift 'U.S.'
+        "L-nn",  # Attach 'U.S.' to 'sales'
+        "L-poss",  # Attach 'its' to 'sales'
+        "S",  # Shift 'sales'
+        "S",  # Shift 'to'
+        "S",  # Shift 'remain'
+        "L-cop",  # Attach 'remain' to 'steady'
+        "L-aux",  # Attach 'to' to 'steady'
+        "L-nsubj",  # Attach 'sales' to 'steady'
+        "R-xcomp",  # Attach 'steady' to 'expects'
+        "R-prep",  # Attach 'at' to 'steady'
+        "S",  # Shift 'about'
+        "L-quantmod",  # Attach "about" to "1,200"
+        "S",  # Shift "1,200"
+        "L-num",  # Attach "1,200" to "cars"
+        "R-pobj",  # Attach "cars" to "at"
+        "D",  # Reduce "cars"
+        "D",  # Reduce "at"
+        "R-prep",  # Attach "in" to "steady"
+        "R-pobj",  # Attach "1990" to "in"
+        "D",  # Reduce "1990"
+        "D",  # Reduce "in"
+        "D",  # Reduce "steady"
+        "D",  # Reduce "expects"
+        "R-punct",  # Attach "." to "said"
+        "D",  # Reduce "."
+        "D",  # Reduce "said"
+    ]
+
+    gold_words = []
+    gold_deps = []
+    gold_heads = []
+    for line in words_deps_heads.strip().split("\n"):
+        line = line.strip()
+        if not line:
+            continue
+        word, dep, head = line.split()
+        gold_words.append(word)
+        gold_deps.append(dep)
+        gold_heads.append(head)
+    gold_heads = [gold_words.index(head) for head in gold_heads]
+    for dep in gold_deps:
+        arc_eager.add_action(2, dep)  # Left
+        arc_eager.add_action(3, dep)  # Right
+    doc = Doc(Vocab(), words=gold_words)
+    example = Example.from_dict(doc, {"heads": gold_heads, "deps": gold_deps})
+    ae_oracle_actions = arc_eager.get_oracle_sequence(example, _debug=False)
+    ae_oracle_actions = [arc_eager.get_class_name(i) for i in ae_oracle_actions]
+    assert ae_oracle_actions == expected_transitions
+
+
+def test_oracle_bad_tokenization(vocab, arc_eager):
+    words_deps_heads = """
+        [catalase] dep is
+        : punct is
+        that nsubj is
+        is root is
+        bad comp is
+    """
+
+    gold_words = []
+    gold_deps = []
+    gold_heads = []
+    for line in words_deps_heads.strip().split("\n"):
+        line = line.strip()
+        if not line:
+            continue
+        word, dep, head = line.split()
+        gold_words.append(word)
+        gold_deps.append(dep)
+        gold_heads.append(head)
+    gold_heads = [gold_words.index(head) for head in gold_heads]
+    for dep in gold_deps:
+        arc_eager.add_action(2, dep)  # Left
+        arc_eager.add_action(3, dep)  # Right
+    reference = Doc(Vocab(), words=gold_words, deps=gold_deps, heads=gold_heads)
+    predicted = Doc(
+        reference.vocab, words=["[", "catalase", "]", ":", "that", "is", "bad"]
+    )
+    example = Example(predicted=predicted, reference=reference)
+    ae_oracle_actions = arc_eager.get_oracle_sequence(example, _debug=False)
+    ae_oracle_actions = [arc_eager.get_class_name(i) for i in ae_oracle_actions]
+    assert ae_oracle_actions

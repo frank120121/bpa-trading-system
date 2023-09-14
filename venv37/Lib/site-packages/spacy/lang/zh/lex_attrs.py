@@ -1,6 +1,5 @@
-# coding: utf8
-from __future__ import unicode_literals
 import re
+
 from ...attrs import LIKE_NUM
 
 _single_num_words = [

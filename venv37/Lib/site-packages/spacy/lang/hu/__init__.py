@@ -1,29 +1,16 @@
-# coding: utf8
-from __future__ import unicode_literals
-
-from .tokenizer_exceptions import TOKENIZER_EXCEPTIONS, TOKEN_MATCH
-from .punctuation import TOKENIZER_PREFIXES, TOKENIZER_SUFFIXES, TOKENIZER_INFIXES
+from ...language import BaseDefaults, Language
+from .punctuation import TOKENIZER_INFIXES, TOKENIZER_PREFIXES, TOKENIZER_SUFFIXES
 from .stop_words import STOP_WORDS
-
-from ..tokenizer_exceptions import BASE_EXCEPTIONS
-from ..norm_exceptions import BASE_NORMS
-from ...language import Language
-from ...attrs import LANG, NORM
-from ...util import update_exc, add_lookups
+from .tokenizer_exceptions import TOKEN_MATCH, TOKENIZER_EXCEPTIONS
 
 
-class HungarianDefaults(Language.Defaults):
-    lex_attr_getters = dict(Language.Defaults.lex_attr_getters)
-    lex_attr_getters[LANG] = lambda text: "hu"
-    lex_attr_getters[NORM] = add_lookups(
-        Language.Defaults.lex_attr_getters[NORM], BASE_NORMS
-    )
-    tokenizer_exceptions = update_exc(BASE_EXCEPTIONS, TOKENIZER_EXCEPTIONS)
-    stop_words = STOP_WORDS
+class HungarianDefaults(BaseDefaults):
+    tokenizer_exceptions = TOKENIZER_EXCEPTIONS
     prefixes = TOKENIZER_PREFIXES
     suffixes = TOKENIZER_SUFFIXES
     infixes = TOKENIZER_INFIXES
     token_match = TOKEN_MATCH
+    stop_words = STOP_WORDS
 
 
 class Hungarian(Language):

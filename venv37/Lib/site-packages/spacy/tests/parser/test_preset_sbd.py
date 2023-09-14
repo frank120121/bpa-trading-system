@@ -1,14 +1,13 @@
-# coding: utf8
-from __future__ import unicode_literals
-
 import pytest
-from thinc.neural.optimizers import Adam
-from thinc.neural.ops import NumpyOps
+from thinc.api import Adam
+
+from spacy import registry
 from spacy.attrs import NORM
-from spacy.gold import GoldParse
-from spacy.vocab import Vocab
-from spacy.tokens import Doc
 from spacy.pipeline import DependencyParser
+from spacy.pipeline.dep_parser import DEFAULT_PARSER_MODEL
+from spacy.tokens import Doc
+from spacy.training import Example
+from spacy.vocab import Vocab
 
 
 @pytest.fixture
@@ -16,21 +15,32 @@ def vocab():
     return Vocab(lex_attr_getters={NORM: lambda s: s})
 
 
+def _parser_example(parser):
+    doc = Doc(parser.vocab, words=["a", "b", "c", "d"])
+    gold = {"heads": [1, 1, 3, 3], "deps": ["right", "ROOT", "left", "ROOT"]}
+    return Example.from_dict(doc, gold)
+
+
 @pytest.fixture
 def parser(vocab):
-    parser = DependencyParser(vocab)
+    vocab.strings.add("ROOT")
+    cfg = {"model": DEFAULT_PARSER_MODEL}
+    model = registry.resolve(cfg, validate=True)["model"]
+    parser = DependencyParser(vocab, model)
     parser.cfg["token_vector_width"] = 4
     parser.cfg["hidden_width"] = 32
     # parser.add_label('right')
     parser.add_label("left")
-    parser.begin_training([], **parser.cfg)
-    sgd = Adam(NumpyOps(), 0.001)
+    parser.initialize(lambda: [_parser_example(parser)])
+    sgd = Adam(0.001)
 
     for i in range(10):
         losses = {}
         doc = Doc(vocab, words=["a", "b", "c", "d"])
-        gold = GoldParse(doc, heads=[1, 1, 3, 3], deps=["left", "ROOT", "left", "ROOT"])
-        parser.update([doc], [gold], sgd=sgd, losses=losses)
+        example = Example.from_dict(
+            doc, {"heads": [1, 1, 3, 3], "deps": ["left", "ROOT", "left", "ROOT"]}
+        )
+        parser.update([example], sgd=sgd, losses=losses)
     return parser
 
 
@@ -63,13 +73,16 @@ def test_sents_1_2(parser):
 
 def test_sents_1_3(parser):
     doc = Doc(parser.vocab, words=["a", "b", "c", "d"])
-    doc[1].sent_start = True
-    doc[3].sent_start = True
+    doc[0].is_sent_start = True
+    doc[1].is_sent_start = True
+    doc[2].is_sent_start = None
+    doc[3].is_sent_start = True
     doc = parser(doc)
     assert len(list(doc.sents)) >= 3
     doc = Doc(parser.vocab, words=["a", "b", "c", "d"])
-    doc[1].sent_start = True
-    doc[2].sent_start = False
-    doc[3].sent_start = True
+    doc[0].is_sent_start = True
+    doc[1].is_sent_start = True
+    doc[2].is_sent_start = False
+    doc[3].is_sent_start = True
     doc = parser(doc)
     assert len(list(doc.sents)) == 3

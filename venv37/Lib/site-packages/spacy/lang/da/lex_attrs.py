@@ -1,8 +1,4 @@
-# coding: utf8
-from __future__ import unicode_literals
-
 from ...attrs import LIKE_NUM
-
 
 # Source http://fjern-uv.dk/tal.php
 _num_words = """nul

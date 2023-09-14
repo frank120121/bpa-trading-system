@@ -1,7 +1,4 @@
-# coding: utf8
-from __future__ import unicode_literals
 from ...attrs import LIKE_NUM
-
 
 MIM = "م"
 ZWNJ_O_MIM = "‌ام"

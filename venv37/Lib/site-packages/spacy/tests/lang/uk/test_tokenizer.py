@@ -1,8 +1,4 @@
-# coding: utf-8
-from __future__ import unicode_literals
-
 import pytest
-
 
 PUNCT_OPEN = ["(", "[", "{", "*"]
 PUNCT_CLOSE = [")", "]", "}", "*"]
@@ -92,7 +88,6 @@ def test_uk_tokenizer_splits_open_appostrophe(uk_tokenizer, text):
     assert tokens[0].text == "'"
 
 
-@pytest.mark.xfail(reason="See #3327")
 @pytest.mark.parametrize("text", ["Тест''"])
 def test_uk_tokenizer_splits_double_end_quote(uk_tokenizer, text):
     tokens = uk_tokenizer(text)
@@ -144,3 +139,10 @@ def test_uk_tokenizer_splits_bracket_period(uk_tokenizer):
     text = "(Раз, два, три, проверка)."
     tokens = uk_tokenizer(text)
     assert tokens[len(tokens) - 1].text == "."
+
+
+def test_uk_tokenizer_handles_final_diacritics(uk_tokenizer):
+    text = "Хлібі́в не було́. Хлібі́в не було́."
+    tokens = uk_tokenizer(text)
+    assert tokens[2].text == "було́"
+    assert tokens[3].text == "."

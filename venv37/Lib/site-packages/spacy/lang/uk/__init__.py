@@ -1,39 +1,53 @@
-# coding: utf8
-from __future__ import unicode_literals
+from typing import Callable, Optional
 
-from .tokenizer_exceptions import TOKENIZER_EXCEPTIONS
-from .stop_words import STOP_WORDS
-from .lex_attrs import LEX_ATTRS
+from thinc.api import Model
 
-from ..tokenizer_exceptions import BASE_EXCEPTIONS
-from ..norm_exceptions import BASE_NORMS
-from ...util import update_exc, add_lookups
-from ...language import Language
-from ...lookups import Lookups
-from ...attrs import LANG, NORM
+from ...language import BaseDefaults, Language
+from ..punctuation import (
+    COMBINING_DIACRITICS_TOKENIZER_INFIXES,
+    COMBINING_DIACRITICS_TOKENIZER_SUFFIXES,
+)
 from .lemmatizer import UkrainianLemmatizer
+from .lex_attrs import LEX_ATTRS
+from .stop_words import STOP_WORDS
+from .tokenizer_exceptions import TOKENIZER_EXCEPTIONS
 
 
-class UkrainianDefaults(Language.Defaults):
-    lex_attr_getters = dict(Language.Defaults.lex_attr_getters)
-    lex_attr_getters[LANG] = lambda text: "uk"
-    lex_attr_getters[NORM] = add_lookups(
-        Language.Defaults.lex_attr_getters[NORM], BASE_NORMS
-    )
-    lex_attr_getters.update(LEX_ATTRS)
-    tokenizer_exceptions = update_exc(BASE_EXCEPTIONS, TOKENIZER_EXCEPTIONS)
+class UkrainianDefaults(BaseDefaults):
+    tokenizer_exceptions = TOKENIZER_EXCEPTIONS
+    lex_attr_getters = LEX_ATTRS
     stop_words = STOP_WORDS
-
-    @classmethod
-    def create_lemmatizer(cls, nlp=None, lookups=None):
-        if lookups is None:
-            lookups = Lookups()
-        return UkrainianLemmatizer(lookups)
+    suffixes = COMBINING_DIACRITICS_TOKENIZER_SUFFIXES
+    infixes = COMBINING_DIACRITICS_TOKENIZER_INFIXES
 
 
 class Ukrainian(Language):
     lang = "uk"
     Defaults = UkrainianDefaults
+
+
+@Ukrainian.factory(
+    "lemmatizer",
+    assigns=["token.lemma"],
+    default_config={
+        "model": None,
+        "mode": "pymorphy3",
+        "overwrite": False,
+        "scorer": {"@scorers": "spacy.lemmatizer_scorer.v1"},
+    },
+    default_score_weights={"lemma_acc": 1.0},
+)
+def make_lemmatizer(
+    nlp: Language,
+    model: Optional[Model],
+    name: str,
+    mode: str,
+    overwrite: bool,
+    scorer: Optional[Callable],
+):
+    return UkrainianLemmatizer(
+        nlp.vocab, model, name, mode=mode, overwrite=overwrite, scorer=scorer
+    )
 
 
 __all__ = ["Ukrainian"]

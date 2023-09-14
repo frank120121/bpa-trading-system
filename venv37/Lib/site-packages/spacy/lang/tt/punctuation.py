@@ -1,8 +1,12 @@
-# coding: utf8
-from __future__ import unicode_literals
-
-from ..char_classes import ALPHA, ALPHA_LOWER, ALPHA_UPPER, CONCAT_QUOTES, HYPHENS
-from ..char_classes import LIST_ELLIPSES, LIST_ICONS
+from ..char_classes import (
+    ALPHA,
+    ALPHA_LOWER,
+    ALPHA_UPPER,
+    CONCAT_QUOTES,
+    HYPHENS,
+    LIST_ELLIPSES,
+    LIST_ICONS,
+)
 
 _hyphens_no_dash = HYPHENS.replace("-", "").strip("|").replace("||", "")
 _infixes = (

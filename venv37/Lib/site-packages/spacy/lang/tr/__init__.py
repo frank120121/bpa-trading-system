@@ -1,24 +1,16 @@
-# coding: utf8
-from __future__ import unicode_literals
-
-from .tokenizer_exceptions import TOKENIZER_EXCEPTIONS
+from ...language import BaseDefaults, Language
+from .lex_attrs import LEX_ATTRS
 from .stop_words import STOP_WORDS
-
-from ..tokenizer_exceptions import BASE_EXCEPTIONS
-from ..norm_exceptions import BASE_NORMS
-from ...language import Language
-from ...attrs import LANG, NORM
-from ...util import update_exc, add_lookups
+from .syntax_iterators import SYNTAX_ITERATORS
+from .tokenizer_exceptions import TOKEN_MATCH, TOKENIZER_EXCEPTIONS
 
 
-class TurkishDefaults(Language.Defaults):
-    lex_attr_getters = dict(Language.Defaults.lex_attr_getters)
-    lex_attr_getters[LANG] = lambda text: "tr"
-    lex_attr_getters[NORM] = add_lookups(
-        Language.Defaults.lex_attr_getters[NORM], BASE_NORMS
-    )
-    tokenizer_exceptions = update_exc(BASE_EXCEPTIONS, TOKENIZER_EXCEPTIONS)
+class TurkishDefaults(BaseDefaults):
+    tokenizer_exceptions = TOKENIZER_EXCEPTIONS
+    lex_attr_getters = LEX_ATTRS
     stop_words = STOP_WORDS
+    token_match = TOKEN_MATCH
+    syntax_iterators = SYNTAX_ITERATORS
 
 
 class Turkish(Language):

@@ -1,27 +1,36 @@
-# coding: utf8
-from __future__ import unicode_literals
-
-from ...symbols import ORTH, LEMMA, POS, NORM, NOUN
-
+from ...symbols import NORM, ORTH
+from ...util import update_exc
+from ..tokenizer_exceptions import BASE_EXCEPTIONS
 
 _exc = {}
 
 for exc_data in [
-    {ORTH: "вул.", LEMMA: "вулиця", NORM: "вулиця", POS: NOUN},
-    {ORTH: "ім.", LEMMA: "ім'я", NORM: "імені", POS: NOUN},
-    {ORTH: "просп.", LEMMA: "проспект", NORM: "проспект", POS: NOUN},
-    {ORTH: "бул.", LEMMA: "бульвар", NORM: "бульвар", POS: NOUN},
-    {ORTH: "пров.", LEMMA: "провулок", NORM: "провулок", POS: NOUN},
-    {ORTH: "пл.", LEMMA: "площа", NORM: "площа", POS: NOUN},
-    {ORTH: "г.", LEMMA: "гора", NORM: "гора", POS: NOUN},
-    {ORTH: "п.", LEMMA: "пан", NORM: "пан", POS: NOUN},
-    {ORTH: "м.", LEMMA: "місто", NORM: "місто", POS: NOUN},
-    {ORTH: "проф.", LEMMA: "професор", NORM: "професор", POS: NOUN},
-    {ORTH: "акад.", LEMMA: "академік", NORM: "академік", POS: NOUN},
-    {ORTH: "доц.", LEMMA: "доцент", NORM: "доцент", POS: NOUN},
-    {ORTH: "оз.", LEMMA: "озеро", NORM: "озеро", POS: NOUN},
+    {ORTH: "обл.", NORM: "область"},
+    {ORTH: "р-н.", NORM: "район"},
+    {ORTH: "р-н", NORM: "район"},
+    {ORTH: "м.", NORM: "місто"},
+    {ORTH: "вул.", NORM: "вулиця"},
+    {ORTH: "просп.", NORM: "проспект"},
+    {ORTH: "пр-кт", NORM: "проспект"},
+    {ORTH: "бул.", NORM: "бульвар"},
+    {ORTH: "пров.", NORM: "провулок"},
+    {ORTH: "пл.", NORM: "площа"},
+    {ORTH: "майд.", NORM: "майдан"},
+    {ORTH: "мкр.", NORM: "мікрорайон"},
+    {ORTH: "ст.", NORM: "станція"},
+    {ORTH: "ж/м", NORM: "житловий масив"},
+    {ORTH: "наб.", NORM: "набережна"},
+    {ORTH: "в/ч", NORM: "військова частина"},
+    {ORTH: "в/м", NORM: "військове містечко"},
+    {ORTH: "оз.", NORM: "озеро"},
+    {ORTH: "ім.", NORM: "імені"},
+    {ORTH: "г.", NORM: "гора"},
+    {ORTH: "п.", NORM: "пан"},
+    {ORTH: "проф.", NORM: "професор"},
+    {ORTH: "акад.", NORM: "академік"},
+    {ORTH: "доц.", NORM: "доцент"},
 ]:
     _exc[exc_data[ORTH]] = [exc_data]
 
 
-TOKENIZER_EXCEPTIONS = _exc
+TOKENIZER_EXCEPTIONS = update_exc(BASE_EXCEPTIONS, _exc)

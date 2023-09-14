@@ -1,6 +1,3 @@
-# coding: utf-8
-from __future__ import unicode_literals
-
 import pytest
 
 
@@ -46,13 +43,12 @@ def test_en_tokenizer_doesnt_split_apos_exc(en_tokenizer, text):
     assert tokens[0].text == text
 
 
-@pytest.mark.parametrize("text", ["we'll", "You'll", "there'll"])
+@pytest.mark.parametrize("text", ["we'll", "You'll", "there'll", "this'll", "those'll"])
 def test_en_tokenizer_handles_ll_contraction(en_tokenizer, text):
     tokens = en_tokenizer(text)
     assert len(tokens) == 2
     assert tokens[0].text == text.split("'")[0]
     assert tokens[1].text == "'ll"
-    assert tokens[1].lemma_ == "will"
 
 
 @pytest.mark.parametrize(
@@ -107,20 +103,25 @@ def test_en_tokenizer_handles_exc_in_text(en_tokenizer):
 def test_en_tokenizer_handles_times(en_tokenizer, text):
     tokens = en_tokenizer(text)
     assert len(tokens) == 2
-    assert tokens[1].lemma_ in ["a.m.", "p.m."]
 
 
 @pytest.mark.parametrize(
-    "text,norms", [("I'm", ["i", "am"]), ("shan't", ["shall", "not"])]
+    "text,norms",
+    [
+        ("I'm", ["i", "am"]),
+        ("shan't", ["shall", "not"]),
+        (
+            "Many factors cause cancer 'cause it is complex",
+            ["many", "factors", "cause", "cancer", "because", "it", "is", "complex"],
+        ),
+    ],
 )
 def test_en_tokenizer_norm_exceptions(en_tokenizer, text, norms):
     tokens = en_tokenizer(text)
     assert [token.norm_ for token in tokens] == norms
 
 
-@pytest.mark.parametrize(
-    "text,norm", [("radicalised", "radicalized"), ("cuz", "because")]
-)
+@pytest.mark.parametrize("text,norm", [("Jan.", "January"), ("'cuz", "because")])
 def test_en_lex_attrs_norm_exceptions(en_tokenizer, text, norm):
     tokens = en_tokenizer(text)
     assert tokens[0].norm_ == norm

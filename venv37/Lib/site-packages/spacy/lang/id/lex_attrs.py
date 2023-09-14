@@ -1,11 +1,7 @@
-# coding: utf8
-from __future__ import unicode_literals
-
 import unicodedata
 
-from .punctuation import LIST_CURRENCY
 from ...attrs import IS_CURRENCY, LIKE_NUM
-
+from .punctuation import LIST_CURRENCY
 
 _num_words = [
     "nol",

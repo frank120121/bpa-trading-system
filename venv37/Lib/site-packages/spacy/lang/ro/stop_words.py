@@ -1,7 +1,3 @@
-# encoding: utf8
-from __future__ import unicode_literals
-
-
 # Source: https://github.com/stopwords-iso/stopwords-ro
 STOP_WORDS = set(
     """
@@ -12,11 +8,13 @@ aceasta
 această
 aceea
 aceeasi
+aceeași
 acei
 aceia
 acel
 acela
 acelasi
+același
 acele
 acelea
 acest
@@ -28,12 +26,11 @@ acestia
 acestui
 aceşti
 aceştia
-acești
-aceștia
 acolo
 acord
 acum
 adica
+adică
 ai
 aia
 aibă
@@ -57,6 +54,8 @@ alături
 am
 anume
 apoi
+apai
+apăi
 ar
 are
 as
@@ -154,7 +153,9 @@ că
 căci
 cărei
 căror
+cărora
 cărui
+căruia
 către
 d
 da
@@ -179,6 +180,8 @@ deşi
 deși
 din
 dinaintea
+dincolo
+dincoace
 dintr
 dintr-
 dintre
@@ -190,6 +193,10 @@ drept
 dupa
 după
 dă
+deunaseara
+deunăseară
+deunazi
+deunăzi
 e
 ea
 ei
@@ -224,7 +231,6 @@ geaba
 graţie
 grație
 h
-halbă
 i
 ia
 iar
@@ -236,6 +242,7 @@ in
 inainte
 inapoi
 inca
+incotro
 incit
 insa
 intr
@@ -256,6 +263,10 @@ m
 ma
 mai
 mare
+macar
+măcar
+mata
+matale
 mea
 mei
 mele
@@ -278,11 +289,18 @@ mâine
 mîine
 mă
 n
+na
 ne
+neincetat
+neîncetat
 nevoie
 ni
 nici
+nicidecum
+nicidecat
+nicidecât
 niciodata
+niciodată
 nicăieri
 nimeni
 nimeri
@@ -304,6 +322,10 @@ noștri
 nu
 numai
 o
+odata
+odată
+odinioara
+odinioară
 opt
 or
 ori
@@ -318,7 +340,9 @@ oricît
 oriunde
 p
 pai
+păi
 parca
+parcă
 patra
 patru
 patrulea
@@ -335,13 +359,11 @@ prima
 primul
 prin
 printr-
+printre
 putini
 puţin
 puţina
 puţină
-puțin
-puțina
-puțină
 până
 pînă
 r
@@ -419,6 +441,7 @@ unuia
 unul
 v
 va
+vai
 vi
 voastre
 voastră

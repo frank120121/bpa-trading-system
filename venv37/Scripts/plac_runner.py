@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!c:\users\p7016\documents\bpa\venv37\scripts\python.exe
 from __future__ import with_statement
 import os
 import sys
@@ -32,11 +32,11 @@ def run(fnames, cmd, verbose):
     fname='script to run (.py or .plac or .placet)',
     extra='additional arguments',
     )
-def main(verbose, interactive, multiline, serve, batch, test, fname=None,
+def main(verbose, interactive, multiline, serve, batch, test, fname='',
          *extra):
     "Runner for plac tools, plac batch files and plac tests"
     baseparser = plac.parser_from(main)
-    if fname is None:
+    if not fname:
         baseparser.print_help()
     elif sys.argv[1] == fname:  # script mode
         plactool = plac.import_main(fname)
@@ -64,6 +64,8 @@ def main(verbose, interactive, multiline, serve, batch, test, fname=None,
         print('run %s plac test(s)' % (len(extra) + 1))
     else:
         baseparser.print_usage()
+
+
 main.add_help = False
 
 if __name__ == '__main__':

@@ -1,9 +1,25 @@
-# coding: utf-8
-from __future__ import unicode_literals
+import os
 
 import pytest
-from spacy.attrs import LEMMA, ORTH, PROB, IS_ALPHA
+
+from spacy.attrs import IS_ALPHA, LEMMA, ORTH
+from spacy.lang.en import English
 from spacy.parts_of_speech import NOUN, VERB
+from spacy.vocab import Vocab
+
+from ..util import make_tempdir
+
+
+@pytest.mark.issue(1868)
+def test_issue1868():
+    """Test Vocab.__contains__ works with int keys."""
+    vocab = Vocab()
+    lex = vocab["hello"]
+    assert lex.orth in vocab
+    assert lex.orth_ in vocab
+    assert "some string" not in vocab
+    int_id = vocab.strings.add("some string")
+    assert int_id not in vocab
 
 
 @pytest.mark.parametrize(
@@ -33,7 +49,6 @@ def test_vocab_api_shape_attr(en_vocab, text):
         ("VERB", VERB),
         ("LEMMA", LEMMA),
         ("ORTH", ORTH),
-        ("PROB", PROB),
     ],
 )
 def test_vocab_api_symbols(en_vocab, string, symbol):
@@ -50,3 +65,19 @@ def test_vocab_api_contains(en_vocab, text):
 def test_vocab_writing_system(en_vocab):
     assert en_vocab.writing_system["direction"] == "ltr"
     assert en_vocab.writing_system["has_case"] is True
+
+
+def test_to_disk():
+    nlp = English()
+    with make_tempdir() as d:
+        nlp.vocab.to_disk(d)
+        assert "vectors" in os.listdir(d)
+        assert "lookups.bin" in os.listdir(d)
+
+
+def test_to_disk_exclude():
+    nlp = English()
+    with make_tempdir() as d:
+        nlp.vocab.to_disk(d, exclude=("vectors", "lookups"))
+        assert "vectors" not in os.listdir(d)
+        assert "lookups.bin" not in os.listdir(d)

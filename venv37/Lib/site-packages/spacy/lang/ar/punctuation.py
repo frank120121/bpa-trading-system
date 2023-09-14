@@ -1,8 +1,11 @@
-# coding: utf8
-from __future__ import unicode_literals
-
-from ..char_classes import LIST_PUNCT, LIST_ELLIPSES, LIST_QUOTES, CURRENCY
-from ..char_classes import UNITS, ALPHA_UPPER
+from ..char_classes import (
+    ALPHA_UPPER,
+    CURRENCY,
+    LIST_ELLIPSES,
+    LIST_PUNCT,
+    LIST_QUOTES,
+    UNITS,
+)
 
 _suffixes = (
     LIST_PUNCT

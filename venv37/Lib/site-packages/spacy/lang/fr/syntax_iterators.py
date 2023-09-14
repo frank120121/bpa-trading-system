@@ -1,10 +1,11 @@
-# coding: utf8
-from __future__ import unicode_literals
+from typing import Iterator, Tuple, Union
 
-from ...symbols import NOUN, PROPN, PRON
+from ...errors import Errors
+from ...symbols import NOUN, PRON, PROPN
+from ...tokens import Doc, Span
 
 
-def noun_chunks(obj):
+def noun_chunks(doclike: Union[Doc, Span]) -> Iterator[Tuple[int, int, int]]:
     """
     Detect base noun phrases from a dependency parse. Works on both Doc and Span.
     """
@@ -12,38 +13,73 @@ def noun_chunks(obj):
         "nsubj",
         "nsubj:pass",
         "obj",
-        "iobj",
-        "ROOT",
-        "appos",
+        "obl",
+        "obl:agent",
+        "obl:arg",
+        "obl:mod",
         "nmod",
-        "nmod:poss",
+        "pcomp",
+        "appos",
+        "ROOT",
     ]
-    doc = obj.doc  # Ensure works on both Doc and Span.
-    np_deps = [doc.vocab.strings[label] for label in labels]
-    conj = doc.vocab.strings.add("conj")
+    post_modifiers = ["flat", "flat:name", "flat:foreign", "fixed", "compound"]
+    doc = doclike.doc  # Ensure works on both Doc and Span.
+    if not doc.has_annotation("DEP"):
+        raise ValueError(Errors.E029)
+    np_deps = {doc.vocab.strings.add(label) for label in labels}
+    np_modifs = {doc.vocab.strings.add(modifier) for modifier in post_modifiers}
     np_label = doc.vocab.strings.add("NP")
-    seen = set()
-    for i, word in enumerate(obj):
+    adj_label = doc.vocab.strings.add("amod")
+    det_label = doc.vocab.strings.add("det")
+    det_pos = doc.vocab.strings.add("DET")
+    adp_pos = doc.vocab.strings.add("ADP")
+    conj_label = doc.vocab.strings.add("conj")
+    conj_pos = doc.vocab.strings.add("CCONJ")
+    prev_end = -1
+    for i, word in enumerate(doclike):
         if word.pos not in (NOUN, PROPN, PRON):
             continue
         # Prevent nested chunks from being produced
-        if word.i in seen:
+        if word.left_edge.i <= prev_end:
             continue
         if word.dep in np_deps:
-            if any(w.i in seen for w in word.subtree):
-                continue
-            seen.update(j for j in range(word.left_edge.i, word.right_edge.i + 1))
-            yield word.left_edge.i, word.right_edge.i + 1, np_label
-        elif word.dep == conj:
+            right_childs = list(word.rights)
+            right_child = right_childs[0] if right_childs else None
+
+            if right_child:
+                if (
+                    right_child.dep == adj_label
+                ):  # allow chain of adjectives by expanding to right
+                    right_end = right_child.right_edge
+                elif (
+                    right_child.dep == det_label and right_child.pos == det_pos
+                ):  # cut relative pronouns here
+                    right_end = right_child
+                elif right_child.dep in np_modifs:  # Check if we can expand to right
+                    right_end = word.right_edge
+                else:
+                    right_end = word
+            else:
+                right_end = word
+            prev_end = right_end.i
+
+            left_index = word.left_edge.i
+            left_index = left_index + 1 if word.left_edge.pos == adp_pos else left_index
+
+            yield left_index, right_end.i + 1, np_label
+        elif word.dep == conj_label:
             head = word.head
-            while head.dep == conj and head.head.i < head.i:
+            while head.dep == conj_label and head.head.i < head.i:
                 head = head.head
             # If the head is an NP, and we're coordinated to it, we're an NP
             if head.dep in np_deps:
-                if any(w.i in seen for w in word.subtree):
-                    continue
-                seen.update(j for j in range(word.left_edge.i, word.right_edge.i + 1))
-                yield word.left_edge.i, word.right_edge.i + 1, np_label
+                prev_end = word.i
+
+                left_index = word.left_edge.i  # eliminate left attached conjunction
+                left_index = (
+                    left_index + 1 if word.left_edge.pos == conj_pos else left_index
+                )
+                yield left_index, word.i + 1, np_label
 
 
 SYNTAX_ITERATORS = {"noun_chunks": noun_chunks}

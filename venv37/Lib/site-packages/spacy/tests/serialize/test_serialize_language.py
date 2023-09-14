@@ -1,10 +1,14 @@
-# coding: utf-8
-from __future__ import unicode_literals
+import pickle
+import re
 
 import pytest
-import re
+
+from spacy.lang.en import English
+from spacy.lang.it import Italian
 from spacy.language import Language
 from spacy.tokenizer import Tokenizer
+from spacy.training import Example
+from spacy.util import load_config_from_str
 
 from ..util import make_tempdir
 
@@ -21,6 +25,71 @@ def meta_data():
         "license": "license-in-fixture",
         "vectors": {"width": 0, "vectors": 0, "keys": 0, "name": None},
     }
+
+
+@pytest.mark.issue(2482)
+def test_issue2482():
+    """Test we can serialize and deserialize a blank NER or parser model."""
+    nlp = Italian()
+    nlp.add_pipe("ner")
+    b = nlp.to_bytes()
+    Italian().from_bytes(b)
+
+
+CONFIG_ISSUE_6950 = """
+[nlp]
+lang = "en"
+pipeline = ["tok2vec", "tagger"]
+
+[components]
+
+[components.tok2vec]
+factory = "tok2vec"
+
+[components.tok2vec.model]
+@architectures = "spacy.Tok2Vec.v1"
+
+[components.tok2vec.model.embed]
+@architectures = "spacy.MultiHashEmbed.v1"
+width = ${components.tok2vec.model.encode:width}
+attrs = ["NORM","PREFIX","SUFFIX","SHAPE"]
+rows = [5000,2500,2500,2500]
+include_static_vectors = false
+
+[components.tok2vec.model.encode]
+@architectures = "spacy.MaxoutWindowEncoder.v1"
+width = 96
+depth = 4
+window_size = 1
+maxout_pieces = 3
+
+[components.ner]
+factory = "ner"
+
+[components.tagger]
+factory = "tagger"
+
+[components.tagger.model]
+@architectures = "spacy.Tagger.v2"
+nO = null
+
+[components.tagger.model.tok2vec]
+@architectures = "spacy.Tok2VecListener.v1"
+width = ${components.tok2vec.model.encode:width}
+upstream = "*"
+"""
+
+
+@pytest.mark.issue(6950)
+def test_issue6950():
+    """Test that the nlp object with initialized tok2vec with listeners pickles
+    correctly (and doesn't have lambdas).
+    """
+    nlp = English.from_config(load_config_from_str(CONFIG_ISSUE_6950))
+    nlp.initialize(lambda: [Example.from_dict(nlp.make_doc("hello"), {"tags": ["V"]})])
+    pickle.dumps(nlp)
+    nlp("hello")
+    pickle.dumps(nlp)
 
 
 def test_serialize_language_meta_disk(meta_data):
@@ -59,12 +128,8 @@ def test_serialize_language_exclude(meta_data):
     nlp = Language(meta=meta_data)
     assert nlp.meta["name"] == name
     new_nlp = Language().from_bytes(nlp.to_bytes())
-    assert nlp.meta["name"] == name
+    assert new_nlp.meta["name"] == name
     new_nlp = Language().from_bytes(nlp.to_bytes(), exclude=["meta"])
     assert not new_nlp.meta["name"] == name
     new_nlp = Language().from_bytes(nlp.to_bytes(exclude=["meta"]))
     assert not new_nlp.meta["name"] == name
-    with pytest.raises(ValueError):
-        nlp.to_bytes(meta=False)
-    with pytest.raises(ValueError):
-        Language().from_bytes(nlp.to_bytes(), meta=False)

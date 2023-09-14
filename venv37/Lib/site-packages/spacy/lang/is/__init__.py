@@ -1,14 +1,8 @@
-# coding: utf8
-from __future__ import unicode_literals
-
+from ...language import BaseDefaults, Language
 from .stop_words import STOP_WORDS
-from ...language import Language
-from ...attrs import LANG
 
 
-class IcelandicDefaults(Language.Defaults):
-    lex_attr_getters = dict(Language.Defaults.lex_attr_getters)
-    lex_attr_getters[LANG] = lambda text: "is"
+class IcelandicDefaults(BaseDefaults):
     stop_words = STOP_WORDS
 
 
