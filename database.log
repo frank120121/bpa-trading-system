@@ -1,0 +1,5 @@
+2023-09-13 19:39:14,121:INFO:Starting main function.
+2023-09-13 19:39:14,121:INFO:Successfully connected to database: crypto_bot.db
+2023-09-13 19:39:14,121:INFO:Creating merchants table.
+2023-09-13 19:39:14,134:INFO:Creating users table.
+2023-09-13 19:39:14,139:INFO:Creating orders table.

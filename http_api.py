@@ -22,18 +22,37 @@ def send_signed_request(http_method, url_path, KEY, SECRET, payload={}, dataLoad
         session.headers.update(headers)
         
         response = getattr(session, http_method.lower())(url, params={}, data=dataLoad)
+
+        response_data = response.json()
+        #print("API response:", response_data)
+
+        if 'data' not in response_data:
+            logging.error("API Response does not contain 'data' field")
+            return {'success': False}
         
         if response.status_code != 200:
             logging.error(f"Received status code {response.status_code}: {response.text}")
-            return None
+            
+            try:
+                if response_data['code'] == -1021:
+                    server_delay = int(response_data['msg'].split(" ")[-2].replace("ms", ""))
+                    new_offset = offset - server_delay  # Adjust offset
+                    return {'new_offset': new_offset, 'success': False}
+            
+            except Exception as e:
+                logging.error(f"An error occurred while parsing the error response: {e}")
 
-        return response.json()
+            return {'success': False}
+
+        return {'success': True, 'data': response_data}
+
     except requests.exceptions.RequestException as e:
         logging.error(f"Request error: {e}")
     except Exception as e:
         logging.error(f"An unexpected error occurred: {e}")
 
-    return None
+    return {'success': False}
+
 
 def send_signed_request_gUOD(order_no, KEY, SECRET, offset=0):
     try:
