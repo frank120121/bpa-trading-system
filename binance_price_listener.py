@@ -1,6 +1,7 @@
 import asyncio
 import websockets
 import json
+from datetime import datetime
 
 class BinancePriceListener:
     def __init__(self, symbol):
@@ -13,13 +14,17 @@ class BinancePriceListener:
         await self.run_forever()
 
     async def process_msg_stream(self, message):
+        current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        print(f"[{current_time}] Received Message: {message}")  # Debug print
         msg = json.loads(message)
         self.last_price = float(msg['p'])
+
 
     async def run_forever(self):
         while True:
             async with websockets.connect(self.ws_url) as ws:
-                print("WebSocket connection opened.")
+                current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                print(f"[{current_time}] WebSocket connection opened.")
                 try:
                     while True:
                         message = await ws.recv()

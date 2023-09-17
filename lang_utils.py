@@ -1,6 +1,6 @@
 from common_vars import ProhibitedPaymentTypes
 
-def get_message_by_language(language, status, buyer_name=None):
+async def get_message_by_language(language, status, buyer_name=None):
     STATUS_MESSAGES = {
         2: {
             'es': "Estamos validando su pago, por favor permitame unos minutos para verificar. Gracias por su paciencia",
@@ -8,8 +8,9 @@ def get_message_by_language(language, status, buyer_name=None):
         },
         1: {
             'es': [
-                "Por favor enviar el pago a los detalles del anuncio. Pagos provenientes de {ProhibitedPaymentTypes} estan PROHIBIDOS y seran APELADOS.",
-                "Para el concepto estas son opciones validas: pago, o su nombre ({buyer_name})."
+                "Solo se aceptan pagos de cuentas bancarias que estan a su nombre ({buyer_name}).",
+                "Pagos provenientes de {ProhibitedPaymentTypes} estan PROHIBIDOS y seran APELADOS.",
+                "Por favor enviar el pago a los detalles del anuncio. Para el concepto estas son opciones validas: pago, o su nombre ({buyer_name})."
             ],
             'en': [
                 "Hello {buyer_name}, thank you for your order! Please remember that we only accept payments from accounts that are in your name.",

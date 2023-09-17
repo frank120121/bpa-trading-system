@@ -1,0 +1,4 @@
+DEBUG:root:This message should go to the log file
+INFO:websocket:Websocket connected
+DEBUG:root:This message should go to the log file
+INFO:websocket:Websocket connected

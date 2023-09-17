@@ -1,8 +1,9 @@
 from credentials import credentials_dict
-import requests
 import time
 import hmac
 import hashlib
+import aiohttp
+import asyncio
 
 class BinanceWallets:
     def __init__(self):
@@ -15,27 +16,25 @@ class BinanceWallets:
         signature = hmac.new(api_secret.encode('utf-8'), payload.encode('utf-8'), hashlib.sha256).hexdigest()
         return signature
 
-    def get_user_assets(self, api_key, api_secret, account):
+    async def get_user_assets(self, api_key, api_secret, account):
         try:
             timestamp = int(time.time() * 1000)
             query_string = f"timestamp={timestamp}"
-            
+
             signature = self.generate_signature(api_secret, query_string)
             url = f"https://api.binance.com/sapi/v3/asset/getUserAsset?{query_string}&signature={signature}"
 
-            headers = {
-                "X-MBX-APIKEY": api_key
-            }
+            headers = {"X-MBX-APIKEY": api_key}
 
-            response = requests.post(url, headers=headers)
-            
-            if response.status_code == 200:
-                assets_data = response.json()
-                self.update_balances(assets_data, account, is_funding=False)
+            async with aiohttp.ClientSession() as session:
+                async with session.post(url, headers=headers) as response:
+                    if response.status == 200:
+                        assets_data = await response.json()
+                        self.update_balances(assets_data, account, is_funding=False)
         except Exception as e:
             print(f"An exception occurred in get_user_assets: {e}")
 
-    def get_funding_assets(self, api_key, api_secret, account):
+    async def get_funding_assets(self, api_key, api_secret, account):
         try:
             timestamp = int(time.time() * 1000)
             query_string = f"timestamp={timestamp}"
@@ -43,15 +42,13 @@ class BinanceWallets:
             signature = self.generate_signature(api_secret, query_string)
             url = f"https://api.binance.com/sapi/v1/asset/get-funding-asset?{query_string}&signature={signature}"
 
-            headers = {
-                "X-MBX-APIKEY": api_key
-            }
+            headers = {"X-MBX-APIKEY": api_key}
 
-            response = requests.post(url, headers=headers)
-            
-            if response.status_code == 200:
-                funding_data = response.json()
-                self.update_balances(funding_data, account, is_funding=True)
+            async with aiohttp.ClientSession() as session:
+                async with session.post(url, headers=headers) as response:
+                    if response.status == 200:
+                        funding_data = await response.json()
+                        self.update_balances(funding_data, account, is_funding=True)
         except Exception as e:
             print(f"An exception occurred in get_funding_assets: {e}")
 
@@ -80,13 +77,12 @@ class BinanceWallets:
                 'USDC': sum(float(data.get('free', 0)) for data in asset_data if data['asset'] == 'USDC'),
                 'USDT': sum(float(data.get('free', 0)) for data in asset_data if data['asset'] == 'USDT')
             }
-
     def check_asset_balance(self, asset, target):
         balance = self.combined_balances.get(asset, 0)
         if balance < target:
             return target - balance
         return 0
-
+    
     def get_account_with_most_usd(self):
         max_free_usd = 0
         max_account = None
@@ -100,45 +96,40 @@ class BinanceWallets:
                 most_usd_asset = max(assets, key=assets.get)
 
         return max_account, most_usd_asset
-    
-    def place_order(self, api_key, api_secret, symbol, side, order_type, quantity=None, price=None, timeInForce=None, quoteOrderQty=None):
+
+    async def place_order(self, api_key, api_secret, symbol, side, order_type, quantity=None, price=None, timeInForce=None, quoteOrderQty=None):
         try:
             timestamp = int(time.time() * 1000)
             query_string = f"symbol={symbol}&side={side}&type={order_type}&timestamp={timestamp}"
-        
-            if quantity is not None:
+
+            if quantity:
                 query_string += f"&quantity={quantity}"
-        
-            if price is not None:
+            if price:
                 query_string += f"&price={price}"
-        
-            if timeInForce is not None:
+            if timeInForce:
                 query_string += f"&timeInForce={timeInForce}"
-            
+
             signature = self.generate_signature(api_secret, query_string)
             url = f"https://api.binance.com/api/v3/order?{query_string}&signature={signature}"
 
-            headers = {
-                "X-MBX-APIKEY": api_key
-            }
+            headers = {"X-MBX-APIKEY": api_key}
 
-            response = requests.post(url, headers=headers)
-        
-            if response.status_code == 200:
-                order_data = response.json()
-                print(f"Order successfully placed: {order_data}")
-            else:
-                print(f"Failed to place order: {response.text}")
-
+            async with aiohttp.ClientSession() as session:
+                async with session.post(url, headers=headers) as response:
+                    if response.status == 200:
+                        order_data = await response.json()
+                        print(f"Order successfully placed: {order_data}")
+                    else:
+                        print(f"Failed to place order: {await response.text()}")
         except Exception as e:
             print(f"An exception occurred in place_order: {e}")
 
-    def main(self):
+    async def main(self):
         for account, cred in credentials_dict.items():
-            self.get_user_assets(cred['KEY'], cred['SECRET'], account)
-            self.get_funding_assets(cred['KEY'], cred['SECRET'], account)
+            await self.get_user_assets(cred['KEY'], cred['SECRET'], account)
+            await self.get_funding_assets(cred['KEY'], cred['SECRET'], account)
 
 if __name__ == "__main__":
     wallets = BinanceWallets()
-    wallets.main()
+    asyncio.run(wallets.main())
 
