@@ -9,7 +9,6 @@ from urllib.parse import urlencode
 import websockets
 from credentials import credentials_dict, BASE_URL
 from websocket_handlers import on_message
-from merchant_account import MerchantAccount
 from logging_config import setup_logging
 import logging
 setup_logging()
@@ -56,7 +55,7 @@ async def send_signed_request(http_method, url_path, KEY, SECRET, payload={}, da
                 logger.error(f"Received status code {response.status}: {response_data}")
                 return {'success': False}
             return {'success': True, 'data': response_data}
-async def run_websocket(KEY, SECRET, max_retries=10, initial_backoff=5, max_backoff=60):
+async def run_websocket(KEY, SECRET, merchant_account, max_retries=10, initial_backoff=5, max_backoff=60):
     retry_count = 0
     backoff = initial_backoff
     offset = 0
@@ -81,36 +80,34 @@ async def run_websocket(KEY, SECRET, max_retries=10, initial_backoff=5, max_back
             logger.info("WebSocket connection closed gracefully.")
             break
         except websockets.exceptions.ConnectionClosedError:
-            logger.error("WebSocket connection closed unexpectedly. Reconnecting...")
+            logger.error("c2c webSocket connection closed unexpectedly. Reconnecting...")
         except websockets.exceptions.ConnectionTimeout:
             logger.error("WebSocket connection timed out. Reconnecting...")
         except Exception as e:
             logger.error(f"An unexpected error occurred: {e}. Reconnecting...")
-            traceback.print_exc()
-        if 'message' in response:
-            logger.error(f"Server response: {response['message']}")        
+            traceback.print_exc()  
         sleep_time = min(max_backoff, backoff)
         sleep_time += random.uniform(0, 0.1 * sleep_time)
         await asyncio.sleep(sleep_time)
         backoff *= 2
         retry_count += 1
-    if retry_count >= max_retries and max_retries != -1:
-        logger.warning("Max retries reached. Exiting.")
-async def main():
+        if retry_count >= max_retries and max_retries != -1:
+            logger.warning("Max retries reached. Exiting.")
+async def main_binance_c2c(merchant_account):
     credentials = list(credentials_dict.values())
     tasks = []
     for cred in credentials:
         task = asyncio.create_task(
-            run_websocket(cred['KEY'], cred['SECRET'], max_retries=20, initial_backoff=5, max_backoff=60)
+            run_websocket(cred['KEY'], cred['SECRET'], merchant_account, max_retries=20, initial_backoff=5, max_backoff=60)
         )
         tasks.append(task)
     try:
         await asyncio.gather(*tasks)
     except KeyboardInterrupt:
         logger.info("KeyboardInterrupt received. Exiting.")
-if __name__ == "__main__":
-    setup_logging()
-    logger = logging.getLogger(__name__)
-    merchant_account = MerchantAccount()
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(main())
+# if __name__ == "__main__":
+#     setup_logging()
+#     logger = logging.getLogger(__name__)
+#     merchant_account = MerchantAccount()
+#     loop = asyncio.get_event_loop()
+#     loop.run_until_complete(main())
