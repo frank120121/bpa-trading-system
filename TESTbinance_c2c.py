@@ -87,6 +87,8 @@ async def run_websocket(KEY, SECRET, max_retries=10, initial_backoff=5, max_back
         except Exception as e:
             logger.error(f"An unexpected error occurred: {e}. Reconnecting...")
             traceback.print_exc()
+        if 'message' in response:
+            logger.error(f"Server response: {response['message']}")        
         sleep_time = min(max_backoff, backoff)
         sleep_time += random.uniform(0, 0.1 * sleep_time)
         await asyncio.sleep(sleep_time)

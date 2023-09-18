@@ -127,7 +127,7 @@ async def insert_order(conn, order_tuple):
         return cursor.lastrowid
 async def insert_or_update_order(conn, order_details):
     try:
-        logger.debug(f"Order Details Received in db:")
+        logger.info(f"Order Details Received in db:")
         seller_name = order_details['data']['sellerName']
         buyer_name = order_details['data']['buyerName']
         order_no = order_details['data']['orderNumber']
@@ -135,7 +135,7 @@ async def insert_or_update_order(conn, order_details):
         order_status = order_details['data']['orderStatus']
         total_price = order_details['data']['totalPrice']
         fiat_unit = order_details['data']['fiatUnit']
-        logger.debug(f"Seller Name: {seller_name}, Buyer Name: {buyer_name}, Order Status: {order_status}")
+        logger.info(f"Seller Name: {seller_name}, Buyer Name: {buyer_name}, Order Status: {order_status}")
         if None in (seller_name, buyer_name, order_no, trade_type, order_status, total_price, fiat_unit):
             logger.error("One or more required fields are None. Aborting operation.")
             return

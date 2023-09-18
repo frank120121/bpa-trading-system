@@ -17,7 +17,7 @@ def determine_language(order_details):
     lang_mappings = {'MXN': 'es', 'USD': 'en'}
     return lang_mappings.get(fiat_unit, 'en')
 async def generic_reply(ws, uuid, order_no, order_details, conn, status_code):
-    logging.debug("Inside generic_reply function.")
+    logging.info("Inside generic_reply function.")
     current_reply_count = await get_reply_count(conn, order_no)
     logging.info(f"Current reply count: {current_reply_count}")
     if current_reply_count < 2:
@@ -105,24 +105,24 @@ REPLY_FUNCTIONS = {
 }
 async def handle_text_message(ws, msg_json, order_no, order_details, conn):
     uuid = msg_json.get('uuid')
-    logger.debug(f"UUID obtained from msg_json: {uuid}")
+    logger.info(f"UUID obtained from msg_json: {uuid}")
     if not await check_order_details(order_details):
         print("check_order_details returned False. Exiting function.")
         return
     msg_content = msg_json.get('content', '').lower()
-    logger.debug(f"Message content obtained from msg_json: {msg_content}")
+    logger.info(f"Message content obtained from msg_json: {msg_content}")
     if order_details:
         logger.info("order_details inde handle_text_message")
         status = order_details.get('order_status')
-        logger.debug(f"Order status obtained from order_details: {status}")
+        logger.info(f"Order status obtained from order_details: {status}")
         await generic_reply(ws, uuid, order_no, order_details, conn, status)
-        logger.debug("generic_reply function called successfully.")
+        logger.info("generic_reply function called successfully.")
         return
     func = REPLY_FUNCTIONS.get(msg_content)
-    logger.debug(f"Function mapped for the given message content: {func}")
+    logger.info(f"Function mapped for the given message content: {func}")
     if func:
         await func(ws, msg_json, uuid, order_no, order_details, conn)
-        logger.debug("Mapped function called successfully.")
+        logger.info("Mapped function called successfully.")
 async def handle_image_message(ws, msg_json, order_no, order_details, conn):
     uuid = msg_json.get('uuid')
     if not await check_order_details(order_details):
