@@ -45,7 +45,6 @@ async def update_status_from_system_type(conn, msg_json, order_no):
         content = msg_json.get('content', '')
         content_dict = json.loads(content)
         system_type = content_dict.get('type', '')
-        print(system_type)
     except json.JSONDecodeError:
         system_type = ''
     status_map = {

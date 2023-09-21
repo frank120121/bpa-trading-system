@@ -1,0 +1,140 @@
+import asyncio
+import aiohttp
+from urllib.parse import urlencode
+import hashlib
+import hmac
+import time
+import traceback
+import logging
+from credentials import credentials_dict
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+class BinanceAPI:
+    def __init__(self, KEY, SECRET):
+        self.KEY = KEY
+        self.SECRET = SECRET
+    def hashing(self, query_string):
+        return hmac.new(self.SECRET.encode('utf-8'), query_string.encode('utf-8'), hashlib.sha256).hexdigest()
+    async def api_call(self, method, endpoint, payload):
+        query_string = urlencode(payload)
+        signature = self.hashing(query_string)
+        headers = {
+            "Content-Type": "application/json;charset=utf-8",
+            "X-MBX-APIKEY": self.KEY,
+            "clientType": "WEB",
+        }
+        query_string += f"&signature={signature}"
+        async with aiohttp.ClientSession() as session:
+            async with session.post(f"{endpoint}?{query_string}", json=payload, headers=headers) as response:
+                if response.status == 200:
+                    return await response.json()
+                else:
+                    logger.error(f"API call failed with status code {response.status}: {await response.text()}")
+                    return None
+    async def get_ad_detail(self, advNo):
+        return await self.api_call(
+            'post',
+            "https://api.binance.com/sapi/v1/c2c/ads/getDetailByNo",
+            {
+                "adsNo": advNo,
+                "timestamp": int(time.time() * 1000)
+            }
+        )
+    async def update_ad(self, advNo, priceFloatingRatio):
+        return await self.api_call(
+            'post',
+            "https://api.binance.com/sapi/v1/c2c/ads/update",
+            {
+                "advNo": advNo,
+                "priceFloatingRatio": priceFloatingRatio,
+                "timestamp": int(time.time() * 1000)
+            }
+        )
+    async def fetch_ads_search(self):
+        return await self.api_call(
+            'post',
+            "https://api.binance.com/sapi/v1/c2c/ads/search",
+            {
+                "asset": "BTC",
+                "fiat": "MXN",
+                "page": 1,
+                "publisherType": "merchant",
+                "rows": 7,
+                "tradeType": "BUY",
+                "transAmount": 15000,
+                "timestamp": int(time.time() * 1000)
+            }
+        )
+async def analyze_and_update_ads(advNo, KEY, SECRET, target_spot=1):
+    try:
+        api_instance = BinanceAPI(KEY, SECRET)
+        
+        ad_details = await api_instance.get_ad_detail(advNo)
+        if ad_details is None:
+            logger.error("Failed to get ad details.")
+            return
+        current_priceFloatingRatio = float(ad_details['data']['priceFloatingRatio'])
+        our_current_price = float(ad_details['data']['price'])
+        logger.info(f"Our start price: {our_current_price}, floating ratio: {current_priceFloatingRatio}")
+
+        ads_response = await api_instance.fetch_ads_search()
+        if ads_response is None or ads_response.get('code') != '000000' or 'data' not in ads_response:
+            logger.error("Failed to fetch ads data.")
+            return
+
+        ads_data = ads_response['data']
+        if not ads_data:
+            logger.error("ads_data list is empty.")
+            return
+
+        filtered_ads_data = [ad for ad in ads_data if ad['advertiser']['userNo'] != 'sf87c48750d303291a6b2761f410f149e']
+        if not filtered_ads_data:
+            logger.error("filtered_ads_data list is empty.")
+            return
+
+        # Determine if the ad is already at the targeted spot
+        is_target_ad = str(filtered_ads_data[target_spot - 1]['adv']['advNo']) == str(advNo)
+        
+        # Competitor price based on target spot
+        if is_target_ad:
+            competitor_price = float(filtered_ads_data[target_spot]['adv']['price'])
+        else:
+            competitor_price = float(filtered_ads_data[target_spot - 1]['adv']['price'])
+
+        logger.info(f"Competitor price: {target_spot}: {competitor_price}")
+
+        # Price difference calculation logic stays the same
+        price_diff_ratio = (our_current_price / competitor_price)
+        new_ratio_unbounded = None
+        if price_diff_ratio >= 1:
+            new_ratio_unbounded = (current_priceFloatingRatio - ((abs(price_diff_ratio - 1) * 100))) - 0.01
+        else:
+            new_ratio_unbounded = current_priceFloatingRatio + (((1 - price_diff_ratio) * 100)) - 0.01
+
+        new_ratio = max(101.27, min(110, round(new_ratio_unbounded, 2)))
+
+        if new_ratio == current_priceFloatingRatio:
+            logger.info(f"Skipping update.")
+            return
+        else:
+            await api_instance.update_ad(advNo, new_ratio)
+            logger.info(f"Updating ratio: {new_ratio}")
+
+    except Exception as e:
+        traceback.print_exc()
+
+if __name__ == "__main__":
+    KEY_1 = credentials_dict['account_1']['KEY']
+    SECRET_1 = credentials_dict['account_1']['SECRET']
+    KEY_2 = credentials_dict['account_2']['KEY']
+    SECRET_2 = credentials_dict['account_2']['SECRET']
+    
+    advNo_1 = "11531824717949116416"
+    advNo_2 = "11531141756952866816"
+
+    while True:
+        asyncio.get_event_loop().run_until_complete(analyze_and_update_ads(advNo_1, KEY_1, SECRET_1, target_spot=4))
+        asyncio.get_event_loop().run_until_complete(analyze_and_update_ads(advNo_2, KEY_2, SECRET_2, target_spot=1))
+        
+        time.sleep(60)
+

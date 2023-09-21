@@ -3,6 +3,7 @@ from common_utils import get_server_time
 from lang_utils import get_message_by_language
 import json
 from database import update_reply_count, get_reply_count, reset_reply_count
+from binance_orders import binance_buy_order
 import logging
 from logging_config import setup_logging
 setup_logging()
@@ -55,7 +56,16 @@ async def send_text_message(ws, text, uuid, order_no):
     except Exception as e:
         logger.error(f"Error sending message: {e}")
 async def handle_system_notifications(ws, msg_json, order_no, order_details, conn):
-    print("handling notification")
+    content = msg_json.get('content', '')
+    content_dict = json.loads(content)
+    system_type = content_dict.get('type', '')
+
+    if system_type == "seller_completed":
+        asset_type =  content_dict.get('symbol', '')
+        if asset_type == 'BTC':
+            binance_buy_order(asset_type)
+
+    logger.debug("handling notification")
     await reset_reply_count(conn, order_no)
     try:
         if not await check_order_details(order_details):

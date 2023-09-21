@@ -17,7 +17,6 @@ credentials_dict = {
         'KEY': os.environ.get('API_KEY_MGL'),
         'SECRET': os.environ.get('API_SECRET_MGL')
     }
-    # Add more accounts as needed
 }
 
 # Bitso credentials
