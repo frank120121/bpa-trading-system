@@ -59,7 +59,7 @@ class BinanceAPI:
     async def fetch_ads_search(self, asset_type):
         if asset_type == 'BTC':
             transAmount = 15000
-            rows = 6
+            rows = 8
         else:
             rows = 20
             transAmount = 50000
