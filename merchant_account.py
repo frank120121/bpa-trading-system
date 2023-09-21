@@ -1,5 +1,5 @@
 from message_handlers import handle_text_message, handle_system_notifications, handle_image_message
-from database import insert_or_update_order, get_order_details, order_exists, update_status_from_system_type, reset_reply_count
+from database import insert_or_update_order, get_order_details, update_status_from_system_type
 from TESTorder_details import fetch_order_details
 import logging
 from logging_config import setup_logging
