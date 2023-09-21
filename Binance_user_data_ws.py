@@ -2,7 +2,6 @@ import asyncio
 import aiohttp
 import websockets
 from credentials import credentials_dict, BASE_URL
-from websocket_handlers import on_message
 from logging_config import setup_logging
 import logging
 setup_logging()
@@ -26,7 +25,7 @@ async def run_websocket(api_key, api_secret, merchant_account):
         ws_url = f"wss://stream.binance.com:9443/ws/{listen_key}"
         async with websockets.connect(ws_url) as ws:
             async for message in ws:
-                await on_message(ws, message, api_key, api_secret, merchant_account)
+                logger.info(f"Incoming WebSocket Message: {message}")
     except Exception as e:
         logger.error(f"An error occurred: {e}")
 
