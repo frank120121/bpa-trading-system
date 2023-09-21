@@ -63,7 +63,7 @@ async def handle_system_notifications(ws, msg_json, order_no, order_details, con
     if system_type == "seller_completed":
         asset_type =  content_dict.get('symbol', '')
         if asset_type == 'BTC':
-            binance_buy_order(asset_type)
+            await binance_buy_order(asset_type)
 
     logger.debug("handling notification")
     await reset_reply_count(conn, order_no)
