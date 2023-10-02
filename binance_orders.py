@@ -25,8 +25,8 @@ async def new_order(wallets, account_to_use, most_usd_asset, missing_balance):
             quoteOrderQty=None
         )
     except Exception as e:
-        logging.error(f"An error occurred: {e}")
-        logging.error(traceback.format_exc())
+        logger.error(f"An error occurred: {e}")
+        logger.error(traceback.format_exc())
 
 async def binance_buy_order(asset_type):
     try: 
@@ -47,15 +47,13 @@ async def binance_buy_order(asset_type):
             logger.info(f"No missing balance for {asset_type}")
 
     except Exception as e:
-        logging.error(f"An error occurred: {e}")
-        logging.error(traceback.format_exc())
+        logger.error(f"An error occurred: {e}")
+        logger.error(traceback.format_exc())
 
 async def binance_orders_main(loop):
-    print("Inside binance_buy_order main")
     await asyncio.gather(
         binance_buy_order('BTC'),
     )
-    print("Exiting binance_buy_order main")
 
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()

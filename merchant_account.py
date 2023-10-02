@@ -13,7 +13,7 @@ class MerchantAccount:
             await insert_or_update_order(conn, order_details)
             order_details = await get_order_details(conn, order_no)
         else:
-            logging.warning("Failed to fetch order details from the external source.")
+            logger.warning("Failed to fetch order details from the external source.")
             return
         if msg_type == 'system':
             await update_status_from_system_type(conn, msg_json, order_no)
@@ -22,6 +22,10 @@ class MerchantAccount:
         if msg_status == 'read':
             return
         elif msg_type == 'text':
-            await handle_text_message(ws, msg_json, order_no, order_details, conn)
+            order_status = order_details.get('order_status')
+            if order_status in (1, 2):
+                await handle_text_message(ws, msg_json, order_no, order_details, conn)
+            else:
+                return
         elif msg_type == 'image':
             await handle_image_message(ws, msg_json, order_no, order_details, conn)

@@ -6,8 +6,8 @@ FIAT_UNIT_USD = 'USD'
 
 ads_dict = {
     'account_1': [
-        {'advNo': '11531824717949116416', 'target_spot': 4, 'asset': 'BTC'},
-        {'advNo': '11515582400296718336', 'target_spot': 4, 'asset': 'USDT'}
+        {'advNo': '11531824717949116416', 'target_spot': 3, 'asset': 'BTC'},
+        {'advNo': '11515582400296718336', 'target_spot': 3, 'asset': 'USDT'}
     ],
     'account_2': [
         {'advNo': '11531141756952866816', 'target_spot': 1, 'asset': 'BTC'},

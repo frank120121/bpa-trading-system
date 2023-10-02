@@ -1,5 +1,5 @@
 from credentials import credentials_dict
-import time
+from common_utils import get_server_time
 import hmac
 import hashlib
 import aiohttp
@@ -18,7 +18,7 @@ class BinanceWallets:
 
     async def get_user_assets(self, api_key, api_secret, account):
         try:
-            timestamp = int(time.time() * 1000)
+            timestamp = await get_server_time()
             query_string = f"timestamp={timestamp}"
 
             signature = self.generate_signature(api_secret, query_string)
@@ -36,7 +36,7 @@ class BinanceWallets:
 
     async def get_funding_assets(self, api_key, api_secret, account):
         try:
-            timestamp = int(time.time() * 1000)
+            timestamp = await get_server_time()
             query_string = f"timestamp={timestamp}"
 
             signature = self.generate_signature(api_secret, query_string)
@@ -99,7 +99,7 @@ class BinanceWallets:
 
     async def place_order(self, api_key, api_secret, symbol, side, order_type, quantity=None, price=None, timeInForce=None, quoteOrderQty=None):
         try:
-            timestamp = int(time.time() * 1000)
+            timestamp = await get_server_time()
             query_string = f"symbol={symbol}&side={side}&type={order_type}&timestamp={timestamp}"
 
             if quantity:

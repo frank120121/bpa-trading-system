@@ -27,7 +27,7 @@ if account in credentials_dict:
     KEY = credentials_dict[account]['KEY']
     SECRET = credentials_dict[account]['SECRET']
 else:
-    print(f"Credentials not found for account: {account}")
+    logger.error(f"Credentials not found for account: {account}")
     exit()
 def hashing(query_string, secret):
     return hmac.new(secret.encode('utf-8'), query_string.encode('utf-8'), hashlib.sha256).hexdigest()
@@ -56,7 +56,7 @@ async def fetch_order_details(KEY, SECRET, order_no):
                 return response_data
 
             else:
-                print(f"Request failed with status code {response.status}: {await response.text()}")
+                logger.error(f"Request failed with status code {response.status}: {await response.text()}")
 if __name__ == "__main__":
     adOrderNo = "20536613332382937088"
     asyncio.run(fetch_order_details(KEY, SECRET, adOrderNo))

@@ -6,7 +6,7 @@ import hmac
 import os
 from dotenv import load_dotenv
 import logging
-import time
+from common_utils import get_server_time
 asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -26,15 +26,15 @@ def hashing(query_string, secret):
     return hmac.new(secret.encode('utf-8'), query_string.encode('utf-8'), hashlib.sha256).hexdigest()
 async def fetch_ads_search(KEY, SECRET):
     payload = {
-        "asset": "BTC",
+        "asset": "USDT",
         "fiat": "MXN",
         "page": 1,
-        "payType": "BBVA",
+        "payType": "BBVABank",
         "publisherType": "merchant",
         "rows": 3,
         "tradeType": "BUY",
-        "transAmount": 15000,
-        "timestamp": int(time.time() * 1000)
+        "transAmount": 150000,
+        "timestamp": await get_server_time()
     }
     query_string = urlencode(payload)
     signature = hashing(query_string, SECRET)

@@ -1,6 +1,5 @@
-
-from common_utils import get_server_time
-from lang_utils import get_message_by_language
+from binance_messages import send_text_message, present_menu_based_on_status, handle_menu_response
+from lang_utils import get_message_by_language, determine_language, get_default_reply
 import json
 from database import update_reply_count, get_reply_count, reset_reply_count
 from binance_orders import binance_buy_order
@@ -10,51 +9,31 @@ setup_logging()
 logger = logging.getLogger(__name__)
 async def check_order_details(order_details):
     if order_details is None:
-        logging.warning("order_details is None.")
+        logger.warning("order_details is None.")
         return False
     return True
-def determine_language(order_details):
-    fiat_unit = order_details.get('fiat_unit')
-    lang_mappings = {'MXN': 'es', 'USD': 'en'}
-    return lang_mappings.get(fiat_unit, 'en')
 async def generic_reply(ws, uuid, order_no, order_details, conn, status_code):
-    logging.info("Inside generic_reply function.")
+    logger.info("Inside generic_reply function.")
     current_reply_count = await get_reply_count(conn, order_no)
-    logging.info(f"Current reply count: {current_reply_count}")
+    logger.info(f"Current reply count: {current_reply_count}")
     if current_reply_count < 2:
         buyer_name = order_details.get('buyer_name')
         current_language = determine_language(order_details)
-        logging.info(f"Buyer Name: {buyer_name}, Current Language: {current_language}")
+        logger.info(f"Buyer Name: {buyer_name}, Current Language: {current_language}")
         messages_to_send = await get_message_by_language(current_language, status_code, buyer_name)
-        logging.info(f"Messages to send: {messages_to_send}")
+        logger.info(f"Messages to send: {messages_to_send}")
         if messages_to_send is None:
-            logging.warning(f"No messages found for language: {current_language} and status_code: {status_code}")
+            logger.warning(f"No messages found for language: {current_language} and status_code: {status_code}")
             return
         for msg in messages_to_send:
             await send_text_message(ws, msg, uuid, order_no)
-            logging.info(f"Sent message: {msg}")
+            logger.info(f"Sent message: {msg}")
         await update_reply_count(conn, order_no)
-        logging.info("Updated reply count.")
+        logger.info("Updated reply count.")
     else:
-        logging.info("Reply count is 2 or more. Exiting function.")
+        logger.info("Reply count is 2 or more. Exiting function.")
         return
-async def send_text_message(ws, text, uuid, order_no):
-    try:
-        logger.info(f"Sending a message: {text}")
-        timestamp = await get_server_time()
-        message = {
-            'type': 'text',
-            'uuid': uuid,
-            'orderNo': order_no,
-            'content': text,
-            'self': True,
-            'clientType': 'web',
-            'createTime': timestamp,
-            'sendStatus': 0
-        }
-        await ws.send(json.dumps(message))
-    except Exception as e:
-        logger.error(f"Error sending message: {e}")
+
 async def handle_system_notifications(ws, msg_json, order_no, order_details, conn):
     content = msg_json.get('content', '')
     content_dict = json.loads(content)
@@ -121,18 +100,14 @@ async def handle_text_message(ws, msg_json, order_no, order_details, conn):
         return
     msg_content = msg_json.get('content', '').lower()
     logger.info(f"Message content obtained from msg_json: {msg_content}")
-    if order_details:
-        logger.info("order_details inde handle_text_message")
-        status = order_details.get('order_status')
-        logger.info(f"Order status obtained from order_details: {status}")
-        await generic_reply(ws, uuid, order_no, order_details, conn, status)
-        logger.info("generic_reply function called successfully.")
-        return
-    func = REPLY_FUNCTIONS.get(msg_content)
-    logger.info(f"Function mapped for the given message content: {func}")
-    if func:
-        await func(ws, msg_json, uuid, order_no, order_details, conn)
-        logger.info("Mapped function called successfully.")
+    if msg_content in ['ayuda', 'help']:
+        await present_menu_based_on_status(ws, order_details, uuid, order_no)
+    elif msg_content.isdigit():
+        await handle_menu_response(ws, int(msg_content), order_details, uuid, order_no)
+    else:
+        default_reply = get_default_reply(order_details)
+        await send_text_message(ws, default_reply, uuid, order_no)
+
 async def handle_image_message(ws, msg_json, order_no, order_details, conn):
     uuid = msg_json.get('uuid')
     if not await check_order_details(order_details):

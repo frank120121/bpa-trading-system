@@ -3,9 +3,9 @@ import aiohttp
 from urllib.parse import urlencode
 import hashlib
 import hmac
-import time
 import traceback
 import logging
+from common_utils import get_server_time
 from common_vars import ads_dict
 from credentials import credentials_dict
 logging.basicConfig(level=logging.INFO)
@@ -43,7 +43,7 @@ class BinanceAPI:
             "https://api.binance.com/sapi/v1/c2c/ads/getDetailByNo",
             {
                 "adsNo": advNo,
-                "timestamp": int(time.time() * 1000)
+                "timestamp": await get_server_time()
             }
         )
     async def update_ad(self, advNo, priceFloatingRatio):
@@ -53,7 +53,7 @@ class BinanceAPI:
             {
                 "advNo": advNo,
                 "priceFloatingRatio": priceFloatingRatio,
-                "timestamp": int(time.time() * 1000)
+                "timestamp": await get_server_time()
             }
         )
     async def fetch_ads_search(self, asset_type):
@@ -74,7 +74,7 @@ class BinanceAPI:
                 "rows": rows,
                 "tradeType": "BUY",
                 "transAmount": transAmount,
-                "timestamp": int(time.time() * 1000)
+                "timestamp": await get_server_time()
             }
         )
 async def analyze_and_update_ads(advNo, api_instance, target_spot, asset_type, KEY, SECRET):
@@ -85,7 +85,7 @@ async def analyze_and_update_ads(advNo, api_instance, target_spot, asset_type, K
             return
         current_priceFloatingRatio = float(ad_details['data']['priceFloatingRatio'])
         our_current_price = float(ad_details['data']['price'])
-        logger.info(f"{asset_type} - Our start price: {our_current_price}, floating ratio: {current_priceFloatingRatio}")
+        logger.info(f"{asset_type} - start: {our_current_price}, ratio: {current_priceFloatingRatio}")
 
         ads_response = await api_instance.fetch_ads_search(asset_type)
         if ads_response is None or ads_response.get('code') != '000000' or 'data' not in ads_response:
@@ -100,7 +100,7 @@ async def analyze_and_update_ads(advNo, api_instance, target_spot, asset_type, K
         else: 
             filtered_ads_data = [
                 ad for ad in ads_data
-                if ad['advertiser']['userNo'] != 'sf87c48750d303291a6b2761f410f149e'
+                if ad['advertiser']['userNo'] != 'safc975e9b2f5388799527f59a7184c40'
                 and 'tradeMethods' in ad['adv']
                 and any(
                     payment_method.get('tradeMethodName') == 'BBVA'
@@ -122,7 +122,7 @@ async def analyze_and_update_ads(advNo, api_instance, target_spot, asset_type, K
             new_ratio_unbounded = (current_priceFloatingRatio - ((abs(price_diff_ratio - 1) * 100))) - 0.01
         else:
             new_ratio_unbounded = current_priceFloatingRatio + (((1 - price_diff_ratio) * 100)) - 0.01
-        new_ratio = max(101.17, min(110, round(new_ratio_unbounded, 2)))
+        new_ratio = max(102.73, min(110, round(new_ratio_unbounded, 2)))
         if new_ratio == current_priceFloatingRatio:
             logger.info(f"Skipping update.")
             return
