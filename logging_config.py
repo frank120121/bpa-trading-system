@@ -1,7 +1,7 @@
 import logging.config
 def setup_logging():
     logging.basicConfig(filename='C:/Users/p7016/Documents/bpa/database.log', 
-                        level=logging.DEBUG, 
+                        level=logging.INFO, 
                         format='%(asctime)s:%(levelname)s:%(message)s')
 
 

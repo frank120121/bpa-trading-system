@@ -46,14 +46,13 @@ STATUS_MESSAGES = {
     },
     1: {
         'es': [
-            "Hola soy Vito, un asistente automatizado aquí para agilizar el proceso de intercambio. Solo se aceptan pagos de cuentas bancarias que estan a su nombre ({buyer_name}).",
+            "Hola soy Nebula, una asistente virtual. Solo se aceptan pagos de cuentas bancarias que estan a su nombre ({buyer_name}).",
             "Pagos provenientes de {ProhibitedPaymentTypes} estan PROHIBIDOS y seran APELADOS.",
-            "Por favor enviar el pago a los detalles del anuncio. Para el concepto estas son opciones validas: pago, o su nombre ({buyer_name}).",
-            "Si tiene alguna duda o necesita ayuda solo teclee ayuda en el chat y le presentare un menu de opciones ."
+            "Para el concepto estas son opciones validas: pago, o su nombre ({buyer_name}). Si tiene alguna duda o necesita ayuda solo teclee ayuda en el chat y le presentare un menu de opciones.",
 
         ],
         'en': [
-            "Hello, I'm Vito, an automated assistant here to streamline the trading process. We only accept payments from bank accounts registered in your name, {buyer_name}.",
+            "Hello, I'm Nebula, an automated assistant here to streamline the trading process. We only accept payments from bank accounts registered in your name, {buyer_name}.",
             "Payments from {ProhibitedPaymentTypes} are PROHIBITED and will be APPEALED.",
             "Please send the payment to the details provided in the listing. For the payment reference, you can use 'payment' or your name, {buyer_name}.",
             "If you have any questions or need assistance, just type 'help' in the chat, and I'll present you with an options menu."
@@ -90,9 +89,11 @@ STATUS_MESSAGES = {
 MENUS = {
     1: {
         'es': [
+            "Le presento las opciones disponibles del 1-3:",
             "1. Opciones de pago.",
-            "2. Qué incluir en el concepto/referencia.",
-            "3. Términos de la orden."
+            "2. Que incluir en el concepto/referencia.",
+            "3. Terminos de la orden.",
+            "Por favor solo introducir el numero correspondiente."
         ],
         'en': [
             "1. Payment options.",
@@ -102,11 +103,15 @@ MENUS = {
     },
     2: {
         'es': [
+            "Le presento las opciones disponibles del 1-5:",
+            "",
             "1. Estado del pago.",
             "2. Cómo enviar prueba de pago.",
             "3. ¿Qué hacer si enviaste una cantidad incorrecta?",
             "4. ¿Necesitas más tiempo para realizar el pago?",
-            "5. Tiempo de espera para transacciones BBVA."
+            "5. Tiempo de espera para transacciones BBVA.",
+            "",
+            "Por favor solo introducir el numero correspondiente."
         ],
         'en': [
             "1. Payment status.",
@@ -121,7 +126,7 @@ MENUS = {
 MENU_RESPONSES = {
     1: {
         'es': {
-            1: "Para ver las opciones de pago por favor seleccione la opcion que le aparece como Realizar Pago en la parte superior. Despues selecione la opcion que dice Transferido, notificar al vendedor.",
+            1: "Para ver las opciones de pago por favor seleccione la opcion Realizar Pago en la parte superior > Seleccione el metodo de pago > Selecione la opcion que dice Transferido, notificar al vendedor despues de realizar el pago.",
             2: " Para el concepto estas son opciones validas: pago, o su nombre ({buyer_name}).",
             3: "Pagos provenientes de {ProhibitedPaymentTypes} estan PROHIBIDOS y seran APELADOS."
         },

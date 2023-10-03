@@ -25,7 +25,7 @@ async def run_websocket(api_key, api_secret, merchant_account):
         ws_url = f"wss://stream.binance.com:9443/ws/{listen_key}"
         async with websockets.connect(ws_url) as ws:
             async for message in ws:
-                logger.info(f"Incoming WebSocket Message: {message}")
+                logger.info(f"Incoming user_data_ws Message: {message}")
     except Exception as e:
         logger.error(f"An error occurred: {e}")
 

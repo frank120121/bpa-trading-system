@@ -9,8 +9,8 @@ from urllib.parse import urlencode
 import websockets
 from credentials import credentials_dict, BASE_URL
 from websocket_handlers import on_message
-from logging_config import setup_logging
 import logging
+from logging_config import setup_logging
 setup_logging()
 logger = logging.getLogger(__name__)
 async def get_server_timestamp():
@@ -76,13 +76,17 @@ async def run_websocket(KEY, SECRET, merchant_account, max_retries=10, initial_b
             logger.info(f"Attempting to connect to WebSocket with URL: {wss_url}")
             async with websockets.connect(wss_url) as ws:
                 async for message in ws:
+                    logger.info(message)
                     await on_message(ws, message, KEY, SECRET, merchant_account)
             logger.info("WebSocket connection closed gracefully.")
             break
         except websockets.exceptions.ConnectionClosedError:
             logger.error("c2c webSocket connection closed unexpectedly. Reconnecting...")
-        except websockets.exceptions.ConnectionTimeout:
-            logger.error("WebSocket connection timed out. Reconnecting...")
+        except websockets.WebSocketException as e:
+            if "timeout" in str(e).lower():  
+                logger.error("WebSocket connection timed out. Reconnecting...")
+            else:
+                raise e
         except Exception as e:
             logger.error(f"An unexpected error occurred: {e}. Reconnecting...")
             traceback.print_exc()  

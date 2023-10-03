@@ -108,7 +108,7 @@ async def find_or_insert_merchant(conn, sellerName):
         if row:
             return row[0]
         else:
-            await cursor.execute("INSERT INTO merchants (sellerName) VALUES (?, ?, ?)", (sellerName))
+            await cursor.execute("INSERT INTO merchants (sellerName) VALUES (?)", (sellerName,))
             return cursor.lastrowid
 async def find_or_insert_buyer(conn, buyer_name, merchant_id):
     async with conn.cursor() as cursor:
@@ -158,6 +158,7 @@ async def insert_or_update_order(conn, order_details):
             await update_total_fiat_spent(conn, buyer_id, float(total_price))
     except Exception as e:
         logger.error(f"Error in insert_or_update_order: {e}")
+        print(f"Exception details: {e}")
 async def column_exists(conn, table_name, column_name):
     async with conn.cursor() as cursor:
         await cursor.execute(f"PRAGMA table_info({table_name})")

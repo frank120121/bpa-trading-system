@@ -1,25 +1,48 @@
 import sqlite3
 import asyncio
 
-async def fetch_data(conn, query):
+async def fetch_data(conn, query, params=None):
     cursor = conn.cursor()
-    cursor.execute(query)
+    if params:
+        cursor.execute(query, params)
+    else:
+        cursor.execute(query)
     rows = cursor.fetchall()
     return rows
 
-async def print_all_orders(database_path):
+async def print_all_tables(database_path):
     conn = sqlite3.connect(database_path)
     
-    query = "SELECT * FROM orders"
-    rows = await fetch_data(conn, query)
+    # Getting the list of tables in the database
+    tables = await fetch_data(conn, "SELECT name FROM sqlite_master WHERE type='table';")
+    table_names = [table[0] for table in tables]
     
-    print(f"{'ID':<5} {'Order No':<10} {'Buyer Name':<15} {'Seller Name':<15} {'Trade Type':<10} {'Order Status':<15} {'Total Price':<12} {'Fiat Unit':<10} {'Bot Replied':<12} {'Reply Count':<12}")
-    
-    for row in rows:
-        print(f"{row[0]:<5} {row[1]:<10} {row[2]:<15} {row[3]:<15} {row[4]:<10} {row[5]:<15} {row[6]:<12} {row[7]:<10} {row[8]:<12} {row[9]:<12}")
+    for table_name in table_names:
+        print(f"\nContents of {table_name}:\n{'='*30}")
+        
+        # Fetching columns for the table
+        cursor = conn.cursor()
+        cursor.execute(f"PRAGMA table_info({table_name})")
+        columns = [desc[1] for desc in cursor.fetchall()]
+        
+        # Fetching rows from the table
+        rows = await fetch_data(conn, f"SELECT * FROM {table_name}")
+        
+        # Printing the header
+        header = " | ".join(columns)
+        print(header)
+        print("-"*len(header))
+        
+        # Printing rows
+        for row in rows:
+            print(" | ".join(map(str, row)))
 
     conn.close()
 
-# You can run the function like this:
+async def main():
+    database_path = "crypto_bot.db"
+    await print_all_tables(database_path)
+
 loop = asyncio.get_event_loop()
-loop.run_until_complete(print_all_orders("crypto_bot.db"))
+loop.run_until_complete(main())
+

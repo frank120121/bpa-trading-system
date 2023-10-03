@@ -1,7 +1,6 @@
 from binance_messages import send_text_message, present_menu_based_on_status, handle_menu_response
-from lang_utils import get_message_by_language, determine_language, get_default_reply
+from lang_utils import get_message_by_language, determine_language
 import json
-from database import update_reply_count, get_reply_count, reset_reply_count
 from binance_orders import binance_buy_order
 import logging
 from logging_config import setup_logging
@@ -14,25 +13,20 @@ async def check_order_details(order_details):
     return True
 async def generic_reply(ws, uuid, order_no, order_details, conn, status_code):
     logger.info("Inside generic_reply function.")
-    current_reply_count = await get_reply_count(conn, order_no)
-    logger.info(f"Current reply count: {current_reply_count}")
-    if current_reply_count < 2:
-        buyer_name = order_details.get('buyer_name')
-        current_language = determine_language(order_details)
-        logger.info(f"Buyer Name: {buyer_name}, Current Language: {current_language}")
-        messages_to_send = await get_message_by_language(current_language, status_code, buyer_name)
-        logger.info(f"Messages to send: {messages_to_send}")
-        if messages_to_send is None:
-            logger.warning(f"No messages found for language: {current_language} and status_code: {status_code}")
-            return
-        for msg in messages_to_send:
-            await send_text_message(ws, msg, uuid, order_no)
-            logger.info(f"Sent message: {msg}")
-        await update_reply_count(conn, order_no)
-        logger.info("Updated reply count.")
-    else:
-        logger.info("Reply count is 2 or more. Exiting function.")
+
+    buyer_name = order_details.get('buyer_name')
+    current_language = determine_language(order_details)
+    logger.info(f"Buyer Name: {buyer_name}, Current Language: {current_language}")
+    messages_to_send = await get_message_by_language(current_language, status_code, buyer_name)
+    logger.info(f"Messages to send: {messages_to_send}")
+    if messages_to_send is None:
+        logger.warning(f"No messages found for language: {current_language} and status_code: {status_code}")
         return
+    for msg in messages_to_send:
+        await send_text_message(ws, msg, uuid, order_no)
+        logger.info(f"Sent message: {msg}")
+
+
 
 async def handle_system_notifications(ws, msg_json, order_no, order_details, conn):
     content = msg_json.get('content', '')
@@ -45,7 +39,6 @@ async def handle_system_notifications(ws, msg_json, order_no, order_details, con
             await binance_buy_order(asset_type)
 
     logger.debug("handling notification")
-    await reset_reply_count(conn, order_no)
     try:
         if not await check_order_details(order_details):
             return
@@ -74,8 +67,6 @@ async def handle_system_notifications(ws, msg_json, order_no, order_details, con
     except Exception as e:
         logger.error(f"Exception occurred: {e}")
 REPLY_FUNCTIONS = {
-    'hello': lambda ws, uuid, order_no, order_details, conn: send_text_message(ws, "Hello! How can I assist you?", uuid, order_no),
-    'wait': lambda ws, uuid, order_no, order_details, conn: send_text_message(ws, "Sure, I'll wait bruh.", uuid, order_no),
     'request_proof': lambda ws, uuid, order_no, order_details, conn: (
         send_text_message(
             ws,
@@ -104,9 +95,6 @@ async def handle_text_message(ws, msg_json, order_no, order_details, conn):
         await present_menu_based_on_status(ws, order_details, uuid, order_no)
     elif msg_content.isdigit():
         await handle_menu_response(ws, int(msg_content), order_details, uuid, order_no)
-    else:
-        default_reply = get_default_reply(order_details)
-        await send_text_message(ws, default_reply, uuid, order_no)
 
 async def handle_image_message(ws, msg_json, order_no, order_details, conn):
     uuid = msg_json.get('uuid')

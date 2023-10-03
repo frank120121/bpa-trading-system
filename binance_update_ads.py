@@ -18,21 +18,31 @@ class BinanceAPI:
 
     def hashing(self, query_string):
         return hmac.new(self.SECRET.encode('utf-8'), query_string.encode('utf-8'), hashlib.sha256).hexdigest()
-    async def api_call(self, method, endpoint, payload):
-        query_string = urlencode(payload)
-        signature = self.hashing(query_string)
-        headers = {
-            "Content-Type": "application/json;charset=utf-8",
-            "X-MBX-APIKEY": self.KEY,
-            "clientType": "WEB",
-        }
-        query_string += f"&signature={signature}"
-        async with self.session.post(f"{endpoint}?{query_string}", json=payload, headers=headers) as response:
-            if response.status == 200:
-                return await response.json()
+    async def api_call(self, method, endpoint, payload, max_retries=3, retry_delay=3):
+        for retry_count in range(max_retries):
+            try:
+                query_string = urlencode(payload)
+                signature = self.hashing(query_string)
+                headers = {
+                    "Content-Type": "application/json;charset=utf-8",
+                    "X-MBX-APIKEY": self.KEY,
+                    "clientType": "WEB",
+                }
+                query_string += f"&signature={signature}"
+                async with self.session.post(f"{endpoint}?{query_string}", json=payload, headers=headers) as response:
+                    if response.status == 200:
+                        return await response.json()
+                    else:
+                        logger.error(f"API call failed with status code {response.status}: {await response.text()}")
+                        return None
+            except Exception as e:
+                logger.error(f"API call failed: {e}")
+        
+            if retry_count < max_retries - 1:
+                logger.info(f"Retrying API call in {retry_delay} seconds (attempt {retry_count + 2}/{max_retries})")
+                await asyncio.sleep(retry_delay)
             else:
-                logger.error(f"API call failed with status code {response.status}: {await response.text()}")
-                return None
+                logger.error("Max retries reached. Exiting.")
 
     async def close_session(self):
         await self.session.close()
@@ -122,13 +132,14 @@ async def analyze_and_update_ads(advNo, api_instance, target_spot, asset_type, K
             new_ratio_unbounded = (current_priceFloatingRatio - ((abs(price_diff_ratio - 1) * 100))) - 0.01
         else:
             new_ratio_unbounded = current_priceFloatingRatio + (((1 - price_diff_ratio) * 100)) - 0.01
-        new_ratio = max(102.73, min(110, round(new_ratio_unbounded, 2)))
+        new_ratio = max(101.43, min(110, round(new_ratio_unbounded, 2)))
         if new_ratio == current_priceFloatingRatio:
             logger.info(f"Skipping update.")
             return
         else:
             await api_instance.update_ad(advNo, new_ratio)
             logger.info(f"Updating ratio: {new_ratio}")
+            await asyncio.sleep(1)
     except Exception as e:
         traceback.print_exc()
 async def main_loop():
