@@ -27,14 +27,14 @@ async def fetch_btcmxn():
                 lowest_ask = min([float(order['r']) for order in payload['asks']], default=None)
                 
                 if lowest_ask is not None:
-                    logger.info(f"Lowest ask price for BTC/MXN: {lowest_ask}")
+                    logger.debug(f"Lowest ask price for BTC/MXN: {lowest_ask}")
 
                 # Process the data, you can send this to update_ad in binance_update_ads
                 # This can be done using various ways, for example, through a shared data structure or message queue
                 
             # Handle keep-alive messages
             elif data['type'] == 'ka':
-                logger.info("Received keep-alive message")
+                logger.debug("Received keep-alive message")
 
 if __name__ == "__main__":
     asyncio.get_event_loop().run_until_complete(fetch_btcmxn())

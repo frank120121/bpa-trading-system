@@ -34,7 +34,7 @@ async def binance_buy_order(asset_type):
         wallets = await get_wallets()
         missing_balance = wallets.check_asset_balance(asset_type, btc_target)
 
-        logger.info(f"Inside binance_buy_order for {asset_type}")
+        logger.debug(f"Inside binance_buy_order for {asset_type}")
         logger.info(f"Missing balance for {asset_type}: {missing_balance}")
 
         if missing_balance > 0.00025:

@@ -6,7 +6,7 @@ import logging
 from logging_config import setup_logging
 setup_logging()
 logger = logging.getLogger(__name__)
-rate_limiter = RateLimiter(limit_period=3)
+rate_limiter = RateLimiter(limit_period=10)
 
 def should_ignore_message(msg_json):
     msg_type = msg_json.get('type', '')
@@ -29,7 +29,7 @@ async def on_message(ws, message, KEY, SECRET, merchant_account: MerchantAccount
     try:
         msg_json = json.loads(message)
         if should_ignore_message(msg_json):
-            logger.info("Ignoring message of type: %s", msg_json.get('type', ''))
+            logger.debug("Ignoring message of type: %s", msg_json.get('type', ''))
             return
         order_no = msg_json.get('orderNo', '')
         if rate_limiter.is_limited(order_no):
@@ -52,4 +52,4 @@ async def on_message(ws, message, KEY, SECRET, merchant_account: MerchantAccount
     except Exception as e:
         logger.exception("An exception occurred: %s", e)
 async def on_close(ws, close_status_code, close_msg, KEY, SECRET):
-    logger.info(f"### closed ###")
+    logger.debug(f"### closed ###")

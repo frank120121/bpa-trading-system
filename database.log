@@ -1,454 +1,93 @@
-2023-10-03 00:35:29,669:INFO:{"content":"ayuda","createTime":1696318529005,"id":"842647904343759617","orderNo":"20542422716212072448","self":false,"status":"unread","type":"text","uuid":"f71c1891-3215-4dac-ad6c-1a8ae401aff3"}
-2023-10-03 00:35:29,669:INFO:Inside async_create_connection function
-2023-10-03 00:35:29,684:INFO:UUID obtained from msg_json: f71c1891-3215-4dac-ad6c-1a8ae401aff3
-2023-10-03 00:35:29,684:INFO:Message content obtained from msg_json: ayuda
-2023-10-03 00:35:29,684:INFO:Sending a message: 1. Opciones de pago.
-2. Que incluir en el concepto/referencia.
-3. Terminos de la orden.
-2023-10-03 00:35:30,335:INFO:{"content":"1. Opciones de pago.\n2. Que incluir en el concepto/referencia.\n3. Terminos de la orden.","createTime":1696318529461,"id":"842647915740450561","orderNo":"20542422716212072448","self":true,"status":"unread","type":"text","uuid":"1696318529461"}
-2023-10-03 00:35:30,335:INFO:Ignoring message of type: text
-2023-10-03 00:35:35,606:INFO:{"content":"1","createTime":1696318534947,"id":"842648004033977088","orderNo":"20542422716212072448","self":false,"status":"unread","type":"text","uuid":"4b7a441b-d7bc-49bb-9505-dd12e5a1b0b7"}
-2023-10-03 00:35:35,606:WARNING:Rate limit triggered for order: 20542422716212072448
-2023-10-03 00:35:49,657:INFO:{"content":"1","createTime":1696318548986,"id":"842648239586089728","orderNo":"20542422716212072448","self":false,"status":"unread","type":"text","uuid":"a37558c1-beef-42e5-80c8-9dba9e39cbc7"}
-2023-10-03 00:35:49,657:INFO:Inside async_create_connection function
-2023-10-03 00:35:49,664:INFO:UUID obtained from msg_json: a37558c1-beef-42e5-80c8-9dba9e39cbc7
-2023-10-03 00:35:49,664:INFO:Message content obtained from msg_json: 1
-2023-10-03 00:35:49,665:INFO:Sending a message: Para ver las opciones de pago por favor seleccione la opcion que le aparece como Realizar Pago en la parte superior. Despues selecione la opcion que dice Transferido, notificar al vendedor.
-2023-10-03 00:35:50,317:INFO:{"content":"Para ver las opciones de pago por favor seleccione la opcion que le aparece como Realizar Pago en la parte superior. Despues selecione la opcion que dice Transferido, notificar al vendedor.","createTime":1696318549439,"id":"842648250815008513","orderNo":"20542422716212072448","self":true,"status":"unread","type":"text","uuid":"1696318549439"}
-2023-10-03 00:35:50,317:INFO:Ignoring message of type: text
-2023-10-03 00:35:56,319:INFO:{"content":"1. Opciones de pago.\n2. Que incluir en el concepto/referencia.\n3. Terminos de la orden.","createTime":1696318373000,"fromNickname":"AMBAR_OTC_DESK","id":"842645290001944320","orderNo":"20542422716212072448","self":true,"status":"read","type":"text","uuid":"1696318372960"}
-2023-10-03 00:35:56,319:INFO:Ignoring message of type: text
-2023-10-03 00:35:56,319:INFO:{"content":"1. Opciones de pago.\n2. Que incluir en el concepto/referencia.\n3. Terminos de la orden.","createTime":1696318385000,"fromNickname":"AMBAR_OTC_DESK","id":"842645481211875073","orderNo":"20542422716212072448","self":true,"status":"read","type":"text","uuid":"1696318384362"}
-2023-10-03 00:35:56,319:INFO:Ignoring message of type: text
-2023-10-03 00:35:56,319:INFO:{"content":"Para ver las opciones de pago por favor seleccione la opcion que le aparece como Realizar Pago en la parte superior. Despues selecione la opcion que dice Transferido, notificar al vendedor.","createTime":1696318550000,"fromNickname":"AMBAR_OTC_DESK","id":"842648250815008513","orderNo":"20542422716212072448","self":true,"status":"read","type":"text","uuid":"1696318549439"}
-2023-10-03 00:35:56,319:INFO:Ignoring message of type: text
-2023-10-03 00:35:56,319:INFO:{"content":"1. Opciones de pago.\n2. Que incluir en el concepto/referencia.\n3. Terminos de la orden.","createTime":1696318530000,"fromNickname":"AMBAR_OTC_DESK","id":"842647915740450561","orderNo":"20542422716212072448","self":true,"status":"read","type":"text","uuid":"1696318529461"}
-2023-10-03 00:35:56,319:INFO:Ignoring message of type: text
-2023-10-03 00:35:58,166:INFO:{"content":"{\"type\":\"seller_cancelled\"}","createTime":1696318557492,"id":"842648382267283200","orderNo":"20542422716212072448","self":false,"status":"read","type":"system"}
-2023-10-03 00:35:58,166:WARNING:Rate limit triggered for order: 20542422716212072448
-2023-10-03 00:36:45,262:INFO:{"content":"{\"type\":\"seller_merchant_trading\"}","createTime":1696318604592,"id":"842649172457379584","orderNo":"20542426688446865408","self":false,"status":"read","type":"system"}
-2023-10-03 00:36:45,262:INFO:Inside async_create_connection function
-2023-10-03 00:36:45,843:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 125.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:36:46,325:INFO:Fetched order details: success
-2023-10-03 00:36:46,326:INFO:Order Details Received in db:
-2023-10-03 00:36:46,326:INFO:Seller Name: MUNOZ PEREA MARIA FERNANDA, Buyer Name: LOPEZ GUERRERO FRANCISCO JAVIER, Order Status: 1
-2023-10-03 00:36:46,371:INFO:Inside generic_reply function.
-2023-10-03 00:36:46,371:INFO:Buyer Name: LOPEZ GUERRERO FRANCISCO JAVIER, Current Language: es
-2023-10-03 00:36:46,371:INFO:Messages to send: ['Hola soy Nebula, una asistente virtual. Solo se aceptan pagos de cuentas bancarias que estan a su nombre (LOPEZ GUERRERO FRANCISCO JAVIER).', 'Pagos provenientes de TERCEROS, BANCO AZTECA, STP, MERCADO PAGO, o en Efectivo estan PROHIBIDOS y seran APELADOS.', 'Para el concepto estas son opciones validas: pago, o su nombre (LOPEZ GUERRERO FRANCISCO JAVIER). Si tiene alguna duda o necesita ayuda solo teclee ayuda en el chat y le presentare un menu de opciones.']
-2023-10-03 00:36:46,371:INFO:Sending a message: Hola soy Nebula, una asistente virtual. Solo se aceptan pagos de cuentas bancarias que estan a su nombre (LOPEZ GUERRERO FRANCISCO JAVIER).
-2023-10-03 00:36:47,343:INFO:Sent message: Hola soy Nebula, una asistente virtual. Solo se aceptan pagos de cuentas bancarias que estan a su nombre (LOPEZ GUERRERO FRANCISCO JAVIER).
-2023-10-03 00:36:47,343:INFO:Sending a message: Pagos provenientes de TERCEROS, BANCO AZTECA, STP, MERCADO PAGO, o en Efectivo estan PROHIBIDOS y seran APELADOS.
-2023-10-03 00:36:47,744:INFO:Sent message: Pagos provenientes de TERCEROS, BANCO AZTECA, STP, MERCADO PAGO, o en Efectivo estan PROHIBIDOS y seran APELADOS.
-2023-10-03 00:36:47,744:INFO:Sending a message: Para el concepto estas son opciones validas: pago, o su nombre (LOPEZ GUERRERO FRANCISCO JAVIER). Si tiene alguna duda o necesita ayuda solo teclee ayuda en el chat y le presentare un menu de opciones.
-2023-10-03 00:36:48,120:INFO:Sent message: Para el concepto estas son opciones validas: pago, o su nombre (LOPEZ GUERRERO FRANCISCO JAVIER). Si tiene alguna duda o necesita ayuda solo teclee ayuda en el chat y le presentare un menu de opciones.
-2023-10-03 00:36:48,125:INFO:{"content":"¿Le han ofrecido un trabajo, una oportunidad de inversión o una gran oferta que requiere invertir a través de Bitcoin, USDT, o alguna cripto? Lo más probable es que esté siendo víctima de un fraude. Recuerda practicar el sentido común. Si tiene alguna pregunta, comuníquese directamente con servicio al cliente de Binance, quien le dirá que no recomendamos ni trabajamos con un tercero de ningún tipo.","createTime":1696318604604,"orderNo":"20542426688446865408","self":false,"status":"read","type":"auto_reply"}
-2023-10-03 00:36:48,125:WARNING:Rate limit triggered for order: 20542426688446865408
-2023-10-03 00:36:48,125:INFO:{"content":"Hola soy Nebula, una asistente virtual. Solo se aceptan pagos de cuentas bancarias que estan a su nombre (LOPEZ GUERRERO FRANCISCO JAVIER).","createTime":1696318606684,"id":"842649211293847297","orderNo":"20542426688446865408","self":true,"status":"unread","type":"text","uuid":"1696318606684"}
-2023-10-03 00:36:48,125:INFO:Ignoring message of type: text
-2023-10-03 00:36:48,125:INFO:{"content":"{\"original_message_id\":\"1696318606684\",\"type\":\"nlp_third_party\"}","createTime":1696318607021,"id":"842649213175151362","orderNo":"20542426688446865408","self":false,"status":"unread","type":"system"}
-2023-10-03 00:36:48,125:INFO:Ignoring message of type: system
-2023-10-03 00:36:48,125:INFO:{"content":"Pagos provenientes de TERCEROS, BANCO AZTECA, STP, MERCADO PAGO, o en Efectivo estan PROHIBIDOS y seran APELADOS.","createTime":1696318607083,"id":"842649217954402048","orderNo":"20542426688446865408","self":true,"status":"unread","type":"text","uuid":"1696318607083"}
-2023-10-03 00:36:48,125:INFO:Ignoring message of type: text
-2023-10-03 00:36:48,339:INFO:{"content":"Para el concepto estas son opciones validas: pago, o su nombre (LOPEZ GUERRERO FRANCISCO JAVIER). Si tiene alguna duda o necesita ayuda solo teclee ayuda en el chat y le presentare un menu de opciones.","createTime":1696318607464,"id":"842649224312966912","orderNo":"20542426688446865408","self":true,"status":"unread","type":"text","uuid":"1696318607464"}
-2023-10-03 00:36:48,339:INFO:Ignoring message of type: text
-2023-10-03 00:36:51,020:INFO:{"content":"Hola soy Nebula, una asistente virtual. Solo se aceptan pagos de cuentas bancarias que estan a su nombre (LOPEZ GUERRERO FRANCISCO JAVIER).","createTime":1696318607000,"fromNickname":"AMBAR_OTC_DESK","id":"842649211293847297","orderNo":"20542426688446865408","self":true,"status":"read","type":"text","uuid":"1696318606684"}
-2023-10-03 00:36:51,020:INFO:Ignoring message of type: text
-2023-10-03 00:36:51,020:INFO:{"content":"Pagos provenientes de TERCEROS, BANCO AZTECA, STP, MERCADO PAGO, o en Efectivo estan PROHIBIDOS y seran APELADOS.","createTime":1696318607000,"fromNickname":"AMBAR_OTC_DESK","id":"842649217954402048","orderNo":"20542426688446865408","self":true,"status":"read","type":"text","uuid":"1696318607083"}
-2023-10-03 00:36:51,020:INFO:Ignoring message of type: text
-2023-10-03 00:36:51,020:INFO:{"content":"Para el concepto estas son opciones validas: pago, o su nombre (LOPEZ GUERRERO FRANCISCO JAVIER). Si tiene alguna duda o necesita ayuda solo teclee ayuda en el chat y le presentare un menu de opciones.","createTime":1696318608000,"fromNickname":"AMBAR_OTC_DESK","id":"842649224312966912","orderNo":"20542426688446865408","self":true,"status":"read","type":"text","uuid":"1696318607464"}
-2023-10-03 00:36:51,020:INFO:Ignoring message of type: text
-2023-10-03 00:37:02,689:INFO:{"content":"¿Le han ofrecido un trabajo, una oportunidad de inversión o una gran oferta que requiere invertir a través de Bitcoin, USDT, o alguna cripto? Lo más probable es que esté siendo víctima de un fraude. Recuerda practicar el sentido común. Si tiene alguna pregunta, comuníquese directamente con servicio al cliente de Binance, quien le dirá que no recomendamos ni trabajamos con un tercero de ningún tipo.","createTime":1696318605000,"id":"842649172809701120","orderNo":"20542426688446865408","self":true,"status":"read","type":"auto_reply"}
-2023-10-03 00:37:02,689:INFO:Ignoring message of type: auto_reply
-2023-10-03 00:37:10,434:INFO:{"content":"ayuda","createTime":1696318629764,"id":"842649594903938048","orderNo":"20542426688446865408","self":false,"status":"unread","type":"text","uuid":"45ae0e99-2d64-4d0f-afb0-b501c66f8450"}
-2023-10-03 00:37:10,434:INFO:Inside async_create_connection function
-2023-10-03 00:37:10,450:INFO:UUID obtained from msg_json: 45ae0e99-2d64-4d0f-afb0-b501c66f8450
-2023-10-03 00:37:10,450:INFO:Message content obtained from msg_json: ayuda
-2023-10-03 00:37:10,450:INFO:Sending a message: 1. Opciones de pago.
-2. Que incluir en el concepto/referencia.
-3. Terminos de la orden.
-2023-10-03 00:37:11,102:INFO:{"content":"1. Opciones de pago.\n2. Que incluir en el concepto/referencia.\n3. Terminos de la orden.","createTime":1696318630228,"id":"842649606229511936","orderNo":"20542426688446865408","self":true,"status":"unread","type":"text","uuid":"1696318630228"}
-2023-10-03 00:37:11,102:INFO:Ignoring message of type: text
-2023-10-03 00:37:15,443:INFO:{"content":"1","createTime":1696318634780,"id":"842649678974567425","orderNo":"20542426688446865408","self":false,"status":"unread","type":"text","uuid":"a66778a0-0068-4a91-a39f-7df7a4633890"}
-2023-10-03 00:37:15,443:WARNING:Rate limit triggered for order: 20542426688446865408
-2023-10-03 00:38:10,271:INFO:{"content":"ayuda","createTime":1696318689606,"id":"842650598802211841","orderNo":"20542426688446865408","self":false,"status":"unread","type":"text","uuid":"4bba8db4-7578-4d57-adc3-dcf624bbd4b9"}
-2023-10-03 00:38:10,271:INFO:Inside async_create_connection function
-2023-10-03 00:38:10,271:INFO:UUID obtained from msg_json: 4bba8db4-7578-4d57-adc3-dcf624bbd4b9
-2023-10-03 00:38:10,271:INFO:Message content obtained from msg_json: ayuda
-2023-10-03 00:38:10,271:INFO:Sending a message: 1. Opciones de pago.
-2. Que incluir en el concepto/referencia.
-3. Terminos de la orden.
-2023-10-03 00:38:10,397:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 109.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:38:10,999:INFO:{"content":"1. Opciones de pago.\n2. Que incluir en el concepto/referencia.\n3. Terminos de la orden.","createTime":1696318690118,"id":"842650611033755392","orderNo":"20542426688446865408","self":true,"status":"unread","type":"text","uuid":"1696318690118"}
-2023-10-03 00:38:10,999:INFO:Ignoring message of type: text
-2023-10-03 00:38:15,823:INFO:{"content":"1","createTime":1696318695151,"id":"842650691815097344","orderNo":"20542426688446865408","self":false,"status":"unread","type":"text","uuid":"cdb0e7e7-a669-4c7e-83da-e7485606c263"}
-2023-10-03 00:38:15,823:WARNING:Rate limit triggered for order: 20542426688446865408
-2023-10-03 00:38:36,575:INFO:{"content":"1","createTime":1696318715897,"id":"842651039891997697","orderNo":"20542426688446865408","self":false,"status":"unread","type":"text","uuid":"5aca43f0-b7ef-4007-bf31-b643854513c2"}
-2023-10-03 00:38:36,575:INFO:Inside async_create_connection function
-2023-10-03 00:38:36,577:INFO:UUID obtained from msg_json: 5aca43f0-b7ef-4007-bf31-b643854513c2
-2023-10-03 00:38:36,577:INFO:Message content obtained from msg_json: 1
-2023-10-03 00:38:36,577:INFO:Sending a message: Para ver las opciones de pago por favor seleccione la opcion que le aparece como Realizar Pago en la parte superior. Despues selecione la opcion que dice Transferido, notificar al vendedor.
-2023-10-03 00:38:36,735:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 156.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:38:37,339:INFO:{"content":"Para ver las opciones de pago por favor seleccione la opcion que le aparece como Realizar Pago en la parte superior. Despues selecione la opcion que dice Transferido, notificar al vendedor.","createTime":1696318716461,"id":"842651052995956481","orderNo":"20542426688446865408","self":true,"status":"unread","type":"text","uuid":"1696318716461"}
-2023-10-03 00:38:37,339:INFO:Ignoring message of type: text
-2023-10-03 00:41:32,211:INFO:WebSocket connection closed gracefully.
-2023-10-03 00:41:45,809:INFO:Using offset: 0
-2023-10-03 00:41:45,825:INFO:Using offset: 0
-2023-10-03 00:41:46,410:INFO:Getting address info stream.binance.com:9443, type=<SocketKind.SOCK_STREAM: 1> took 110.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('52.197.61.84', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('54.95.2.229', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('18.180.60.170', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('18.178.178.167', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('13.112.201.128', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('54.92.21.118', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('13.113.66.207', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('52.69.201.1', 9443))]
-2023-10-03 00:41:46,810:INFO:Attempting to connect to WebSocket with URL: wss://im.binance.com:443/chat/c2c_c49b83ef5a2d4ec192e34925c967a1fb_v2?token=TOKENc668fdb47a8a48159012563578cdfbf9&clientType=web
-2023-10-03 00:41:46,810:INFO:Attempting to connect to WebSocket with URL: wss://im.binance.com:443/chat/c2c_d060d926224142d693c6ce5d4e9cee54_v2?token=TOKEN31599ac45af14f3caffdc0998d42a46e&clientType=web
-2023-10-03 00:41:46,998:INFO:Getting address info im.binance.com:443, type=<SocketKind.SOCK_STREAM: 1> took 188.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('18.238.172.209', 443))]
-2023-10-03 00:41:46,998:INFO:Getting address info im.binance.com:443, type=<SocketKind.SOCK_STREAM: 1> took 188.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('18.238.172.209', 443))]
-2023-10-03 00:41:57,168:INFO:{"content":"ayuda","createTime":1696318916489,"id":"842654405351195649","orderNo":"20542426688446865408","self":false,"status":"unread","type":"text","uuid":"31dd9ca8-434f-4008-9d3b-f75411754e92"}
-2023-10-03 00:41:57,168:INFO:Inside async_create_connection function
-2023-10-03 00:41:57,175:INFO:UUID obtained from msg_json: 31dd9ca8-434f-4008-9d3b-f75411754e92
-2023-10-03 00:41:57,175:INFO:Message content obtained from msg_json: ayuda
-2023-10-03 00:41:57,175:INFO:Sending a message: 1. Opciones de pago.
-2. Que incluir en el concepto/referencia.
-3. Terminos de la orden.
-2023-10-03 00:41:57,863:INFO:{"content":"1. Opciones de pago.\n2. Que incluir en el concepto/referencia.\n3. Terminos de la orden.","createTime":1696318916985,"id":"842654417242377729","orderNo":"20542426688446865408","self":true,"status":"unread","type":"text","uuid":"1696318916985"}
-2023-10-03 00:41:57,863:INFO:Ignoring message of type: text
-2023-10-03 00:42:03,794:INFO:{"content":"1","createTime":1696318923125,"id":"842654516584137729","orderNo":"20542426688446865408","self":false,"status":"unread","type":"text","uuid":"7ce52f36-aae0-4d4c-8ae4-5b42437fc5ad"}
-2023-10-03 00:42:03,794:WARNING:Rate limit triggered for order: 20542426688446865408
-2023-10-03 00:42:27,505:INFO:Using offset: 0
-2023-10-03 00:42:27,505:INFO:Using offset: 0
-2023-10-03 00:42:28,421:INFO:Attempting to connect to WebSocket with URL: wss://im.binance.com:443/chat/c2c_c49b83ef5a2d4ec192e34925c967a1fb_v2?token=TOKEN748282d9aafe43ddaef22db889f6c753&clientType=web
-2023-10-03 00:42:28,430:INFO:Attempting to connect to WebSocket with URL: wss://im.binance.com:443/chat/c2c_d060d926224142d693c6ce5d4e9cee54_v2?token=TOKEN2621675f163b4194b1b1e7de86eb1c89&clientType=web
-2023-10-03 00:42:34,319:INFO:{"content":"ayuda","createTime":1696318953652,"id":"842655028742210561","orderNo":"20542426688446865408","self":false,"status":"unread","type":"text","uuid":"4019963c-1a0d-485e-9313-977a997434b9"}
-2023-10-03 00:42:34,319:INFO:Inside async_create_connection function
-2023-10-03 00:42:34,319:INFO:UUID obtained from msg_json: 4019963c-1a0d-485e-9313-977a997434b9
-2023-10-03 00:42:34,319:INFO:Message content obtained from msg_json: ayuda
-2023-10-03 00:42:34,319:INFO:Sending a message: 1. Opciones de pago.
-2. Que incluir en el concepto/referencia.
-3. Terminos de la orden.
-2023-10-03 00:42:34,973:INFO:{"content":"1. Opciones de pago.\n2. Que incluir en el concepto/referencia.\n3. Terminos de la orden.","createTime":1696318954098,"id":"842655039966949888","orderNo":"20542426688446865408","self":true,"status":"unread","type":"text","uuid":"1696318954098"}
-2023-10-03 00:42:34,973:INFO:Ignoring message of type: text
-2023-10-03 00:42:47,451:INFO:{"content":"1","createTime":1696318966785,"id":"842655249077388288","orderNo":"20542426688446865408","self":false,"status":"unread","type":"text","uuid":"80266d3b-4d50-4fb6-ae60-31eef9958744"}
-2023-10-03 00:42:47,451:INFO:Inside async_create_connection function
-2023-10-03 00:42:47,451:INFO:UUID obtained from msg_json: 80266d3b-4d50-4fb6-ae60-31eef9958744
-2023-10-03 00:42:47,451:INFO:Message content obtained from msg_json: 1
-2023-10-03 00:42:47,451:INFO:Sending a message: Para ver las opciones de pago por favor seleccione la opcion que le aparece como Realizar Pago en la parte superior. Despues selecione la opcion que dice Transferido, notificar al vendedor.
-2023-10-03 00:42:47,560:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 109.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:42:48,167:INFO:{"content":"Para ver las opciones de pago por favor seleccione la opcion que le aparece como Realizar Pago en la parte superior. Despues selecione la opcion que dice Transferido, notificar al vendedor.","createTime":1696318967292,"id":"842655261224874496","orderNo":"20542426688446865408","self":true,"status":"unread","type":"text","uuid":"1696318967292"}
-2023-10-03 00:42:48,167:INFO:Ignoring message of type: text
-2023-10-03 00:43:03,767:INFO:{"content":"Para ver las opciones de pago por favor seleccione la opcion que le aparece como Realizar Pago en la parte superior. Despues selecione la opcion que dice Transferido, notificar al vendedor.","createTime":1696318717000,"fromNickname":"AMBAR_OTC_DESK","id":"842651052995956481","orderNo":"20542426688446865408","self":true,"status":"read","type":"text","uuid":"1696318716461"}
-2023-10-03 00:43:03,767:INFO:Ignoring message of type: text
-2023-10-03 00:43:03,767:INFO:{"content":"1. Opciones de pago.\n2. Que incluir en el concepto/referencia.\n3. Terminos de la orden.","createTime":1696318954000,"fromNickname":"AMBAR_OTC_DESK","id":"842655039966949888","orderNo":"20542426688446865408","self":true,"status":"read","type":"text","uuid":"1696318954098"}
-2023-10-03 00:43:03,767:INFO:Ignoring message of type: text
-2023-10-03 00:43:03,767:INFO:{"content":"Para ver las opciones de pago por favor seleccione la opcion que le aparece como Realizar Pago en la parte superior. Despues selecione la opcion que dice Transferido, notificar al vendedor.","createTime":1696318968000,"fromNickname":"AMBAR_OTC_DESK","id":"842655261224874496","orderNo":"20542426688446865408","self":true,"status":"read","type":"text","uuid":"1696318967292"}
-2023-10-03 00:43:03,767:INFO:Ignoring message of type: text
-2023-10-03 00:43:03,783:INFO:{"content":"1. Opciones de pago.\n2. Que incluir en el concepto/referencia.\n3. Terminos de la orden.","createTime":1696318630000,"fromNickname":"AMBAR_OTC_DESK","id":"842649606229511936","orderNo":"20542426688446865408","self":true,"status":"read","type":"text","uuid":"1696318630228"}
-2023-10-03 00:43:03,783:INFO:Ignoring message of type: text
-2023-10-03 00:43:03,783:INFO:{"content":"1. Opciones de pago.\n2. Que incluir en el concepto/referencia.\n3. Terminos de la orden.","createTime":1696318690000,"fromNickname":"AMBAR_OTC_DESK","id":"842650611033755392","orderNo":"20542426688446865408","self":true,"status":"read","type":"text","uuid":"1696318690118"}
-2023-10-03 00:43:03,783:INFO:Ignoring message of type: text
-2023-10-03 00:43:03,783:INFO:{"content":"1. Opciones de pago.\n2. Que incluir en el concepto/referencia.\n3. Terminos de la orden.","createTime":1696318917000,"fromNickname":"AMBAR_OTC_DESK","id":"842654417242377729","orderNo":"20542426688446865408","self":true,"status":"read","type":"text","uuid":"1696318916985"}
-2023-10-03 00:43:03,783:INFO:Ignoring message of type: text
-2023-10-03 00:45:25,592:INFO:Using offset: 0
-2023-10-03 00:45:25,592:INFO:Using offset: 0
-2023-10-03 00:45:26,159:INFO:Getting address info stream.binance.com:9443, type=<SocketKind.SOCK_STREAM: 1> took 110.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('52.196.43.65', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('52.195.90.111', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('35.76.84.226', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('54.238.88.115', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('35.76.11.234', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('13.114.73.178', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('43.206.14.159', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('52.195.142.231', 9443))]
-2023-10-03 00:45:26,564:INFO:Attempting to connect to WebSocket with URL: wss://im.binance.com:443/chat/c2c_c49b83ef5a2d4ec192e34925c967a1fb_v2?token=TOKEN81fe81b9102a4b7d89183c60f9a2def8&clientType=web
-2023-10-03 00:45:26,571:INFO:Attempting to connect to WebSocket with URL: wss://im.binance.com:443/chat/c2c_d060d926224142d693c6ce5d4e9cee54_v2?token=TOKEN46690855a1354f1b8b35958014e64de5&clientType=web
-2023-10-03 00:45:26,771:INFO:Getting address info im.binance.com:443, type=<SocketKind.SOCK_STREAM: 1> took 203.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('18.238.172.209', 443))]
-2023-10-03 00:45:26,771:INFO:Getting address info im.binance.com:443, type=<SocketKind.SOCK_STREAM: 1> took 203.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('18.238.172.209', 443))]
-2023-10-03 00:47:41,390:INFO:Using offset: 0
-2023-10-03 00:47:41,406:INFO:Using offset: 0
-2023-10-03 00:47:41,563:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 156.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:47:41,563:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 156.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:47:41,563:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 156.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:47:41,563:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 156.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:47:42,062:INFO:Getting address info stream.binance.com:9443, type=<SocketKind.SOCK_STREAM: 1> took 125.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('54.92.114.47', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('54.92.68.230', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('54.248.68.86', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('54.178.254.87', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('52.194.201.223', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('54.95.18.191', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('54.199.252.190', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('18.177.110.164', 9443))]
-2023-10-03 00:47:42,062:INFO:Getting address info stream.binance.com:9443, type=<SocketKind.SOCK_STREAM: 1> took 109.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('54.92.114.47', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('54.92.68.230', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('54.248.68.86', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('54.178.254.87', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('52.194.201.223', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('54.95.18.191', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('54.199.252.190', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('18.177.110.164', 9443))]
-2023-10-03 00:47:42,062:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 109.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:47:42,062:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 109.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:47:42,454:INFO:Attempting to connect to WebSocket with URL: wss://im.binance.com:443/chat/c2c_c49b83ef5a2d4ec192e34925c967a1fb_v2?token=TOKEN720dfa68076144b591f1dbd7a8560ade&clientType=web
-2023-10-03 00:47:42,454:INFO:Attempting to connect to WebSocket with URL: wss://im.binance.com:443/chat/c2c_d060d926224142d693c6ce5d4e9cee54_v2?token=TOKENad928fcfe3e842d6b7e6b4204df354f1&clientType=web
-2023-10-03 00:47:42,605:INFO:Getting address info im.binance.com:443, type=<SocketKind.SOCK_STREAM: 1> took 156.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('18.238.172.209', 443))]
-2023-10-03 00:47:42,605:INFO:Getting address info im.binance.com:443, type=<SocketKind.SOCK_STREAM: 1> took 156.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('18.238.172.209', 443))]
-2023-10-03 00:47:44,258:INFO:{"content":"ayuda","createTime":1696319263577,"id":"842660228555097089","orderNo":"20542426688446865408","self":false,"status":"unread","type":"text","uuid":"e4481067-d824-424f-a5fc-292d1568f0b8"}
-2023-10-03 00:47:44,258:INFO:Inside async_create_connection function
-2023-10-03 00:47:44,258:INFO:UUID obtained from msg_json: e4481067-d824-424f-a5fc-292d1568f0b8
-2023-10-03 00:47:44,258:INFO:Message content obtained from msg_json: ayuda
-2023-10-03 00:47:46,273:INFO:Sending a message: 1. Opciones de pago.
-2. Que incluir en el concepto/referencia.
-3. Terminos de la orden.
-2023-10-03 00:47:46,898:INFO:{"content":"1. Opciones de pago.\n2. Que incluir en el concepto/referencia.\n3. Terminos de la orden.","createTime":1696319266005,"id":"842660273015501312","orderNo":"20542426688446865408","self":true,"status":"unread","type":"text","uuid":"1696319266005"}
-2023-10-03 00:47:46,898:INFO:Ignoring message of type: text
-2023-10-03 00:48:02,801:INFO:Using offset: 0
-2023-10-03 00:48:02,817:INFO:Using offset: 0
-2023-10-03 00:48:02,958:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 141.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:48:02,958:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 141.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:48:02,958:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 141.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:48:02,958:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 141.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:48:03,797:INFO:Attempting to connect to WebSocket with URL: wss://im.binance.com:443/chat/c2c_c49b83ef5a2d4ec192e34925c967a1fb_v2?token=TOKENe28331baeeb24ec1ae89d75faed3a626&clientType=web
-2023-10-03 00:48:03,813:INFO:Attempting to connect to WebSocket with URL: wss://im.binance.com:443/chat/c2c_d060d926224142d693c6ce5d4e9cee54_v2?token=TOKEN5a99c89e71ae49a38b494bb3fb4e5b27&clientType=web
-2023-10-03 00:48:03,909:INFO:Getting address info im.binance.com:443, type=<SocketKind.SOCK_STREAM: 1> took 110.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('18.238.172.209', 443))]
-2023-10-03 00:48:08,100:INFO:{"content":"ayuda","createTime":1696319287437,"id":"842660628742030337","orderNo":"20542426688446865408","self":false,"status":"unread","type":"text","uuid":"56eecb4f-7767-49c0-a102-08b626cdbb38"}
-2023-10-03 00:48:08,100:INFO:Inside async_create_connection function
-2023-10-03 00:48:08,116:INFO:UUID obtained from msg_json: 56eecb4f-7767-49c0-a102-08b626cdbb38
-2023-10-03 00:48:08,116:INFO:Message content obtained from msg_json: ayuda
-2023-10-03 00:48:09,128:INFO:Sending a message: 1. Opciones de pago.
-2. Que incluir en el concepto/referencia.
-3. Terminos de la orden.
-2023-10-03 00:48:09,779:INFO:{"content":"1. Opciones de pago.\n2. Que incluir en el concepto/referencia.\n3. Terminos de la orden.","createTime":1696319288892,"id":"842660656896507137","orderNo":"20542426688446865408","self":true,"status":"unread","type":"text","uuid":"1696319288892"}
-2023-10-03 00:48:09,779:INFO:Ignoring message of type: text
-2023-10-03 00:48:35,959:INFO:{"content":"ayuda","createTime":1696319315288,"id":"842661095987495936","orderNo":"20542426688446865408","self":false,"status":"unread","type":"text","uuid":"b48004dd-3cbb-4a03-aace-de1ca212f1c5"}
-2023-10-03 00:48:35,959:INFO:Inside async_create_connection function
-2023-10-03 00:48:35,959:INFO:UUID obtained from msg_json: b48004dd-3cbb-4a03-aace-de1ca212f1c5
-2023-10-03 00:48:35,959:INFO:Message content obtained from msg_json: ayuda
-2023-10-03 00:48:36,964:INFO:Sending a message: 1. Opciones de pago.
-2. Que incluir en el concepto/referencia.
-3. Terminos de la orden.
-2023-10-03 00:48:37,614:INFO:{"content":"1. Opciones de pago.\n2. Que incluir en el concepto/referencia.\n3. Terminos de la orden.","createTime":1696319316733,"id":"842661123839982849","orderNo":"20542426688446865408","self":true,"status":"unread","type":"text","uuid":"1696319316733"}
-2023-10-03 00:48:37,614:INFO:Ignoring message of type: text
-2023-10-03 00:48:51,539:INFO:{"content":"1","createTime":1696319330866,"id":"842661357342966784","orderNo":"20542426688446865408","self":false,"status":"unread","type":"text","uuid":"05a0fc83-c040-4f33-aab2-a8f03906abe6"}
-2023-10-03 00:48:51,539:INFO:Inside async_create_connection function
-2023-10-03 00:48:51,539:INFO:UUID obtained from msg_json: 05a0fc83-c040-4f33-aab2-a8f03906abe6
-2023-10-03 00:48:51,539:INFO:Message content obtained from msg_json: 1
-2023-10-03 00:48:51,539:INFO:Sending a message: Para ver las opciones de pago por favor seleccione la opcion Realizar Pago en la parte superior > Seleccione el metodo de pago > Selecione la opcion que dice Transferido, notificar al vendedor despues de realizar el pago.
-2023-10-03 00:48:51,655:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 125.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:48:52,243:INFO:{"content":"Para ver las opciones de pago por favor seleccione la opcion Realizar Pago en la parte superior > Seleccione el metodo de pago > Selecione la opcion que dice Transferido, notificar al vendedor despues de realizar el pago.","createTime":1696319331373,"id":"842661369475202305","orderNo":"20542426688446865408","self":true,"status":"unread","type":"text","uuid":"1696319331373"}
-2023-10-03 00:48:52,243:INFO:Ignoring message of type: text
-2023-10-03 00:51:40,122:INFO:Using offset: 0
-2023-10-03 00:51:40,138:INFO:Using offset: 0
-2023-10-03 00:51:40,297:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 156.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:51:40,297:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 156.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:51:40,297:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 156.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:51:40,297:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 156.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:51:40,820:INFO:Getting address info stream.binance.com:9443, type=<SocketKind.SOCK_STREAM: 1> took 109.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('35.79.80.135', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('52.193.1.16', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('13.114.94.40', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('54.249.30.38', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('35.74.53.159', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('18.181.24.183', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('54.150.131.74', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('54.250.71.123', 9443))]
-2023-10-03 00:51:40,820:INFO:Getting address info stream.binance.com:9443, type=<SocketKind.SOCK_STREAM: 1> took 109.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('35.79.80.135', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('52.193.1.16', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('13.114.94.40', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('54.249.30.38', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('35.74.53.159', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('18.181.24.183', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('54.150.131.74', 9443)), (<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('54.250.71.123', 9443))]
-2023-10-03 00:51:41,220:INFO:Attempting to connect to WebSocket with URL: wss://im.binance.com:443/chat/c2c_d060d926224142d693c6ce5d4e9cee54_v2?token=TOKENcebed4beb71a4b8fa1a892d97385f736&clientType=web
-2023-10-03 00:51:41,220:INFO:Attempting to connect to WebSocket with URL: wss://im.binance.com:443/chat/c2c_c49b83ef5a2d4ec192e34925c967a1fb_v2?token=TOKEN2b4d10e9e1594005b27190a4010ee0a5&clientType=web
-2023-10-03 00:51:41,505:INFO:Getting address info im.binance.com:443, type=<SocketKind.SOCK_STREAM: 1> took 282.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('18.238.172.209', 443))]
-2023-10-03 00:51:41,505:INFO:Getting address info im.binance.com:443, type=<SocketKind.SOCK_STREAM: 1> took 282.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('18.238.172.209', 443))]
-2023-10-03 00:51:43,036:INFO:{"content":"{\"nickName\":\"KrypticPay\",\"realName\":\"LOPEZ GUERRERO FRANCISCO JAVIER\",\"type\":\"seller_payed\"}","createTime":1696319502360,"id":"842664234505033473","orderNo":"20542426688446865408","self":false,"status":"read","type":"system"}
-2023-10-03 00:51:43,036:INFO:Inside async_create_connection function
-2023-10-03 00:51:43,051:INFO:Sending a message: Por favor enviar comprobante de pago(requerido).
-2023-10-03 00:51:43,653:INFO:{"content":"Por favor enviar comprobante de pago(requerido).","createTime":1696319502770,"id":"842664245070939137","orderNo":"20542426688446865408","self":true,"status":"unread","type":"text","uuid":"1696319502770"}
-2023-10-03 00:51:43,653:INFO:Ignoring message of type: text
-2023-10-03 00:51:46,244:INFO:{"content":"Por favor enviar comprobante de pago(requerido).","createTime":1696319503000,"fromNickname":"AMBAR_OTC_DESK","id":"842664245070939137","orderNo":"20542426688446865408","self":true,"status":"read","type":"text","uuid":"1696319502770"}
-2023-10-03 00:51:46,244:INFO:Ignoring message of type: text
-2023-10-03 00:51:52,085:INFO:{"content":"ayuda","createTime":1696319511409,"id":"842664386351875072","orderNo":"20542426688446865408","self":false,"status":"unread","type":"text","uuid":"153e5ef4-2581-4f13-88b4-0ef14ef9360b"}
-2023-10-03 00:51:52,085:WARNING:Rate limit triggered for order: 20542426688446865408
-2023-10-03 00:52:08,955:INFO:{"content":"ayuda","createTime":1696319528291,"id":"842664669601612801","orderNo":"20542426688446865408","self":false,"status":"unread","type":"text","uuid":"773ea815-dbed-49b0-8207-a1c494f72757"}
-2023-10-03 00:52:08,955:INFO:Inside async_create_connection function
-2023-10-03 00:52:08,971:INFO:UUID obtained from msg_json: 773ea815-dbed-49b0-8207-a1c494f72757
-2023-10-03 00:52:08,971:INFO:Message content obtained from msg_json: ayuda
-2023-10-03 00:52:09,985:INFO:Sending a message: Le presento las opciones disponibles del 1-5:
-1. Estado del pago.
-2. Cómo enviar prueba de pago.
-3. ¿Qué hacer si enviaste una cantidad incorrecta?
-4. ¿Necesitas más tiempo para realizar el pago?
-5. Tiempo de espera para transacciones BBVA.
-Por favor solo introducir el numero correspondiente.
-2023-10-03 00:52:10,120:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 125.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:52:10,711:INFO:{"content":"Le presento las opciones disponibles del 1-5:\n1. Estado del pago.\n2. Cómo enviar prueba de pago.\n3. ¿Qué hacer si enviaste una cantidad incorrecta?\n4. ¿Necesitas más tiempo para realizar el pago?\n5. Tiempo de espera para transacciones BBVA.\nPor favor solo introducir el numero correspondiente.","createTime":1696319529834,"id":"842664699112735744","orderNo":"20542426688446865408","self":true,"status":"unread","type":"text","uuid":"1696319529834"}
-2023-10-03 00:52:10,711:INFO:Ignoring message of type: text
-2023-10-03 00:53:20,942:INFO:Using offset: 0
-2023-10-03 00:53:20,942:INFO:Using offset: 0
-2023-10-03 00:53:21,088:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 125.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:53:21,088:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 125.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:53:21,088:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 125.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:53:21,088:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 125.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:53:21,976:INFO:Attempting to connect to WebSocket with URL: wss://im.binance.com:443/chat/c2c_d060d926224142d693c6ce5d4e9cee54_v2?token=TOKEN48a9608d86a249bd8553598e590da16f&clientType=web
-2023-10-03 00:53:21,976:INFO:Attempting to connect to WebSocket with URL: wss://im.binance.com:443/chat/c2c_c49b83ef5a2d4ec192e34925c967a1fb_v2?token=TOKENb338dd218b4e4a039138897ba1900cc4&clientType=web
-2023-10-03 00:53:22,102:INFO:Getting address info im.binance.com:443, type=<SocketKind.SOCK_STREAM: 1> took 125.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('18.238.172.209', 443))]
-2023-10-03 00:53:22,102:INFO:Getting address info im.binance.com:443, type=<SocketKind.SOCK_STREAM: 1> took 125.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('18.238.172.209', 443))]
-2023-10-03 00:53:26,674:INFO:{"content":"ayuda","createTime":1696319605990,"id":"842665973174518785","orderNo":"20542426688446865408","self":false,"status":"unread","type":"text","uuid":"b3a2d16e-0263-4c6a-a051-7889a07d1004"}
-2023-10-03 00:53:26,674:INFO:Inside async_create_connection function
-2023-10-03 00:53:26,674:INFO:UUID obtained from msg_json: b3a2d16e-0263-4c6a-a051-7889a07d1004
-2023-10-03 00:53:26,674:INFO:Message content obtained from msg_json: ayuda
-2023-10-03 00:53:27,676:INFO:Sending a message: Le presento las opciones disponibles del 1-5:
-
-1. Estado del pago.
-2. Cómo enviar prueba de pago.
-3. ¿Qué hacer si enviaste una cantidad incorrecta?
-4. ¿Necesitas más tiempo para realizar el pago?
-5. Tiempo de espera para transacciones BBVA.
-
-Por favor solo introducir el numero correspondiente.
-2023-10-03 00:53:28,340:INFO:{"content":"Le presento las opciones disponibles del 1-5:\n\n1. Estado del pago.\n2. Cómo enviar prueba de pago.\n3. ¿Qué hacer si enviaste una cantidad incorrecta?\n4. ¿Necesitas más tiempo para realizar el pago?\n5. Tiempo de espera para transacciones BBVA.\n\nPor favor solo introducir el numero correspondiente.","createTime":1696319607463,"id":"842666001578891264","orderNo":"20542426688446865408","self":true,"status":"unread","type":"text","uuid":"1696319607463"}
-2023-10-03 00:53:28,340:INFO:Ignoring message of type: text
-2023-10-03 00:54:30,105:INFO:{"content":"2","createTime":1696319669424,"id":"842667037420438529","orderNo":"20542426688446865408","self":false,"status":"unread","type":"text","uuid":"5647be9f-ec10-4fb3-b120-fc0a3b006ff3"}
-2023-10-03 00:54:30,105:INFO:Inside async_create_connection function
-2023-10-03 00:54:30,120:INFO:UUID obtained from msg_json: 5647be9f-ec10-4fb3-b120-fc0a3b006ff3
-2023-10-03 00:54:30,120:INFO:Message content obtained from msg_json: 2
-2023-10-03 00:54:30,120:INFO:Sending a message: Puedes enviar la prueba de pago selecionando el boton (+) > ALBUM > y la captura que desea adjuntar.
-2023-10-03 00:54:30,283:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 172.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:54:30,881:INFO:{"content":"Puedes enviar la prueba de pago selecionando el boton (+) > ALBUM > y la captura que desea adjuntar.","createTime":1696319669997,"id":"842667050624653313","orderNo":"20542426688446865408","self":true,"status":"unread","type":"text","uuid":"1696319669997"}
-2023-10-03 00:54:30,881:INFO:Ignoring message of type: text
-2023-10-03 00:54:46,651:INFO:{"content":"3","createTime":1696319685980,"id":"842667315167249409","orderNo":"20542426688446865408","self":false,"status":"unread","type":"text","uuid":"47fe91f4-824f-4b91-a5cb-fe63debe6272"}
-2023-10-03 00:54:46,651:INFO:Inside async_create_connection function
-2023-10-03 00:54:46,667:INFO:UUID obtained from msg_json: 47fe91f4-824f-4b91-a5cb-fe63debe6272
-2023-10-03 00:54:46,667:INFO:Message content obtained from msg_json: 3
-2023-10-03 00:54:46,667:INFO:Sending a message: Si enviaste una cantidad incorrecta, deberas cancelar esta orden primero y despues abrir una nueva orden por la cantidad correcta.
-2023-10-03 00:54:47,313:INFO:{"content":"Si enviaste una cantidad incorrecta, deberas cancelar esta orden primero y despues abrir una nueva orden por la cantidad correcta.","createTime":1696319686433,"id":"842667326391752704","orderNo":"20542426688446865408","self":true,"status":"unread","type":"text","uuid":"1696319686433"}
-2023-10-03 00:54:47,313:INFO:Ignoring message of type: text
-2023-10-03 00:55:06,805:INFO:{"content":"3","createTime":1696319706123,"id":"842667653110711297","orderNo":"20542426688446865408","self":false,"status":"unread","type":"text","uuid":"250ff842-7c4f-4243-ac60-123d42120496"}
-2023-10-03 00:55:06,805:INFO:Inside async_create_connection function
-2023-10-03 00:55:06,805:INFO:UUID obtained from msg_json: 250ff842-7c4f-4243-ac60-123d42120496
-2023-10-03 00:55:06,805:INFO:Message content obtained from msg_json: 3
-2023-10-03 00:55:06,805:INFO:Sending a message: Si enviaste una cantidad incorrecta, deberas cancelar esta orden primero y despues abrir una nueva orden por la cantidad correcta.
-2023-10-03 00:55:06,947:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 141.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:55:07,538:INFO:{"content":"Si enviaste una cantidad incorrecta, deberas cancelar esta orden primero y despues abrir una nueva orden por la cantidad correcta.","createTime":1696319706655,"id":"842667665677391872","orderNo":"20542426688446865408","self":true,"status":"unread","type":"text","uuid":"1696319706655"}
-2023-10-03 00:55:07,538:INFO:Ignoring message of type: text
-2023-10-03 00:55:14,357:INFO:{"content":"Le presento las opciones disponibles del 1-5:\n\n1. Estado del pago.\n2. Cómo enviar prueba de pago.\n3. ¿Qué hacer si enviaste una cantidad incorrecta?\n4. ¿Necesitas más tiempo para realizar el pago?\n5. Tiempo de espera para transacciones BBVA.\n\nPor favor solo introducir el numero correspondiente.","createTime":1696319608000,"fromNickname":"AMBAR_OTC_DESK","id":"842666001578891264","orderNo":"20542426688446865408","self":true,"status":"read","type":"text","uuid":"1696319607463"}
-2023-10-03 00:55:14,357:INFO:Ignoring message of type: text
-2023-10-03 00:55:14,357:INFO:{"content":"Puedes enviar la prueba de pago selecionando el boton (+) > ALBUM > y la captura que desea adjuntar.","createTime":1696319670000,"fromNickname":"AMBAR_OTC_DESK","id":"842667050624653313","orderNo":"20542426688446865408","self":true,"status":"read","type":"text","uuid":"1696319669997"}
-2023-10-03 00:55:14,357:INFO:Ignoring message of type: text
-2023-10-03 00:55:14,373:INFO:{"content":"Le presento las opciones disponibles del 1-5:\n1. Estado del pago.\n2. Cómo enviar prueba de pago.\n3. ¿Qué hacer si enviaste una cantidad incorrecta?\n4. ¿Necesitas más tiempo para realizar el pago?\n5. Tiempo de espera para transacciones BBVA.\nPor favor solo introducir el numero correspondiente.","createTime":1696319530000,"fromNickname":"AMBAR_OTC_DESK","id":"842664699112735744","orderNo":"20542426688446865408","self":true,"status":"read","type":"text","uuid":"1696319529834"}
-2023-10-03 00:55:14,373:INFO:Ignoring message of type: text
-2023-10-03 00:55:14,373:INFO:{"content":"Si enviaste una cantidad incorrecta, deberas cancelar esta orden primero y despues abrir una nueva orden por la cantidad correcta.","createTime":1696319687000,"fromNickname":"AMBAR_OTC_DESK","id":"842667326391752704","orderNo":"20542426688446865408","self":true,"status":"read","type":"text","uuid":"1696319686433"}
-2023-10-03 00:55:14,373:INFO:Ignoring message of type: text
-2023-10-03 00:55:14,373:INFO:{"content":"Si enviaste una cantidad incorrecta, deberas cancelar esta orden primero y despues abrir una nueva orden por la cantidad correcta.","createTime":1696319707000,"fromNickname":"AMBAR_OTC_DESK","id":"842667665677391872","orderNo":"20542426688446865408","self":true,"status":"read","type":"text","uuid":"1696319706655"}
-2023-10-03 00:55:14,373:INFO:Ignoring message of type: text
-2023-10-03 00:55:56,195:INFO:Using offset: 0
-2023-10-03 00:55:56,195:INFO:Using offset: 0
-2023-10-03 00:55:57,116:INFO:Attempting to connect to WebSocket with URL: wss://im.binance.com:443/chat/c2c_d060d926224142d693c6ce5d4e9cee54_v2?token=TOKEN9397c461ff004572bb39a2a716bc57f8&clientType=web
-2023-10-03 00:55:57,132:INFO:Attempting to connect to WebSocket with URL: wss://im.binance.com:443/chat/c2c_c49b83ef5a2d4ec192e34925c967a1fb_v2?token=TOKENfdbc4232d81f4292aad638a8726cdf78&clientType=web
-2023-10-03 00:55:57,281:INFO:Getting address info im.binance.com:443, type=<SocketKind.SOCK_STREAM: 1> took 172.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('18.238.172.209', 443))]
-2023-10-03 00:55:57,281:INFO:Getting address info im.binance.com:443, type=<SocketKind.SOCK_STREAM: 1> took 156.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('18.238.172.209', 443))]
-2023-10-03 00:56:00,616:INFO:{"content":"e","createTime":1696319759933,"id":"842668555892704256","orderNo":"20542426688446865408","self":false,"status":"unread","type":"text","uuid":"c73dcfca-9f99-45d3-a069-59050560ff0c"}
-2023-10-03 00:56:00,616:INFO:Inside async_create_connection function
-2023-10-03 00:56:00,616:INFO:UUID obtained from msg_json: c73dcfca-9f99-45d3-a069-59050560ff0c
-2023-10-03 00:56:00,616:INFO:Message content obtained from msg_json: e
-2023-10-03 00:56:04,379:INFO:{"content":"3","createTime":1696319763705,"id":"842668619193140225","orderNo":"20542426688446865408","self":false,"status":"unread","type":"text","uuid":"64050f4f-7bc6-4c1c-89cb-b2a22fad3aef"}
-2023-10-03 00:56:04,379:WARNING:Rate limit triggered for order: 20542426688446865408
-2023-10-03 00:56:21,447:INFO:{"content":"3","createTime":1696319780763,"id":"842668905362113536","orderNo":"20542426688446865408","self":false,"status":"unread","type":"text","uuid":"30556552-1616-4986-a208-c10d75ff8511"}
-2023-10-03 00:56:21,447:INFO:Inside async_create_connection function
-2023-10-03 00:56:21,447:INFO:UUID obtained from msg_json: 30556552-1616-4986-a208-c10d75ff8511
-2023-10-03 00:56:21,447:INFO:Message content obtained from msg_json: 3
-2023-10-03 00:56:22,462:INFO:Sending a message: Si enviaste una cantidad incorrecta, deberas cancelar esta orden primero y despues abrir una nueva orden por la cantidad correcta.
-2023-10-03 00:56:22,619:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 156.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:56:23,230:INFO:{"content":"Si enviaste una cantidad incorrecta, deberas cancelar esta orden primero y despues abrir una nueva orden por la cantidad correcta.","createTime":1696319782336,"id":"842668935496422912","orderNo":"20542426688446865408","self":true,"status":"unread","type":"text","uuid":"1696319782336"}
-2023-10-03 00:56:23,230:INFO:Ignoring message of type: text
-2023-10-03 00:56:43,555:INFO:Using offset: 0
-2023-10-03 00:56:43,555:INFO:Using offset: 0
-2023-10-03 00:56:43,655:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 110.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:56:43,655:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 110.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:56:43,656:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 110.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:56:43,656:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 110.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:56:44,508:INFO:Attempting to connect to WebSocket with URL: wss://im.binance.com:443/chat/c2c_c49b83ef5a2d4ec192e34925c967a1fb_v2?token=TOKEN16ef33061623413497cbd1798057b39e&clientType=web
-2023-10-03 00:56:44,513:INFO:Attempting to connect to WebSocket with URL: wss://im.binance.com:443/chat/c2c_d060d926224142d693c6ce5d4e9cee54_v2?token=TOKENbc5946385b37401cba196990ee59ea25&clientType=web
-2023-10-03 00:56:44,659:INFO:Getting address info im.binance.com:443, type=<SocketKind.SOCK_STREAM: 1> took 156.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('18.238.172.209', 443))]
-2023-10-03 00:56:44,659:INFO:Getting address info im.binance.com:443, type=<SocketKind.SOCK_STREAM: 1> took 141.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('18.238.172.209', 443))]
-2023-10-03 00:56:47,352:INFO:{"content":"3","createTime":1696319806681,"id":"842669340193997824","orderNo":"20542426688446865408","self":false,"status":"unread","type":"text","uuid":"8de098d0-dce1-498c-a542-92f95bd969dc"}
-2023-10-03 00:56:47,352:INFO:Inside async_create_connection function
-2023-10-03 00:56:47,368:INFO:UUID obtained from msg_json: 8de098d0-dce1-498c-a542-92f95bd969dc
-2023-10-03 00:56:47,368:INFO:Message content obtained from msg_json: 3
-2023-10-03 00:56:48,376:INFO:Sending a message: Si enviaste una cantidad incorrecta, deberas cancelar esta orden primero y despues abrir una nueva orden por la cantidad correcta.
-2023-10-03 00:56:49,015:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 640.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:56:49,625:INFO:{"content":"Si enviaste una cantidad incorrecta, deberas cancelar esta orden primero y despues abrir una nueva orden por la cantidad correcta.","createTime":1696319808725,"id":"842669378276142081","orderNo":"20542426688446865408","self":true,"status":"unread","type":"text","uuid":"1696319808725"}
-2023-10-03 00:56:49,625:INFO:Ignoring message of type: text
-2023-10-03 00:57:05,567:INFO:{"content":"ayuda","createTime":1696319824893,"id":"842669645757432832","orderNo":"20542426688446865408","self":false,"status":"unread","type":"text","uuid":"e62bd527-c57f-43a9-826a-e5e3e297ee7d"}
-2023-10-03 00:57:05,567:INFO:Inside async_create_connection function
-2023-10-03 00:57:05,583:INFO:UUID obtained from msg_json: e62bd527-c57f-43a9-826a-e5e3e297ee7d
-2023-10-03 00:57:05,583:INFO:Message content obtained from msg_json: ayuda
-2023-10-03 00:57:06,582:INFO:Sending a message: Le presento las opciones disponibles del 1-5:
-
-1. Estado del pago.
-2. Cómo enviar prueba de pago.
-3. ¿Qué hacer si enviaste una cantidad incorrecta?
-4. ¿Necesitas más tiempo para realizar el pago?
-5. Tiempo de espera para transacciones BBVA.
-
-Por favor solo introducir el numero correspondiente.
-2023-10-03 00:57:07,215:INFO:{"content":"Le presento las opciones disponibles del 1-5:\n\n1. Estado del pago.\n2. Cómo enviar prueba de pago.\n3. ¿Qué hacer si enviaste una cantidad incorrecta?\n4. ¿Necesitas más tiempo para realizar el pago?\n5. Tiempo de espera para transacciones BBVA.\n\nPor favor solo introducir el numero correspondiente.","createTime":1696319826340,"id":"842669673605475329","orderNo":"20542426688446865408","self":true,"status":"unread","type":"text","uuid":"1696319826340"}
-2023-10-03 00:57:07,215:INFO:Ignoring message of type: text
-2023-10-03 00:57:47,810:INFO:{"content":"1","createTime":1696319867140,"id":"842670354611586049","orderNo":"20542426688446865408","self":false,"status":"unread","type":"text","uuid":"05a4fc9b-1c33-49c1-9d87-edfa1c21bea0"}
-2023-10-03 00:57:47,810:INFO:Inside async_create_connection function
-2023-10-03 00:57:47,826:INFO:UUID obtained from msg_json: 05a4fc9b-1c33-49c1-9d87-edfa1c21bea0
-2023-10-03 00:57:47,826:INFO:Message content obtained from msg_json: 1
-2023-10-03 00:57:48,829:INFO:Sending a message: Estamos validando su pago, por favor permitame unos minutos para verificar. Gracias por su paciencia
-2023-10-03 00:57:48,946:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 109.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:57:49,536:INFO:{"content":"Estamos validando su pago, por favor permitame unos minutos para verificar. Gracias por su paciencia","createTime":1696319868650,"id":"842670383432707072","orderNo":"20542426688446865408","self":true,"status":"unread","type":"text","uuid":"1696319868650"}
-2023-10-03 00:57:49,536:INFO:Ignoring message of type: text
-2023-10-03 00:58:23,106:INFO:Using offset: 0
-2023-10-03 00:58:23,108:INFO:Using offset: 0
-2023-10-03 00:58:23,247:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 141.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:58:23,247:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 141.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:58:23,247:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 141.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:58:23,247:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 141.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:58:24,154:INFO:Attempting to connect to WebSocket with URL: wss://im.binance.com:443/chat/c2c_d060d926224142d693c6ce5d4e9cee54_v2?token=TOKEN5a80d0a2678c4f09b9d5818ea99e156f&clientType=web
-2023-10-03 00:58:24,154:INFO:Attempting to connect to WebSocket with URL: wss://im.binance.com:443/chat/c2c_c49b83ef5a2d4ec192e34925c967a1fb_v2?token=TOKENb04a6c67df0f419eb5281668fd529a94&clientType=web
-2023-10-03 00:58:24,342:INFO:Getting address info im.binance.com:443, type=<SocketKind.SOCK_STREAM: 1> took 187.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('18.238.172.209', 443))]
-2023-10-03 00:58:24,342:INFO:Getting address info im.binance.com:443, type=<SocketKind.SOCK_STREAM: 1> took 187.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('18.238.172.209', 443))]
-2023-10-03 00:58:26,168:INFO:{"content":"ayuda","createTime":1696319905495,"id":"842670998034596865","orderNo":"20542426688446865408","self":false,"status":"unread","type":"text","uuid":"bf04324a-c78b-45a3-aa5e-7cfd6049b624"}
-2023-10-03 00:58:26,168:INFO:Inside async_create_connection function
-2023-10-03 00:58:26,183:INFO:UUID obtained from msg_json: bf04324a-c78b-45a3-aa5e-7cfd6049b624
-2023-10-03 00:58:26,183:INFO:Message content obtained from msg_json: ayuda
-2023-10-03 00:58:27,192:INFO:Sending a message: Le presento las opciones disponibles del 1-5:
-
-1. Estado del pago.
-2. Cómo enviar prueba de pago.
-3. ¿Qué hacer si enviaste una cantidad incorrecta?
-4. ¿Necesitas más tiempo para realizar el pago?
-5. Tiempo de espera para transacciones BBVA.
-
-Por favor solo introducir el numero correspondiente.
-2023-10-03 00:58:27,794:INFO:{"content":"Le presento las opciones disponibles del 1-5:\n\n1. Estado del pago.\n2. Cómo enviar prueba de pago.\n3. ¿Qué hacer si enviaste una cantidad incorrecta?\n4. ¿Necesitas más tiempo para realizar el pago?\n5. Tiempo de espera para transacciones BBVA.\n\nPor favor solo introducir el numero correspondiente.","createTime":1696319906898,"id":"842671025291568384","orderNo":"20542426688446865408","self":true,"status":"unread","type":"text","uuid":"1696319906898"}
-2023-10-03 00:58:27,794:INFO:Ignoring message of type: text
-2023-10-03 00:58:36,643:INFO:{"content":"1","createTime":1696319915962,"id":"842671173641716737","orderNo":"20542426688446865408","self":false,"status":"unread","type":"text","uuid":"6fc3fd0b-e173-434e-b085-cdbe4bcca161"}
-2023-10-03 00:58:36,643:INFO:Inside async_create_connection function
-2023-10-03 00:58:36,647:INFO:UUID obtained from msg_json: 6fc3fd0b-e173-434e-b085-cdbe4bcca161
-2023-10-03 00:58:36,647:INFO:Message content obtained from msg_json: 1
-2023-10-03 00:58:36,647:INFO:Sending a message: Estamos validando su pago, por favor permitame unos minutos para verificar. Gracias por su paciencia
-2023-10-03 00:58:36,757:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 110.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:58:37,344:INFO:{"content":"Estamos validando su pago, por favor permitame unos minutos para verificar. Gracias por su paciencia","createTime":1696319916457,"id":"842671185513981185","orderNo":"20542426688446865408","self":true,"status":"unread","type":"text","uuid":"1696319916457"}
-2023-10-03 00:58:37,344:INFO:Ignoring message of type: text
-2023-10-03 00:58:57,215:INFO:{"content":"1","createTime":1696319936547,"id":"842671519000708096","orderNo":"20542426688446865408","self":false,"status":"unread","type":"text","uuid":"128904ce-a484-4cb1-bcc6-10bfa649a416"}
-2023-10-03 00:58:57,215:INFO:Inside async_create_connection function
-2023-10-03 00:58:57,231:INFO:UUID obtained from msg_json: 128904ce-a484-4cb1-bcc6-10bfa649a416
-2023-10-03 00:58:57,231:INFO:Message content obtained from msg_json: 1
-2023-10-03 00:58:57,231:INFO:Sending a message: Estamos validando su pago, por favor permitame unos minutos para verificar. Gracias por su paciencia
-2023-10-03 00:58:57,866:INFO:{"content":"Estamos validando su pago, por favor permitame unos minutos para verificar. Gracias por su paciencia","createTime":1696319936991,"id":"842671530034111745","orderNo":"20542426688446865408","self":true,"status":"unread","type":"text","uuid":"1696319936991"}
-2023-10-03 00:58:57,866:INFO:Ignoring message of type: text
-2023-10-03 00:59:38,576:INFO:Using offset: 0
-2023-10-03 00:59:38,576:INFO:Using offset: 0
-2023-10-03 00:59:38,691:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 109.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:59:38,691:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 109.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:59:38,691:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 109.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:59:38,691:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 109.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 00:59:39,544:INFO:Attempting to connect to WebSocket with URL: wss://im.binance.com:443/chat/c2c_d060d926224142d693c6ce5d4e9cee54_v2?token=TOKENd2f89b40fb064c9692b099021f0d6a83&clientType=web
-2023-10-03 00:59:39,544:INFO:Attempting to connect to WebSocket with URL: wss://im.binance.com:443/chat/c2c_c49b83ef5a2d4ec192e34925c967a1fb_v2?token=TOKENe7be613fa4e145d8a3884566ae770e32&clientType=web
-2023-10-03 00:59:39,659:INFO:Getting address info im.binance.com:443, type=<SocketKind.SOCK_STREAM: 1> took 110.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('18.238.172.209', 443))]
-2023-10-03 00:59:39,659:INFO:Getting address info im.binance.com:443, type=<SocketKind.SOCK_STREAM: 1> took 110.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('18.238.172.209', 443))]
-2023-10-03 00:59:42,401:INFO:{"content":"ayuda","createTime":1696319981724,"id":"842672276944995328","orderNo":"20542426688446865408","self":false,"status":"unread","type":"text","uuid":"9a22a48d-596b-4040-9ce6-dc0450032c9c"}
-2023-10-03 00:59:42,401:INFO:Inside async_create_connection function
-2023-10-03 00:59:42,419:INFO:UUID obtained from msg_json: 9a22a48d-596b-4040-9ce6-dc0450032c9c
-2023-10-03 00:59:42,419:INFO:Message content obtained from msg_json: ayuda
-2023-10-03 00:59:42,419:INFO:Sending a message: Le presento las opciones disponibles del 1-5:
-
-1. Estado del pago.
-2. Cómo enviar prueba de pago.
-3. ¿Qué hacer si enviaste una cantidad incorrecta?
-4. ¿Necesitas más tiempo para realizar el pago?
-5. Tiempo de espera para transacciones BBVA.
-
-Por favor solo introducir el numero correspondiente.
-2023-10-03 00:59:43,019:INFO:{"content":"Le presento las opciones disponibles del 1-5:\n\n1. Estado del pago.\n2. Cómo enviar prueba de pago.\n3. ¿Qué hacer si enviaste una cantidad incorrecta?\n4. ¿Necesitas más tiempo para realizar el pago?\n5. Tiempo de espera para transacciones BBVA.\n\nPor favor solo introducir el numero correspondiente.","createTime":1696319982129,"id":"842672287500928769","orderNo":"20542426688446865408","self":true,"status":"unread","type":"text","uuid":"1696319982129"}
-2023-10-03 00:59:43,019:INFO:Ignoring message of type: text
-2023-10-03 00:59:54,668:INFO:{"content":"Si enviaste una cantidad incorrecta, deberas cancelar esta orden primero y despues abrir una nueva orden por la cantidad correcta.","createTime":1696319783000,"fromNickname":"AMBAR_OTC_DESK","id":"842668935496422912","orderNo":"20542426688446865408","self":true,"status":"read","type":"text","uuid":"1696319782336"}
-2023-10-03 00:59:54,668:INFO:Ignoring message of type: text
-2023-10-03 00:59:54,668:INFO:{"content":"Estamos validando su pago, por favor permitame unos minutos para verificar. Gracias por su paciencia","createTime":1696319917000,"fromNickname":"AMBAR_OTC_DESK","id":"842671185513981185","orderNo":"20542426688446865408","self":true,"status":"read","type":"text","uuid":"1696319916457"}
-2023-10-03 00:59:54,668:INFO:Ignoring message of type: text
-2023-10-03 00:59:54,671:INFO:{"content":"Si enviaste una cantidad incorrecta, deberas cancelar esta orden primero y despues abrir una nueva orden por la cantidad correcta.","createTime":1696319809000,"fromNickname":"AMBAR_OTC_DESK","id":"842669378276142081","orderNo":"20542426688446865408","self":true,"status":"read","type":"text","uuid":"1696319808725"}
-2023-10-03 00:59:54,671:INFO:Ignoring message of type: text
-2023-10-03 00:59:54,680:INFO:{"content":"Le presento las opciones disponibles del 1-5:\n\n1. Estado del pago.\n2. Cómo enviar prueba de pago.\n3. ¿Qué hacer si enviaste una cantidad incorrecta?\n4. ¿Necesitas más tiempo para realizar el pago?\n5. Tiempo de espera para transacciones BBVA.\n\nPor favor solo introducir el numero correspondiente.","createTime":1696319827000,"fromNickname":"AMBAR_OTC_DESK","id":"842669673605475329","orderNo":"20542426688446865408","self":true,"status":"read","type":"text","uuid":"1696319826340"}
-2023-10-03 00:59:54,680:INFO:Ignoring message of type: text
-2023-10-03 00:59:54,680:INFO:{"content":"Estamos validando su pago, por favor permitame unos minutos para verificar. Gracias por su paciencia","createTime":1696319869000,"fromNickname":"AMBAR_OTC_DESK","id":"842670383432707072","orderNo":"20542426688446865408","self":true,"status":"read","type":"text","uuid":"1696319868650"}
-2023-10-03 00:59:54,680:INFO:Ignoring message of type: text
-2023-10-03 00:59:54,686:INFO:{"content":"Le presento las opciones disponibles del 1-5:\n\n1. Estado del pago.\n2. Cómo enviar prueba de pago.\n3. ¿Qué hacer si enviaste una cantidad incorrecta?\n4. ¿Necesitas más tiempo para realizar el pago?\n5. Tiempo de espera para transacciones BBVA.\n\nPor favor solo introducir el numero correspondiente.","createTime":1696319907000,"fromNickname":"AMBAR_OTC_DESK","id":"842671025291568384","orderNo":"20542426688446865408","self":true,"status":"read","type":"text","uuid":"1696319906898"}
-2023-10-03 00:59:54,686:INFO:Ignoring message of type: text
-2023-10-03 00:59:54,687:INFO:{"content":"Le presento las opciones disponibles del 1-5:\n\n1. Estado del pago.\n2. Cómo enviar prueba de pago.\n3. ¿Qué hacer si enviaste una cantidad incorrecta?\n4. ¿Necesitas más tiempo para realizar el pago?\n5. Tiempo de espera para transacciones BBVA.\n\nPor favor solo introducir el numero correspondiente.","createTime":1696319982000,"fromNickname":"AMBAR_OTC_DESK","id":"842672287500928769","orderNo":"20542426688446865408","self":true,"status":"read","type":"text","uuid":"1696319982129"}
-2023-10-03 00:59:54,687:INFO:Ignoring message of type: text
-2023-10-03 00:59:54,687:INFO:{"content":"Estamos validando su pago, por favor permitame unos minutos para verificar. Gracias por su paciencia","createTime":1696319937000,"fromNickname":"AMBAR_OTC_DESK","id":"842671530034111745","orderNo":"20542426688446865408","self":true,"status":"read","type":"text","uuid":"1696319936991"}
-2023-10-03 00:59:54,687:INFO:Ignoring message of type: text
-2023-10-03 01:00:03,928:INFO:{"content":"1","createTime":1696320003245,"id":"842672637990683648","orderNo":"20542426688446865408","self":false,"status":"unread","type":"text","uuid":"78f6ceb7-dcc2-4944-ab8b-60c880444bf3"}
-2023-10-03 01:00:03,928:INFO:Inside async_create_connection function
-2023-10-03 01:00:03,928:INFO:UUID obtained from msg_json: 78f6ceb7-dcc2-4944-ab8b-60c880444bf3
-2023-10-03 01:00:03,928:INFO:Message content obtained from msg_json: 1
-2023-10-03 01:00:03,928:INFO:Sending a message: Estamos validando su pago, por favor permitame unos minutos para verificar. Gracias por su paciencia
-2023-10-03 01:00:04,109:INFO:Getting address info api.binance.com:443, type=<SocketKind.SOCK_STREAM: 1>, flags=<AddressInfo.AI_ADDRCONFIG: 1024> took 188.000ms: [(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 0, '', ('108.138.171.75', 443))]
-2023-10-03 01:00:04,693:INFO:{"content":"Estamos validando su pago, por favor permitame unos minutos para verificar. Gracias por su paciencia","createTime":1696320003815,"id":"842672651214194432","orderNo":"20542426688446865408","self":true,"status":"unread","type":"text","uuid":"1696320003815"}
-2023-10-03 01:00:04,693:INFO:Ignoring message of type: text
-2023-10-03 01:00:06,707:INFO:{"content":"Estamos validando su pago, por favor permitame unos minutos para verificar. Gracias por su paciencia","createTime":1696320004000,"fromNickname":"AMBAR_OTC_DESK","id":"842672651214194432","orderNo":"20542426688446865408","self":true,"status":"read","type":"text","uuid":"1696320003815"}
-2023-10-03 01:00:06,707:INFO:Ignoring message of type: text
+2023-10-07 00:35:50,008:binance_update_ads:INFO:BTC - start: 522222.72, ratio: 102.99
+2023-10-07 00:35:50,024:binance_update_ads:INFO:Competitor price: 1: 522273.11
+2023-10-07 00:35:52,042:binance_update_ads:INFO:BTC - start: 542505.19, ratio: 106.99
+2023-10-07 00:35:52,042:binance_update_ads:INFO:Competitor price: 3: 542555.89
+2023-10-07 00:35:55,126:binance_update_ads:INFO:USDT - start: 18.59, ratio: 102.57
+2023-10-07 00:35:55,126:binance_update_ads:INFO:Competitor price: 4: 18.6
+2023-10-07 00:36:00,300:binance_update_ads:INFO:USDT - start: 18.99, ratio: 104.57
+2023-10-07 00:36:00,300:binance_update_ads:INFO:Competitor price: 9: 18.99
+2023-10-07 00:36:54,915:binance_update_ads:INFO:BTC - start: 522058.39, ratio: 102.99
+2023-10-07 00:36:54,915:binance_update_ads:INFO:Competitor price: 1: 522135.58
+2023-10-07 00:36:56,940:binance_update_ads:INFO:BTC - start: 542505.19, ratio: 106.99
+2023-10-07 00:36:56,940:binance_update_ads:INFO:Competitor price: 3: 542406.54
+2023-10-07 00:37:03,265:binance_update_ads:INFO:USDT - start: 18.63, ratio: 102.61
+2023-10-07 00:37:03,265:binance_update_ads:INFO:Competitor price: 4: 18.6
+2023-10-07 00:37:08,228:binance_update_ads:INFO:USDT - start: 18.99, ratio: 104.56
+2023-10-07 00:37:08,228:binance_update_ads:INFO:Competitor price: 9: 18.99
+2023-10-07 00:38:02,070:binance_update_ads:INFO:BTC - start: 522058.39, ratio: 102.99
+2023-10-07 00:38:02,070:binance_update_ads:INFO:Competitor price: 1: 522135.58
+2023-10-07 00:38:04,077:binance_update_ads:INFO:BTC - start: 542209.39, ratio: 106.96
+2023-10-07 00:38:04,077:binance_update_ads:INFO:Competitor price: 3: 542406.54
+2023-10-07 00:38:10,115:binance_update_ads:INFO:USDT - start: 18.6, ratio: 102.44
+2023-10-07 00:38:10,115:binance_update_ads:INFO:Competitor price: 4: 18.6
+2023-10-07 00:38:15,049:binance_update_ads:INFO:USDT - start: 18.98, ratio: 104.55
+2023-10-07 00:38:15,049:binance_update_ads:INFO:Competitor price: 9: 18.99
+2023-10-07 00:39:09,198:binance_update_ads:INFO:BTC - start: 522058.39, ratio: 102.99
+2023-10-07 00:39:09,198:binance_update_ads:INFO:Competitor price: 1: 522135.58
+2023-10-07 00:39:11,222:binance_update_ads:INFO:BTC - start: 542323.14, ratio: 106.99
+2023-10-07 00:39:11,222:binance_update_ads:INFO:Competitor price: 3: 542406.54
+2023-10-07 00:39:17,428:binance_update_ads:INFO:USDT - start: 18.6, ratio: 102.43
+2023-10-07 00:39:17,428:binance_update_ads:INFO:Competitor price: 4: 18.6
+2023-10-07 00:39:22,355:binance_update_ads:INFO:USDT - start: 18.99, ratio: 104.59
+2023-10-07 00:39:22,355:binance_update_ads:INFO:Competitor price: 9: 18.99
+2023-10-07 00:40:16,518:binance_update_ads:INFO:BTC - start: 522058.39, ratio: 102.99
+2023-10-07 00:40:16,533:binance_update_ads:INFO:Competitor price: 1: 522135.58
+2023-10-07 00:40:18,535:binance_update_ads:INFO:BTC - start: 542315.06, ratio: 107.0
+2023-10-07 00:40:18,535:binance_update_ads:INFO:Competitor price: 3: 542406.54
+2023-10-07 00:40:24,497:binance_update_ads:INFO:USDT - start: 18.6, ratio: 102.42
+2023-10-07 00:40:24,497:binance_update_ads:INFO:Competitor price: 4: 18.6
+2023-10-07 00:40:29,484:binance_update_ads:INFO:USDT - start: 18.99, ratio: 104.58
+2023-10-07 00:40:29,484:binance_update_ads:INFO:Competitor price: 9: 18.99
+2023-10-07 00:41:23,249:binance_update_ads:INFO:BTC - start: 522058.39, ratio: 102.99
+2023-10-07 00:41:23,249:binance_update_ads:INFO:Competitor price: 1: 522019.83
+2023-10-07 00:41:28,386:binance_update_ads:INFO:BTC - start: 542364.07, ratio: 107.01
+2023-10-07 00:41:28,386:binance_update_ads:INFO:Competitor price: 3: 542406.54
+2023-10-07 00:41:31,572:binance_update_ads:INFO:USDT - start: 18.59, ratio: 102.41
+2023-10-07 00:41:31,572:binance_update_ads:INFO:Competitor price: 4: 18.6
+2023-10-07 00:41:36,623:binance_update_ads:INFO:USDT - start: 18.99, ratio: 104.57
+2023-10-07 00:41:36,623:binance_update_ads:INFO:Competitor price: 9: 18.99
+2023-10-07 00:42:11,549:websocket_handlers:WARNING:Rate limit triggered for order: 20543871029193846784
+2023-10-07 00:42:11,549:websocket_handlers:WARNING:Rate limit triggered for order: 20543871029193846784
+2023-10-07 00:42:11,549:websocket_handlers:WARNING:Rate limit triggered for order: 20543871029193846784
+2023-10-07 00:42:11,549:websocket_handlers:WARNING:Rate limit triggered for order: 20543871029193846784
+2023-10-07 00:42:11,549:websocket_handlers:WARNING:Rate limit triggered for order: 20543871029193846784
+2023-10-07 00:42:11,549:websocket_handlers:WARNING:Rate limit triggered for order: 20543871029193846784
+2023-10-07 00:42:11,549:websocket_handlers:WARNING:Rate limit triggered for order: 20543871029193846784
+2023-10-07 00:42:11,549:websocket_handlers:WARNING:Rate limit triggered for order: 20543871029193846784
+2023-10-07 00:42:11,675:websocket_handlers:WARNING:Rate limit triggered for order: 20543871029193846784
+2023-10-07 00:42:11,675:websocket_handlers:WARNING:Rate limit triggered for order: 20543871029193846784
+2023-10-07 00:42:11,675:websocket_handlers:WARNING:Rate limit triggered for order: 20543871029193846784
+2023-10-07 00:42:30,324:binance_update_ads:INFO:BTC - start: 521862.57, ratio: 102.97
+2023-10-07 00:42:30,324:binance_update_ads:INFO:Competitor price: 1: 522019.83
+2023-10-07 00:42:35,610:binance_update_ads:INFO:BTC - start: 542337.71, ratio: 107.01
+2023-10-07 00:42:35,610:binance_update_ads:INFO:Competitor price: 3: 542290.89
+2023-10-07 00:42:41,540:binance_update_ads:INFO:USDT - start: 18.59, ratio: 102.45
+2023-10-07 00:42:41,540:binance_update_ads:INFO:Competitor price: 4: 18.6
+2023-10-07 00:42:46,538:binance_update_ads:INFO:USDT - start: 18.99, ratio: 104.56
+2023-10-07 00:42:46,538:binance_update_ads:INFO:Competitor price: 9: 18.99
+2023-10-07 00:43:40,470:binance_update_ads:INFO:BTC - start: 521928.4, ratio: 102.99
+2023-10-07 00:43:40,471:binance_update_ads:INFO:Competitor price: 1: 522019.83
+2023-10-07 00:43:45,535:binance_update_ads:INFO:BTC - start: 542199.39, ratio: 106.99
+2023-10-07 00:43:45,535:binance_update_ads:INFO:Competitor price: 3: 542290.89
+2023-10-07 00:43:51,480:binance_update_ads:INFO:USDT - start: 18.61, ratio: 102.49
+2023-10-07 00:43:51,480:binance_update_ads:INFO:Competitor price: 4: 18.6
+2023-10-07 00:43:56,549:binance_update_ads:INFO:USDT - start: 18.98, ratio: 104.55
+2023-10-07 00:43:56,550:binance_update_ads:INFO:Competitor price: 9: 18.99
+2023-10-07 00:44:50,446:binance_update_ads:INFO:BTC - start: 522021.75, ratio: 103.0
+2023-10-07 00:44:50,446:binance_update_ads:INFO:Competitor price: 1: 522019.83
+2023-10-07 00:44:55,756:binance_update_ads:INFO:BTC - start: 542294.54, ratio: 107.0
+2023-10-07 00:44:55,756:binance_update_ads:INFO:Competitor price: 3: 542290.89
+2023-10-07 00:45:01,868:binance_update_ads:INFO:USDT - start: 18.6, ratio: 102.43
+2023-10-07 00:45:01,868:binance_update_ads:INFO:Competitor price: 4: 18.6
+2023-10-07 00:45:06,848:binance_update_ads:INFO:USDT - start: 18.99, ratio: 104.59
+2023-10-07 00:45:06,848:binance_update_ads:INFO:Competitor price: 9: 18.99
+2023-10-07 00:46:00,830:binance_update_ads:INFO:BTC - start: 522089.76, ratio: 102.99
+2023-10-07 00:46:00,830:binance_update_ads:INFO:Competitor price: 1: 522019.83
+2023-10-07 00:46:05,958:binance_update_ads:INFO:BTC - start: 542367.07, ratio: 106.99
+2023-10-07 00:46:05,958:binance_update_ads:INFO:Competitor price: 3: 542290.89
+2023-10-07 00:46:11,926:binance_update_ads:INFO:USDT - start: 18.6, ratio: 102.42
+2023-10-07 00:46:11,926:binance_update_ads:INFO:Competitor price: 4: 18.6
+2023-10-07 00:46:16,879:binance_update_ads:INFO:USDT - start: 18.99, ratio: 104.58
+2023-10-07 00:46:16,879:binance_update_ads:INFO:Competitor price: 9: 18.99
+2023-10-07 00:46:55,782:__main__:ERROR:KeyboardInterrupt received. Cleaning up...
+2023-10-07 00:46:55,789:__main__:ERROR:Tasks cancelled. Cleaning up...

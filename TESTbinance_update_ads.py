@@ -75,7 +75,7 @@ async def analyze_and_update_ads(advNo, KEY, SECRET, target_spot=1):
             return
         current_priceFloatingRatio = float(ad_details['data']['priceFloatingRatio'])
         our_current_price = float(ad_details['data']['price'])
-        logger.info(f"Our start price: {our_current_price}, floating ratio: {current_priceFloatingRatio}")
+        logger.debug(f"Our start price: {our_current_price}, floating ratio: {current_priceFloatingRatio}")
 
         ads_response = await api_instance.fetch_ads_search()
         if ads_response is None or ads_response.get('code') != '000000' or 'data' not in ads_response:
@@ -101,7 +101,7 @@ async def analyze_and_update_ads(advNo, KEY, SECRET, target_spot=1):
         else:
             competitor_price = float(filtered_ads_data[target_spot - 1]['adv']['price'])
 
-        logger.info(f"Competitor price: {target_spot}: {competitor_price}")
+        logger.debug(f"Competitor price: {target_spot}: {competitor_price}")
 
         # Price difference calculation logic stays the same
         price_diff_ratio = (our_current_price / competitor_price)
@@ -114,11 +114,11 @@ async def analyze_and_update_ads(advNo, KEY, SECRET, target_spot=1):
         new_ratio = max(101.27, min(110, round(new_ratio_unbounded, 2)))
 
         if new_ratio == current_priceFloatingRatio:
-            logger.info(f"Skipping update.")
+            logger.debug(f"Skipping update.")
             return
         else:
             await api_instance.update_ad(advNo, new_ratio)
-            logger.info(f"Updating ratio: {new_ratio}")
+            logger.debug(f"Updating ratio: {new_ratio}")
 
     except Exception as e:
         traceback.print_exc()

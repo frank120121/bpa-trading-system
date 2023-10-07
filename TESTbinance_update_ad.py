@@ -46,7 +46,7 @@ async def update_ad(KEY, SECRET):
             if response.status == 200:
                 response_data = await response.json()
                 print(response_data)
-                logger.info("Fetched ads search: success")
+                logger.debug("Fetched ads search: success")
                 return response_data
             else:
                 print(f"Request failed with status code {response.status}: {await response.text()}")

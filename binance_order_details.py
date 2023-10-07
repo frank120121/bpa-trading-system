@@ -52,7 +52,7 @@ async def fetch_order_details(KEY, SECRET, order_no):
         async with session.post(f"{url}?{query_string}", json=payload, headers=headers) as response:
             if response.status == 200:
                 response_data = await response.json()
-                logger.info("Fetched order details: success")
+                logger.debug("Fetched order details: success")
                 return response_data
 
             else:

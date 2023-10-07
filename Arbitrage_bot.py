@@ -20,9 +20,36 @@ class ArbitrageBot:
                 "ping": int(time.time() * 1000)  
             }
             await ws.send(json.dumps(ping_message))
+
+    async def connect_diff_depth_stream(self):
+        uri = "wss://ws.trubit.com/openapi/quote/ws/v1"
+        subscription_message = {
+            "symbol": ','.join(self.pairs),
+            "topic": "diffDepth",  # Change the topic to "diffDepth"
+            "event": "sub",
+            "params": {
+                "binary": False
+            }
+        }
+
+        while True:
+            try:
+                async with websockets.connect(uri) as ws:
+                    self.connected = True
+                    asyncio.create_task(self.send_custom_ping(ws))
+                    await ws.send(json.dumps(subscription_message))
+
+                    async for message in ws:
+                        data = json.loads(message)
+                        await self.handle_diff_depth_data(data)
+
+            except websockets.ConnectionClosedError:
+                self.connected = False
+                print(f"[{datetime.now()}] Connection closed, trying to reconnect in 5 seconds...")
+                await asyncio.sleep(5)
+
     async def connect_trade_stream(self):
         uri = "wss://ws.trubit.com/openapi/quote/ws/v1"
-        
         subscription_message = {
             "symbol": ','.join(self.pairs),
             "topic": "trade",
@@ -32,7 +59,7 @@ class ArbitrageBot:
             }
         }
 
-        while True: 
+        while True:
             try:
                 async with websockets.connect(uri) as ws:
                     self.connected = True
@@ -45,9 +72,42 @@ class ArbitrageBot:
 
             except websockets.ConnectionClosedError:
                 self.connected = False
-                print(f"[{datetime.now()}] Trade stream connection closed, trying to reconnect in 5 seconds...")
+                print(f"[{datetime.now()}] Connection to Trade stream closed, trying to reconnect in 5 seconds...")
                 await asyncio.sleep(5)
 
+    async def handle_diff_depth_data(self, data):
+        if 'pong' in data:
+            return
+
+        if 'symbol' not in data:
+            print(f"Unexpected data received: {data}")
+            return
+
+        symbol = data['symbol']
+    
+        if 'data' not in data:
+            print(f"Unexpected data format received: {data}")
+            return
+
+        # Extract the bid and ask data from the 'data' list
+        data_list = data['data']
+        if len(data_list) == 0:
+            print(f"No data received for {symbol}")
+            return
+
+        bids = data_list[0]['b']  # Bid data
+        asks = data_list[0]['a']  # Ask data
+
+        if symbol in self.order_book:
+            self.order_book[symbol]['bids'] = bids
+            self.order_book[symbol]['asks'] = asks
+
+        lowest_ask = min(asks, key=lambda x: float(x[0])) if asks else None
+        highest_bid = max(bids, key=lambda x: float(x[0])) if bids else None
+
+        if symbol in ['USDCMMXN', 'USDTMMXN']:
+            print(f"For {symbol}, Top Bid: {highest_bid}, Top Ask: {lowest_ask}")
+            
     async def handle_trade_data(self, data):
         if 'pong' in data:
             return
@@ -64,64 +124,13 @@ class ArbitrageBot:
             trade_type = "BUY" if trade['m'] else "SELL"
 
             # Display the trade details
-            if symbol == 'USDCMMXN':
+            if symbol in ['USDCMMXN', 'USDTMMXN']:
                 print(f"[{trade_time}] {symbol} {trade_type} Trade: Price {trade_price}, Quantity {trade_qty}")
 
 
-    async def connect_merged_depth_stream(self):
-        uri = "wss://ws.trubit.com/openapi/quote/ws/v1"
-        subscription_message = {
-            "symbol": ','.join(self.pairs),
-            "topic": "depth",
-            "event": "sub",
-            "params": {
-                "binary": False
-            }
-        }
-
-        while True: 
-            try:
-                async with websockets.connect(uri) as ws:
-                    self.connected = True
-                    asyncio.create_task(self.send_custom_ping(ws))
-                    await ws.send(json.dumps(subscription_message))
-
-                    async for message in ws:
-                        data = json.loads(message)
-                        await self.handle_merged_depth_data(data)
-
-            except websockets.ConnectionClosedError:
-                self.connected = False
-                print(f"[{datetime.now()}] Connection closed, trying to reconnect in 5 seconds...")
-                await asyncio.sleep(5)
-
-    async def handle_merged_depth_data(self, data):
-        if 'pong' in data:
-            return
-
-        if 'symbol' not in data:
-            print(f"Unexpected data received: {data}")
-            return
-
-        symbol = data['symbol']
-        self.order_book[symbol]['bids'] = data['data'][0]['b'][:1]
-        self.order_book[symbol]['asks'] = data['data'][0]['a'][:1]
-        
-        if symbol == 'USDCMMXN':
-             print(f"For {symbol}, Top Bid: {self.order_book[symbol]['bids']}, Top Ask: {self.order_book[symbol]['asks']}")
-
-    async def evaluate_and_place_orders(self, symbol):
-        pass
-
-    def calculate_threshold(self):
-        return 0.0  
-
-    async def place_order(self, symbol, price):
-        pass
-
 async def main():
-    await asyncio.gather(bot.connect_merged_depth_stream(), bot.connect_trade_stream())
+    bot = ArbitrageBot()
+    await asyncio.gather(bot.connect_diff_depth_stream(), bot.connect_trade_stream())
 
 if __name__ == "__main__":
-    bot = ArbitrageBot()
     asyncio.run(main())

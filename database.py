@@ -6,7 +6,7 @@ import json
 setup_logging()
 logger = logging.getLogger(__name__)
 async def create_connection(db_file, num_retries=3, delay_seconds=5):
-    logger.info("Inside async_create_connection function")
+    logger.debug("Inside async_create_connection function")
     conn = None
     retries = 0
     while retries < num_retries:
@@ -102,6 +102,9 @@ async def order_exists(conn, order_no):
         row = await cursor.fetchone()
         return bool(row)
 async def find_or_insert_merchant(conn, sellerName):
+    if not sellerName: 
+        logger.error(f"Provided sellerName is invalid: {sellerName}")
+        return None
     async with conn.cursor() as cursor:
         await cursor.execute("SELECT id FROM merchants WHERE sellerName = ?", (sellerName,))
         row = await cursor.fetchone()
@@ -126,15 +129,15 @@ async def insert_order(conn, order_tuple):
         return cursor.lastrowid
 async def insert_or_update_order(conn, order_details):
     try:
-        logger.info(f"Order Details Received in db:")
-        seller_name = order_details['data']['sellerName']
+        logger.debug(f"Order Details Received in db:")
+        seller_name = order_details['data']['sellerName'] or order_details['data']['sellerNickname']
         buyer_name = order_details['data']['buyerName']
         order_no = order_details['data']['orderNumber']
         trade_type = order_details['data']['tradeType']
         order_status = order_details['data']['orderStatus']
         total_price = order_details['data']['totalPrice']
         fiat_unit = order_details['data']['fiatUnit']
-        logger.info(f"Seller Name: {seller_name}, Buyer Name: {buyer_name}, Order Status: {order_status}")
+        logger.debug(f"Seller Name: {seller_name}, Buyer Name: {buyer_name}, Order Status: {order_status}")
         if None in (seller_name, buyer_name, order_no, trade_type, order_status, total_price, fiat_unit):
             logger.error("One or more required fields are None. Aborting operation.")
             return
@@ -153,6 +156,9 @@ async def insert_or_update_order(conn, order_details):
             await execute_and_commit(conn, sql, params)
         else:
             merchant_id = await find_or_insert_merchant(conn, seller_name)
+            if not merchant_id:
+                logger.error(f"Failed to find or insert merchant for sellerName: {seller_name}")
+                return 
             buyer_id = await find_or_insert_buyer(conn, buyer_name, merchant_id)
             await insert_order(conn, (order_no, buyer_name, seller_name, trade_type, order_status, total_price, fiat_unit, False))
             await update_total_fiat_spent(conn, buyer_id, float(total_price))

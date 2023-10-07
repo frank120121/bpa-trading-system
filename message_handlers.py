@@ -12,21 +12,19 @@ async def check_order_details(order_details):
         return False
     return True
 async def generic_reply(ws, uuid, order_no, order_details, conn, status_code):
-    logger.info("Inside generic_reply function.")
+    logger.debug("Inside generic_reply function.")
 
     buyer_name = order_details.get('buyer_name')
     current_language = determine_language(order_details)
-    logger.info(f"Buyer Name: {buyer_name}, Current Language: {current_language}")
+    logger.debug(f"Buyer Name: {buyer_name}, Current Language: {current_language}")
     messages_to_send = await get_message_by_language(current_language, status_code, buyer_name)
-    logger.info(f"Messages to send: {messages_to_send}")
+    logger.debug(f"Messages to send: {messages_to_send}")
     if messages_to_send is None:
         logger.warning(f"No messages found for language: {current_language} and status_code: {status_code}")
         return
     for msg in messages_to_send:
         await send_text_message(ws, msg, uuid, order_no)
-        logger.info(f"Sent message: {msg}")
-
-
+        logger.debug(f"Sent message: {msg}")
 
 async def handle_system_notifications(ws, msg_json, order_no, order_details, conn):
     content = msg_json.get('content', '')
@@ -37,6 +35,8 @@ async def handle_system_notifications(ws, msg_json, order_no, order_details, con
         asset_type =  content_dict.get('symbol', '')
         if asset_type == 'BTC':
             await binance_buy_order(asset_type)
+    if system_type == "buyer_merchant_trading":
+        return
 
     logger.debug("handling notification")
     try:
@@ -70,7 +70,7 @@ REPLY_FUNCTIONS = {
     'request_proof': lambda ws, uuid, order_no, order_details, conn: (
         send_text_message(
             ws,
-            "Por favor enviar comprobante de pago(requerido)." if determine_language(order_details) == 'es' else "Please send proof of payment(required).",
+            "Por favor enviar comprobante de pago(requerido). Si neceita ayuda teclee la palabra ayuda" if determine_language(order_details) == 'es' else "Please send proof of payment(required).",
             uuid,
             order_no
         )
@@ -85,12 +85,12 @@ REPLY_FUNCTIONS = {
 }
 async def handle_text_message(ws, msg_json, order_no, order_details, conn):
     uuid = msg_json.get('uuid')
-    logger.info(f"UUID obtained from msg_json: {uuid}")
+    logger.debug(f"UUID obtained from msg_json: {uuid}")
     if not await check_order_details(order_details):
         print("check_order_details returned False. Exiting function.")
         return
     msg_content = msg_json.get('content', '').lower()
-    logger.info(f"Message content obtained from msg_json: {msg_content}")
+    logger.debug(f"Message content obtained from msg_json: {msg_content}")
     if msg_content in ['ayuda', 'help']:
         await present_menu_based_on_status(ws, order_details, uuid, order_no)
     elif msg_content.isdigit():

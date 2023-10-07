@@ -1,131 +1,47 @@
 import asyncio
-import aiohttp
-from urllib.parse import urlencode
-import hashlib
-import hmac
 import traceback
 import logging
-from common_utils import get_server_time
-from common_vars import ads_dict
+from ads_database import update_ad_in_database, fetch_all_ads_from_database, get_ad_from_database
+from populate_database import populate_ads_with_details
 from credentials import credentials_dict
+from binance_api import BinanceAPI
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-class BinanceAPI:
-    def __init__(self, KEY, SECRET):
-        self.KEY = KEY
-        self.SECRET = SECRET
-        self.session = aiohttp.ClientSession()
+async def start_update_ads():
+    await main_loop_forever()
+def filter_ads(ads_data, advNo):
+    unwanted_users = ['safc975e9b2f5388799527f59a7184c40', 'sf87c48750d303291a6b2761f410f149e']
+    return [ad for ad in ads_data if ad['advertiser']['userNo'] not in unwanted_users and ad['adv']['advNo'] != advNo]
 
-    def hashing(self, query_string):
-        return hmac.new(self.SECRET.encode('utf-8'), query_string.encode('utf-8'), hashlib.sha256).hexdigest()
-    async def api_call(self, method, endpoint, payload, max_retries=3, retry_delay=3):
-        for retry_count in range(max_retries):
-            try:
-                query_string = urlencode(payload)
-                signature = self.hashing(query_string)
-                headers = {
-                    "Content-Type": "application/json;charset=utf-8",
-                    "X-MBX-APIKEY": self.KEY,
-                    "clientType": "WEB",
-                }
-                query_string += f"&signature={signature}"
-                async with self.session.post(f"{endpoint}?{query_string}", json=payload, headers=headers) as response:
-                    if response.status == 200:
-                        return await response.json()
-                    else:
-                        logger.error(f"API call failed with status code {response.status}: {await response.text()}")
-                        return None
-            except Exception as e:
-                logger.error(f"API call failed: {e}")
-        
-            if retry_count < max_retries - 1:
-                logger.info(f"Retrying API call in {retry_delay} seconds (attempt {retry_count + 2}/{max_retries})")
-                await asyncio.sleep(retry_delay)
-            else:
-                logger.error("Max retries reached. Exiting.")
+async def analyze_and_update_ads(ad, api_instance, ads_data):
+    advNo = ad['advNo']
+    target_spot = ad['target_spot']
+    adjusted_target_spot = target_spot
+    asset_type = ad['asset_type']
+    current_priceFloatingRatio = float(ad['floating_ratio'])
 
-    async def close_session(self):
-        await self.session.close()
-
-    async def get_ad_detail(self, advNo):
-        return await self.api_call(
-            'post',
-            "https://api.binance.com/sapi/v1/c2c/ads/getDetailByNo",
-            {
-                "adsNo": advNo,
-                "timestamp": await get_server_time()
-            }
-        )
-    async def update_ad(self, advNo, priceFloatingRatio):
-        return await self.api_call(
-            'post',
-            "https://api.binance.com/sapi/v1/c2c/ads/update",
-            {
-                "advNo": advNo,
-                "priceFloatingRatio": priceFloatingRatio,
-                "timestamp": await get_server_time()
-            }
-        )
-    async def fetch_ads_search(self, asset_type):
-        if asset_type == 'BTC':
-            transAmount = 15000
-            rows = 8
-        else:
-            rows = 20
-            transAmount = 50000
-        return await self.api_call(
-            'post',
-            "https://api.binance.com/sapi/v1/c2c/ads/search",
-            {
-                "asset": asset_type,
-                "fiat": "MXN",
-                "page": 1,
-                "publisherType": "merchant",
-                "rows": rows,
-                "tradeType": "BUY",
-                "transAmount": transAmount,
-                "timestamp": await get_server_time()
-            }
-        )
-async def analyze_and_update_ads(advNo, api_instance, target_spot, asset_type, KEY, SECRET):
     try:
-        ad_details = await api_instance.get_ad_detail(advNo)
-        if ad_details is None:
-            logger.error(f"Failed to get {asset_type} ad details.")
-            return
-        current_priceFloatingRatio = float(ad_details['data']['priceFloatingRatio'])
-        our_current_price = float(ad_details['data']['price'])
-        logger.info(f"{asset_type} - start: {our_current_price}, ratio: {current_priceFloatingRatio}")
-
-        ads_response = await api_instance.fetch_ads_search(asset_type)
-        if ads_response is None or ads_response.get('code') != '000000' or 'data' not in ads_response:
-            logger.error("Failed to fetch ads data.")
-            return
-        ads_data = ads_response['data']
-        if not ads_data:
-            logger.error("ads_data list is empty.")
-            return
-        if asset_type == 'BTC':
-            filtered_ads_data = [ad for ad in ads_data if ad['advertiser']['userNo'] != 'sf87c48750d303291a6b2761f410f149e']
-        else: 
-            filtered_ads_data = [
-                ad for ad in ads_data
-                if ad['advertiser']['userNo'] != 'safc975e9b2f5388799527f59a7184c40'
-                and 'tradeMethods' in ad['adv']
-                and any(
-                    payment_method.get('tradeMethodName') == 'BBVA'
-                    for payment_method in ad['adv']['tradeMethods']
-                )
-            ]
-        if len(filtered_ads_data) < target_spot:
-            logger.error("Not enough ads to analyze. Exiting.")
-            return
-        is_target_ad = str(filtered_ads_data[target_spot - 1]['adv']['advNo']) == str(advNo)  
-        if is_target_ad:
-            competitor_price = float(filtered_ads_data[target_spot]['adv']['price'])
+        logger.debug(f"All advNos in ads_data: {[item['adv']['advNo'] for item in ads_data]}")
+        our_ad_data = next((item for item in ads_data if item['adv']['advNo'] == advNo), None)
+        
+        if our_ad_data:
+            our_current_price = float(our_ad_data['adv']['price'])
         else:
-            competitor_price = float(filtered_ads_data[target_spot - 1]['adv']['price'])
-        logger.info(f"Competitor price: {target_spot}: {competitor_price}")
+            logger.debug(f"Ad with advNo: {advNo} not found in the returned list. Fetching from database.")
+            our_ad_data_db = await get_ad_from_database(advNo)
+            if not our_ad_data_db:
+                logger.error(f"Ad with advNo: {advNo} not found in the database either. Skipping...")
+                return
+            our_current_price = float(our_ad_data_db['price'])
+    
+        logger.info(f"{asset_type} - start: {our_current_price}, ratio: {current_priceFloatingRatio}")
+        filtered_ads_data = filter_ads(ads_data, advNo)
+        if len(filtered_ads_data) < adjusted_target_spot:
+            adjusted_target_spot = len(filtered_ads_data)
+            logger.debug("Adjusted the target spot due to insufficient ads after filtering.")
+        competitor_ad = filtered_ads_data[adjusted_target_spot - 1]
+        competitor_price = float(competitor_ad['adv']['price'])
+        logger.info(f"Competitor price: {adjusted_target_spot}: {competitor_price}")
         price_diff_ratio = (our_current_price / competitor_price)
         new_ratio_unbounded = None
         if price_diff_ratio >= 1:
@@ -134,31 +50,53 @@ async def analyze_and_update_ads(advNo, api_instance, target_spot, asset_type, K
             new_ratio_unbounded = current_priceFloatingRatio + (((1 - price_diff_ratio) * 100)) - 0.01
         new_ratio = max(101.43, min(110, round(new_ratio_unbounded, 2)))
         if new_ratio == current_priceFloatingRatio:
-            logger.info(f"Skipping update.")
+            logger.debug(f"Skipping update.")
             return
         else:
+            await asyncio.sleep(1)
             await api_instance.update_ad(advNo, new_ratio)
-            logger.info(f"Updating ratio: {new_ratio}")
+            await update_ad_in_database(advNo, target_spot, asset_type, our_current_price, new_ratio, ad['account'])
+            logger.debug(f"Updating ratio: {new_ratio}")
             await asyncio.sleep(1)
     except Exception as e:
         traceback.print_exc()
 async def main_loop():
-    tasks = []
-    api_instances = []
-    for account, ads in ads_dict.items():
+    api_instances = {}
+    all_ads = await fetch_all_ads_from_database()
+    btc_ads = sorted([ad for ad in all_ads if ad['asset_type'] == 'BTC'], key=lambda x: x['target_spot'])
+    usdt_ads = sorted([ad for ad in all_ads if ad['asset_type'] == 'USDT'], key=lambda x: x['target_spot'])
+    unique_accounts = set(ad['account'] for ad in all_ads)
+    for account in unique_accounts:
         KEY = credentials_dict[account]['KEY']
         SECRET = credentials_dict[account]['SECRET']
         api_instance = BinanceAPI(KEY, SECRET)
-        api_instances.append(api_instance)
-        for ad in ads:
-            task = analyze_and_update_ads(ad['advNo'], api_instance, ad['target_spot'], ad['asset'], KEY, SECRET)
-            tasks.append(task)
-    await asyncio.gather(*tasks)
-    for api_instance in api_instances:
+        api_instances[account] = api_instance
+    ads_by_type = [('BTC', btc_ads), ('USDT', usdt_ads)]
+    for asset_type, ads_list in ads_by_type:
+        first_ad = ads_list[0]
+        ads_data = await api_instances[first_ad['account']].fetch_ads_search(asset_type)
+        
+        if ads_data is None or ads_data.get('code') != '000000' or 'data' not in ads_data:
+            logger.error(f"Failed to fetch {asset_type} ads data.")
+            continue
+        ads_data = ads_data['data']
+        if not ads_data:
+            logger.error(f"{asset_type} ads_data list is empty.")
+            continue
+        for ad in ads_list:
+            api_instance = api_instances[ad['account']]
+            await analyze_and_update_ads(ad, api_instance, ads_data)
+            await asyncio.sleep(2)
+    for api_instance in api_instances.values():
         await api_instance.close_session()
+async def chained_tasks():
+    await asyncio.sleep(45)
+    await populate_ads_with_details()
 async def main_loop_forever():
     while True:
         await main_loop()
-        await asyncio.sleep(90)
+        populate_task = asyncio.create_task(chained_tasks())
+        await asyncio.sleep(45)
+        await populate_task
 if __name__ == "__main__":
     asyncio.get_event_loop().run_until_complete(main_loop_forever())

@@ -27,7 +27,7 @@ async def get_server_timestamp():
         logger.error(f"An error occurred while fetching server time: {e}")
         return None
 async def get_adjusted_timestamp(offset=0):
-    logger.info(f"Using offset: {offset}")
+    logger.debug(f"Using offset: {offset}")
     server_time = await get_server_timestamp()
     if server_time:
         return server_time - offset
@@ -65,7 +65,7 @@ async def run_websocket(KEY, SECRET, merchant_account, max_retries=10, initial_b
             response = await send_signed_request("GET", uri_path, KEY, SECRET, offset=offset)
             if response and 'new_offset' in response:
                 offset = response['new_offset']
-                logger.info(f"Updated offset to {offset}")
+                logger.debug(f"Updated offset to {offset}")
                 continue
             wss_url = ''
             if 'data' in response and 'data' in response['data'] and 'chatWssUrl' in response['data']['data']:
@@ -73,12 +73,12 @@ async def run_websocket(KEY, SECRET, merchant_account, max_retries=10, initial_b
             else:
                 logger.error(f"Key 'chatWssUrl' not found in API response. Full response: {response}")
                 return
-            logger.info(f"Attempting to connect to WebSocket with URL: {wss_url}")
+            logger.debug(f"Attempting to connect to WebSocket with URL: {wss_url}")
             async with websockets.connect(wss_url) as ws:
                 async for message in ws:
-                    logger.info(message)
+                    logger.debug(message)
                     await on_message(ws, message, KEY, SECRET, merchant_account)
-            logger.info("WebSocket connection closed gracefully.")
+            logger.debug("WebSocket connection closed gracefully.")
             break
         except websockets.exceptions.ConnectionClosedError:
             logger.error("c2c webSocket connection closed unexpectedly. Reconnecting...")
