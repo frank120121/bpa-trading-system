@@ -21,6 +21,7 @@ async def populate_ads_with_details():
     async with aiohttp.ClientSession() as session:
         try:
             ads_info = await fetch_all_ads_from_database()
+            logger.debug(f"Fetched ads from database: {ads_info}")
             for ad_info in ads_info:
                 account = ad_info['account']
                 if account not in api_instances:
@@ -36,6 +37,7 @@ async def populate_ads_with_details():
 async def process_ad(ad_info, api_instance):
     advNo = ad_info['advNo']
     ad_details = await api_instance.get_ad_detail(advNo)
+    logger.debug(f"Ad details fetched from BinanceAPI for advNo {advNo}: {ad_details}")
     if ad_details and advNo in advNo_to_target_spot:
         ad_details['target_spot'] = advNo_to_target_spot[advNo]
         logger.debug(f"Updated target_spot for advNo {advNo} to {advNo_to_target_spot[advNo]}")
@@ -47,6 +49,7 @@ async def process_ad(ad_info, api_instance):
             floating_ratio=ad_details['data']['priceFloatingRatio'],
             account=ad_info['account']
         )
+
 
 if __name__ == "__main__":
     asyncio.run(populate_ads_with_details())

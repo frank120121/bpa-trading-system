@@ -3,7 +3,7 @@ import asyncio
 
 class AssetBalanceDB:
     def __init__(self):
-        self.db_path = "C:\\Users\\p7016\\asset_balance.db"
+        self.db_path = "C:\\Users\\p7016\\OneDrive\\Work\\P2Pbot\\asset_balance.db"
 
     async def create_table(self):
         async with aiosqlite.connect(self.db_path) as db:
@@ -70,22 +70,6 @@ class AssetBalanceDB:
             await db.commit()
 
 if __name__ == "__main__":
-    db = AssetBalanceDB()
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    
-    try:
-        #loop.run_until_complete(db.create_table())
-        loop.run_until_complete(db.display_all_balances())
-        
-        # Reset all balances to zero
-        #loop.run_until_complete(db.reset_all_balances_to_zero())
-        
-        # Display balances after resetting
-        #loop.run_until_complete(db.display_all_balances())
-    finally:
-        loop.run_until_complete(loop.shutdown_asyncgens())
-        loop.close()
-    
-    import sys
-    sys.exit(0)
+    db_manager = AssetBalanceDB()
+    asyncio.run(db_manager.create_table())
+    asyncio.run(db_manager.display_all_balances())
