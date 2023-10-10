@@ -6,7 +6,7 @@ setup_logging()
 logger = logging.getLogger(__name__)
 from common_vars import ads_dict
 
-DB_PATH = 'C:\\Users\\p7016\\OneDrive\\Work\\P2Pbot\\ads_data.db'
+DB_PATH = 'C:/Users/p7016/Documents/bpa/ads_data.db'
 
 async def create_database():
     async with aiosqlite.connect(DB_PATH) as conn:

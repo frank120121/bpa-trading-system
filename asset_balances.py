@@ -3,7 +3,7 @@ import asyncio
 
 class AssetBalanceDB:
     def __init__(self):
-        self.db_path = "C:\\Users\\p7016\\OneDrive\\Work\\P2Pbot\\asset_balance.db"
+        self.db_path = "C:/Users/p7016/Documents/bpa/asset_balance.db"
 
     async def create_table(self):
         async with aiosqlite.connect(self.db_path) as db:

@@ -182,7 +182,7 @@ async def order_has_image(conn, order_no):
         logger.error(f"Error in order_has_image: {e}")
         return False
 async def main():
-    database = "C:\\Users\\p7016\\OneDrive\\Work\\P2Pbot\\orders_data.db"
+    database = "C:/Users/p7016/Documents/bpa/orders_data.db"
     sql_create_merchants_table = """CREATE TABLE IF NOT EXISTS merchants (
                                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                                 sellerName TEXT NOT NULL UNIQUE
