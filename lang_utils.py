@@ -48,7 +48,8 @@ STATUS_MESSAGES = {
         'es': [
             "Hola soy Nebula, una asistente virtual. Solo se aceptan pagos de cuentas bancarias que estan a su nombre ({buyer_name}).",
             "Pagos provenientes de {ProhibitedPaymentTypes} estan PROHIBIDOS y seran APELADOS.",
-            "Para el concepto estas son opciones validas: pago, o su nombre ({buyer_name}). Si tiene alguna duda o necesita ayuda solo teclee ayuda en el chat y le presentare un menu de opciones.",
+            "Para el concepto estas son opciones validas: pago, o su nombre ({buyer_name}).", 
+            "Si tiene alguna duda o necesita ayuda solo teclee ayuda en el chat y le presentare un menu de opciones.",
 
         ],
         'en': [

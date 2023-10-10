@@ -76,7 +76,7 @@ async def run_websocket(KEY, SECRET, merchant_account, max_retries=10, initial_b
             logger.debug(f"Attempting to connect to WebSocket with URL: {wss_url}")
             async with websockets.connect(wss_url) as ws:
                 async for message in ws:
-                    logger.debug(message)
+                    logger.info(message)
                     await on_message(ws, message, KEY, SECRET, merchant_account)
             logger.debug("WebSocket connection closed gracefully.")
             break

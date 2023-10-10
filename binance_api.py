@@ -60,6 +60,7 @@ class BinanceAPI:
             }
         )
     async def update_ad(self, advNo, priceFloatingRatio):
+        logger.info(f"Updating ad: {advNo} with rate: {priceFloatingRatio}")
         return await self.api_call(
             'post',
             "https://api.binance.com/sapi/v1/c2c/ads/update",

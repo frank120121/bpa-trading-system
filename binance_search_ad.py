@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 url = "https://api.binance.com/sapi/v1/c2c/ads/search"
 
 def get_credentials():
-    account = 'account_1'  # specify the account to use
+    account = 'account_1' 
     if account in credentials_dict:
         return credentials_dict[account]['KEY'], credentials_dict[account]['SECRET']
     else:
@@ -26,10 +26,8 @@ async def fetch_ads_search(KEY, SECRET, asset_type):
     timestamp = str(await get_server_time())
     if asset_type == 'BTC':
         transAmount = 15000
-        rows = 4
         payTypes = None
     else:
-        rows = 10
         transAmount = 50000
         payTypes = ["BBVABank"]
 
@@ -38,7 +36,7 @@ async def fetch_ads_search(KEY, SECRET, asset_type):
         "fiat": "MXN",
         "page": 1,
         "publisherType": "merchant",
-        "rows": rows,
+        "rows": 10,
         "tradeType": "BUY",
         "transAmount": transAmount,
     }

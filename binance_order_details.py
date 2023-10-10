@@ -9,7 +9,10 @@ import logging
 from logging_config import setup_logging
 setup_logging()
 logger = logging.getLogger(__name__)
+import sys
 
+if sys.platform == 'win32':
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 
 load_dotenv()
@@ -17,12 +20,12 @@ load_dotenv()
 
 url = "https://api.binance.com/sapi/v1/c2c/orderMatch/getUserOrderDetail"
 credentials_dict = {
-    'account_2': {
-        'KEY': os.environ.get('API_KEY_MGL'),
-        'SECRET': os.environ.get('API_SECRET_MGL')
+    'account_1': {
+        'KEY': os.environ.get('API_KEY_MFMP'),
+        'SECRET': os.environ.get('API_SECRET_MFMP')
     }
 }
-account = 'account_2'
+account = 'account_1'
 if account in credentials_dict:
     KEY = credentials_dict[account]['KEY']
     SECRET = credentials_dict[account]['SECRET']
@@ -58,6 +61,6 @@ async def fetch_order_details(KEY, SECRET, order_no):
             else:
                 logger.error(f"Request failed with status code {response.status}: {await response.text()}")
 if __name__ == "__main__":
-    adOrderNo = "20536613332382937088"
-    asyncio.run(fetch_order_details(KEY, SECRET, adOrderNo))
-
+    adOrderNo = "20544408550775197696"
+    result = asyncio.run(fetch_order_details(KEY, SECRET, adOrderNo))
+    print(result)

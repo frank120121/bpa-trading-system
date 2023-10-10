@@ -1,9 +1,11 @@
 from credentials import credentials_dict
 from common_utils import get_server_time
+from asset_balances import AssetBalanceDB
 import hmac
 import hashlib
 import aiohttp
 import asyncio
+import platform
 
 class BinanceWallets:
     def __init__(self):
@@ -123,13 +125,25 @@ class BinanceWallets:
                         print(f"Failed to place order: {await response.text()}")
         except Exception as e:
             print(f"An exception occurred in place_order: {e}")
-
-    async def main(self):
-        for account, cred in credentials_dict.items():
-            await self.get_user_assets(cred['KEY'], cred['SECRET'], account)
-            await self.get_funding_assets(cred['KEY'], cred['SECRET'], account)
+    def display_assets(self):
+        print("Available Assets:")
+        for asset, balance in self.combined_balances.items():
+            print(f"{asset}: {balance}")
+    async def save_balances_to_db(self):
+        db = AssetBalanceDB()
+        for asset, balance in self.combined_balances.items():
+            await db.insert_or_update_balance(asset, balance)
+    async def main(self, session=None):
+        async with session or aiohttp.ClientSession() as s:
+            for account, cred in credentials_dict.items():
+                await self.get_user_assets(cred['KEY'], cred['SECRET'], account)
+                await self.get_funding_assets(cred['KEY'], cred['SECRET'], account)
+        await self.save_balances_to_db()
+if platform.system() == "Windows":
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 if __name__ == "__main__":
     wallets = BinanceWallets()
     asyncio.run(wallets.main())
+    wallets.display_assets()
 

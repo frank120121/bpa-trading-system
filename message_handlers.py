@@ -12,69 +12,62 @@ async def check_order_details(order_details):
         return False
     return True
 async def generic_reply(ws, uuid, order_no, order_details, conn, status_code):
-    logger.debug("Inside generic_reply function.")
-
     buyer_name = order_details.get('buyer_name')
     current_language = determine_language(order_details)
-    logger.debug(f"Buyer Name: {buyer_name}, Current Language: {current_language}")
     messages_to_send = await get_message_by_language(current_language, status_code, buyer_name)
-    logger.debug(f"Messages to send: {messages_to_send}")
     if messages_to_send is None:
         logger.warning(f"No messages found for language: {current_language} and status_code: {status_code}")
         return
     for msg in messages_to_send:
         await send_text_message(ws, msg, uuid, order_no)
-        logger.debug(f"Sent message: {msg}")
+
+SYSTEM_REPLY_FUNCTIONS = {
+    1: 'new_order',
+    2: 'request_proof',
+    3: 'we_are_buying',
+    4: 'completed_order',
+    5: 'customer_appealed',
+    6: 'seller_cancelled',
+    7: 'canceled_by_system',
+    8: 'we_payed',
+    9: 'we_apealed'
+}
 
 async def handle_system_notifications(ws, msg_json, order_no, order_details, conn):
     content = msg_json.get('content', '')
     content_dict = json.loads(content)
     system_type = content_dict.get('type', '')
-
     if system_type == "seller_completed":
-        asset_type =  content_dict.get('symbol', '')
+        asset_type = content_dict.get('symbol', '')
         if asset_type == 'BTC':
             await binance_buy_order(asset_type)
     if system_type == "buyer_merchant_trading":
         return
+    if not await check_order_details(order_details):
+        return
 
-    logger.debug("handling notification")
-    try:
-        if not await check_order_details(order_details):
-            return
-        msg_type = order_details.get('order_status')
-        if msg_type is not None:
-            uuid = msg_json.get('UUID', '')
-            SYSTEM_REPLY_FUNCTIONS = {
-                1: 'new_order',
-                2: 'request_proof',
-                3: 'we_are_buying',
-                4: 'completed_order',
-                5: 'customer_appealed',
-                6: 'seller_cancelled',
-                7: 'canceled_by_system',
-                8: 'we_payed',
-                9: 'we_apealed'
-            }
-            func_name = SYSTEM_REPLY_FUNCTIONS.get(msg_type)
-            func = REPLY_FUNCTIONS.get(func_name)
-            if func:
-                await func(ws, uuid, order_no, order_details, conn)
-            else:
-                logger.warning(f"Unhandled system notification type: {msg_type}")
+    msg_type = order_details.get('order_status')
+    if msg_type:
+        uuid = msg_json.get('UUID', '')
+        func_name = SYSTEM_REPLY_FUNCTIONS.get(msg_type)
+        func = REPLY_FUNCTIONS.get(func_name)
+        if func:
+            await func(ws, uuid, order_no, order_details, conn)
         else:
-            logger.warning("Empty or missing order_status in order_details.")
-    except Exception as e:
-        logger.error(f"Exception occurred: {e}")
+            logger.warning(f"Unhandled system notification type: {msg_type}")
+    else:
+        logger.warning("Empty or missing order_status in order_details.")
+
+async def send_request_proof(ws, uuid, order_no, order_details, conn):
+    language = determine_language(order_details)
+    if language == 'es':
+        message = "Por favor enviar comprobante de pago(requerido). Si necesita ayuda teclee la palabra ayuda"
+    else:
+        message = "Please send proof of payment(required)."
+    await send_text_message(ws, message, uuid, order_no)
+
 REPLY_FUNCTIONS = {
-    'request_proof': lambda ws, uuid, order_no, order_details, conn: (
-        send_text_message(
-            ws,
-            "Por favor enviar comprobante de pago(requerido). Si neceita ayuda teclee la palabra ayuda" if determine_language(order_details) == 'es' else "Please send proof of payment(required).",
-            uuid,
-            order_no
-        )
-    ),
+    'request_proof': send_request_proof,
     'new_order': lambda ws, uuid, order_no, order_details, conn: generic_reply(ws, uuid, order_no, order_details, conn, 1),
     'sell_order': lambda ws, uuid, order_no, order_details, conn: generic_reply(ws, uuid, order_no, order_details, conn, 2),
     'completed_order': lambda ws, uuid, order_no, order_details, conn: generic_reply(ws, uuid, order_no, order_details, conn, 4),
@@ -85,12 +78,10 @@ REPLY_FUNCTIONS = {
 }
 async def handle_text_message(ws, msg_json, order_no, order_details, conn):
     uuid = msg_json.get('uuid')
-    logger.debug(f"UUID obtained from msg_json: {uuid}")
     if not await check_order_details(order_details):
         print("check_order_details returned False. Exiting function.")
         return
     msg_content = msg_json.get('content', '').lower()
-    logger.debug(f"Message content obtained from msg_json: {msg_content}")
     if msg_content in ['ayuda', 'help']:
         await present_menu_based_on_status(ws, order_details, uuid, order_no)
     elif msg_content.isdigit():
@@ -101,9 +92,8 @@ async def handle_image_message(ws, msg_json, order_no, order_details, conn):
     if not await check_order_details(order_details):
         return
     current_language = determine_language(order_details)
-    if current_language == 'es':
-        await send_text_message(ws, "Enseguida Verifico.", uuid, order_no)
-    elif current_language == 'en':
-        await send_text_message(ws, "One moment, I'll verify.", uuid, order_no)
+    response_message = await get_message_by_language(current_language, 100)
+    if response_message:
+        await send_text_message(ws, response_message[0], uuid, order_no)
     else:
         await send_text_message(ws, "One moment, I'll verify.", uuid, order_no)

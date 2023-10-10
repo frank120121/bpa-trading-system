@@ -35,10 +35,6 @@ async def update_order_status(conn, order_no, order_status):
     sql = "UPDATE orders SET order_status = ? WHERE order_no = ?"
     params = (order_status, order_no)
     await execute_and_commit(conn, sql, params)
-async def reset_reply_count(conn, order_no):
-    sql = "UPDATE orders SET reply_count = 0 WHERE order_no = ?"
-    params = (order_no,)
-    await execute_and_commit(conn, sql, params)
 async def update_status_from_system_type(conn, msg_json, order_no):
     
     try:
@@ -64,10 +60,6 @@ async def update_status_from_system_type(conn, msg_json, order_no):
             sql = "UPDATE orders SET order_status = ? WHERE order_no = ?"
             params = (status, order_no)
             await execute_and_commit(conn, sql, params)
-async def update_reply_count(conn, order_no):
-    sql = "UPDATE orders SET reply_count = reply_count + 1 WHERE order_no = ?"
-    params = (order_no,)
-    await execute_and_commit(conn, sql, params)
 async def update_total_fiat_spent(conn, buyer_id, total_price):
     sql = '''UPDATE users SET total_crypto_sold_30d = total_crypto_sold_30d + ? WHERE id = ?'''
     await execute_and_commit(conn, sql, (total_price, buyer_id))
@@ -81,15 +73,6 @@ async def get_order_details(conn, order_no):
                 return {column_names[i]: row[i] for i in range(len(row))}
             else:
                 return None
-    except Exception as e:
-        logger.error(f"An error occurred: {e}")
-        return None
-async def get_reply_count(conn, order_no):
-    try:
-        async with conn.cursor() as cursor:
-            await cursor.execute("SELECT reply_count FROM orders WHERE order_no = ?", (order_no,))
-            row = await cursor.fetchone()
-            return row[0] if row else None
     except Exception as e:
         logger.error(f"An error occurred: {e}")
         return None
@@ -124,8 +107,8 @@ async def find_or_insert_buyer(conn, buyer_name, merchant_id):
             return cursor.lastrowid
 async def insert_order(conn, order_tuple):
     async with conn.cursor() as cursor:
-        await cursor.execute('''INSERT INTO orders(order_no, buyer_name, seller_name, trade_type, order_status, total_price, fiat_unit, bot_replied)
-                                VALUES(?,?,?,?,?,?,?,?)''', order_tuple)
+        await cursor.execute('''INSERT INTO orders(order_no, buyer_name, seller_name, trade_type, order_status, total_price, fiat_unit, asset, amount)
+                                VALUES(?,?,?,?,?,?,?,?,?)''', order_tuple)
         return cursor.lastrowid
 async def insert_or_update_order(conn, order_details):
     try:
@@ -137,11 +120,14 @@ async def insert_or_update_order(conn, order_details):
         order_status = order_details['data']['orderStatus']
         total_price = order_details['data']['totalPrice']
         fiat_unit = order_details['data']['fiatUnit']
+        asset = order_details['data']['asset']
+        amount = order_details['data']['amount']
         logger.debug(f"Seller Name: {seller_name}, Buyer Name: {buyer_name}, Order Status: {order_status}")
         if None in (seller_name, buyer_name, order_no, trade_type, order_status, total_price, fiat_unit):
             logger.error("One or more required fields are None. Aborting operation.")
             return
         if await order_exists(conn, order_no):
+            print("Updating existing order...")
             sql = """
                 UPDATE orders
                 SET seller_name = ?,
@@ -149,40 +135,33 @@ async def insert_or_update_order(conn, order_details):
                     trade_type = ?,
                     order_status = ?,
                     total_price = ?,
-                    fiat_unit = ?
+                    fiat_unit = ?,
+                    asset = ?,
+                    amount = ?
                 WHERE order_no = ?
             """
-            params = (seller_name, buyer_name, trade_type, order_status, total_price, fiat_unit, order_no)
+            params = (seller_name, buyer_name, trade_type, order_status, total_price, fiat_unit, asset, amount, order_no)
             await execute_and_commit(conn, sql, params)
         else:
+            print("Inserting new order...")
             merchant_id = await find_or_insert_merchant(conn, seller_name)
             if not merchant_id:
                 logger.error(f"Failed to find or insert merchant for sellerName: {seller_name}")
                 return 
             buyer_id = await find_or_insert_buyer(conn, buyer_name, merchant_id)
-            await insert_order(conn, (order_no, buyer_name, seller_name, trade_type, order_status, total_price, fiat_unit, False))
+            await insert_order(conn, (order_no, buyer_name, seller_name, trade_type, order_status, total_price, fiat_unit, asset, amount))
             await update_total_fiat_spent(conn, buyer_id, float(total_price))
     except Exception as e:
         logger.error(f"Error in insert_or_update_order: {e}")
         print(f"Exception details: {e}")
-async def column_exists(conn, table_name, column_name):
+async def print_table_structure(conn, table_name):
     async with conn.cursor() as cursor:
         await cursor.execute(f"PRAGMA table_info({table_name})")
-        columns = [column[1] for column in await cursor.fetchall()]
-        return column_name in columns
-async def add_reply_count_column(conn):
-    async with conn.cursor() as cursor:
-        await cursor.execute("ALTER TABLE orders ADD COLUMN reply_count INTEGER DEFAULT 0;")
-    await conn.commit()
-async def is_column_exists(conn, table_name, column_name):
-    sql_check_column = f"PRAGMA table_info({table_name});"
-    cursor = await conn.execute(sql_check_column)
-    rows = await cursor.fetchall()
-    return any(row[1] == column_name for row in rows)
-async def alter_orders_table_add_payment_proof(conn):
-    sql_alter_orders_table = """ALTER TABLE orders
-                                ADD COLUMN payment_proof BLOB;"""
-    await execute_and_commit(conn, sql_alter_orders_table)
+        columns = await cursor.fetchall()
+        print(f"Structure of {table_name}:")
+        for column in columns:
+            print(column)
+
 async def add_image_to_order(conn, order_no, image_data):
     sql_update_order_with_image = """
     UPDATE orders
@@ -203,7 +182,7 @@ async def order_has_image(conn, order_no):
         logger.error(f"Error in order_has_image: {e}")
         return False
 async def main():
-    database = "crypto_bot.db"
+    database = "C:\\Users\\p7016\\crypto_bot.db"
     sql_create_merchants_table = """CREATE TABLE IF NOT EXISTS merchants (
                                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                                 sellerName TEXT NOT NULL UNIQUE
@@ -226,39 +205,17 @@ async def main():
                               order_status INTEGER,
                               total_price REAL,
                               fiat_unit TEXT,
-                              bot_replied BOOLEAN,
-                              reply_count INTEGER DEFAULT 0
+                              asset TEXT,
+                              amount REAL
                               );"""
-    sql_create_exchange_accounts_table = """CREATE TABLE IF NOT EXISTS exchange_accounts (
-                                            id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                            merchant_id INTEGER NOT NULL,
-                                            exchange_name TEXT NOT NULL,
-                                            FOREIGN KEY (merchant_id) REFERENCES merchants (id)
-                                            );"""
-    sql_create_bank_accounts_table = """CREATE TABLE IF NOT EXISTS bank_accounts (
-                                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                        merchant_id INTEGER NOT NULL,
-                                        bank_name TEXT NOT NULL,
-                                        FOREIGN KEY (merchant_id) REFERENCES merchants (id)
-                                        );"""
-    sql_create_account_balances_table = """CREATE TABLE IF NOT EXISTS account_balances (
-                                           id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                           account_type TEXT NOT NULL,  -- 'exchange' or 'bank'
-                                           account_id INTEGER NOT NULL,
-                                           asset_type TEXT NOT NULL,
-                                           balance REAL NOT NULL
-                                           );"""
     conn = await create_connection(database)
     if conn is not None:
         await create_table(conn, sql_create_merchants_table)
         await create_table(conn, sql_create_users_table)
         await create_table(conn, sql_create_orders_table)
-        await create_table(conn, sql_create_exchange_accounts_table)
-        await create_table(conn, sql_create_bank_accounts_table)
-        await create_table(conn, sql_create_account_balances_table)
-        column_exists = await is_column_exists(conn, 'orders', 'payment_proof')
-        if not column_exists:
-            await alter_orders_table_add_payment_proof(conn)
+        await print_table_structure(conn, 'merchants')
+        await print_table_structure(conn, 'users')
+        await print_table_structure(conn, 'orders')
         await conn.close()
     else:
         logger.error("Error! Cannot create the database connection.")

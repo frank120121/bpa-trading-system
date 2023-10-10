@@ -5,42 +5,59 @@ import logging
 DATABASE = "crypto_bot.db"
 logging.basicConfig(level=logging.INFO)
 
-async def check_nickname_column_exists(conn):
+async def check_bot_replied_column_exists(conn):
     async with conn.cursor() as cursor:
-        await cursor.execute("PRAGMA table_info(merchants)")
+        await cursor.execute("PRAGMA table_info(orders)")
         columns = [column[1] for column in await cursor.fetchall()]
-        return 'nickname' in columns
+        return 'bot_replied' in columns and 'reply_count' in columns
 
 async def upgrade_database():
     async with aiosqlite.connect(DATABASE) as conn:
-        if await check_nickname_column_exists(conn):
-            logging.info("Detected 'nickname' column in merchants table. Starting upgrade process...")
+        if await check_bot_replied_column_exists(conn):
+            logging.info("Detected 'bot_replied' and 'reply_count' columns in orders table. Starting upgrade process...")
 
-            # 1. Rename the original merchants table
-            await conn.execute("ALTER TABLE merchants RENAME TO merchants_old")
-            logging.info("Renamed merchants table to merchants_old")
+            # 1. Rename the original orders table
+            await conn.execute("ALTER TABLE orders RENAME TO orders_old")
+            logging.info("Renamed orders table to orders_old")
 
-            # 2. Create a new merchants table without the nickname column
+            # 2. Create a new orders table with the desired changes
             await conn.execute("""
-                CREATE TABLE merchants (
+                CREATE TABLE orders (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    sellerName TEXT NOT NULL UNIQUE
+                    order_no TEXT NOT NULL UNIQUE,
+                    buyer_name TEXT,
+                    seller_name TEXT,
+                    trade_type TEXT,
+                    order_status INTEGER,
+                    total_price REAL,
+                    fiat_unit TEXT,
+                    asset TEXT,
+                    amount REAL DEFAULT 0,
+                    payment_proof TEXT
                 )
             """)
-            logging.info("Created new merchants table without 'nickname' column")
+            logging.info("Created new orders table with 'asset' and 'amount' columns")
 
             # 3. Copy data from the old table to the new one
-            await conn.execute("INSERT INTO merchants (id, sellerName) SELECT id, sellerName FROM merchants_old")
-            logging.info("Copied data from merchants_old to merchants")
+            await conn.execute("""
+                INSERT INTO orders (id, order_no, buyer_name, seller_name, trade_type, 
+                                    order_status, total_price, fiat_unit, asset, amount, payment_proof)
+                SELECT id, order_no, buyer_name, seller_name, trade_type, order_status, 
+                       total_price, fiat_unit, 
+                       CASE WHEN bot_replied = 0 THEN 'BTC' ELSE 'ETH' END, 
+                       CAST(reply_count AS REAL), payment_proof
+                FROM orders_old
+            """)
+            logging.info("Copied data from orders_old to orders")
 
             # 4. Drop the old table
-            await conn.execute("DROP TABLE merchants_old")
-            logging.info("Dropped merchants_old table")
+            await conn.execute("DROP TABLE orders_old")
+            logging.info("Dropped orders_old table")
 
             await conn.commit()
             logging.info("Upgrade completed successfully!")
         else:
-            logging.info("No 'nickname' column found in merchants table. No upgrade needed.")
+            logging.info("No 'bot_replied' or 'reply_count' columns found in orders table. No upgrade needed.")
 
 if __name__ == "__main__":
     asyncio.run(upgrade_database())

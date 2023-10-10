@@ -28,7 +28,8 @@ def send_request(HTTP_METHOD, REQUEST_PATH, JSON_PAYLOAD=None):
     
     full_url = BITSO_BASE_URL + REQUEST_PATH
     response = None
-
+    print(f"Full URL: {full_url}")
+    print(f"Headers: {headers}")
     if HTTP_METHOD == "GET":
         response = requests.get(full_url, headers=headers)
     elif HTTP_METHOD == "POST":
@@ -61,9 +62,9 @@ def place_order(book, side, order_type, major=None, minor=None, price=None):
     response = send_request("POST", "/v3/orders/", order_payload)
     return response
 
-# Example usage
 balance_response = send_request("GET", "/v3/balance/")
 print("balance was success")
+print(balance_response)
 
 # buy_order_response = place_order("btc_mxn", "buy", "limit", major=0.00011, price=445115.67)
 # print(buy_order_response)
