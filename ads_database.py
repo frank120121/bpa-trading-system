@@ -5,7 +5,7 @@ from logging_config import setup_logging
 setup_logging()
 logger = logging.getLogger(__name__)
 
-DB_PATH = 'C:/Users/p7016/Documents/bpa/ads_data.db'
+DB_PATH = 'C:\\Users\\p7016\\OneDrive\\Work\\P2Pbot\\ads_data.db'
 
 async def create_database():
     async with aiosqlite.connect(DB_PATH) as conn:
@@ -82,21 +82,24 @@ async def insert_multiple_ads(ads_list):
         await conn.commit()
 
 async def print_all_ads():
-    async with aiosqlite.connect(DB_PATH) as conn:
-        c = await conn.cursor()
-        await c.execute("SELECT * FROM ads")
-        all_ads = await c.fetchall()
+    try:
+        async with aiosqlite.connect(DB_PATH) as conn:
+            c = await conn.cursor()
+            await c.execute("SELECT * FROM ads")
+            all_ads = await c.fetchall()
 
-        for ad in all_ads:
-            print({
-                'advNo': ad[0],
-                'target_spot': ad[1],
-                'asset_type': ad[2],
-                'price': ad[3],
-                'floating_ratio': ad[4],
-                'last_updated': ad[5],
-                'account': ad[6]
-            })
+            for ad in all_ads:
+                print({
+                    'advNo': ad[0],
+                    'target_spot': ad[1],
+                    'asset_type': ad[2],
+                    'price': ad[3],
+                    'floating_ratio': ad[4],
+                    'last_updated': ad[5],
+                    'account': ad[6]
+                })
+    except Exception as e:
+        print(f"An error occurred: {e}")
 async def update_ads(ad):
     async with aiosqlite.connect(DB_PATH) as conn:
         c = await conn.cursor()
@@ -116,5 +119,6 @@ async def update_ads(ad):
         await conn.commit()
 if __name__ == "__main__":
     import asyncio
-    asyncio.run(create_database())
-    asyncio.run(print_all_ads()) 
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(create_database())
+    loop.run_until_complete(print_all_ads())
