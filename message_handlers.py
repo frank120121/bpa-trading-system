@@ -4,8 +4,10 @@ import json
 from binance_orders import binance_buy_order
 import logging
 from logging_config import setup_logging
+from common_utils import RateLimiter
 setup_logging()
 logger = logging.getLogger(__name__)
+rate_limiter = RateLimiter(limit_period=10)
 async def check_order_details(order_details):
     if order_details is None:
         logger.warning("order_details is None.")
@@ -77,6 +79,9 @@ REPLY_FUNCTIONS = {
     'we_apealed':  lambda ws, uuid, order_no, order_details, conn: generic_reply(ws, uuid, order_no, order_details, conn, 9),
 }
 async def handle_text_message(ws, msg_json, order_no, order_details, conn):
+    if rate_limiter.is_limited(order_no):
+        logger.warning(f"Rate limit triggered for order: {order_no}")
+        return
     uuid = msg_json.get('uuid')
     if not await check_order_details(order_details):
         print("check_order_details returned False. Exiting function.")

@@ -11,6 +11,6 @@ ads_dict = {
     ],
     'account_2': [
         {'advNo': '11531141756952866816', 'target_spot': 1, 'asset_type': 'BTC'},
-        {'advNo': '11519225605560729600', 'target_spot': 3, 'asset_type': 'USDT'}
+        {'advNo': '11519225605560729600', 'target_spot': 2, 'asset_type': 'USDT'}
     ]
 }

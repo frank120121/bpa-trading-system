@@ -1,13 +1,10 @@
 import json
 from database import create_connection
 from merchant_account import MerchantAccount
-from common_utils import RateLimiter
 import logging
 from logging_config import setup_logging
 setup_logging()
 logger = logging.getLogger(__name__)
-rate_limiter = RateLimiter(limit_period=10)
-
 def should_ignore_message(msg_json):
     msg_type = msg_json.get('type', '')
     content = msg_json.get('content')
@@ -24,7 +21,6 @@ def should_ignore_message(msg_json):
         msg_type in ['auto_reply', 'system'] and inner_type == 'nlp_third_party'):
         return True
     return False
-
 async def on_message(ws, message, KEY, SECRET, merchant_account: MerchantAccount):
     try:
         msg_json = json.loads(message)
@@ -32,10 +28,6 @@ async def on_message(ws, message, KEY, SECRET, merchant_account: MerchantAccount
             logger.debug("Ignoring message of type: %s", msg_json.get('type', ''))
             return
         order_no = msg_json.get('orderNo', '')
-        if rate_limiter.is_limited(order_no):
-            logger.warning(f"Rate limit triggered for order: {order_no}")
-            return
-
         msg_type = msg_json.get('type', '')
         conn = await create_connection("crypto_bot.db")
         if conn:
