@@ -1,5 +1,9 @@
 import asyncio
 import aiosqlite
+import logging
+from logging_config import setup_logging
+setup_logging(log_filename='TESTs_logger.log')
+logger = logging.getLogger(__name__)
 
 DB_PATH = 'C:/Users/p7016/Documents/bpa/ads_data.db'
 

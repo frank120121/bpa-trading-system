@@ -4,7 +4,9 @@ import hashlib
 import hmac
 import time
 import logging
-logging.basicConfig(level=logging.DEBUG)
+from logging_config import setup_logging
+setup_logging(log_filename='TESTs_logger.log')
+logger = logging.getLogger(__name__)
 
 def create_signature(secret_key, query_string):
     return hmac.new(secret_key.encode('utf-8'), query_string.encode('utf-8'), hashlib.sha256).hexdigest()

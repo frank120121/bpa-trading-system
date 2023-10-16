@@ -7,7 +7,7 @@ import os
 from dotenv import load_dotenv
 import logging
 from logging_config import setup_logging
-setup_logging()
+setup_logging(log_filename='Binance_c2c_logger.log')
 logger = logging.getLogger(__name__)
 import sys
 
@@ -54,6 +54,10 @@ async def fetch_order_details(KEY, SECRET, order_no):
     async with aiohttp.ClientSession() as session:
         async with session.post(f"{url}?{query_string}", json=payload, headers=headers) as response:
             if response.status == 200:
+                # print("Headers from the response:")
+                # for header, value in response.headers.items():
+                #     print(f"{header}: {value}")
+
                 response_data = await response.json()
                 logger.debug("Fetched order details: success")
                 return response_data
@@ -64,3 +68,14 @@ if __name__ == "__main__":
     adOrderNo = "20544408550775197696"
     result = asyncio.run(fetch_order_details(KEY, SECRET, adOrderNo))
     print(result)
+    account_number = None
+    for method in result['data']['payMethods']:
+        for field in method['fields']:
+            if field['fieldName'] == 'Account number':
+                account_number = field['fieldValue']
+                break
+
+    if account_number:
+        print(account_number)
+    else:
+        print("Account number not found.")

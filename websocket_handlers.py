@@ -1,38 +1,36 @@
 import json
 from database import create_connection
 from merchant_account import MerchantAccount
+from common_vars import status_map
 import logging
 from logging_config import setup_logging
-setup_logging()
+setup_logging(log_filename='websocket_handler.log')
 logger = logging.getLogger(__name__)
-def should_ignore_message(msg_json):
-    msg_type = msg_json.get('type', '')
-    content = msg_json.get('content')
-    inner_type = ''
-    if content:
-        try:
-            content_json = json.loads(content)
-            if isinstance(content_json, dict):
-                inner_type = content_json.get('type', '')
-        except json.JSONDecodeError:
-            pass
-    is_self = msg_json.get('self', False)
-    if (is_self or 
-        msg_type in ['auto_reply', 'system'] and inner_type == 'nlp_third_party'):
-        return True
-    return False
+
 async def on_message(ws, message, KEY, SECRET, merchant_account: MerchantAccount):
     try:
         msg_json = json.loads(message)
-        if should_ignore_message(msg_json):
-            logger.debug("Ignoring message of type: %s", msg_json.get('type', ''))
+        is_self = msg_json.get('self', False)
+        if is_self:
+            logger.info("message was from self")
             return
-        order_no = msg_json.get('orderNo', '')
         msg_type = msg_json.get('type', '')
-        conn = await create_connection("crypto_bot.db")
+        if msg_type == 'system':
+                try:
+
+                    content = msg_json.get('content', '')
+                    content_dict = json.loads(content)
+                    system_type = content_dict.get('type', '')
+                    if system_type not in status_map:
+                        logger.info("System type not in status_map")
+                        return
+                except json.JSONDecodeError:
+                    logger.error(f"Failed to decode JSON from content: {content}")
+                    return
+        conn = await create_connection("C:/Users/p7016/Documents/bpa/orders_data.db")
         if conn:
             try:
-                await merchant_account.handle_message_by_type(ws, KEY, SECRET, msg_json, order_no, conn, msg_type)
+                await merchant_account.handle_message_by_type(ws, KEY, SECRET, msg_json, conn, msg_type)
                 await conn.commit()               
             except Exception as e:
                 await conn.rollback()

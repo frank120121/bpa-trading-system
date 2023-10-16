@@ -2,7 +2,7 @@ import aiosqlite
 import asyncio
 import logging
 
-DATABASE = "crypto_bot.db"
+DATABASE = "C:/Users/p7016/Documents/bpa/orders_data.db"
 logging.basicConfig(level=logging.INFO)
 
 async def check_bot_replied_column_exists(conn):

@@ -1,48 +1,53 @@
-import sqlite3
+import aiosqlite
 import asyncio
 
-async def fetch_data(conn, query, params=None):
-    cursor = conn.cursor()
-    if params:
-        cursor.execute(query, params)
-    else:
-        cursor.execute(query)
-    rows = cursor.fetchall()
-    return rows
+async def get_all_table_names(conn):
+    async with conn.cursor() as cursor:
+        await cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
+        tables = await cursor.fetchall()
+    return [table[0] for table in tables]
 
-async def print_all_tables(database_path):
-    conn = sqlite3.connect(database_path)
-    
-    # Getting the list of tables in the database
-    tables = await fetch_data(conn, "SELECT name FROM sqlite_master WHERE type='table';")
-    table_names = [table[0] for table in tables]
-    
+async def fetch_and_print_all_data_from_table(conn, table_name):
+    try:
+        async with conn.cursor() as cursor:
+            await cursor.execute(f"SELECT * FROM {table_name};")
+            rows = await cursor.fetchall()
+            print(f"\nData from {table_name}:")
+            for row in rows:
+                print(row)
+    except aiosqlite.Error as e:
+        print(f"Error: {str(e)}")
+
+async def fetch_and_print_all_data_from_all_tables(conn):
+    table_names = await get_all_table_names(conn)
+    print(f"Found tables: {table_names}")  # Additional log
     for table_name in table_names:
-        print(f"\nContents of {table_name}:\n{'='*30}")
-        
-        # Fetching columns for the table
-        cursor = conn.cursor()
-        cursor.execute(f"PRAGMA table_info({table_name})")
-        columns = [desc[1] for desc in cursor.fetchall()]
-        
-        # Fetching rows from the table
-        rows = await fetch_data(conn, f"SELECT * FROM {table_name}")
-        
-        # Printing the header
-        header = " | ".join(columns)
-        print(header)
-        print("-"*len(header))
-        
-        # Printing rows
-        for row in rows:
-            print(" | ".join(map(str, row)))
+        await fetch_and_print_all_data_from_table(conn, table_name)
 
-    conn.close()
+async def fetch_and_print_data_for_orders(conn):
+    try:
+        async with conn.cursor() as cursor:
+            await cursor.execute("SELECT * FROM orders;")
+            rows = await cursor.fetchall()
+            print("\nData from orders:")
+            for row in rows:
+                print(row)
+    except aiosqlite.Error as e:
+        print(f"Error: {str(e)}")
 
 async def main():
-    database_path = "crypto_bot.db"
-    await print_all_tables(database_path)
+    print("Starting main function...")
+    db_path = "C:/Users/p7016/Documents/bpa/orders_data.db"  # Adjust this path as needed
+    print(f"Connecting to {db_path}...")
+    conn = await aiosqlite.connect(db_path)
 
-loop = asyncio.get_event_loop()
-loop.run_until_complete(main())
+    try:
+        print("Fetching and printing data...")
+        await fetch_and_print_all_data_from_all_tables(conn)
+        await fetch_and_print_data_for_orders(conn)
+    finally:
+        print("Closing the connection...")
+        await conn.close()
 
+if __name__ == "__main__":
+    asyncio.run(main())

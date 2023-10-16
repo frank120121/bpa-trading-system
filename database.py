@@ -1,12 +1,14 @@
-import logging
-from logging_config import setup_logging
+
 import aiosqlite
 import asyncio
 import json
-setup_logging()
+from prettytable import PrettyTable
+import logging
+from logging_config import setup_logging
+setup_logging(log_filename='Database_logger.log')
 logger = logging.getLogger(__name__)
 async def create_connection(db_file, num_retries=3, delay_seconds=5):
-    logger.debug("Inside async_create_connection function")
+    logger.info("Inside async_create_connection function")
     conn = None
     retries = 0
     while retries < num_retries:
@@ -60,9 +62,7 @@ async def update_status_from_system_type(conn, msg_json, order_no):
             sql = "UPDATE orders SET order_status = ? WHERE order_no = ?"
             params = (status, order_no)
             await execute_and_commit(conn, sql, params)
-async def update_total_fiat_spent(conn, buyer_id, total_price):
-    sql = '''UPDATE users SET total_crypto_sold_30d = total_crypto_sold_30d + ? WHERE id = ?'''
-    await execute_and_commit(conn, sql, (total_price, buyer_id))
+
 async def get_order_details(conn, order_no):
     try:
         async with conn.cursor() as cursor:
@@ -96,91 +96,152 @@ async def find_or_insert_merchant(conn, sellerName):
         else:
             await cursor.execute("INSERT INTO merchants (sellerName) VALUES (?)", (sellerName,))
             return cursor.lastrowid
-async def find_or_insert_buyer(conn, buyer_name, merchant_id):
+async def find_or_insert_buyer(conn, buyer_name):
     async with conn.cursor() as cursor:
-        await cursor.execute("SELECT id FROM users WHERE name = ? AND merchant_id = ?", (buyer_name, merchant_id))
+        await cursor.execute(
+            """
+            INSERT OR IGNORE INTO users 
+            (name, kyc_status, total_crypto_sold_lifetime) 
+            VALUES (?, 0, 0.0)
+            """, 
+            (buyer_name,)
+        )
+        await cursor.execute(
+            "SELECT id FROM users WHERE name = ?", 
+            (buyer_name,)
+        )
         row = await cursor.fetchone()
-        if row:
-            return row[0]
-        else:
-            await cursor.execute("INSERT INTO users (name, merchant_id, kyc_status, total_crypto_sold_30d, total_crypto_sold_lifetime) VALUES (?, ?, 0, 0.0, 0.0)", (buyer_name, merchant_id))
-            return cursor.lastrowid
+        return row[0] if row else None
+async def update_total_spent(conn, order_no):
+    try:
+        order_sql = """
+            SELECT buyer_name, seller_name, total_price, order_date
+            FROM orders
+            WHERE order_no = ?
+        """
+        async with conn.cursor() as cursor:
+            await cursor.execute(order_sql, (order_no,))
+            order_details = await cursor.fetchone()
+            if not order_details:
+                print(f"No order found with order_no: {order_no}")
+                return
+            
+            buyer_name, seller_name, total_price, order_date = order_details
+        update_user_sql = """
+            UPDATE users 
+            SET total_crypto_sold_lifetime = total_crypto_sold_lifetime + ?
+            WHERE name = ?
+        """
+        await execute_and_commit(conn, update_user_sql, (total_price, buyer_name))
+        await insert_transaction(conn, buyer_name, seller_name, total_price, order_date)
+    except Exception as e:
+        print(f"An error occurred in update_total_spent: {e}")
+
+async def insert_transaction(conn, buyer_name, seller_name, total_price, order_date):
+    async with conn.cursor() as cursor:
+        await cursor.execute(
+            """
+            INSERT OR IGNORE INTO transactions 
+            (buyer_name, seller_name, total_price, order_date) 
+            VALUES (?, ?, ?, ?)
+            """, 
+            (buyer_name, seller_name, total_price, order_date)
+        )
 async def insert_order(conn, order_tuple):
     async with conn.cursor() as cursor:
         await cursor.execute('''INSERT INTO orders(order_no, buyer_name, seller_name, trade_type, order_status, total_price, fiat_unit, asset, amount)
                                 VALUES(?,?,?,?,?,?,?,?,?)''', order_tuple)
+        logger.info(f"Inserted new order: {order_tuple[0]}")
         return cursor.lastrowid
 async def insert_or_update_order(conn, order_details):
     try:
-        logger.debug(f"Order Details Received in db:")
-        seller_name = order_details['data']['sellerName'] or order_details['data']['sellerNickname']
-        buyer_name = order_details['data']['buyerName']
-        order_no = order_details['data']['orderNumber']
-        trade_type = order_details['data']['tradeType']
-        order_status = order_details['data']['orderStatus']
-        total_price = order_details['data']['totalPrice']
-        fiat_unit = order_details['data']['fiatUnit']
-        asset = order_details['data']['asset']
-        amount = order_details['data']['amount']
-        logger.debug(f"Seller Name: {seller_name}, Buyer Name: {buyer_name}, Order Status: {order_status}")
+        logger.info(f"Order Details Received in db:")
+        data = order_details.get('data', {})
+        seller_name = data.get('sellerName') or data.get('sellerNickname')
+        buyer_name = data.get('buyerName')
+        order_no = data.get('orderNumber')
+        trade_type = data.get('tradeType')
+        order_status = data.get('orderStatus')
+        total_price = data.get('totalPrice')
+        fiat_unit = data.get('fiatUnit')
+        asset = data.get('asset')
+        amount = data.get('amount')
         if None in (seller_name, buyer_name, order_no, trade_type, order_status, total_price, fiat_unit):
             logger.error("One or more required fields are None. Aborting operation.")
             return
         if await order_exists(conn, order_no):
-            print("Updating existing order...")
+            logger.info("Updating existing order...")
             sql = """
                 UPDATE orders
-                SET seller_name = ?,
-                    buyer_name = ?,
-                    trade_type = ?,
-                    order_status = ?,
-                    total_price = ?,
-                    fiat_unit = ?,
-                    asset = ?,
-                    amount = ?
+                SET order_status = ?
                 WHERE order_no = ?
             """
-            params = (seller_name, buyer_name, trade_type, order_status, total_price, fiat_unit, asset, amount, order_no)
+            params = (order_status, order_no)
             await execute_and_commit(conn, sql, params)
         else:
-            print("Inserting new order...")
-            merchant_id = await find_or_insert_merchant(conn, seller_name)
-            if not merchant_id:
-                logger.error(f"Failed to find or insert merchant for sellerName: {seller_name}")
-                return 
-            buyer_id = await find_or_insert_buyer(conn, buyer_name, merchant_id)
+            logger.info("Inserting new order...")
+            await find_or_insert_merchant(conn, seller_name)
+            await find_or_insert_buyer(conn, buyer_name)
             await insert_order(conn, (order_no, buyer_name, seller_name, trade_type, order_status, total_price, fiat_unit, asset, amount))
-            await update_total_fiat_spent(conn, buyer_id, float(total_price))
+
     except Exception as e:
         logger.error(f"Error in insert_or_update_order: {e}")
         print(f"Exception details: {e}")
-async def print_table_structure(conn, table_name):
-    async with conn.cursor() as cursor:
-        await cursor.execute(f"PRAGMA table_info({table_name})")
-        columns = await cursor.fetchall()
-        print(f"Structure of {table_name}:")
-        for column in columns:
-            print(column)
 
-async def add_image_to_order(conn, order_no, image_data):
-    sql_update_order_with_image = """
-    UPDATE orders
-    SET payment_proof = ?
-    WHERE order_no = ?;
+async def calculate_crypto_sold_30d(conn, buyer_name):
+    try:
+        sql = """
+            SELECT SUM(amount)
+            FROM orders
+            WHERE buyer_name = ? 
+                AND order_status = 4
+                AND order_date >= datetime('now', '-30 day')
+        """
+        params = (buyer_name,)
+        total_crypto_sold_30d = await execute_and_fetchone(conn, sql, params)
+        return total_crypto_sold_30d[0] if total_crypto_sold_30d else 0
+    except Exception as e:
+        logger.error(f"Error calculating crypto sold in the last 30 days: {e}")
+        return 0
+    
+
+async def execute_and_fetchone(conn, sql, params=None):
     """
-    await execute_and_commit(conn, sql_update_order_with_image, (image_data, order_no))
-async def order_has_image(conn, order_no):
-    sql_check_for_image = """
-    SELECT payment_proof FROM orders WHERE order_no = ?;
+    Execute a SQL query and fetch one result.
+
+    Parameters:
+    - conn: a database connection object
+    - sql: a string containing a SQL query
+    - params: a tuple with parameters to substitute into the SQL query
+
+    Returns:
+    - A single query result
     """
     try:
-        async with conn.cursor() as cur:
-            await cur.execute(sql_check_for_image, (order_no,))
-            row = await cur.fetchone()
-        return row[0] is not None if row else False
+        async with conn.cursor() as cursor:
+            await cursor.execute(sql, params)
+            return await cursor.fetchone()
     except Exception as e:
-        logger.error(f"Error in order_has_image: {e}")
-        return False
+        print(f"Error executing query: {e}")
+        return None
+
+async def print_table_contents(conn, table_name):
+    async with conn.cursor() as cursor:
+        try:
+            await cursor.execute(f"PRAGMA table_info({table_name})")
+            columns_info = await cursor.fetchall()
+            column_names = [column[1] for column in columns_info]
+            await cursor.execute(f"SELECT * FROM {table_name}")
+            rows = await cursor.fetchall()
+            table = PrettyTable()
+            table.field_names = column_names
+            for row in rows:
+                table.add_row(row)
+            print(f"\nContents of {table_name}:")
+            print(table)
+        except Exception as e:
+            print(f"Error reading from table {table_name}: {e}")
+
 async def main():
     database = "C:/Users/p7016/Documents/bpa/orders_data.db"
     sql_create_merchants_table = """CREATE TABLE IF NOT EXISTS merchants (
@@ -189,13 +250,17 @@ async def main():
                                 );"""
     sql_create_users_table = """CREATE TABLE IF NOT EXISTS users (
                                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                name TEXT NOT NULL,
-                                merchant_id INTEGER NOT NULL,
-                                kyc_status INTEGER,
-                                total_crypto_sold_30d REAL,
-                                total_crypto_sold_lifetime REAL,
-                                FOREIGN KEY (merchant_id) REFERENCES merchants (id)
+                                name TEXT NOT NULL UNIQUE,
+                                kyc_status INTEGER DEFAULT 0,
+                                total_crypto_sold_lifetime REAL
                                 );"""
+    sql_create_transactions_table = """CREATE TABLE IF NOT EXISTS transactions (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        buyer_name TEXT,
+        seller_name TEXT,
+        total_price REAL,
+        order_date TIMESTAMP
+    );"""
     sql_create_orders_table = """CREATE TABLE IF NOT EXISTS orders (
                               id INTEGER PRIMARY KEY AUTOINCREMENT,
                               order_no TEXT NOT NULL UNIQUE,
@@ -206,16 +271,21 @@ async def main():
                               total_price REAL,
                               fiat_unit TEXT,
                               asset TEXT,
-                              amount REAL
+                              amount REAL,
+                              ignore_count INTEGER DEFAULT 0,
+                              order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                               );"""
     conn = await create_connection(database)
     if conn is not None:
         await create_table(conn, sql_create_merchants_table)
         await create_table(conn, sql_create_users_table)
         await create_table(conn, sql_create_orders_table)
-        await print_table_structure(conn, 'merchants')
-        await print_table_structure(conn, 'users')
-        await print_table_structure(conn, 'orders')
+        await create_table(conn, sql_create_transactions_table)
+
+        await print_table_contents(conn, 'merchants')
+        await print_table_contents(conn, 'users')
+        await print_table_contents(conn, 'orders')
+        await print_table_contents(conn, 'transactions')
         await conn.close()
     else:
         logger.error("Error! Cannot create the database connection.")

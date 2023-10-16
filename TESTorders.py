@@ -8,7 +8,7 @@ def generate_random_order_no():
 
 async def test_order_insertion():
     # 1. Setup database
-    conn = await database.create_connection("crypto_bot.db")
+    conn = await database.create_connection("C:/Users/p7016/Documents/bpa/orders_data.db")
     if not conn:
         print("Failed to connect to the database.")
         return

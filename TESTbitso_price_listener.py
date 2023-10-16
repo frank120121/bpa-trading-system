@@ -1,11 +1,10 @@
 import asyncio
 import json
-import logging
 import websockets
-
-logging.basicConfig(level=logging.INFO)
+import logging
+from logging_config import setup_logging
+setup_logging(log_filename='bitso_price_listener.log')
 logger = logging.getLogger(__name__)
-
 async def fetch_btcmxn():
     uri = "wss://ws.bitso.com"
     async with websockets.connect(uri) as websocket:

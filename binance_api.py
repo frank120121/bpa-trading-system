@@ -3,11 +3,11 @@ import aiohttp
 from urllib.parse import urlencode
 import hashlib
 import hmac
-import logging
 from common_utils import get_server_time
 from binance_search_ad import fetch_ads_search
-
-logging.basicConfig(level=logging.INFO)
+import logging
+from logging_config import setup_logging
+setup_logging(log_filename='Binance_c2c_logger.log')
 logger = logging.getLogger(__name__)
 class BinanceAPI:
 

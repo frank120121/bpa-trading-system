@@ -1,11 +1,12 @@
 import asyncio
 import traceback
-import logging
 from ads_database import update_ad_in_database, fetch_all_ads_from_database, get_ad_from_database
 from populate_database import populate_ads_with_details
 from credentials import credentials_dict
 from binance_api import BinanceAPI
-logging.basicConfig(level=logging.INFO)
+import logging
+from logging_config import setup_logging
+setup_logging(log_filename='Binance_c2c_logger.log')
 logger = logging.getLogger(__name__)
 async def start_update_ads():
     await main_loop_forever()
@@ -13,7 +14,7 @@ def filter_ads(ads_data, base_price, all_ads, asset_type):
     if asset_type == 'BTC':
         price_threshold = 1.0142
     else:
-        price_threshold = 1.017
+        price_threshold = 1.0193
     own_ads = [entry['advNo'] for entry in all_ads]
     return [
         ad for ad in ads_data
@@ -68,12 +69,10 @@ async def analyze_and_update_ads(ad, api_instance, ads_data, all_ads):
         price_diff_ratio = (our_current_price / competitor_price)
         new_ratio_unbounded = None
         diff_ratio = None
-        adjusted_ratio = 0.01
+        adjusted_ratio = 0.02
+        if asset_type == 'USDT':
+            adjusted_ratio = 0.03
         if price_diff_ratio >= 1:
-            if asset_type == 'USDT':
-                adjusted_ratio = 0.04
-            else:
-                adjusted_ratio = 0.02
             new_ratio_unbounded = (current_priceFloatingRatio - ((abs(price_diff_ratio - 1) * 100))) - adjusted_ratio
         else:
             new_ratio_unbounded = current_priceFloatingRatio + (((1 - price_diff_ratio) * 100)) - adjusted_ratio

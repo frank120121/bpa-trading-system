@@ -4,9 +4,9 @@ from binance_user_data_ws import main_user_data_ws
 from binance_c2c import main_binance_c2c
 from binance_update_ads import start_update_ads
 from merchant_account import MerchantAccount
-from logging_config import setup_logging
 import logging
-setup_logging()
+from logging_config import setup_logging
+setup_logging(log_filename='Binance_c2c_logger.log')
 logger = logging.getLogger(__name__)
 asyncio.get_event_loop().set_debug(True)
 async def heartbeat():

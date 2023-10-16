@@ -5,11 +5,13 @@ import hashlib
 import hmac
 import os
 from dotenv import load_dotenv
-import logging
 import time
-asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-logging.basicConfig(level=logging.INFO)
+import logging
+from logging_config import setup_logging
+setup_logging(log_filename='TESTs_logger.log')
 logger = logging.getLogger(__name__)
+asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
 load_dotenv()
 url = "https://api.binance.com/sapi/v1/c2c/ads/update"
 credentials_dict = {
@@ -30,7 +32,7 @@ def hashing(query_string, secret):
 async def update_ad(KEY, SECRET):
     payload = {
         "advNo": "11515582400296718336",
-        "priceFloatingRatio": 102.5,
+        "advStatus": 1,
         "timestamp": int(time.time() * 1000)
     }
     query_string = urlencode(payload)

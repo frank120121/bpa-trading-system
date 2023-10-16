@@ -4,7 +4,7 @@ import time
 import hashlib
 import hmac
 from credentials import bitso_credentials, BITSO_BASE_URL
-from asset_balances import AssetBalanceDB
+from asset_balances import update_balance
 import logging
 from logging_config import setup_logging
 setup_logging()
@@ -23,13 +23,11 @@ class BitsoWallets:
         ).hexdigest()
         AUTH_HEADER = f"Bitso {self.api_key}:{DNONCE}:{signature}"
         return AUTH_HEADER
-
     def send_request(self, HTTP_METHOD, REQUEST_PATH, JSON_PAYLOAD=None):
         headers = {
             'Authorization': self.generate_bitso_authorization(HTTP_METHOD, REQUEST_PATH, json.dumps(JSON_PAYLOAD) if JSON_PAYLOAD else ""),
             'Content-Type': 'application/json'
         }
-    
         full_url = BITSO_BASE_URL + REQUEST_PATH
         response = None
         if HTTP_METHOD == "GET":
@@ -45,22 +43,26 @@ class BitsoWallets:
         else:
             logger.error(f"An error occurred: {response.status_code} {response.reason}")
             return None
-
     def get_balances(self):
         balance_response = self.send_request("GET", "/v3/balance/")
         if balance_response:
             return balance_response['payload']['balances']
-        return []
-
-    async def save_balances_to_db(self):
-        db = AssetBalanceDB()
-        balances = self.get_balances()
-        for asset_balance in balances:
+        else:
+            logger.warning("Response is empty")
+            return []
+    async def save_balances_to_db(self, account):
+        exchange_id = 2
+        original_balances = self.get_balances()
+        adjusted_balances = {}   
+        for asset_balance in original_balances:
             asset = self._convert_currency_code(asset_balance['currency']).upper()
             balance = float(asset_balance['total'])
+
             if balance != 0.0:
-                await db.insert_or_update_balance(asset, balance)
-        return balances
+                adjusted_balances[asset] = balance
+        
+        update_balance(exchange_id, account, adjusted_balances)
+        return adjusted_balances
     def _convert_currency_code(self, currency_code):
         conversion_map = {
          "USD": "USDC"
@@ -68,14 +70,13 @@ class BitsoWallets:
         return conversion_map.get(currency_code.upper(), currency_code)
 async def main():
     for account_name, credentials in bitso_credentials.items():
-        logger.debug(f"Fetching balances for {account_name}...")
+        logger.info(f"Fetching balances for {account_name}")
         wallets = BitsoWallets(credentials['KEY'], credentials['SECRET'])
-        await wallets.save_balances_to_db()
-
-
+        await wallets.save_balances_to_db(account_name)
 if __name__ == "__main__":
     import asyncio
     asyncio.run(main())
+
 
 
 

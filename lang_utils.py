@@ -1,4 +1,8 @@
 from common_vars import ProhibitedPaymentTypes
+import logging
+from logging_config import setup_logging
+setup_logging(log_filename='Binance_c2c_logger.log')
+logger = logging.getLogger(__name__)
 
 def determine_language(order_details):
     fiat_unit = order_details.get('fiat_unit')

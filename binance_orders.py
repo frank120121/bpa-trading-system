@@ -3,12 +3,12 @@ from binance_wallets import BinanceWallets
 import traceback
 import logging
 from logging_config import setup_logging
-setup_logging()
+setup_logging(log_filename='Binance_c2c_logger.log')
 logger = logging.getLogger(__name__)
 
 async def get_wallets():
     wallets = BinanceWallets()
-    await wallets.main()
+    await wallets.balances()
     return wallets
 
 async def new_order(wallets, account_to_use, most_usd_asset, missing_balance):

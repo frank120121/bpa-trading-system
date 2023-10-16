@@ -5,14 +5,15 @@ import hashlib
 import hmac
 import os
 from dotenv import load_dotenv
-import logging
 import time
+import logging
+from logging_config import setup_logging
+setup_logging(log_filename='TESTs_logger.log')
+logger = logging.getLogger(__name__)
 
 # Set Windows event loop policy
 asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
 
 load_dotenv()
 

@@ -11,7 +11,7 @@ from credentials import credentials_dict, BASE_URL
 from websocket_handlers import on_message
 import logging
 from logging_config import setup_logging
-setup_logging()
+setup_logging(log_filename='Binance_c2c_logger.log')
 logger = logging.getLogger(__name__)
 async def get_server_timestamp():
     url = "https://api.binance.com/api/v1/time"
