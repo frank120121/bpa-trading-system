@@ -8,17 +8,17 @@ def determine_language(order_details):
     fiat_unit = order_details.get('fiat_unit')
     lang_mappings = {'MXN': 'es', 'USD': 'en'}
     return lang_mappings.get(fiat_unit, 'en')
-def get_menu_for_order(order_details):
+async def get_menu_for_order(order_details):
     language = determine_language(order_details)
     menu = get_menu_by_language(language, order_details.get('order_status'))
     return menu
-def get_default_reply(order_details):
+async def get_default_reply(order_details):
     language = determine_language(order_details)
     if language == 'es':
         return "Si tiene alguna duda o necesita ayuda, solo escriba 'ayuda' en el chat y le presentaré un menú de opciones."
     else:
         return "If you have any questions or need assistance, just type 'help' in the chat, and I'll present you with an options menu."
-def get_response_for_menu_choice(language, status, choice, buyer_name=None):
+async def get_response_for_menu_choice(language, status, choice, buyer_name=None):
     response = MENU_RESPONSES.get(status, {}).get(language, {}).get(choice)
     
     if response is not None:
@@ -31,29 +31,28 @@ def get_response_for_menu_choice(language, status, choice, buyer_name=None):
     return None
 
 
-def is_valid_choice(language, status, choice):
+async def is_valid_choice(language, status, choice):
     valid_choices = MENUS.get(status, {}).get(language, [])
     return choice in range(1, len(valid_choices) + 1)
 
-def get_invalid_choice_reply(order_details):
+async def get_invalid_choice_reply(order_details):
     language = determine_language(order_details)
     if language == 'es':
-        return "Opción no válida. Si tiene dudas, escriba 'ayuda' en el chat."
+        return "Opción no válida."
     else:
-        return "Invalid choice. If you have questions, type 'help' in the chat."
+        return "Invalid choice."
 
 
 STATUS_MESSAGES = {
     2: {
-        'es': "Estamos validando su pago, por favor permitame unos minutos para verificar. Gracias por su paciencia",
-        'en': "Your payment is under review, please allow the team a few more minutes. Thank you for your patience."
+        'es': "Por favor enviar comprobante de pago(requerido). Si necesita ayuda ingrese la palabra \"AYUDA\"",
+        'en': "Please send proof of payment(required). For help type \"HELP\""
     },
     1: {
         'es': [
             "Hola soy Nebula, una asistente virtual. Solo se aceptan pagos de cuentas bancarias que estan a su nombre ({buyer_name}).",
             "Pagos provenientes de {ProhibitedPaymentTypes} estan PROHIBIDOS y seran APELADOS.",
-            "Para el concepto estas son opciones validas: pago, o su nombre ({buyer_name}).", 
-            "Si tiene alguna duda o necesita ayuda solo teclee ayuda en el chat y le presentare un menu de opciones.",
+            "Para el concepto estas son opciones validas: pago, o su nombre ({buyer_name}).",
 
         ],
         'en': [
@@ -66,6 +65,12 @@ STATUS_MESSAGES = {
     7: {
         'es': "veo que la orden se cancelo. Si envio el pago y la orden se cancelo no se preocupe, puede abrir una nueva orden sin tener que pagar dos veces. Solo adjunte el comprobante de pago y seleccione la opción que dice 'realizar pago' o 'transferir notificar al vendedor' con gusto lo atendere. (respuesta automatica)",
         'en': "Order has been automatically cancelled. If you have sent the payment, please open a new order and attach your proof of your payment."
+    },
+
+    8: {
+        'es': 'Listo el pago ya se envio por favor verificar el deposito en su cuenta y proceder a liberar la orden. Muchas gracias por su apoyo pase un excelente dia.',
+        'en': 'The payment has been sent, please verify you have received the deposit and release the order. Thank you have a great day!'
+
     },
     9: {
         'es': "Debido a que violó los términos del anuncio se procede con el retorno de la transferencia. Me podrías ayudar confirmando el número de CLABE INTERBANCARIA y nombre de BENEFICIARIO para poder proceder lo más rápido posible. Por favor no se desespere, realizaré el retorno en cuanto me sea posible. Tome en cuenta que tengo otras órdenes pendientes. Muchas gracias por su comprensión, estaré enviando lo más rápido posible.(respuesta automatica)",

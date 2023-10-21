@@ -3,7 +3,7 @@ import hashlib
 import hmac
 import asyncio
 from credentials import credentials_dict
-from common_utils import get_server_time
+from common_utils import get_server_timestamp
 import logging
 from logging_config import setup_logging
 setup_logging(log_filename='Binance_c2c_logger.log')
@@ -23,7 +23,7 @@ def hashing(query_string, secret):
     return hmac.new(secret.encode('utf-8'), query_string.encode('utf-8'), hashlib.sha256).hexdigest()
 
 async def fetch_ads_search(KEY, SECRET, asset_type):
-    timestamp = str(await get_server_time())
+    timestamp = str(await get_server_timestamp())
     if asset_type == 'BTC':
         transAmount = 15000
         payTypes = None

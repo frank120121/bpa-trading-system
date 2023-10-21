@@ -1,0 +1,635 @@
+2023-10-17 22:18:55,705:__main__:WARNING:Token seems to have expired. Logging details for further inspection.
+2023-10-17 22:18:55,721:__main__:ERROR:Failed request URL: https://graph.microsoft.com/v1.0/me/messages?$top=5
+2023-10-17 22:18:55,721:__main__:ERROR:Error while fetching emails: 'ClientResponseError' object has no attribute 'response'
+2023-10-17 22:18:55,721:__main__:ERROR:Full exception traceback: Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 90, in fetch_emails_for_order
+    raise aiohttp.ClientResponseError(response.request_info, response.history, status=response.status)
+aiohttp.client_exceptions.ClientResponseError: 401, message='', url=URL('https://graph.microsoft.com/v1.0/me/messages?$top=5')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 139, in main
+    await fetch_emails_for_order(access_token, refresh_token)
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 111, in fetch_emails_for_order
+    logger.error(f"Server Response: {await e.response.text()}")
+AttributeError: 'ClientResponseError' object has no attribute 'response'
+
+2023-10-17 22:18:56,159:__main__:ERROR:An error occurred: Failed to get access token. Response: {'error': 'invalid_grant', 'error_description': 'AADSTS9002313: Invalid request. Request is malformed or invalid.\r\nTrace ID: 20400626-e2b7-41d8-8d13-83e6ba000201\r\nCorrelation ID: 74492cfe-a0e1-4966-9a8d-6a236ceeaea0\r\nTimestamp: 2023-10-18 05:18:55Z', 'error_codes': [9002313], 'timestamp': '2023-10-18 05:18:55Z', 'trace_id': '20400626-e2b7-41d8-8d13-83e6ba000201', 'correlation_id': '74492cfe-a0e1-4966-9a8d-6a236ceeaea0', 'error_uri': 'https://login.microsoftonline.com/error?code=9002313'}
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 90, in fetch_emails_for_order
+    raise aiohttp.ClientResponseError(response.request_info, response.history, status=response.status)
+aiohttp.client_exceptions.ClientResponseError: 401, message='', url=URL('https://graph.microsoft.com/v1.0/me/messages?$top=5')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 139, in main
+    await fetch_emails_for_order(access_token, refresh_token)
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 111, in fetch_emails_for_order
+    logger.error(f"Server Response: {await e.response.text()}")
+AttributeError: 'ClientResponseError' object has no attribute 'response'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 69, in get_access_token
+    raise ValueError(f"Failed to get access token. Response: {token_data}")
+ValueError: Failed to get access token. Response: {'error': 'invalid_grant', 'error_description': 'AADSTS9002313: Invalid request. Request is malformed or invalid.\r\nTrace ID: 20400626-e2b7-41d8-8d13-83e6ba000201\r\nCorrelation ID: 74492cfe-a0e1-4966-9a8d-6a236ceeaea0\r\nTimestamp: 2023-10-18 05:18:55Z', 'error_codes': [9002313], 'timestamp': '2023-10-18 05:18:55Z', 'trace_id': '20400626-e2b7-41d8-8d13-83e6ba000201', 'correlation_id': '74492cfe-a0e1-4966-9a8d-6a236ceeaea0', 'error_uri': 'https://login.microsoftonline.com/error?code=9002313'}
+
+2023-10-17 22:18:56,541:__main__:ERROR:An error occurred: Failed to get access token. Response: {'error': 'invalid_grant', 'error_description': 'AADSTS9002313: Invalid request. Request is malformed or invalid.\r\nTrace ID: bef4a608-9cd5-442f-ba82-42fbce6ea000\r\nCorrelation ID: 4af4226f-b95b-49cc-a3d0-8bd6e67dc6ef\r\nTimestamp: 2023-10-18 05:18:55Z', 'error_codes': [9002313], 'timestamp': '2023-10-18 05:18:55Z', 'trace_id': 'bef4a608-9cd5-442f-ba82-42fbce6ea000', 'correlation_id': '4af4226f-b95b-49cc-a3d0-8bd6e67dc6ef', 'error_uri': 'https://login.microsoftonline.com/error?code=9002313'}
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 90, in fetch_emails_for_order
+    raise aiohttp.ClientResponseError(response.request_info, response.history, status=response.status)
+aiohttp.client_exceptions.ClientResponseError: 401, message='', url=URL('https://graph.microsoft.com/v1.0/me/messages?$top=5')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 139, in main
+    await fetch_emails_for_order(access_token, refresh_token)
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 111, in fetch_emails_for_order
+    logger.error(f"Server Response: {await e.response.text()}")
+AttributeError: 'ClientResponseError' object has no attribute 'response'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 69, in get_access_token
+    raise ValueError(f"Failed to get access token. Response: {token_data}")
+ValueError: Failed to get access token. Response: {'error': 'invalid_grant', 'error_description': 'AADSTS9002313: Invalid request. Request is malformed or invalid.\r\nTrace ID: bef4a608-9cd5-442f-ba82-42fbce6ea000\r\nCorrelation ID: 4af4226f-b95b-49cc-a3d0-8bd6e67dc6ef\r\nTimestamp: 2023-10-18 05:18:55Z', 'error_codes': [9002313], 'timestamp': '2023-10-18 05:18:55Z', 'trace_id': 'bef4a608-9cd5-442f-ba82-42fbce6ea000', 'correlation_id': '4af4226f-b95b-49cc-a3d0-8bd6e67dc6ef', 'error_uri': 'https://login.microsoftonline.com/error?code=9002313'}
+
+2023-10-17 22:18:56,839:__main__:WARNING:Token seems to have expired. Logging details for further inspection.
+2023-10-17 22:18:56,839:__main__:ERROR:Failed request URL: https://graph.microsoft.com/v1.0/me/messages?$top=5
+2023-10-17 22:18:56,839:__main__:ERROR:Error on retry after refreshing token: 'ClientResponseError' object has no attribute 'response'
+2023-10-17 22:18:56,839:__main__:ERROR:Full exception traceback: Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 90, in fetch_emails_for_order
+    raise aiohttp.ClientResponseError(response.request_info, response.history, status=response.status)
+aiohttp.client_exceptions.ClientResponseError: 401, message='', url=URL('https://graph.microsoft.com/v1.0/me/messages?$top=5')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 139, in main
+    await fetch_emails_for_order(access_token, refresh_token)
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 111, in fetch_emails_for_order
+    logger.error(f"Server Response: {await e.response.text()}")
+AttributeError: 'ClientResponseError' object has no attribute 'response'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 90, in fetch_emails_for_order
+    raise aiohttp.ClientResponseError(response.request_info, response.history, status=response.status)
+aiohttp.client_exceptions.ClientResponseError: 401, message='', url=URL('https://graph.microsoft.com/v1.0/me/messages?$top=5')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 149, in main
+    await fetch_emails_for_order(access_token, refresh_token)
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 111, in fetch_emails_for_order
+    logger.error(f"Server Response: {await e.response.text()}")
+AttributeError: 'ClientResponseError' object has no attribute 'response'
+
+2023-10-17 23:59:52,174:__main__:WARNING:Token seems to have expired. Logging details for further inspection.
+2023-10-17 23:59:52,174:__main__:ERROR:Failed request URL: https://graph.microsoft.com/v1.0/me/messages?$top=5
+2023-10-17 23:59:52,174:__main__:ERROR:Error while fetching emails: 'ClientResponseError' object has no attribute 'response'
+2023-10-17 23:59:52,174:__main__:ERROR:Full exception traceback: Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 90, in fetch_emails_for_order
+    raise aiohttp.ClientResponseError(response.request_info, response.history, status=response.status)
+aiohttp.client_exceptions.ClientResponseError: 401, message='', url=URL('https://graph.microsoft.com/v1.0/me/messages?$top=5')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 139, in main
+    await fetch_emails_for_order(access_token, refresh_token)
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 111, in fetch_emails_for_order
+    logger.error(f"Server Response: {await e.response.text()}")
+AttributeError: 'ClientResponseError' object has no attribute 'response'
+
+2023-10-17 23:59:52,596:__main__:ERROR:An error occurred: Failed to get access token. Response: {'error': 'invalid_grant', 'error_description': 'AADSTS9002313: Invalid request. Request is malformed or invalid.\r\nTrace ID: 8c2a4ea9-49a5-40a9-83ae-63fbeb213c01\r\nCorrelation ID: 904190d5-44aa-428a-b9c1-d18d72819bf1\r\nTimestamp: 2023-10-18 06:59:51Z', 'error_codes': [9002313], 'timestamp': '2023-10-18 06:59:51Z', 'trace_id': '8c2a4ea9-49a5-40a9-83ae-63fbeb213c01', 'correlation_id': '904190d5-44aa-428a-b9c1-d18d72819bf1', 'error_uri': 'https://login.microsoftonline.com/error?code=9002313'}
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 90, in fetch_emails_for_order
+    raise aiohttp.ClientResponseError(response.request_info, response.history, status=response.status)
+aiohttp.client_exceptions.ClientResponseError: 401, message='', url=URL('https://graph.microsoft.com/v1.0/me/messages?$top=5')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 139, in main
+    await fetch_emails_for_order(access_token, refresh_token)
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 111, in fetch_emails_for_order
+    logger.error(f"Server Response: {await e.response.text()}")
+AttributeError: 'ClientResponseError' object has no attribute 'response'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 69, in get_access_token
+    raise ValueError(f"Failed to get access token. Response: {token_data}")
+ValueError: Failed to get access token. Response: {'error': 'invalid_grant', 'error_description': 'AADSTS9002313: Invalid request. Request is malformed or invalid.\r\nTrace ID: 8c2a4ea9-49a5-40a9-83ae-63fbeb213c01\r\nCorrelation ID: 904190d5-44aa-428a-b9c1-d18d72819bf1\r\nTimestamp: 2023-10-18 06:59:51Z', 'error_codes': [9002313], 'timestamp': '2023-10-18 06:59:51Z', 'trace_id': '8c2a4ea9-49a5-40a9-83ae-63fbeb213c01', 'correlation_id': '904190d5-44aa-428a-b9c1-d18d72819bf1', 'error_uri': 'https://login.microsoftonline.com/error?code=9002313'}
+
+2023-10-17 23:59:52,999:__main__:ERROR:An error occurred: Failed to get access token. Response: {'error': 'invalid_grant', 'error_description': 'AADSTS9002313: Invalid request. Request is malformed or invalid.\r\nTrace ID: 6472eb2c-42b4-4a50-be7b-8a6b414a1601\r\nCorrelation ID: 6f66a94d-503c-4f99-986a-cf81ec25456a\r\nTimestamp: 2023-10-18 06:59:52Z', 'error_codes': [9002313], 'timestamp': '2023-10-18 06:59:52Z', 'trace_id': '6472eb2c-42b4-4a50-be7b-8a6b414a1601', 'correlation_id': '6f66a94d-503c-4f99-986a-cf81ec25456a', 'error_uri': 'https://login.microsoftonline.com/error?code=9002313'}
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 90, in fetch_emails_for_order
+    raise aiohttp.ClientResponseError(response.request_info, response.history, status=response.status)
+aiohttp.client_exceptions.ClientResponseError: 401, message='', url=URL('https://graph.microsoft.com/v1.0/me/messages?$top=5')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 139, in main
+    await fetch_emails_for_order(access_token, refresh_token)
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 111, in fetch_emails_for_order
+    logger.error(f"Server Response: {await e.response.text()}")
+AttributeError: 'ClientResponseError' object has no attribute 'response'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 69, in get_access_token
+    raise ValueError(f"Failed to get access token. Response: {token_data}")
+ValueError: Failed to get access token. Response: {'error': 'invalid_grant', 'error_description': 'AADSTS9002313: Invalid request. Request is malformed or invalid.\r\nTrace ID: 6472eb2c-42b4-4a50-be7b-8a6b414a1601\r\nCorrelation ID: 6f66a94d-503c-4f99-986a-cf81ec25456a\r\nTimestamp: 2023-10-18 06:59:52Z', 'error_codes': [9002313], 'timestamp': '2023-10-18 06:59:52Z', 'trace_id': '6472eb2c-42b4-4a50-be7b-8a6b414a1601', 'correlation_id': '6f66a94d-503c-4f99-986a-cf81ec25456a', 'error_uri': 'https://login.microsoftonline.com/error?code=9002313'}
+
+2023-10-17 23:59:53,307:__main__:WARNING:Token seems to have expired. Logging details for further inspection.
+2023-10-17 23:59:53,307:__main__:ERROR:Failed request URL: https://graph.microsoft.com/v1.0/me/messages?$top=5
+2023-10-17 23:59:53,307:__main__:ERROR:Error on retry after refreshing token: 'ClientResponseError' object has no attribute 'response'
+2023-10-17 23:59:53,307:__main__:ERROR:Full exception traceback: Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 90, in fetch_emails_for_order
+    raise aiohttp.ClientResponseError(response.request_info, response.history, status=response.status)
+aiohttp.client_exceptions.ClientResponseError: 401, message='', url=URL('https://graph.microsoft.com/v1.0/me/messages?$top=5')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 139, in main
+    await fetch_emails_for_order(access_token, refresh_token)
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 111, in fetch_emails_for_order
+    logger.error(f"Server Response: {await e.response.text()}")
+AttributeError: 'ClientResponseError' object has no attribute 'response'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 90, in fetch_emails_for_order
+    raise aiohttp.ClientResponseError(response.request_info, response.history, status=response.status)
+aiohttp.client_exceptions.ClientResponseError: 401, message='', url=URL('https://graph.microsoft.com/v1.0/me/messages?$top=5')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 149, in main
+    await fetch_emails_for_order(access_token, refresh_token)
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 111, in fetch_emails_for_order
+    logger.error(f"Server Response: {await e.response.text()}")
+AttributeError: 'ClientResponseError' object has no attribute 'response'
+
+2023-10-17 23:59:59,550:__main__:WARNING:Token seems to have expired. Logging details for further inspection.
+2023-10-17 23:59:59,550:__main__:ERROR:Failed request URL: https://graph.microsoft.com/v1.0/me/messages?$top=5
+2023-10-17 23:59:59,550:__main__:ERROR:Error while fetching emails: 'ClientResponseError' object has no attribute 'response'
+2023-10-17 23:59:59,550:__main__:ERROR:Full exception traceback: Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 90, in fetch_emails_for_order
+    raise aiohttp.ClientResponseError(response.request_info, response.history, status=response.status)
+aiohttp.client_exceptions.ClientResponseError: 401, message='', url=URL('https://graph.microsoft.com/v1.0/me/messages?$top=5')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 139, in main
+    await fetch_emails_for_order(access_token, refresh_token)
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 111, in fetch_emails_for_order
+    logger.error(f"Server Response: {await e.response.text()}")
+AttributeError: 'ClientResponseError' object has no attribute 'response'
+
+2023-10-17 23:59:59,940:__main__:ERROR:An error occurred: Failed to get access token. Response: {'error': 'invalid_grant', 'error_description': 'AADSTS9002313: Invalid request. Request is malformed or invalid.\r\nTrace ID: eca18e2a-6dc6-4e42-87e3-dbae7b3e0800\r\nCorrelation ID: e88f6be1-c83d-4c6f-845a-e36de6261ec5\r\nTimestamp: 2023-10-18 06:59:59Z', 'error_codes': [9002313], 'timestamp': '2023-10-18 06:59:59Z', 'trace_id': 'eca18e2a-6dc6-4e42-87e3-dbae7b3e0800', 'correlation_id': 'e88f6be1-c83d-4c6f-845a-e36de6261ec5', 'error_uri': 'https://login.microsoftonline.com/error?code=9002313'}
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 90, in fetch_emails_for_order
+    raise aiohttp.ClientResponseError(response.request_info, response.history, status=response.status)
+aiohttp.client_exceptions.ClientResponseError: 401, message='', url=URL('https://graph.microsoft.com/v1.0/me/messages?$top=5')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 139, in main
+    await fetch_emails_for_order(access_token, refresh_token)
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 111, in fetch_emails_for_order
+    logger.error(f"Server Response: {await e.response.text()}")
+AttributeError: 'ClientResponseError' object has no attribute 'response'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 69, in get_access_token
+    raise ValueError(f"Failed to get access token. Response: {token_data}")
+ValueError: Failed to get access token. Response: {'error': 'invalid_grant', 'error_description': 'AADSTS9002313: Invalid request. Request is malformed or invalid.\r\nTrace ID: eca18e2a-6dc6-4e42-87e3-dbae7b3e0800\r\nCorrelation ID: e88f6be1-c83d-4c6f-845a-e36de6261ec5\r\nTimestamp: 2023-10-18 06:59:59Z', 'error_codes': [9002313], 'timestamp': '2023-10-18 06:59:59Z', 'trace_id': 'eca18e2a-6dc6-4e42-87e3-dbae7b3e0800', 'correlation_id': 'e88f6be1-c83d-4c6f-845a-e36de6261ec5', 'error_uri': 'https://login.microsoftonline.com/error?code=9002313'}
+
+2023-10-18 00:00:00,302:__main__:ERROR:An error occurred: Failed to get access token. Response: {'error': 'invalid_grant', 'error_description': 'AADSTS9002313: Invalid request. Request is malformed or invalid.\r\nTrace ID: 299e0148-832a-492f-89bd-c9d4fd600700\r\nCorrelation ID: 3b79f291-f369-4698-a544-1fe87556e0d1\r\nTimestamp: 2023-10-18 06:59:59Z', 'error_codes': [9002313], 'timestamp': '2023-10-18 06:59:59Z', 'trace_id': '299e0148-832a-492f-89bd-c9d4fd600700', 'correlation_id': '3b79f291-f369-4698-a544-1fe87556e0d1', 'error_uri': 'https://login.microsoftonline.com/error?code=9002313'}
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 90, in fetch_emails_for_order
+    raise aiohttp.ClientResponseError(response.request_info, response.history, status=response.status)
+aiohttp.client_exceptions.ClientResponseError: 401, message='', url=URL('https://graph.microsoft.com/v1.0/me/messages?$top=5')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 139, in main
+    await fetch_emails_for_order(access_token, refresh_token)
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 111, in fetch_emails_for_order
+    logger.error(f"Server Response: {await e.response.text()}")
+AttributeError: 'ClientResponseError' object has no attribute 'response'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 69, in get_access_token
+    raise ValueError(f"Failed to get access token. Response: {token_data}")
+ValueError: Failed to get access token. Response: {'error': 'invalid_grant', 'error_description': 'AADSTS9002313: Invalid request. Request is malformed or invalid.\r\nTrace ID: 299e0148-832a-492f-89bd-c9d4fd600700\r\nCorrelation ID: 3b79f291-f369-4698-a544-1fe87556e0d1\r\nTimestamp: 2023-10-18 06:59:59Z', 'error_codes': [9002313], 'timestamp': '2023-10-18 06:59:59Z', 'trace_id': '299e0148-832a-492f-89bd-c9d4fd600700', 'correlation_id': '3b79f291-f369-4698-a544-1fe87556e0d1', 'error_uri': 'https://login.microsoftonline.com/error?code=9002313'}
+
+2023-10-18 00:00:00,608:__main__:WARNING:Token seems to have expired. Logging details for further inspection.
+2023-10-18 00:00:00,608:__main__:ERROR:Failed request URL: https://graph.microsoft.com/v1.0/me/messages?$top=5
+2023-10-18 00:00:00,608:__main__:ERROR:Error on retry after refreshing token: 'ClientResponseError' object has no attribute 'response'
+2023-10-18 00:00:00,608:__main__:ERROR:Full exception traceback: Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 90, in fetch_emails_for_order
+    raise aiohttp.ClientResponseError(response.request_info, response.history, status=response.status)
+aiohttp.client_exceptions.ClientResponseError: 401, message='', url=URL('https://graph.microsoft.com/v1.0/me/messages?$top=5')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 139, in main
+    await fetch_emails_for_order(access_token, refresh_token)
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 111, in fetch_emails_for_order
+    logger.error(f"Server Response: {await e.response.text()}")
+AttributeError: 'ClientResponseError' object has no attribute 'response'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 90, in fetch_emails_for_order
+    raise aiohttp.ClientResponseError(response.request_info, response.history, status=response.status)
+aiohttp.client_exceptions.ClientResponseError: 401, message='', url=URL('https://graph.microsoft.com/v1.0/me/messages?$top=5')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 149, in main
+    await fetch_emails_for_order(access_token, refresh_token)
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 111, in fetch_emails_for_order
+    logger.error(f"Server Response: {await e.response.text()}")
+AttributeError: 'ClientResponseError' object has no attribute 'response'
+
+2023-10-18 00:30:09,861:__main__:WARNING:Token seems to have expired. Logging details for further inspection.
+2023-10-18 00:30:09,862:__main__:ERROR:Failed request URL: https://graph.microsoft.com/v1.0/me/messages?$top=5
+2023-10-18 00:30:09,862:__main__:ERROR:Error while fetching emails: 'ClientResponseError' object has no attribute 'response'
+2023-10-18 00:30:09,863:__main__:ERROR:Full exception traceback: Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 91, in fetch_emails_for_order
+    raise aiohttp.ClientResponseError(response.request_info, response.history, status=response.status)
+aiohttp.client_exceptions.ClientResponseError: 401, message='', url=URL('https://graph.microsoft.com/v1.0/me/messages?$top=5')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 140, in main
+    await fetch_emails_for_order(access_token, refresh_token)
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 112, in fetch_emails_for_order
+    logger.error(f"Server Response: {await e.response.text()}")
+AttributeError: 'ClientResponseError' object has no attribute 'response'
+
+2023-10-18 00:30:10,280:__main__:INFO:<ClientResponse(https://login.microsoftonline.com/common/oauth2/v2.0/token) [400 Bad Request]>
+<CIMultiDictProxy('Cache-Control': 'no-store, no-cache', 'Pragma': 'no-cache', 'Content-Type': 'application/json; charset=utf-8', 'Expires': '-1', 'Strict-Transport-Security': 'max-age=31536000; includeSubDomains', 'X-Content-Type-Options': 'nosniff', 'P3P': 'CP="DSP CUR OTPi IND OTRi ONL FIN"', 'x-ms-request-id': '872cb8fe-bc4c-4ad6-92f0-7aa9b08c2b00', 'x-ms-ests-server': '2.1.16522.6 - EUS ProdSlices', 'x-ms-httpver': '1.1', 'X-XSS-Protection': '0', 'Set-Cookie': 'fpc=AuvRQotZDu5EiXv4WZMmt1U; expires=Fri, 17-Nov-2023 07:30:09 GMT; path=/; secure; HttpOnly; SameSite=None', 'Set-Cookie': 'x-ms-gateway-slice=estsfd; path=/; secure; samesite=none; httponly', 'Set-Cookie': 'stsservicecookie=estsfd; path=/; secure; samesite=none; httponly', 'Date': 'Wed, 18 Oct 2023 07:30:09 GMT', 'Content-Length': '485')>
+
+2023-10-18 00:30:10,280:__main__:ERROR:An error occurred: Failed to get access token. Response: {'error': 'invalid_grant', 'error_description': 'AADSTS9002313: Invalid request. Request is malformed or invalid.\r\nTrace ID: 872cb8fe-bc4c-4ad6-92f0-7aa9b08c2b00\r\nCorrelation ID: a5244288-f33e-48a0-91c7-12b1799a9e63\r\nTimestamp: 2023-10-18 07:30:09Z', 'error_codes': [9002313], 'timestamp': '2023-10-18 07:30:09Z', 'trace_id': '872cb8fe-bc4c-4ad6-92f0-7aa9b08c2b00', 'correlation_id': 'a5244288-f33e-48a0-91c7-12b1799a9e63', 'error_uri': 'https://login.microsoftonline.com/error?code=9002313'}
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 91, in fetch_emails_for_order
+    raise aiohttp.ClientResponseError(response.request_info, response.history, status=response.status)
+aiohttp.client_exceptions.ClientResponseError: 401, message='', url=URL('https://graph.microsoft.com/v1.0/me/messages?$top=5')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 140, in main
+    await fetch_emails_for_order(access_token, refresh_token)
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 112, in fetch_emails_for_order
+    logger.error(f"Server Response: {await e.response.text()}")
+AttributeError: 'ClientResponseError' object has no attribute 'response'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 70, in get_access_token
+    raise ValueError(f"Failed to get access token. Response: {token_data}")
+ValueError: Failed to get access token. Response: {'error': 'invalid_grant', 'error_description': 'AADSTS9002313: Invalid request. Request is malformed or invalid.\r\nTrace ID: 872cb8fe-bc4c-4ad6-92f0-7aa9b08c2b00\r\nCorrelation ID: a5244288-f33e-48a0-91c7-12b1799a9e63\r\nTimestamp: 2023-10-18 07:30:09Z', 'error_codes': [9002313], 'timestamp': '2023-10-18 07:30:09Z', 'trace_id': '872cb8fe-bc4c-4ad6-92f0-7aa9b08c2b00', 'correlation_id': 'a5244288-f33e-48a0-91c7-12b1799a9e63', 'error_uri': 'https://login.microsoftonline.com/error?code=9002313'}
+
+2023-10-18 00:30:10,627:__main__:INFO:<ClientResponse(https://login.microsoftonline.com/common/oauth2/v2.0/token) [400 Bad Request]>
+<CIMultiDictProxy('Cache-Control': 'no-store, no-cache', 'Pragma': 'no-cache', 'Content-Type': 'application/json; charset=utf-8', 'Expires': '-1', 'Strict-Transport-Security': 'max-age=31536000; includeSubDomains', 'X-Content-Type-Options': 'nosniff', 'P3P': 'CP="DSP CUR OTPi IND OTRi ONL FIN"', 'x-ms-request-id': '16e820a6-b215-4812-a7bc-d817e5a09100', 'x-ms-ests-server': '2.1.16522.6 - NCUS ProdSlices', 'x-ms-httpver': '1.1', 'X-XSS-Protection': '0', 'Set-Cookie': 'fpc=AlqpBDIlpcxDvvqi3o2dwbA; expires=Fri, 17-Nov-2023 07:30:09 GMT; path=/; secure; HttpOnly; SameSite=None', 'Set-Cookie': 'x-ms-gateway-slice=estsfd; path=/; secure; samesite=none; httponly', 'Set-Cookie': 'stsservicecookie=estsfd; path=/; secure; samesite=none; httponly', 'Date': 'Wed, 18 Oct 2023 07:30:09 GMT', 'Content-Length': '485')>
+
+2023-10-18 00:30:10,627:__main__:ERROR:An error occurred: Failed to get access token. Response: {'error': 'invalid_grant', 'error_description': 'AADSTS9002313: Invalid request. Request is malformed or invalid.\r\nTrace ID: 16e820a6-b215-4812-a7bc-d817e5a09100\r\nCorrelation ID: 87afb7f7-092b-4a4c-b2bb-b362b1b736e0\r\nTimestamp: 2023-10-18 07:30:09Z', 'error_codes': [9002313], 'timestamp': '2023-10-18 07:30:09Z', 'trace_id': '16e820a6-b215-4812-a7bc-d817e5a09100', 'correlation_id': '87afb7f7-092b-4a4c-b2bb-b362b1b736e0', 'error_uri': 'https://login.microsoftonline.com/error?code=9002313'}
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 91, in fetch_emails_for_order
+    raise aiohttp.ClientResponseError(response.request_info, response.history, status=response.status)
+aiohttp.client_exceptions.ClientResponseError: 401, message='', url=URL('https://graph.microsoft.com/v1.0/me/messages?$top=5')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 140, in main
+    await fetch_emails_for_order(access_token, refresh_token)
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 112, in fetch_emails_for_order
+    logger.error(f"Server Response: {await e.response.text()}")
+AttributeError: 'ClientResponseError' object has no attribute 'response'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 70, in get_access_token
+    raise ValueError(f"Failed to get access token. Response: {token_data}")
+ValueError: Failed to get access token. Response: {'error': 'invalid_grant', 'error_description': 'AADSTS9002313: Invalid request. Request is malformed or invalid.\r\nTrace ID: 16e820a6-b215-4812-a7bc-d817e5a09100\r\nCorrelation ID: 87afb7f7-092b-4a4c-b2bb-b362b1b736e0\r\nTimestamp: 2023-10-18 07:30:09Z', 'error_codes': [9002313], 'timestamp': '2023-10-18 07:30:09Z', 'trace_id': '16e820a6-b215-4812-a7bc-d817e5a09100', 'correlation_id': '87afb7f7-092b-4a4c-b2bb-b362b1b736e0', 'error_uri': 'https://login.microsoftonline.com/error?code=9002313'}
+
+2023-10-18 00:30:10,942:__main__:WARNING:Token seems to have expired. Logging details for further inspection.
+2023-10-18 00:30:10,942:__main__:ERROR:Failed request URL: https://graph.microsoft.com/v1.0/me/messages?$top=5
+2023-10-18 00:30:10,943:__main__:ERROR:Error on retry after refreshing token: 'ClientResponseError' object has no attribute 'response'
+2023-10-18 00:30:10,943:__main__:ERROR:Full exception traceback: Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 91, in fetch_emails_for_order
+    raise aiohttp.ClientResponseError(response.request_info, response.history, status=response.status)
+aiohttp.client_exceptions.ClientResponseError: 401, message='', url=URL('https://graph.microsoft.com/v1.0/me/messages?$top=5')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 140, in main
+    await fetch_emails_for_order(access_token, refresh_token)
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 112, in fetch_emails_for_order
+    logger.error(f"Server Response: {await e.response.text()}")
+AttributeError: 'ClientResponseError' object has no attribute 'response'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 91, in fetch_emails_for_order
+    raise aiohttp.ClientResponseError(response.request_info, response.history, status=response.status)
+aiohttp.client_exceptions.ClientResponseError: 401, message='', url=URL('https://graph.microsoft.com/v1.0/me/messages?$top=5')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 150, in main
+    await fetch_emails_for_order(access_token, refresh_token)
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 112, in fetch_emails_for_order
+    logger.error(f"Server Response: {await e.response.text()}")
+AttributeError: 'ClientResponseError' object has no attribute 'response'
+
+2023-10-18 01:01:44,102:__main__:WARNING:Token seems to have expired. Logging details for further inspection.
+2023-10-18 01:01:44,102:__main__:ERROR:Failed request URL: https://graph.microsoft.com/v1.0/me/messages?$top=5
+2023-10-18 01:01:44,102:__main__:ERROR:Error while fetching emails: 'ClientResponseError' object has no attribute 'response'
+2023-10-18 01:01:44,103:__main__:ERROR:Full exception traceback: Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 91, in fetch_emails_for_order
+    raise aiohttp.ClientResponseError(response.request_info, response.history, status=response.status)
+aiohttp.client_exceptions.ClientResponseError: 401, message='', url=URL('https://graph.microsoft.com/v1.0/me/messages?$top=5')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 140, in main
+    await fetch_emails_for_order(access_token, refresh_token)
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 112, in fetch_emails_for_order
+    logger.error(f"Server Response: {await e.response.text()}")
+AttributeError: 'ClientResponseError' object has no attribute 'response'
+
+2023-10-18 01:01:44,592:__main__:INFO:<ClientResponse(https://login.microsoftonline.com/common/oauth2/v2.0/token) [400 Bad Request]>
+<CIMultiDictProxy('Cache-Control': 'no-store, no-cache', 'Pragma': 'no-cache', 'Content-Type': 'application/json; charset=utf-8', 'Expires': '-1', 'Strict-Transport-Security': 'max-age=31536000; includeSubDomains', 'X-Content-Type-Options': 'nosniff', 'P3P': 'CP="DSP CUR OTPi IND OTRi ONL FIN"', 'x-ms-request-id': '70087f0f-070d-4f3f-9335-ed75334b0e01', 'x-ms-ests-server': '2.1.16522.6 - WUS3 ProdSlices', 'x-ms-httpver': '1.1', 'X-XSS-Protection': '0', 'Set-Cookie': 'fpc=AgYbYuPXJ0pCmrPnWFz5-Qc; expires=Fri, 17-Nov-2023 08:01:43 GMT; path=/; secure; HttpOnly; SameSite=None', 'Set-Cookie': 'x-ms-gateway-slice=estsfd; path=/; secure; samesite=none; httponly', 'Set-Cookie': 'stsservicecookie=estsfd; path=/; secure; samesite=none; httponly', 'Date': 'Wed, 18 Oct 2023 08:01:43 GMT', 'Content-Length': '485')>
+
+2023-10-18 01:01:44,593:__main__:ERROR:An error occurred: Failed to get access token. Response: {'error': 'invalid_grant', 'error_description': 'AADSTS9002313: Invalid request. Request is malformed or invalid.\r\nTrace ID: 70087f0f-070d-4f3f-9335-ed75334b0e01\r\nCorrelation ID: d7099279-5fde-4fd7-a35f-855746be99e3\r\nTimestamp: 2023-10-18 08:01:43Z', 'error_codes': [9002313], 'timestamp': '2023-10-18 08:01:43Z', 'trace_id': '70087f0f-070d-4f3f-9335-ed75334b0e01', 'correlation_id': 'd7099279-5fde-4fd7-a35f-855746be99e3', 'error_uri': 'https://login.microsoftonline.com/error?code=9002313'}
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 91, in fetch_emails_for_order
+    raise aiohttp.ClientResponseError(response.request_info, response.history, status=response.status)
+aiohttp.client_exceptions.ClientResponseError: 401, message='', url=URL('https://graph.microsoft.com/v1.0/me/messages?$top=5')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 140, in main
+    await fetch_emails_for_order(access_token, refresh_token)
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 112, in fetch_emails_for_order
+    logger.error(f"Server Response: {await e.response.text()}")
+AttributeError: 'ClientResponseError' object has no attribute 'response'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 70, in get_access_token
+    raise ValueError(f"Failed to get access token. Response: {token_data}")
+ValueError: Failed to get access token. Response: {'error': 'invalid_grant', 'error_description': 'AADSTS9002313: Invalid request. Request is malformed or invalid.\r\nTrace ID: 70087f0f-070d-4f3f-9335-ed75334b0e01\r\nCorrelation ID: d7099279-5fde-4fd7-a35f-855746be99e3\r\nTimestamp: 2023-10-18 08:01:43Z', 'error_codes': [9002313], 'timestamp': '2023-10-18 08:01:43Z', 'trace_id': '70087f0f-070d-4f3f-9335-ed75334b0e01', 'correlation_id': 'd7099279-5fde-4fd7-a35f-855746be99e3', 'error_uri': 'https://login.microsoftonline.com/error?code=9002313'}
+
+2023-10-18 01:01:45,006:__main__:INFO:<ClientResponse(https://login.microsoftonline.com/common/oauth2/v2.0/token) [400 Bad Request]>
+<CIMultiDictProxy('Cache-Control': 'no-store, no-cache', 'Pragma': 'no-cache', 'Content-Type': 'application/json; charset=utf-8', 'Expires': '-1', 'Strict-Transport-Security': 'max-age=31536000; includeSubDomains', 'X-Content-Type-Options': 'nosniff', 'P3P': 'CP="DSP CUR OTPi IND OTRi ONL FIN"', 'x-ms-request-id': 'be2847df-b575-4b44-a5a7-11a144bf2b00', 'x-ms-ests-server': '2.1.16522.6 - EUS ProdSlices', 'x-ms-httpver': '1.1', 'X-XSS-Protection': '0', 'Set-Cookie': 'fpc=Aq9IBaMAcIJMkVOfP_Ysc-Y; expires=Fri, 17-Nov-2023 08:01:44 GMT; path=/; secure; HttpOnly; SameSite=None', 'Set-Cookie': 'x-ms-gateway-slice=estsfd; path=/; secure; samesite=none; httponly', 'Set-Cookie': 'stsservicecookie=estsfd; path=/; secure; samesite=none; httponly', 'Date': 'Wed, 18 Oct 2023 08:01:43 GMT', 'Content-Length': '485')>
+
+2023-10-18 01:01:45,008:__main__:ERROR:An error occurred: Failed to get access token. Response: {'error': 'invalid_grant', 'error_description': 'AADSTS9002313: Invalid request. Request is malformed or invalid.\r\nTrace ID: be2847df-b575-4b44-a5a7-11a144bf2b00\r\nCorrelation ID: 8838cdb8-d29f-4ba7-8447-0c3f5dc9c1f0\r\nTimestamp: 2023-10-18 08:01:44Z', 'error_codes': [9002313], 'timestamp': '2023-10-18 08:01:44Z', 'trace_id': 'be2847df-b575-4b44-a5a7-11a144bf2b00', 'correlation_id': '8838cdb8-d29f-4ba7-8447-0c3f5dc9c1f0', 'error_uri': 'https://login.microsoftonline.com/error?code=9002313'}
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 91, in fetch_emails_for_order
+    raise aiohttp.ClientResponseError(response.request_info, response.history, status=response.status)
+aiohttp.client_exceptions.ClientResponseError: 401, message='', url=URL('https://graph.microsoft.com/v1.0/me/messages?$top=5')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 140, in main
+    await fetch_emails_for_order(access_token, refresh_token)
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 112, in fetch_emails_for_order
+    logger.error(f"Server Response: {await e.response.text()}")
+AttributeError: 'ClientResponseError' object has no attribute 'response'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 70, in get_access_token
+    raise ValueError(f"Failed to get access token. Response: {token_data}")
+ValueError: Failed to get access token. Response: {'error': 'invalid_grant', 'error_description': 'AADSTS9002313: Invalid request. Request is malformed or invalid.\r\nTrace ID: be2847df-b575-4b44-a5a7-11a144bf2b00\r\nCorrelation ID: 8838cdb8-d29f-4ba7-8447-0c3f5dc9c1f0\r\nTimestamp: 2023-10-18 08:01:44Z', 'error_codes': [9002313], 'timestamp': '2023-10-18 08:01:44Z', 'trace_id': 'be2847df-b575-4b44-a5a7-11a144bf2b00', 'correlation_id': '8838cdb8-d29f-4ba7-8447-0c3f5dc9c1f0', 'error_uri': 'https://login.microsoftonline.com/error?code=9002313'}
+
+2023-10-18 01:01:45,341:__main__:WARNING:Token seems to have expired. Logging details for further inspection.
+2023-10-18 01:01:45,341:__main__:ERROR:Failed request URL: https://graph.microsoft.com/v1.0/me/messages?$top=5
+2023-10-18 01:01:45,342:__main__:ERROR:Error on retry after refreshing token: 'ClientResponseError' object has no attribute 'response'
+2023-10-18 01:01:45,342:__main__:ERROR:Full exception traceback: Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 91, in fetch_emails_for_order
+    raise aiohttp.ClientResponseError(response.request_info, response.history, status=response.status)
+aiohttp.client_exceptions.ClientResponseError: 401, message='', url=URL('https://graph.microsoft.com/v1.0/me/messages?$top=5')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 140, in main
+    await fetch_emails_for_order(access_token, refresh_token)
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 112, in fetch_emails_for_order
+    logger.error(f"Server Response: {await e.response.text()}")
+AttributeError: 'ClientResponseError' object has no attribute 'response'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 91, in fetch_emails_for_order
+    raise aiohttp.ClientResponseError(response.request_info, response.history, status=response.status)
+aiohttp.client_exceptions.ClientResponseError: 401, message='', url=URL('https://graph.microsoft.com/v1.0/me/messages?$top=5')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 150, in main
+    await fetch_emails_for_order(access_token, refresh_token)
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 112, in fetch_emails_for_order
+    logger.error(f"Server Response: {await e.response.text()}")
+AttributeError: 'ClientResponseError' object has no attribute 'response'
+
+2023-10-18 01:14:38,878:__main__:INFO:['197.210.79.9']
+2023-10-18 01:16:44,876:__main__:INFO:['197.210.79.9']
+2023-10-18 01:24:46,550:__main__:INFO:['197.210.79.9']
+2023-10-18 01:26:20,511:__main__:INFO:['197.210.79.9']
+2023-10-18 01:41:56,950:__main__:INFO:[{'ip': '197.210.79.9', 'city': 'Lagos', 'region': 'Lagos', 'country': 'NG', 'loc': '6.4541,3.3947', 'org': 'AS29465 MTN NIGERIA Communication limited', 'timezone': 'Africa/Lagos', 'country_name': 'Nigeria', 'isEU': False, 'country_flag_url': 'https://cdn.ipinfo.io/static/images/countries-flags/NG.svg', 'country_flag': {'emoji': '🇳🇬', 'unicode': 'U+1F1F3 U+1F1EC'}, 'country_currency': {'code': 'NGN', 'symbol': '₦'}, 'continent': {'code': 'AF', 'name': 'Africa'}, 'latitude': '6.4541', 'longitude': '3.3947'}]
+2023-10-18 02:00:50,627:__main__:INFO:[{'ip': '197.210.79.9', 'city': 'Lagos', 'region': 'Lagos', 'country': 'NG', 'loc': '6.4541,3.3947', 'org': 'AS29465 MTN NIGERIA Communication limited', 'timezone': 'Africa/Lagos', 'country_name': 'Nigeria', 'isEU': False, 'country_flag_url': 'https://cdn.ipinfo.io/static/images/countries-flags/NG.svg', 'country_flag': {'emoji': '🇳🇬', 'unicode': 'U+1F1F3 U+1F1EC'}, 'country_currency': {'code': 'NGN', 'symbol': '₦'}, 'continent': {'code': 'AF', 'name': 'Africa'}, 'latitude': '6.4541', 'longitude': '3.3947'}]
+2023-10-18 02:14:15,006:__main__:WARNING:Token seems to have expired. Trying to refresh token and retry.
+2023-10-18 02:14:15,006:__main__:ERROR:Failed request URL: https://graph.microsoft.com/v1.0/me/messages?$top=5
+2023-10-18 02:14:15,007:__main__:ERROR:Error while fetching emails: 'ClientResponseError' object has no attribute 'response'
+2023-10-18 02:14:15,007:__main__:ERROR:Full exception traceback: Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 92, in fetch_emails_for_order
+    raise aiohttp.ClientResponseError(response.request_info, response.history, status=response.status)
+aiohttp.client_exceptions.ClientResponseError: 401, message='', url=URL('https://graph.microsoft.com/v1.0/me/messages?$top=5')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 153, in main
+    await fetch_emails_for_order(access_token, refresh_token, last_four_digits)
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 111, in fetch_emails_for_order
+    logger.error(f"Server Response: {await e.response.text()}")
+AttributeError: 'ClientResponseError' object has no attribute 'response'
+
+2023-10-18 02:15:31,705:__main__:WARNING:Token seems to have expired. Trying to refresh token and retry.
+2023-10-18 02:15:31,705:__main__:ERROR:Failed request URL: https://graph.microsoft.com/v1.0/me/messages?$top=5
+2023-10-18 02:15:31,706:__main__:ERROR:Server Response: {"error":{"code":"InvalidAuthenticationToken","message":"CompactToken validation failed with reason code: 80049228.","innerError":{"date":"2023-10-18T09:15:30","request-id":"6d1d44d9-f3d1-451a-ad22-2afd9397ada3","client-request-id":"6d1d44d9-f3d1-451a-ad22-2afd9397ada3"}}}
+2023-10-18 02:15:31,707:__main__:ERROR:Full exception traceback: Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 92, in fetch_emails_for_order
+    raise aiohttp.ClientResponseError(response.request_info, response.history, status=response.status)
+aiohttp.client_exceptions.ClientResponseError: 401, message='', url=URL('https://graph.microsoft.com/v1.0/me/messages?$top=5')
+
+2023-10-18 02:15:31,709:__main__:ERROR:Error on retry after refreshing token: 'coroutine' object is not subscriptable
+2023-10-18 02:15:31,709:__main__:ERROR:Full exception traceback: Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 92, in fetch_emails_for_order
+    raise aiohttp.ClientResponseError(response.request_info, response.history, status=response.status)
+aiohttp.client_exceptions.ClientResponseError: 401, message='', url=URL('https://graph.microsoft.com/v1.0/me/messages?$top=5')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 134, in handle_token_expiry_and_retry
+    access_token = await get_access_token(await load_tokens()[1])  # Load refresh token from storage
+TypeError: 'coroutine' object is not subscriptable
+
+2023-10-18 02:23:40,853:__main__:ERROR:No IP found for order ending with: 6768
+2023-10-18 02:26:18,488:__main__:ERROR:No IP found for order ending with: 6768
+2023-10-18 02:29:39,643:__main__:ERROR:No IP found for order ending with: 6768
+2023-10-18 02:31:29,533:__main__:ERROR:No IP found for order ending with: 6768
+2023-10-18 02:33:04,446:__main__:WARNING:Token seems to have expired. Trying to refresh token and retry.
+2023-10-18 02:33:04,446:__main__:ERROR:Failed request URL: https://graph.microsoft.com/v1.0/me/messages?$top=5
+2023-10-18 02:33:04,446:__main__:ERROR:Error while fetching emails: 'ClientResponseError' object has no attribute 'response'
+2023-10-18 02:33:04,446:__main__:ERROR:Full exception traceback: Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 92, in fetch_emails_for_order
+    raise aiohttp.ClientResponseError(response.request_info, response.history, status=response.status)
+aiohttp.client_exceptions.ClientResponseError: 401, message='', url=URL('https://graph.microsoft.com/v1.0/me/messages?$top=5')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 159, in main
+    await fetch_emails_for_order(access_token, refresh_token)
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 118, in fetch_emails_for_order
+    logger.error(f"Server Response: {await e.response.text()}")
+AttributeError: 'ClientResponseError' object has no attribute 'response'
+
+2023-10-18 02:41:51,368:__main__:INFO:[]
+2023-10-18 02:44:00,174:__main__:INFO:Token DATA: {'error': 'unauthorized_client', 'error_description': "AADSTS700016: Application with identifier 'None' was not found in the directory 'Microsoft Accounts'. This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant.\r\nTrace ID: d7366037-8521-4734-aa63-c7413cff2c02\r\nCorrelation ID: b5b0226f-b727-4c00-b6d1-fc0729785b05\r\nTimestamp: 2023-10-18 09:43:59Z", 'error_codes': [700016], 'timestamp': '2023-10-18 09:43:59Z', 'trace_id': 'd7366037-8521-4734-aa63-c7413cff2c02', 'correlation_id': 'b5b0226f-b727-4c00-b6d1-fc0729785b05', 'error_uri': 'https://login.microsoftonline.com/error?code=700016'}
+2023-10-18 02:44:00,174:__main__:ERROR:An error occurred: Failed to get access token. Response: {'error': 'unauthorized_client', 'error_description': "AADSTS700016: Application with identifier 'None' was not found in the directory 'Microsoft Accounts'. This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant.\r\nTrace ID: d7366037-8521-4734-aa63-c7413cff2c02\r\nCorrelation ID: b5b0226f-b727-4c00-b6d1-fc0729785b05\r\nTimestamp: 2023-10-18 09:43:59Z", 'error_codes': [700016], 'timestamp': '2023-10-18 09:43:59Z', 'trace_id': 'd7366037-8521-4734-aa63-c7413cff2c02', 'correlation_id': 'b5b0226f-b727-4c00-b6d1-fc0729785b05', 'error_uri': 'https://login.microsoftonline.com/error?code=700016'}
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 71, in get_access_token
+    raise ValueError(f"Failed to get access token. Response: {token_data}")
+ValueError: Failed to get access token. Response: {'error': 'unauthorized_client', 'error_description': "AADSTS700016: Application with identifier 'None' was not found in the directory 'Microsoft Accounts'. This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant.\r\nTrace ID: d7366037-8521-4734-aa63-c7413cff2c02\r\nCorrelation ID: b5b0226f-b727-4c00-b6d1-fc0729785b05\r\nTimestamp: 2023-10-18 09:43:59Z", 'error_codes': [700016], 'timestamp': '2023-10-18 09:43:59Z', 'trace_id': 'd7366037-8521-4734-aa63-c7413cff2c02', 'correlation_id': 'b5b0226f-b727-4c00-b6d1-fc0729785b05', 'error_uri': 'https://login.microsoftonline.com/error?code=700016'}
+
+2023-10-18 02:56:05,018:__main__:ERROR:An error occurred: Failed to get access token. Response: {'error': 'unauthorized_client', 'error_description': "AADSTS700016: Application with identifier 'None' was not found in the directory 'Microsoft Accounts'. This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant.\r\nTrace ID: eee698ba-dc6d-496b-b9cb-92c987f5d801\r\nCorrelation ID: 7829bd54-c260-4f1d-9675-8a0658d84392\r\nTimestamp: 2023-10-18 09:56:04Z", 'error_codes': [700016], 'timestamp': '2023-10-18 09:56:04Z', 'trace_id': 'eee698ba-dc6d-496b-b9cb-92c987f5d801', 'correlation_id': '7829bd54-c260-4f1d-9675-8a0658d84392', 'error_uri': 'https://login.microsoftonline.com/error?code=700016'}
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 61, in get_access_token
+    raise ValueError(f"Failed to get access token. Response: {token_data}")
+ValueError: Failed to get access token. Response: {'error': 'unauthorized_client', 'error_description': "AADSTS700016: Application with identifier 'None' was not found in the directory 'Microsoft Accounts'. This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant.\r\nTrace ID: eee698ba-dc6d-496b-b9cb-92c987f5d801\r\nCorrelation ID: 7829bd54-c260-4f1d-9675-8a0658d84392\r\nTimestamp: 2023-10-18 09:56:04Z", 'error_codes': [700016], 'timestamp': '2023-10-18 09:56:04Z', 'trace_id': 'eee698ba-dc6d-496b-b9cb-92c987f5d801', 'correlation_id': '7829bd54-c260-4f1d-9675-8a0658d84392', 'error_uri': 'https://login.microsoftonline.com/error?code=700016'}
+
+2023-10-18 02:58:42,761:__main__:INFO:Token DATA: {'error': 'unauthorized_client', 'error_description': "AADSTS700016: Application with identifier 'None' was not found in the directory 'Microsoft Accounts'. This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant.\r\nTrace ID: 0b9137c9-32d1-4fe0-91c7-db8ea6a61701\r\nCorrelation ID: a4da16b4-a5c9-4262-8930-811229a10125\r\nTimestamp: 2023-10-18 09:58:41Z", 'error_codes': [700016], 'timestamp': '2023-10-18 09:58:41Z', 'trace_id': '0b9137c9-32d1-4fe0-91c7-db8ea6a61701', 'correlation_id': 'a4da16b4-a5c9-4262-8930-811229a10125', 'error_uri': 'https://login.microsoftonline.com/error?code=700016'}
+2023-10-18 02:58:42,768:__main__:ERROR:An error occurred: Failed to get access token. Response: {'error': 'unauthorized_client', 'error_description': "AADSTS700016: Application with identifier 'None' was not found in the directory 'Microsoft Accounts'. This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant.\r\nTrace ID: 0b9137c9-32d1-4fe0-91c7-db8ea6a61701\r\nCorrelation ID: a4da16b4-a5c9-4262-8930-811229a10125\r\nTimestamp: 2023-10-18 09:58:41Z", 'error_codes': [700016], 'timestamp': '2023-10-18 09:58:41Z', 'trace_id': '0b9137c9-32d1-4fe0-91c7-db8ea6a61701', 'correlation_id': 'a4da16b4-a5c9-4262-8930-811229a10125', 'error_uri': 'https://login.microsoftonline.com/error?code=700016'}
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 72, in get_access_token
+    raise ValueError(f"Failed to get access token. Response: {token_data}")
+ValueError: Failed to get access token. Response: {'error': 'unauthorized_client', 'error_description': "AADSTS700016: Application with identifier 'None' was not found in the directory 'Microsoft Accounts'. This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant.\r\nTrace ID: 0b9137c9-32d1-4fe0-91c7-db8ea6a61701\r\nCorrelation ID: a4da16b4-a5c9-4262-8930-811229a10125\r\nTimestamp: 2023-10-18 09:58:41Z", 'error_codes': [700016], 'timestamp': '2023-10-18 09:58:41Z', 'trace_id': '0b9137c9-32d1-4fe0-91c7-db8ea6a61701', 'correlation_id': 'a4da16b4-a5c9-4262-8930-811229a10125', 'error_uri': 'https://login.microsoftonline.com/error?code=700016'}
+
+2023-10-18 03:03:20,316:__main__:INFO:Token DATA: {'error': 'unauthorized_client', 'error_description': "AADSTS700016: Application with identifier 'None' was not found in the directory 'Microsoft Accounts'. This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant.\r\nTrace ID: f674e5f6-8d6b-4bf0-a6bb-2b1ec2a56e01\r\nCorrelation ID: b1a0e9fe-ccf6-4e04-88f5-50b43923a0db\r\nTimestamp: 2023-10-18 10:03:19Z", 'error_codes': [700016], 'timestamp': '2023-10-18 10:03:19Z', 'trace_id': 'f674e5f6-8d6b-4bf0-a6bb-2b1ec2a56e01', 'correlation_id': 'b1a0e9fe-ccf6-4e04-88f5-50b43923a0db', 'error_uri': 'https://login.microsoftonline.com/error?code=700016'}
+2023-10-18 03:03:20,316:__main__:ERROR:An error occurred: Failed to get access token. Response: {'error': 'unauthorized_client', 'error_description': "AADSTS700016: Application with identifier 'None' was not found in the directory 'Microsoft Accounts'. This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant.\r\nTrace ID: f674e5f6-8d6b-4bf0-a6bb-2b1ec2a56e01\r\nCorrelation ID: b1a0e9fe-ccf6-4e04-88f5-50b43923a0db\r\nTimestamp: 2023-10-18 10:03:19Z", 'error_codes': [700016], 'timestamp': '2023-10-18 10:03:19Z', 'trace_id': 'f674e5f6-8d6b-4bf0-a6bb-2b1ec2a56e01', 'correlation_id': 'b1a0e9fe-ccf6-4e04-88f5-50b43923a0db', 'error_uri': 'https://login.microsoftonline.com/error?code=700016'}
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 72, in get_access_token
+    raise ValueError(f"Failed to get access token. Response: {token_data}")
+ValueError: Failed to get access token. Response: {'error': 'unauthorized_client', 'error_description': "AADSTS700016: Application with identifier 'None' was not found in the directory 'Microsoft Accounts'. This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant.\r\nTrace ID: f674e5f6-8d6b-4bf0-a6bb-2b1ec2a56e01\r\nCorrelation ID: b1a0e9fe-ccf6-4e04-88f5-50b43923a0db\r\nTimestamp: 2023-10-18 10:03:19Z", 'error_codes': [700016], 'timestamp': '2023-10-18 10:03:19Z', 'trace_id': 'f674e5f6-8d6b-4bf0-a6bb-2b1ec2a56e01', 'correlation_id': 'b1a0e9fe-ccf6-4e04-88f5-50b43923a0db', 'error_uri': 'https://login.microsoftonline.com/error?code=700016'}
+
+2023-10-18 13:53:01,484:__main__:INFO:Token DATA: {'error': 'unauthorized_client', 'error_description': "AADSTS700016: Application with identifier 'None' was not found in the directory 'Microsoft Accounts'. This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant.\r\nTrace ID: 1d65662e-3cea-4f8d-ae1b-e9aef3617c02\r\nCorrelation ID: 27a2b747-8a1e-44a9-9c0c-42a0fb9c5950\r\nTimestamp: 2023-10-18 20:53:00Z", 'error_codes': [700016], 'timestamp': '2023-10-18 20:53:00Z', 'trace_id': '1d65662e-3cea-4f8d-ae1b-e9aef3617c02', 'correlation_id': '27a2b747-8a1e-44a9-9c0c-42a0fb9c5950', 'error_uri': 'https://login.microsoftonline.com/error?code=700016'}
+2023-10-18 13:53:01,485:__main__:ERROR:An error occurred: Failed to get access token. Response: {'error': 'unauthorized_client', 'error_description': "AADSTS700016: Application with identifier 'None' was not found in the directory 'Microsoft Accounts'. This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant.\r\nTrace ID: 1d65662e-3cea-4f8d-ae1b-e9aef3617c02\r\nCorrelation ID: 27a2b747-8a1e-44a9-9c0c-42a0fb9c5950\r\nTimestamp: 2023-10-18 20:53:00Z", 'error_codes': [700016], 'timestamp': '2023-10-18 20:53:00Z', 'trace_id': '1d65662e-3cea-4f8d-ae1b-e9aef3617c02', 'correlation_id': '27a2b747-8a1e-44a9-9c0c-42a0fb9c5950', 'error_uri': 'https://login.microsoftonline.com/error?code=700016'}
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 72, in get_access_token
+    raise ValueError(f"Failed to get access token. Response: {token_data}")
+ValueError: Failed to get access token. Response: {'error': 'unauthorized_client', 'error_description': "AADSTS700016: Application with identifier 'None' was not found in the directory 'Microsoft Accounts'. This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant.\r\nTrace ID: 1d65662e-3cea-4f8d-ae1b-e9aef3617c02\r\nCorrelation ID: 27a2b747-8a1e-44a9-9c0c-42a0fb9c5950\r\nTimestamp: 2023-10-18 20:53:00Z", 'error_codes': [700016], 'timestamp': '2023-10-18 20:53:00Z', 'trace_id': '1d65662e-3cea-4f8d-ae1b-e9aef3617c02', 'correlation_id': '27a2b747-8a1e-44a9-9c0c-42a0fb9c5950', 'error_uri': 'https://login.microsoftonline.com/error?code=700016'}
+
+2023-10-18 13:54:32,811:__main__:INFO:Token DATA: {'error': 'unauthorized_client', 'error_description': "AADSTS700016: Application with identifier 'None' was not found in the directory 'Microsoft Accounts'. This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant.\r\nTrace ID: b414a9b0-0de0-46c1-a365-8512c4cae501\r\nCorrelation ID: 27392656-8089-4cf5-9129-7d74b9f52158\r\nTimestamp: 2023-10-18 20:54:31Z", 'error_codes': [700016], 'timestamp': '2023-10-18 20:54:31Z', 'trace_id': 'b414a9b0-0de0-46c1-a365-8512c4cae501', 'correlation_id': '27392656-8089-4cf5-9129-7d74b9f52158', 'error_uri': 'https://login.microsoftonline.com/error?code=700016'}
+2023-10-18 13:54:32,812:__main__:ERROR:An error occurred: Failed to get access token. Response: {'error': 'unauthorized_client', 'error_description': "AADSTS700016: Application with identifier 'None' was not found in the directory 'Microsoft Accounts'. This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant.\r\nTrace ID: b414a9b0-0de0-46c1-a365-8512c4cae501\r\nCorrelation ID: 27392656-8089-4cf5-9129-7d74b9f52158\r\nTimestamp: 2023-10-18 20:54:31Z", 'error_codes': [700016], 'timestamp': '2023-10-18 20:54:31Z', 'trace_id': 'b414a9b0-0de0-46c1-a365-8512c4cae501', 'correlation_id': '27392656-8089-4cf5-9129-7d74b9f52158', 'error_uri': 'https://login.microsoftonline.com/error?code=700016'}
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 72, in get_access_token
+    raise ValueError(f"Failed to get access token. Response: {token_data}")
+ValueError: Failed to get access token. Response: {'error': 'unauthorized_client', 'error_description': "AADSTS700016: Application with identifier 'None' was not found in the directory 'Microsoft Accounts'. This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant.\r\nTrace ID: b414a9b0-0de0-46c1-a365-8512c4cae501\r\nCorrelation ID: 27392656-8089-4cf5-9129-7d74b9f52158\r\nTimestamp: 2023-10-18 20:54:31Z", 'error_codes': [700016], 'timestamp': '2023-10-18 20:54:31Z', 'trace_id': 'b414a9b0-0de0-46c1-a365-8512c4cae501', 'correlation_id': '27392656-8089-4cf5-9129-7d74b9f52158', 'error_uri': 'https://login.microsoftonline.com/error?code=700016'}
+
+2023-10-18 13:55:34,221:__main__:INFO:REFRESH TOKEN: M.C107_BAY.-CVp1tXDDFNgoG5jtHtdRnBTUmSUqHLL2qILxFVrqfsMnHBGnlhV1dkDTv2czD3uBpD396eFK71TC8l5VS1Rc89dpM85j8QHkP23HpF*N87GeSGg9WO2LcUnLDW6HoHW5j9IKr9Ax1wZzRpDRVJHxxILk7MKNmL6fIaVyiXOgj7huCAuAvUQEuYr7MT8UrDFz4F035isD85MzZLK!IL6U1loo5JZgmo48CKIyKpqv4ZyCTDQt8B3HHc7RGNHgE5NkhgGr648aYY*VpO!TAC*6DIagBJLWFXQ04EX9vc1LqZoSd0npl5NeC8jnf6SQsXlRPA$$
+2023-10-18 13:55:34,784:__main__:ERROR:An error occurred: Failed to get access token. Response: {'error': 'unauthorized_client', 'error_description': "AADSTS700016: Application with identifier 'None' was not found in the directory 'Microsoft Accounts'. This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant.\r\nTrace ID: 4320a444-31e3-4736-bfd6-aed4bb2c7102\r\nCorrelation ID: ad614776-5a8f-4bda-8e53-3648f866a286\r\nTimestamp: 2023-10-18 20:55:33Z", 'error_codes': [700016], 'timestamp': '2023-10-18 20:55:33Z', 'trace_id': '4320a444-31e3-4736-bfd6-aed4bb2c7102', 'correlation_id': 'ad614776-5a8f-4bda-8e53-3648f866a286', 'error_uri': 'https://login.microsoftonline.com/error?code=700016'}
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 73, in get_access_token
+    raise ValueError(f"Failed to get access token. Response: {token_data}")
+ValueError: Failed to get access token. Response: {'error': 'unauthorized_client', 'error_description': "AADSTS700016: Application with identifier 'None' was not found in the directory 'Microsoft Accounts'. This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant.\r\nTrace ID: 4320a444-31e3-4736-bfd6-aed4bb2c7102\r\nCorrelation ID: ad614776-5a8f-4bda-8e53-3648f866a286\r\nTimestamp: 2023-10-18 20:55:33Z", 'error_codes': [700016], 'timestamp': '2023-10-18 20:55:33Z', 'trace_id': '4320a444-31e3-4736-bfd6-aed4bb2c7102', 'correlation_id': 'ad614776-5a8f-4bda-8e53-3648f866a286', 'error_uri': 'https://login.microsoftonline.com/error?code=700016'}
+
+2023-10-18 14:02:37,439:__main__:INFO:REFRESH TOKEN: M.C107_BAY.-CVp1tXDDFNgoG5jtHtdRnBTUmSUqHLL2qILxFVrqfsMnHBGnlhV1dkDTv2czD3uBpD396eFK71TC8l5VS1Rc89dpM85j8QHkP23HpF*N87GeSGg9WO2LcUnLDW6HoHW5j9IKr9Ax1wZzRpDRVJHxxILk7MKNmL6fIaVyiXOgj7huCAuAvUQEuYr7MT8UrDFz4F035isD85MzZLK!IL6U1loo5JZgmo48CKIyKpqv4ZyCTDQt8B3HHc7RGNHgE5NkhgGr648aYY*VpO!TAC*6DIagBJLWFXQ04EX9vc1LqZoSd0npl5NeC8jnf6SQsXlRPA$$
+2023-10-18 14:02:38,078:__main__:ERROR:An error occurred: Failed to get access token. Response: {'error': 'unauthorized_client', 'error_description': "AADSTS700016: Application with identifier 'None' was not found in the directory 'Microsoft Accounts'. This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant.\r\nTrace ID: c431d0ea-73eb-4c4c-a0d9-006d2c858002\r\nCorrelation ID: 3f9f9e59-49df-4dcb-ba0c-6d3f68a3ab69\r\nTimestamp: 2023-10-18 21:02:36Z", 'error_codes': [700016], 'timestamp': '2023-10-18 21:02:36Z', 'trace_id': 'c431d0ea-73eb-4c4c-a0d9-006d2c858002', 'correlation_id': '3f9f9e59-49df-4dcb-ba0c-6d3f68a3ab69', 'error_uri': 'https://login.microsoftonline.com/error?code=700016'}
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 73, in get_access_token
+    raise ValueError(f"Failed to get access token. Response: {token_data}")
+ValueError: Failed to get access token. Response: {'error': 'unauthorized_client', 'error_description': "AADSTS700016: Application with identifier 'None' was not found in the directory 'Microsoft Accounts'. This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant.\r\nTrace ID: c431d0ea-73eb-4c4c-a0d9-006d2c858002\r\nCorrelation ID: 3f9f9e59-49df-4dcb-ba0c-6d3f68a3ab69\r\nTimestamp: 2023-10-18 21:02:36Z", 'error_codes': [700016], 'timestamp': '2023-10-18 21:02:36Z', 'trace_id': 'c431d0ea-73eb-4c4c-a0d9-006d2c858002', 'correlation_id': '3f9f9e59-49df-4dcb-ba0c-6d3f68a3ab69', 'error_uri': 'https://login.microsoftonline.com/error?code=700016'}
+
+2023-10-18 14:03:28,029:__main__:INFO:REFRESH TOKEN: M.C107_BAY.-CVp1tXDDFNgoG5jtHtdRnBTUmSUqHLL2qILxFVrqfsMnHBGnlhV1dkDTv2czD3uBpD396eFK71TC8l5VS1Rc89dpM85j8QHkP23HpF*N87GeSGg9WO2LcUnLDW6HoHW5j9IKr9Ax1wZzRpDRVJHxxILk7MKNmL6fIaVyiXOgj7huCAuAvUQEuYr7MT8UrDFz4F035isD85MzZLK!IL6U1loo5JZgmo48CKIyKpqv4ZyCTDQt8B3HHc7RGNHgE5NkhgGr648aYY*VpO!TAC*6DIagBJLWFXQ04EX9vc1LqZoSd0npl5NeC8jnf6SQsXlRPA$$
+2023-10-18 14:03:28,508:__main__:ERROR:An error occurred: Failed to get access token. Response: {'error': 'unauthorized_client', 'error_description': "AADSTS700016: Application with identifier 'None' was not found in the directory 'Microsoft Accounts'. This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant.\r\nTrace ID: 26a96851-8998-4320-ae2a-ffb892ceda00\r\nCorrelation ID: 58024de3-328c-43af-ab24-8633c462f3e9\r\nTimestamp: 2023-10-18 21:03:27Z", 'error_codes': [700016], 'timestamp': '2023-10-18 21:03:27Z', 'trace_id': '26a96851-8998-4320-ae2a-ffb892ceda00', 'correlation_id': '58024de3-328c-43af-ab24-8633c462f3e9', 'error_uri': 'https://login.microsoftonline.com/error?code=700016'}
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 73, in get_access_token
+    raise ValueError(f"Failed to get access token. Response: {token_data}")
+ValueError: Failed to get access token. Response: {'error': 'unauthorized_client', 'error_description': "AADSTS700016: Application with identifier 'None' was not found in the directory 'Microsoft Accounts'. This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant.\r\nTrace ID: 26a96851-8998-4320-ae2a-ffb892ceda00\r\nCorrelation ID: 58024de3-328c-43af-ab24-8633c462f3e9\r\nTimestamp: 2023-10-18 21:03:27Z", 'error_codes': [700016], 'timestamp': '2023-10-18 21:03:27Z', 'trace_id': '26a96851-8998-4320-ae2a-ffb892ceda00', 'correlation_id': '58024de3-328c-43af-ab24-8633c462f3e9', 'error_uri': 'https://login.microsoftonline.com/error?code=700016'}
+
+2023-10-18 14:05:57,424:__main__:INFO:REFRESH TOKEN: M.C107_BAY.-CVp1tXDDFNgoG5jtHtdRnBTUmSUqHLL2qILxFVrqfsMnHBGnlhV1dkDTv2czD3uBpD396eFK71TC8l5VS1Rc89dpM85j8QHkP23HpF*N87GeSGg9WO2LcUnLDW6HoHW5j9IKr9Ax1wZzRpDRVJHxxILk7MKNmL6fIaVyiXOgj7huCAuAvUQEuYr7MT8UrDFz4F035isD85MzZLK!IL6U1loo5JZgmo48CKIyKpqv4ZyCTDQt8B3HHc7RGNHgE5NkhgGr648aYY*VpO!TAC*6DIagBJLWFXQ04EX9vc1LqZoSd0npl5NeC8jnf6SQsXlRPA$$
+2023-10-18 14:05:57,943:__main__:ERROR:An error occurred: Failed to get access token. Response: {'error': 'unauthorized_client', 'error_description': "AADSTS700016: Application with identifier 'None' was not found in the directory 'Microsoft Accounts'. This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant.\r\nTrace ID: 838bb263-3173-4aea-bd85-64ca8ac2cc00\r\nCorrelation ID: 1ae5f5c3-6f15-4e79-8dc4-3533d3429f2d\r\nTimestamp: 2023-10-18 21:05:56Z", 'error_codes': [700016], 'timestamp': '2023-10-18 21:05:56Z', 'trace_id': '838bb263-3173-4aea-bd85-64ca8ac2cc00', 'correlation_id': '1ae5f5c3-6f15-4e79-8dc4-3533d3429f2d', 'error_uri': 'https://login.microsoftonline.com/error?code=700016'}
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 75, in get_access_token
+    raise ValueError(f"Failed to get access token. Response: {token_data}")
+ValueError: Failed to get access token. Response: {'error': 'unauthorized_client', 'error_description': "AADSTS700016: Application with identifier 'None' was not found in the directory 'Microsoft Accounts'. This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant.\r\nTrace ID: 838bb263-3173-4aea-bd85-64ca8ac2cc00\r\nCorrelation ID: 1ae5f5c3-6f15-4e79-8dc4-3533d3429f2d\r\nTimestamp: 2023-10-18 21:05:56Z", 'error_codes': [700016], 'timestamp': '2023-10-18 21:05:56Z', 'trace_id': '838bb263-3173-4aea-bd85-64ca8ac2cc00', 'correlation_id': '1ae5f5c3-6f15-4e79-8dc4-3533d3429f2d', 'error_uri': 'https://login.microsoftonline.com/error?code=700016'}
+
+2023-10-18 14:10:33,905:__main__:INFO:REFRESH TOKEN: M.C107_BAY.-CVp1tXDDFNgoG5jtHtdRnBTUmSUqHLL2qILxFVrqfsMnHBGnlhV1dkDTv2czD3uBpD396eFK71TC8l5VS1Rc89dpM85j8QHkP23HpF*N87GeSGg9WO2LcUnLDW6HoHW5j9IKr9Ax1wZzRpDRVJHxxILk7MKNmL6fIaVyiXOgj7huCAuAvUQEuYr7MT8UrDFz4F035isD85MzZLK!IL6U1loo5JZgmo48CKIyKpqv4ZyCTDQt8B3HHc7RGNHgE5NkhgGr648aYY*VpO!TAC*6DIagBJLWFXQ04EX9vc1LqZoSd0npl5NeC8jnf6SQsXlRPA$$
+2023-10-18 14:10:34,407:__main__:ERROR:An error occurred: Failed to get access token. Response: {'error': 'unauthorized_client', 'error_description': "AADSTS700016: Application with identifier 'None' was not found in the directory 'Microsoft Accounts'. This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant.\r\nTrace ID: 0b4064b8-1bc1-4837-8332-1a381342de01\r\nCorrelation ID: 5060695d-5b57-4924-964e-3b975c78a52d\r\nTimestamp: 2023-10-18 21:10:33Z", 'error_codes': [700016], 'timestamp': '2023-10-18 21:10:33Z', 'trace_id': '0b4064b8-1bc1-4837-8332-1a381342de01', 'correlation_id': '5060695d-5b57-4924-964e-3b975c78a52d', 'error_uri': 'https://login.microsoftonline.com/error?code=700016'}
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_emails.py", line 75, in get_access_token
+    raise ValueError(f"Failed to get access token. Response: {token_data}")
+ValueError: Failed to get access token. Response: {'error': 'unauthorized_client', 'error_description': "AADSTS700016: Application with identifier 'None' was not found in the directory 'Microsoft Accounts'. This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant.\r\nTrace ID: 0b4064b8-1bc1-4837-8332-1a381342de01\r\nCorrelation ID: 5060695d-5b57-4924-964e-3b975c78a52d\r\nTimestamp: 2023-10-18 21:10:33Z", 'error_codes': [700016], 'timestamp': '2023-10-18 21:10:33Z', 'trace_id': '0b4064b8-1bc1-4837-8332-1a381342de01', 'correlation_id': '5060695d-5b57-4924-964e-3b975c78a52d', 'error_uri': 'https://login.microsoftonline.com/error?code=700016'}
+
+2023-10-18 14:25:43,411:__main__:INFO:REFRESH TOKEN: M.C107_BAY.-CVp1tXDDFNgoG5jtHtdRnBTUmSUqHLL2qILxFVrqfsMnHBGnlhV1dkDTv2czD3uBpD396eFK71TC8l5VS1Rc89dpM85j8QHkP23HpF*N87GeSGg9WO2LcUnLDW6HoHW5j9IKr9Ax1wZzRpDRVJHxxILk7MKNmL6fIaVyiXOgj7huCAuAvUQEuYr7MT8UrDFz4F035isD85MzZLK!IL6U1loo5JZgmo48CKIyKpqv4ZyCTDQt8B3HHc7RGNHgE5NkhgGr648aYY*VpO!TAC*6DIagBJLWFXQ04EX9vc1LqZoSd0npl5NeC8jnf6SQsXlRPA$$
+2023-10-18 14:28:03,880:__main__:INFO:REFRESH TOKEN: M.C107_BAY.-CT0X2THRjLoeS3334eYFLdsYi3oUGXhZnurtxYDExv4POZ7xEpAZnenad0brKsS!nLQEFSp6AVXeSBsA!bMlfC*Y6R2R9NGjKNrktPPeUMLJZE0Jex!w4GD3C9!jwY7oUTeNd4!R5A12fSYtEXXXi7b68f!hd4*OfLKE5d461FS2RQtcJ99MO7Bq0JMrCQzszy*0sQ53fOS9Kn*HJrb5BZtBYxL06mqGEKQtW3ojGUmXY7hn5gp5d3cNyg0BmLHvpFwVs!tWm4l*VmiQv5kdJvx*6ET8xYk8CC*!P1KPiqAgMM8yva55jxsacnFhMDqvMGhPIpKEyPV7!JSVZUQ6o!o$
+2023-10-18 14:33:57,088:__main__:ERROR:No IP found for order ending with: 6768
+2023-10-18 14:39:07,013:__main__:INFO:REFRESH TOKEN: M.C107_BAY.-CeDhYS4Lbxhm4pZgXyqRlfeXpBl6ve6276eZpFoKSW5dyAAEVWOHNSew1D2FHOqyhyxAR3kquS8BiaJZmj!xlafCa3jpcTXW4fXHFe6WQgo!mJ33JnkUJa*RaojQCXUndVcCS7ay3!BCGT!938lhpnj83gp9k8H*TsZVQP6tyvEayqPTPpaTPQ2OLxut93g9U*F2GyZL7fCbFo*89WqKiz*2QeposuIj!M!0Wxc4jL4Q83TsYv32b2ekRmzePcjsX0CttqbRBDgB9dRWlfA2lvaFAWUYEKBUKTI9jXW1yIKrwka48J*0feR4p3fvjHT!FCqa22opaTUu!!Y9sx63J3o$
+2023-10-18 15:09:49,682:__main__:ERROR:Could not fetch the IP address for the last four digits: 6768
+2023-10-18 15:11:41,019:__main__:ERROR:Could not fetch the IP address for the last four digits: 4208
+2023-10-18 15:13:23,553:ip_info_io:INFO:Getting IP details for: 147.78.1.32
+2023-10-18 15:13:23,892:ip_info_io:INFO:Got IP details: <ipinfo.details.Details object at 0x00000202AF232EF0>
+2023-10-18 15:15:49,647:ip_info_io:INFO:Getting IP details for: 147.78.1.32
+2023-10-18 15:15:49,984:ip_info_io:INFO:Got IP details: <ipinfo.details.Details object at 0x000001DED6C62E90>
+2023-10-18 15:15:49,984:__main__:INFO:The IP address 147.78.1.32 is from Mexico.

@@ -1,5 +1,5 @@
 from credentials import credentials_dict
-from common_utils import get_server_time
+from common_utils import get_server_timestamp
 from asset_balances import update_balance, get_balance
 import hmac
 import hashlib
@@ -25,7 +25,7 @@ class BinanceWallets:
 
     async def get_user_assets(self, api_key, api_secret, account):
         try:
-            timestamp = await get_server_time()
+            timestamp = await get_server_timestamp()
             query_string = f"timestamp={timestamp}"
 
             signature = self.generate_signature(api_secret, query_string)
@@ -43,7 +43,7 @@ class BinanceWallets:
 
     async def get_funding_assets(self, api_key, api_secret, account):
         try:
-            timestamp = await get_server_time()
+            timestamp = await get_server_timestamp()
             query_string = f"timestamp={timestamp}"
 
             signature = self.generate_signature(api_secret, query_string)
@@ -104,7 +104,7 @@ class BinanceWallets:
         return max_account, most_usd_asset
     async def place_order(self, api_key, api_secret, symbol, side, order_type, quantity=None, price=None, timeInForce=None, quoteOrderQty=None):
         try:
-            timestamp = await get_server_time()
+            timestamp = await get_server_timestamp()
             query_string = f"symbol={symbol}&side={side}&type={order_type}&timestamp={timestamp}"
             if quantity:
                 query_string += f"&quantity={quantity}"
@@ -119,7 +119,7 @@ class BinanceWallets:
                 async with session.post(url, headers=headers) as response:
                     if response.status == 200:
                         order_data = await response.json()
-                        logger.debug(f"Order successfully placed: {order_data}")
+                        logger.info(f"Order successfully placed: {order_data}")
                     else:
                         logger.error(f"Failed to place order: {await response.text()}")
         except Exception as e:

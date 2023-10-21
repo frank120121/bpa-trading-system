@@ -1,10 +1,50 @@
 import sqlite3
+from prettytable import PrettyTable
 import logging
 from logging_config import setup_logging
 setup_logging(log_filename='Binance_c2c_logger.log')
 logger = logging.getLogger(__name__)
 
 DATABASE_PATH = 'C:/Users/p7016/Documents/bpa/asset_balances.db'
+
+def setup_total_balances_db():
+    try:
+        connection = sqlite3.connect(DATABASE_PATH)
+        cursor = connection.cursor()
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS total_balances (
+                asset TEXT PRIMARY KEY,
+                total_balance FLOAT
+            )
+        ''')
+        connection.commit()
+    except sqlite3.Error as e:
+        logger.error(f"Failed to create total_balances table, Error: {str(e)}")
+    finally:
+        if connection:
+            connection.close()
+
+def setup_bank_accounts_db():
+    try:
+        connection = sqlite3.connect(DATABASE_PATH)
+        cursor = connection.cursor()
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS bank_accounts (
+                id INTEGER PRIMARY KEY,
+                account_number TEXT UNIQUE,
+                account_name TEXT,
+                bank_name TEXT,
+                account_balance FLOAT DEFAULT 0
+            )
+        ''')
+        connection.commit()
+    except sqlite3.Error as e:
+        logger.error(f"Failed to create bank_accounts table, Error: {str(e)}")
+    finally:
+        if connection:
+            connection.close()
+
+
 
 def setup_db():
     connection = sqlite3.connect(DATABASE_PATH)
@@ -21,6 +61,50 @@ def setup_db():
     ''')
     connection.commit()
     connection.close()
+
+def add_bank_account(account_number, account_name, bank_name):
+    try:
+        connection = sqlite3.connect(DATABASE_PATH)
+        cursor = connection.cursor()
+        cursor.execute('''
+            INSERT INTO bank_accounts (account_number, account_name, bank_name)
+            VALUES (?, ?, ?, ?)
+        ''', (account_number, account_name, bank_name))
+        connection.commit()
+    except sqlite3.IntegrityError:
+        logger.error(f"Account number {account_number} already exists.")
+    except sqlite3.Error as e:
+        logger.error(f"Failed to add bank account {account_number}, Error: {str(e)}")
+    finally:
+        if connection:
+            connection.close()
+
+def update_total_balances():
+    try:
+        connection = sqlite3.connect(DATABASE_PATH)
+        cursor = connection.cursor()
+
+        # Get the total balances from balances table
+        cursor.execute('''
+            SELECT asset, SUM(balance)
+            FROM balances
+            GROUP BY asset
+        ''')
+        aggregated_balances = cursor.fetchall()
+
+        # Update the total_balances table
+        for asset, total_balance in aggregated_balances:
+            cursor.execute('''
+                INSERT OR REPLACE INTO total_balances (asset, total_balance)
+                VALUES (?, ?)
+            ''', (asset, total_balance))
+        
+        connection.commit()
+    except sqlite3.Error as e:
+        logger.error(f"Failed to update total_balances table, Error: {str(e)}")
+    finally:
+        if connection:
+            connection.close()
 
 def update_balance(exchange_id, account, combined_balances):
     connection = sqlite3.connect(DATABASE_PATH)
@@ -108,8 +192,40 @@ def print_total_asset_balances():
             print(f"Asset: {asset}, Total Balance: {total_balance}")
     else:
         print("No balance data found.")
+def print_table_contents(table_name):
+    try:
+        connection = sqlite3.connect(DATABASE_PATH)
+        cursor = connection.cursor()
+        
+        cursor.execute(f"PRAGMA table_info({table_name})")
+        columns_info = cursor.fetchall()
+        column_names = [column[1] for column in columns_info]
+
+        cursor.execute(f"SELECT * FROM {table_name}")
+        rows = cursor.fetchall()
+        
+        table = PrettyTable()
+        table.field_names = column_names
+        for row in rows:
+            table.add_row(row)
+        
+        print(f"\nContents of {table_name}:")
+        print(table)
+
+    except sqlite3.Error as e:
+        print(f"Error reading from table {table_name}: {e}")
+    finally:
+        if connection:
+            connection.close()
 
 if __name__ == "__main__":
-    setup_db()
-    #print_all_balances()
-    print_total_asset_balances()
+    # setup_db()
+    # setup_bank_accounts_db()
+    # setup_total_balances_db()
+    # update_total_balances()
+    # print_table_contents("bank_accounts")
+    # print_table_contents("balances")
+    # print_table_contents("total_balances")
+
+    
+    add_bank_account()

@@ -7,7 +7,7 @@ import os
 def process_file(file_path):
     with open(file_path, 'r', encoding="utf-8") as f:
         lines = f.readlines()
-    colors, sizes, quantities, skus, prices = [], [], [], [], []
+    colors, sizes, quantities, skus, prices, titles = [], [], [], [], [], []
     for index, line in enumerate(lines):
         line = line.strip()
         if not line:
@@ -16,6 +16,7 @@ def process_file(file_path):
         if line.startswith("Productos"):
             print(f"Line {index + 1}: Identified as header. Skipping.")
             continue
+       
         if line == "Todo está enviado":
             print(f"Line {index + 1}: Identified as footer/status. Skipping.")
             continue
@@ -49,18 +50,34 @@ def process_file(file_path):
                 
                 if not prev_line:  # Skip empty lines
                     continue
-                
+                if prev_line == "No cumple con los requisitos para obtener puntos extra":
+                    continue
                 if re.search(r'\$MXN(\d+\.\d{2})', prev_line):  # This is a price line
                     continue
+
                 elif "/" in prev_line and not color_found:
                     color, size = [part.strip() for part in prev_line.split('/', 1)]
                     if '/' in size:
                         size = size.split('/')[0]
                     print(f"Line {index - prev_index}: Extracted Color: {color}, Size: {size}")
-                    break
+                    size_found = True
+                    color_found = True
+                    continue
+                elif re.match(r'^(XS|S|M|L|XL|XXL|CH|M|G|EG|EEG)$', prev_line) and not size_found:
+                    size = prev_line
+                    size_found = True
+                    print(f"Line {index - prev_index}: Extracted Size: {size}")
+                    continue
                 elif not color_found:
                     color = prev_line
                     print(f"Line {index - prev_index}: Extracted Color: {color}")
+                    color_found = True
+                    continue
+                elif color_found or size_found:
+                    # If the line is not recognized as color, size, or any other pattern, consider it as title
+                    title = prev_line
+                    titles.append(title)
+                    print(f"Line {index - prev_index}: Extracted Title: {title}")
                     break
             
             colors.append(color)
@@ -74,19 +91,20 @@ def process_file(file_path):
                     print(f"Line {index + 1 + lines[index:].index(next_line)}: Extracted Price: {price_search.group(1)}")
                     break
 
-    # print(f"\nColors: {len(colors)}")
-    # print(f"Sizes: {len(sizes)}")
-    # print(f"Quantities: {len(quantities)}")
-    # print(f"SKUs: {len(skus)}")
-    # print(f"Prices: {len(prices)}")
+        # print(f"\nColors: {len(colors)}")
+        # print(f"Sizes: {len(sizes)}")
+        # print(f"Quantities: {len(quantities)}")
+        # print(f"SKUs: {len(skus)}")
+        # print(f"Prices: {len(prices)}")
 
-    if len(colors) == len(sizes) == len(quantities) == len(skus) == len(prices):
+    if len(colors) == len(sizes) == len(quantities) == len(skus) == len(prices) == len(titles):
         df = pd.DataFrame({
+            'Title': titles,
             'Color': colors,
             'Size': sizes,
             'Quantity': quantities,
             'SKU': skus,
-            'Price': prices
+            'Cost_per_item': prices
         })
         # print(df)
         temp_csv_path = 'temp_data.csv'
@@ -104,5 +122,6 @@ for order_number in order_numbers:
     file_path = fr"C:\Users\p7016\Documents\bpa\{order_number}.txt"
     if os.path.exists(file_path):
         process_file(file_path)
+        print(f"Updating file {order_number}.")
     else:
-        print(f"File {file_path} does not exist. Skipping.")
+        print(f"File {order_number} does not exist. Skipping.")

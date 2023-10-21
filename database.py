@@ -37,31 +37,6 @@ async def update_order_status(conn, order_no, order_status):
     sql = "UPDATE orders SET order_status = ? WHERE order_no = ?"
     params = (order_status, order_no)
     await execute_and_commit(conn, sql, params)
-async def update_status_from_system_type(conn, msg_json, order_no):
-    
-    try:
-        content = msg_json.get('content', '')
-        content_dict = json.loads(content)
-        system_type = content_dict.get('type', '')
-    except json.JSONDecodeError:
-        system_type = ''
-    status_map = {
-        'buyer_merchant_trading': 3,
-        'seller_merchant_trading': 1,
-        'seller_payed': 2,
-        'buyer_payed': 8,
-        'submit_appeal': 9,
-        'be_appeal': 5,
-        'seller_completed': 4,
-        'seller_cancelled': 6,
-        'cancelled_by_system': 7
-    }
-    status = status_map.get(system_type, None)
-    if status is not None:
-        if order_no:
-            sql = "UPDATE orders SET order_status = ? WHERE order_no = ?"
-            params = (status, order_no)
-            await execute_and_commit(conn, sql, params)
 
 async def get_order_details(conn, order_no):
     try:
@@ -203,7 +178,51 @@ async def calculate_crypto_sold_30d(conn, buyer_name):
     except Exception as e:
         logger.error(f"Error calculating crypto sold in the last 30 days: {e}")
         return 0
+# In your database module
+async def get_kyc_status(conn, name):
+    async with conn.cursor() as cursor:
+        await cursor.execute("SELECT kyc_status FROM users WHERE name=?", (name,))
+        result = await cursor.fetchone()
+        if result:
+            return result[0]
+        return None
+
+async def get_anti_fraud_stage(conn, name):
+    async with conn.cursor() as cursor:
+        await cursor.execute("SELECT anti_fraud_stage FROM users WHERE name=?", (name,))
+        result = await cursor.fetchone()
+        if result:
+            return result[0]
+        return None
+async def update_anti_fraud_stage(conn, buyer_name, new_stage):
+    async with conn.cursor() as cursor:
+        await cursor.execute("UPDATE users SET anti_fraud_stage = ? WHERE name = ?", (new_stage, buyer_name))
+        await conn.commit()
+async def is_menu_presented(conn, order_no):
+    """
+    Checks if the menu has been presented for a specific order.
+
+    Args:
+    - conn (sqlite3.Connection): SQLite database connection.
+    - order_no (str): The order number to check.
+
+    Returns:
+    - bool: True if the menu has been presented, False otherwise.
+    """
+    async with conn.cursor() as cursor:
+        await cursor.execute("""
+            SELECT menu_presented
+            FROM orders
+            WHERE order_no = ?;
+        """, (order_no,))
     
+        result = await cursor.fetchone()
+    
+    if result:
+        return result[0] == 1  # SQLite uses 1 for TRUE and 0 for FALSE.
+    else:
+        # Order doesn't exist or some other unexpected error.
+        raise ValueError(f"No order found with order_no {order_no}")
 
 async def execute_and_fetchone(conn, sql, params=None):
     """
@@ -223,6 +242,50 @@ async def execute_and_fetchone(conn, sql, params=None):
             return await cursor.fetchone()
     except Exception as e:
         print(f"Error executing query: {e}")
+        return None
+async def set_menu_presented(conn, order_no, value):
+    """
+    Set the menu_presented field in the orders table to either True or False.
+
+    Parameters:
+    - conn: a database connection object
+    - order_no: the order number
+    - value: boolean indicating if the menu was presented
+
+    Returns:
+    - None
+    """
+    try:
+        sql = "UPDATE orders SET menu_presented = ? WHERE order_no = ?"
+        params = (1 if value else 0, order_no)  # Convert to SQLite's BOOLEAN representation
+        await execute_and_commit(conn, sql, params)
+    except Exception as e:
+        logger.error(f"Error setting menu_presented for order_no {order_no}: {e}")
+
+async def update_ignore_count(conn, order_no, count):
+    """
+    Update the ignore_count field in the orders table.
+
+    Parameters:
+    - conn: a database connection object
+    - order_no: the order number
+    - count: the ignore count value
+
+    Returns:
+    - None
+    """
+    try:
+        sql = "UPDATE orders SET ignore_count = ? WHERE order_no = ?"
+        params = (count, order_no)
+        await execute_and_commit(conn, sql, params)
+    except Exception as e:
+        logger.error(f"Error updating ignore_count for order_no {order_no}: {e}")
+async def get_ignore_count(conn, order_no):
+    async with conn.cursor() as cursor:
+        await cursor.execute("SELECT ignore_count FROM orders WHERE order_no=?", (order_no,))
+        result = await cursor.fetchone()
+        if result:
+            return result[0]
         return None
 
 async def print_table_contents(conn, table_name):
@@ -252,7 +315,8 @@ async def main():
                                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                                 name TEXT NOT NULL UNIQUE,
                                 kyc_status INTEGER DEFAULT 0,
-                                total_crypto_sold_lifetime REAL
+                                total_crypto_sold_lifetime REAL,
+                                anti_fraud_stage INTEGER DEFAULT 0
                                 );"""
     sql_create_transactions_table = """CREATE TABLE IF NOT EXISTS transactions (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -272,6 +336,7 @@ async def main():
                               fiat_unit TEXT,
                               asset TEXT,
                               amount REAL,
+                              menu_presented BOOLEAN DEFAULT FALSE,
                               ignore_count INTEGER DEFAULT 0,
                               order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                               );"""

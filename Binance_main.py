@@ -1,9 +1,6 @@
 import asyncio
-from builtins import open
-from binance_user_data_ws import main_user_data_ws
 from binance_c2c import main_binance_c2c
 from binance_update_ads import start_update_ads
-from merchant_account import MerchantAccount
 import logging
 from logging_config import setup_logging
 setup_logging(log_filename='Binance_c2c_logger.log')
@@ -14,12 +11,10 @@ async def heartbeat():
         logger.info("Heartbeat - I'm alive!")
         await asyncio.sleep(300)
 async def main():
-    merchant_account = MerchantAccount() 
-    task1 = asyncio.create_task(main_user_data_ws(merchant_account))
-    task2 = asyncio.create_task(main_binance_c2c(merchant_account))
-    task3 = asyncio.create_task(start_update_ads()) 
-    task4 = asyncio.create_task(heartbeat())
-    tasks = [task1, task2, task3, task4]
+    task1 = asyncio.create_task(main_binance_c2c())
+    task2 = asyncio.create_task(start_update_ads()) 
+    task3 = asyncio.create_task(heartbeat())
+    tasks = [task1, task2, task3]
     try:
         await asyncio.gather(*tasks)
     except asyncio.CancelledError:

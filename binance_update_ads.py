@@ -32,16 +32,11 @@ def compute_median_price(top_ads):
 def check_if_ads_avail(ads_list, adjusted_target_spot):
         if len(ads_list) < adjusted_target_spot:
             adjusted_target_spot = len(ads_list)
-            logger.info("Adjusted the target spot due to insufficient ads after filtering.")
+            logger.debug("Adjusted the target spot due to insufficient ads after filtering.")
             return adjusted_target_spot
         else:
             return adjusted_target_spot
-async def fetch_ads_data(api_instance, asset_type):
-    ads_data = await api_instance.fetch_ads_search(asset_type)
-    if ads_data is None or ads_data.get('code') != '000000' or 'data' not in ads_data:
-        logger.error(f"Failed to fetch {asset_type} ads data.")
-        return None
-    return ads_data['data']
+
 async def analyze_and_update_ads(ad, api_instance, ads_data, all_ads):
     advNo = ad['advNo']
     target_spot = ad['target_spot']
@@ -54,7 +49,7 @@ async def analyze_and_update_ads(ad, api_instance, ads_data, all_ads):
         if our_ad_data:
             our_current_price = float(our_ad_data['adv']['price'])
         else:
-            logger.warning(f"Ad with advNo: {advNo} not found in the returned list. Fetching from database.")
+            logger.debug(f"Ad with advNo: {advNo} not found in the returned list. Fetching from database.")
             our_ad_data_db = await get_ad_from_database(advNo)
             if not our_ad_data_db:
                 logger.error(f"Ad with advNo: {advNo} not found in the database either. Skipping...")
@@ -69,15 +64,13 @@ async def analyze_and_update_ads(ad, api_instance, ads_data, all_ads):
         price_diff_ratio = (our_current_price / competitor_price)
         new_ratio_unbounded = None
         diff_ratio = None
-        adjusted_ratio = 0.02
-        if asset_type == 'USDT':
-            adjusted_ratio = 0.03
+        adjusted_ratio = 0.04
         if price_diff_ratio >= 1:
             new_ratio_unbounded = (current_priceFloatingRatio - ((abs(price_diff_ratio - 1) * 100))) - adjusted_ratio
         else:
             new_ratio_unbounded = current_priceFloatingRatio + (((1 - price_diff_ratio) * 100)) - adjusted_ratio
             diff_ratio = new_ratio_unbounded  - current_priceFloatingRatio
-            if diff_ratio <= 0.07:
+            if diff_ratio <= 0.09:
                 logger.debug(f"Not enough Diff: {diff_ratio}")
                 return
         new_ratio = max(101.5, min(110, round(new_ratio_unbounded, 2)))
@@ -87,41 +80,57 @@ async def analyze_and_update_ads(ad, api_instance, ads_data, all_ads):
         else:       
             await api_instance.update_ad(advNo, new_ratio)
             await update_ad_in_database(advNo, target_spot, asset_type, our_current_price, new_ratio, ad['account'])
-            logger.info(f"ad: {advNo}, {asset_type} - start price: {our_current_price}, ratio: {current_priceFloatingRatio}")
+            logger.debug(f"ad: {advNo}, {asset_type} - start price: {our_current_price}, ratio: {current_priceFloatingRatio}")
             log_data = (competitor_ad['adv']['advNo'], competitor_ad['adv']['price'])
-            logger.info(f"Competitor - ad: {log_data}, spot: {adjusted_target_spot}, price: {competitor_price}, base: {base_price}")
+            logger.debug(f"Competitor - ad: {log_data}, spot: {adjusted_target_spot}, price: {competitor_price}, base: {base_price}")
             await asyncio.sleep(2)
     except Exception as e:
         traceback.print_exc()
 async def main_loop():
-    api_instances = {}
+    # Step 1: Fetch all ads from the database
     all_ads = await fetch_all_ads_from_database()
-    btc_ads = sorted([ad for ad in all_ads if ad['asset_type'] == 'BTC'], key=lambda x: x['target_spot'])
-    usdt_ads = sorted([ad for ad in all_ads if ad['asset_type'] == 'USDT'], key=lambda x: x['target_spot'])
+    btc_ads = []
+    usdt_ads = []
+    for ad in all_ads:
+        if ad['asset_type'] == 'BTC':
+            btc_ads.append(ad)
+        elif ad['asset_type'] == 'USDT':
+            usdt_ads.append(ad)
+
+    btc_ads.sort(key=lambda x: x['target_spot'])
+    usdt_ads.sort(key=lambda x: x['target_spot'])
+    
+    # Step 2: Group unique accounts and initialize Binance API instances
     unique_accounts = set(ad['account'] for ad in all_ads)
-    for account in unique_accounts:
-        KEY = credentials_dict[account]['KEY']
-        SECRET = credentials_dict[account]['SECRET']
-        api_instance = BinanceAPI(KEY, SECRET)
-        api_instances[account] = api_instance
+    api_instances = {account: BinanceAPI(credentials_dict[account]['KEY'], credentials_dict[account]['SECRET']) for account in unique_accounts}
+
+    # Step 3: Process ads by type (BTC & USDT)
     ads_by_type = [('BTC', btc_ads), ('USDT', usdt_ads)]
     for asset_type, ads_list in ads_by_type:
+        # Fetch top 10 ads posted for the current asset type from Binance
         first_ad = ads_list[0]
-        ads_data = await fetch_ads_data(api_instances[first_ad['account']], asset_type)
-        if not ads_data:
+        ads_data = await api_instances[first_ad['account']].fetch_ads_search(asset_type)
+        
+        # Validate ads_data
+        if ads_data is None or ads_data.get('code') != '000000' or 'data' not in ads_data:
+            logger.error(f"Failed to fetch {asset_type} ads data.")
             continue
-        if isinstance(ads_data, dict) and 'data' in ads_data:
-            ads_data = ads_data['data']
-        if not isinstance(ads_data, list):
+        
+        current_ads_data = ads_data['data']
+        if not isinstance(current_ads_data, list):
             logger.error(f"{asset_type} ads_data is not a list.")
             continue
-        if not ads_data:
+        if not current_ads_data:
             logger.error(f"{asset_type} ads_data list is empty.")
             continue
+
+        # Analyze and update each ad
         for ad in ads_list:
             api_instance = api_instances[ad['account']]
-            await analyze_and_update_ads(ad, api_instance, ads_data, all_ads)
+            await analyze_and_update_ads(ad, api_instance, current_ads_data, all_ads)
             await asyncio.sleep(5)
+
+    # Close all API sessions
     for api_instance in api_instances.values():
         await api_instance.close_session()
 async def chained_tasks():

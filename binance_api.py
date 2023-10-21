@@ -3,7 +3,7 @@ import aiohttp
 from urllib.parse import urlencode
 import hashlib
 import hmac
-from common_utils import get_server_time
+from common_utils import get_server_timestamp
 from binance_search_ad import fetch_ads_search
 import logging
 from logging_config import setup_logging
@@ -56,18 +56,18 @@ class BinanceAPI:
             "https://api.binance.com/sapi/v1/c2c/ads/getDetailByNo",
             {
                 "adsNo": advNo,
-                "timestamp": await get_server_time()
+                "timestamp": await get_server_timestamp()
             }
         )
     async def update_ad(self, advNo, priceFloatingRatio):
-        logger.info(f"Updating ad: {advNo} with rate: {priceFloatingRatio}")
+        logger.debug(f"Updating ad: {advNo} with rate: {priceFloatingRatio}")
         return await self.api_call(
             'post',
             "https://api.binance.com/sapi/v1/c2c/ads/update",
             {
                 "advNo": advNo,
                 "priceFloatingRatio": priceFloatingRatio,
-                "timestamp": await get_server_time()
+                "timestamp": await get_server_timestamp()
             }
         )
     async def fetch_ads_search(self, asset_type):

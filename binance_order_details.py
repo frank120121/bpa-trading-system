@@ -1,6 +1,7 @@
 import asyncio
 import aiohttp
 from urllib.parse import urlencode
+from common_utils import get_server_timestamp
 import hashlib
 import hmac
 import os
@@ -34,14 +35,8 @@ else:
     exit()
 def hashing(query_string, secret):
     return hmac.new(secret.encode('utf-8'), query_string.encode('utf-8'), hashlib.sha256).hexdigest()
-async def get_server_time():
-    async with aiohttp.ClientSession() as session:
-        async with session.get("https://api.binance.com/api/v3/time") as response:
-            response_data = await response.json()
-            return response_data['serverTime']
 async def fetch_order_details(KEY, SECRET, order_no):
-    server_time = await get_server_time()
-    timestamp = server_time 
+    timestamp = await get_server_timestamp()
     payload = {"adOrderNo": order_no, "timestamp": timestamp}
     query_string = urlencode(payload)
     signature = hashing(query_string, SECRET)

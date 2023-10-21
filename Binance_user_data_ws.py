@@ -15,7 +15,7 @@ async def send_signed_request(http_method, url_path, api_key, secret_key, params
 async def on_error(ws, error):
     print(f"Error: {error}")
 
-async def run_websocket(api_key, api_secret, merchant_account):
+async def run_websocket(api_key, api_secret):
     try:
         listen_key_response = await send_signed_request("POST", "/api/v3/userDataStream", api_key, api_secret, params=None)
         listen_key = listen_key_response.get("listenKey", "")
@@ -29,12 +29,12 @@ async def run_websocket(api_key, api_secret, merchant_account):
     except Exception as e:
         logger.error(f"An error occurred: {e}")
 
-async def main_user_data_ws(merchant_account):
+async def main_user_data_ws():
     tasks = []
     for account, creds in credentials_dict.items():
         api_key = creds['KEY']
         api_secret = creds['SECRET']
-        task_binance = asyncio.create_task(run_websocket(api_key, api_secret, merchant_account))
+        task_binance = asyncio.create_task(run_websocket(api_key, api_secret))
         tasks.append(task_binance)
     await asyncio.gather(*tasks)
 
