@@ -44,7 +44,7 @@ async def binance_buy_order(asset_type):
             await new_order(wallets, account_to_use, most_usd_asset, missing_balance)
         
         else: 
-            logger.info(f"No missing balance for {asset_type}")
+            logger.info(f"No missing balance for {asset_type}; {missing_balance}")
 
     except Exception as e:
         logger.error(f"An error occurred: {e}")

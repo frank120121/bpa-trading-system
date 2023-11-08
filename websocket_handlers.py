@@ -17,6 +17,7 @@ async def on_message(ws, message, KEY, SECRET):
         msg_type = msg_json.get('type', '')
         conn = await create_connection("C:/Users/p7016/Documents/bpa/orders_data.db")
         if conn:
+            logger.info(message)
             try:
                 await merchant_account.handle_message_by_type(ws, KEY, SECRET, msg_json, msg_type, conn)
                 await conn.commit()               

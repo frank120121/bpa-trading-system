@@ -8,13 +8,9 @@ import logging
 from logging_config import setup_logging
 setup_logging(log_filename='Binance_c2c_logger.log')
 logger = logging.getLogger(__name__)
-async def start_update_ads():
-    await main_loop_forever()
-def filter_ads(ads_data, base_price, all_ads, asset_type):
-    if asset_type == 'BTC':
-        price_threshold = 1.0142
-    else:
-        price_threshold = 1.0193
+
+def filter_ads(ads_data, base_price, all_ads):
+    price_threshold = 1.023
     own_ads = [entry['advNo'] for entry in all_ads]
     return [
         ad for ad in ads_data
@@ -24,11 +20,7 @@ def filter_ads(ads_data, base_price, all_ads, asset_type):
 def compute_base_price(price: float, floating_ratio: float) -> float:
     base_price = price / (floating_ratio / 100)
     return round(base_price, 2)
-def compute_median_price(top_ads):
-    prices = sorted([float(ad['adv']['price']) for ad in top_ads])
-    n = len(prices)
-    m = n - 1
-    return (prices[m // 2] + prices[(m + 1) // 2]) / 2
+
 def check_if_ads_avail(ads_list, adjusted_target_spot):
         if len(ads_list) < adjusted_target_spot:
             adjusted_target_spot = len(ads_list)
@@ -56,33 +48,36 @@ async def analyze_and_update_ads(ad, api_instance, ads_data, all_ads):
                 return
             our_current_price = float(our_ad_data_db['price'])
         base_price = compute_base_price(our_current_price, current_priceFloatingRatio)
-        filtered_ads = filter_ads(ads_data, base_price, all_ads, asset_type)
+        filtered_ads = filter_ads(ads_data, base_price, all_ads)
         adjusted_target_spot = check_if_ads_avail(filtered_ads, adjusted_target_spot)
 
+
+        if not filtered_ads:
+            logger.warning(f"Filtered Ads was empty")
+            return
+        
         competitor_ad = filtered_ads[adjusted_target_spot - 1]
         competitor_price = float(competitor_ad['adv']['price'])
-        price_diff_ratio = (our_current_price / competitor_price)
-        new_ratio_unbounded = None
-        diff_ratio = None
-        adjusted_ratio = 0.04
-        if price_diff_ratio >= 1:
-            new_ratio_unbounded = (current_priceFloatingRatio - ((abs(price_diff_ratio - 1) * 100))) - adjusted_ratio
+        competitor_ratio = (competitor_price / base_price) * 100
+
+
+        if our_current_price >= competitor_price:
+            new_ratio_unbounded = competitor_ratio - 0.04
         else:
-            new_ratio_unbounded = current_priceFloatingRatio + (((1 - price_diff_ratio) * 100)) - adjusted_ratio
-            diff_ratio = new_ratio_unbounded  - current_priceFloatingRatio
-            if diff_ratio <= 0.09:
-                logger.debug(f"Not enough Diff: {diff_ratio}")
+            diff_ratio = competitor_ratio - current_priceFloatingRatio
+            if diff_ratio > 0.09:
+                new_ratio_unbounded = competitor_ratio - 0.04
+            else:
+                logger.debug(f"Competitor ad - spot: {adjusted_target_spot}, price: {competitor_price}, base: {base_price} ratio: {competitor_ratio}. Not enough diff: {diff_ratio}")
                 return
-        new_ratio = max(101.5, min(110, round(new_ratio_unbounded, 2)))
+        new_ratio = max(101.3, min(110, round(new_ratio_unbounded, 2)))
         if new_ratio == current_priceFloatingRatio:
             logger.debug(f"Ratio unchcanged")
             return
         else:       
             await api_instance.update_ad(advNo, new_ratio)
             await update_ad_in_database(advNo, target_spot, asset_type, our_current_price, new_ratio, ad['account'])
-            logger.debug(f"ad: {advNo}, {asset_type} - start price: {our_current_price}, ratio: {current_priceFloatingRatio}")
-            log_data = (competitor_ad['adv']['advNo'], competitor_ad['adv']['price'])
-            logger.debug(f"Competitor - ad: {log_data}, spot: {adjusted_target_spot}, price: {competitor_price}, base: {base_price}")
+            logger.debug(f"ad: {asset_type} - start price: {our_current_price}, ratio: {current_priceFloatingRatio}. Competitor ad - spot: {adjusted_target_spot}, price: {competitor_price}, base: {base_price}, ratio: {competitor_ratio}")
             await asyncio.sleep(2)
     except Exception as e:
         traceback.print_exc()
@@ -133,14 +128,12 @@ async def main_loop():
     # Close all API sessions
     for api_instance in api_instances.values():
         await api_instance.close_session()
-async def chained_tasks():
-    await populate_ads_with_details()
-    await asyncio.sleep(5)
-async def main_loop_forever():
+
+async def start_update_ads():
     while True: 
+        await populate_ads_with_details()
+        await asyncio.sleep(5)
         await main_loop()
-        populate_task = asyncio.create_task(chained_tasks())
         await asyncio.sleep(90)
-        await populate_task
 if __name__ == "__main__":
-    asyncio.get_event_loop().run_until_complete(main_loop_forever())
+    asyncio.get_event_loop().run_until_complete(start_update_ads())

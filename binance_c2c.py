@@ -1,4 +1,3 @@
-import time
 import asyncio
 import random
 import traceback
@@ -52,7 +51,6 @@ async def run_websocket(KEY, SECRET, max_retries=10, initial_backoff=5, max_back
             logger.debug(f"Attempting to connect to WebSocket with URL: {wss_url}")
             async with websockets.connect(wss_url) as ws:
                 async for message in ws:
-                    logger.info(message)
                     await on_message(ws, message, KEY, SECRET)
             logger.debug("WebSocket connection closed gracefully.")
             break
@@ -84,7 +82,7 @@ async def main_binance_c2c():
     try:
         await asyncio.gather(*tasks)
     except KeyboardInterrupt:
-        logger.info("KeyboardInterrupt received. Exiting.")
+        logger.debug("KeyboardInterrupt received. Exiting.")
 # if __name__ == "__main__":
 #     setup_logging()
 #     logger = logging.getLogger(__name__)

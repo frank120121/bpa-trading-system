@@ -27,12 +27,12 @@ async def send_text_message(ws, text, order_no):
     except Exception as e:
         logger.error(f"Error sending message: {e}")
 
-async def present_menu_based_on_status(ws, order_details, order_no):
+async def present_menu_based_on_status(ws, order_details, order_no, conn):
 
     menu = await get_menu_for_order(order_details)
     msg = '\n'.join(menu)
     await send_text_message(ws, msg, order_no)
-    await set_menu_presented(order_no, True)
+    await set_menu_presented(conn, order_no, True)
 
 async def handle_menu_response(ws, choice, order_details, order_no):
     language = determine_language(order_details)

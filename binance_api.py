@@ -42,7 +42,7 @@ class BinanceAPI:
                 logger.error(f"API call to '{method} {endpoint}' with payload '{str(payload)[:50]}...' failed: {e}") 
         
             if retry_count < max_retries - 1:
-                logger.debug(f"Retrying API call in {retry_delay} seconds (attempt {retry_count + 2}/{max_retries})")
+                logger.warning(f"Retrying API call in {retry_delay} seconds (attempt {retry_count + 2}/{max_retries})")
                 await asyncio.sleep(retry_delay)
             else:
                 logger.error("Max retries reached. Exiting.")
@@ -60,7 +60,7 @@ class BinanceAPI:
             }
         )
     async def update_ad(self, advNo, priceFloatingRatio):
-        logger.debug(f"Updating ad: {advNo} with rate: {priceFloatingRatio}")
+        logger.info(f"Updating ad with rate: {priceFloatingRatio}")
         return await self.api_call(
             'post',
             "https://api.binance.com/sapi/v1/c2c/ads/update",

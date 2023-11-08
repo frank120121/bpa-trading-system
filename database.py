@@ -8,7 +8,7 @@ from logging_config import setup_logging
 setup_logging(log_filename='Database_logger.log')
 logger = logging.getLogger(__name__)
 async def create_connection(db_file, num_retries=3, delay_seconds=5):
-    logger.info("Inside async_create_connection function")
+    logger.debug("Inside async_create_connection function")
     conn = None
     retries = 0
     while retries < num_retries:
@@ -126,11 +126,11 @@ async def insert_order(conn, order_tuple):
     async with conn.cursor() as cursor:
         await cursor.execute('''INSERT INTO orders(order_no, buyer_name, seller_name, trade_type, order_status, total_price, fiat_unit, asset, amount)
                                 VALUES(?,?,?,?,?,?,?,?,?)''', order_tuple)
-        logger.info(f"Inserted new order: {order_tuple[0]}")
+        logger.debug(f"Inserted new order: {order_tuple[0]}")
         return cursor.lastrowid
 async def insert_or_update_order(conn, order_details):
     try:
-        logger.info(f"Order Details Received in db:")
+        logger.debug(f"Order Details Received in db:")
         data = order_details.get('data', {})
         seller_name = data.get('sellerName') or data.get('sellerNickname')
         buyer_name = data.get('buyerName')
@@ -145,7 +145,7 @@ async def insert_or_update_order(conn, order_details):
             logger.error("One or more required fields are None. Aborting operation.")
             return
         if await order_exists(conn, order_no):
-            logger.info("Updating existing order...")
+            logger.debug("Updating existing order...")
             sql = """
                 UPDATE orders
                 SET order_status = ?
@@ -154,7 +154,7 @@ async def insert_or_update_order(conn, order_details):
             params = (order_status, order_no)
             await execute_and_commit(conn, sql, params)
         else:
-            logger.info("Inserting new order...")
+            logger.debug("Inserting new order...")
             await find_or_insert_merchant(conn, seller_name)
             await find_or_insert_buyer(conn, buyer_name)
             await insert_order(conn, (order_no, buyer_name, seller_name, trade_type, order_status, total_price, fiat_unit, asset, amount))

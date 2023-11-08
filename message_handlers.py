@@ -84,7 +84,7 @@ async def handle_antifraud_process(ws, content, order_no, order_details, conn, b
 async def handle_text_message(ws, content, order_no, order_details, conn):
     if rate_limiter.is_limited(order_no):
         logger.warning(f"Rate limit triggered for order: {order_no}")
-        return
+        
     if not await check_order_details(order_details):
         print("check_order_details returned False. Exiting function.")
         return 
@@ -102,7 +102,7 @@ async def handle_text_message(ws, content, order_no, order_details, conn):
         logger.debug(f"Handling TEXT: {content}")
         if not await is_menu_presented(conn, order_no):
             if content in ['ayuda', 'help']:
-                await present_menu_based_on_status(ws, order_details, order_no)
+                await present_menu_based_on_status(ws, order_details, order_no, conn)
         if content.isdigit():
             await handle_menu_response(ws, int(content), order_details, order_no)
 
