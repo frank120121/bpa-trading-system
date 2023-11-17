@@ -1,11 +1,12 @@
 from binance_messages import send_text_message, present_menu_based_on_status, handle_menu_response
-from lang_utils import get_message_by_language, determine_language, get_invalid_choice_reply, get_default_reply
+from lang_utils import get_message_by_language, determine_language, transaction_denied, get_default_reply
 from common_vars import ANTI_FRAUD_CHECKS
 from binance_orders import binance_buy_order
 from common_utils import RateLimiter
 from database import update_total_spent, get_kyc_status, get_anti_fraud_stage, is_menu_presented, update_ignore_count
 from binance_anti_fraud import AntiFraud
 from verify_client_ip import fetch_ip
+from binance_blacklist import add_to_blacklist
 import logging
 from logging_config import setup_logging
 setup_logging(log_filename='Binance_c2c_logger.log')
@@ -40,23 +41,30 @@ async def handle_system_notifications(ws, order_no, order_details, conn, order_s
         await update_total_spent(conn, order_no)
         await generic_reply(ws, order_no, order_details, order_status)
 
-    # last_four_digits = order_no[-4:]
-    # country = await fetch_ip(last_four_digits)
-    # if country and country != "MX":
-    #     logger.info("Not from valid country")
-    #     return
-
-
 
     elif order_status == 10:
+        seller_name = order_details.get('seller_name')
         buyer_name = order_details.get('buyer_name')
+        last_four_digits = order_no[-4:]
+        country = await fetch_ip(last_four_digits, seller_name)
+        
+        if country != "MX":
+            logger.info("Transaction cannot take place. Seller is not from Mexico.")
+            await send_text_message(ws, transaction_denied, order_no)
+            await add_to_blacklist(buyer_name)
+            return 
+        
+        
         kyc_status = await get_kyc_status(conn, buyer_name)
-        if kyc_status != 0:
-            seller_name = order_details.get('seller_name')
-            anti_fraud_instance = AntiFraud(buyer_name, seller_name, "Your Bank Name", "Your Account Number", conn)
-            ANTI_FRAUD_CHECKS[order_no] = anti_fraud_instance
-            initial_msg = "Initiating AntiFraud checks. Please answer the following questions..."
-            await send_text_message(ws, initial_msg, order_no)
+        if kyc_status == 0:
+            
+            if order_no not in ANTI_FRAUD_CHECKS:
+                anti_fraud_instance = AntiFraud(buyer_name, seller_name, "Your Bank Name", "Your Account Number", conn)
+                ANTI_FRAUD_CHECKS[order_no] = anti_fraud_instance
+            else:
+                anti_fraud_instance = ANTI_FRAUD_CHECKS[order_no]
+            first_question = anti_fraud_instance.get_next_question()
+            await send_text_message(ws, first_question, order_no)
         else:
             await generic_reply(ws, order_no, order_details, order_status)
     else:
@@ -69,17 +77,15 @@ async def handle_antifraud_process(ws, content, order_no, order_details, conn, b
     anti_fraud_instance = ANTI_FRAUD_CHECKS.get(order_no)
 
     if not anti_fraud_instance:
-        # Create AntiFraud instance
         seller_name = order_details.get('seller_name')
         anti_fraud_stage = await get_anti_fraud_stage(conn, buyer_name)
         anti_fraud_instance = AntiFraud(buyer_name, seller_name, "Your Bank Name", "Your Account Number", conn, anti_fraud_stage)
         ANTI_FRAUD_CHECKS[order_no] = anti_fraud_instance
 
-    # Handle the fraud check response
     response = anti_fraud_instance.handle_response(content)
     await send_text_message(ws, response, order_no)
-    if "Los detalles para el pago son" in response:  # Last message of AntiFraud
-        del ANTI_FRAUD_CHECKS[order_no]  # Remove instance since AntiFraud process is over
+    if "Los detalles para el pago son" in response:
+        del ANTI_FRAUD_CHECKS[order_no]
 
 async def handle_text_message(ws, content, order_no, order_details, conn):
     if rate_limiter.is_limited(order_no):
@@ -95,7 +101,7 @@ async def handle_text_message(ws, content, order_no, order_details, conn):
     buyer_name = order_details.get('buyer_name')
     kyc_status = await get_kyc_status(conn, buyer_name)
     
-    if order_status == 10 and kyc_status != 0:
+    if kyc_status == 0 and order_status == 10:
         await handle_antifraud_process(ws, content, order_no, order_details, conn, buyer_name)
     else:
         

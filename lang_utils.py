@@ -181,3 +181,7 @@ async def get_message_by_language(language, status, buyer_name=None):
             return [messages.format(buyer_name=buyer_name, ProhibitedPaymentTypes=ProhibitedPaymentTypes)]
 
     return None
+transaction_denied = (
+    "For security reasons, I cannot sell to you. Please cancel the order.\n\n"
+    "Por razones de seguridad no es posible proceder. Por favor cancele la orden."
+)

@@ -1,6 +1,4 @@
 import asyncio
-import random
-import traceback
 import hashlib
 import hmac
 import aiohttp
@@ -35,11 +33,12 @@ async def send_signed_request(http_method, url_path, KEY, SECRET, payload={}, da
                 logger.error(f"Received status code {response.status}: {response_data}")
                 return {'success': False}
             return {'success': True, 'data': response_data}
-async def run_websocket(KEY, SECRET, max_retries=10, initial_backoff=5, max_backoff=60):
-    retry_count = 0
-    backoff = initial_backoff
+async def run_websocket(KEY, SECRET):
+
     uri_path = GET_CHAT_CREDENTIALS
-    while retry_count < max_retries or max_retries == -1:
+    backoff = 1
+    max_backoff = 60
+    while True:
         try:
             response = await send_signed_request("GET", uri_path, KEY, SECRET)
             wss_url = ''
@@ -52,31 +51,19 @@ async def run_websocket(KEY, SECRET, max_retries=10, initial_backoff=5, max_back
             async with websockets.connect(wss_url) as ws:
                 async for message in ws:
                     await on_message(ws, message, KEY, SECRET)
-            logger.debug("WebSocket connection closed gracefully.")
-            break
-        except websockets.exceptions.ConnectionClosedError:
-            logger.error("c2c webSocket connection closed unexpectedly. Reconnecting...")
-        except websockets.WebSocketException as e:
-            if "timeout" in str(e).lower():  
-                logger.error("WebSocket connection timed out. Reconnecting...")
-            else:
-                raise e
+            logger.info("WebSocket connection closed gracefully.")
+            backoff = 1
         except Exception as e:
-            logger.error(f"An unexpected error occurred: {e}. Reconnecting...")
-            traceback.print_exc()  
-        sleep_time = min(max_backoff, backoff)
-        sleep_time += random.uniform(0, 0.1 * sleep_time)
-        await asyncio.sleep(sleep_time)
-        backoff *= 2
-        retry_count += 1
-        if retry_count >= max_retries and max_retries != -1:
-            logger.warning("Max retries reached. Exiting.")
+            logger.exception("An unexpected error occurred:")
+            await asyncio.sleep(backoff)
+            backoff = min(max_backoff, backoff * 2)
+
 async def main_binance_c2c():
     credentials = list(credentials_dict.values())
     tasks = []
     for cred in credentials:
         task = asyncio.create_task(
-            run_websocket(cred['KEY'], cred['SECRET'], max_retries=20, initial_backoff=5, max_backoff=60)
+            run_websocket(cred['KEY'], cred['SECRET'])
         )
         tasks.append(task)
     try:

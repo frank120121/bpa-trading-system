@@ -6,7 +6,7 @@ def get_ip_origin(ip_address):
     access_token = '51a4ceb0f429f2'
     handler = ipinfo.getHandler(access_token)
     details = handler.getDetails(ip_address)
-    logger.info(f"Got IP details: {details}")
+    logger.debug(f"Got IP details: {details}")
     return details.country
 
 

@@ -106,17 +106,16 @@ async def outlook_fetch_ip(last_four):
 async def main():
     access_token, refresh_token = await load_tokens()
     try:
-        last_four = '4208'
+        last_four = '0432 '
         ip_info = await outlook_fetch_ip(last_four)
         print(f'IP info:{ip_info}')
-        # if not ip_dict:
-        #     print("Fetching a new token.")
-        #     try:
-        #         access_token = await get_access_token(refresh_token)
-        #     except Exception as e:
-        #         logger.error(f"Error while fetching new access token: {e}")
-        #         logger.error(f"Full exception traceback: {traceback.format_exc()}")
-        #         return
+        # print("Fetching a new token.")
+        # try:
+        #     access_token = await get_access_token(refresh_token)
+        # except Exception as e:
+        #     logger.error(f"Error while fetching new access token: {e}")
+        #     logger.error(f"Full exception traceback: {traceback.format_exc()}")
+        #     return
     except Exception as e:
         logger.error(f"Error while fetching emails: {e}")
         logger.error(f"Full exception traceback: {traceback.format_exc()}")

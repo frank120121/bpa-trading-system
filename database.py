@@ -1,7 +1,6 @@
 
 import aiosqlite
 import asyncio
-import json
 from prettytable import PrettyTable
 import logging
 from logging_config import setup_logging
@@ -312,12 +311,15 @@ async def main():
                                 sellerName TEXT NOT NULL UNIQUE
                                 );"""
     sql_create_users_table = """CREATE TABLE IF NOT EXISTS users (
-                                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                name TEXT NOT NULL UNIQUE,
-                                kyc_status INTEGER DEFAULT 0,
-                                total_crypto_sold_lifetime REAL,
-                                anti_fraud_stage INTEGER DEFAULT 0
-                                );"""
+                                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                    name TEXT NOT NULL UNIQUE,
+                                    kyc_status INTEGER DEFAULT 0,
+                                    total_crypto_sold_lifetime REAL,
+                                    anti_fraud_stage INTEGER DEFAULT 0,
+                                    rfc TEXT NULL,  -- RFC can be NULL
+                                    codigo_postal TEXT NULL  -- Codigo Postal can be NULL
+                                    );"""
+
     sql_create_transactions_table = """CREATE TABLE IF NOT EXISTS transactions (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         buyer_name TEXT,
@@ -340,19 +342,20 @@ async def main():
                               ignore_count INTEGER DEFAULT 0,
                               order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                               );"""
+
+
     conn = await create_connection(database)
     if conn is not None:
-        await create_table(conn, sql_create_merchants_table)
-        await create_table(conn, sql_create_users_table)
-        await create_table(conn, sql_create_orders_table)
-        await create_table(conn, sql_create_transactions_table)
+        # await create_table(conn, sql_create_merchants_table)
+        # await create_table(conn, sql_create_orders_table)
+        # await create_table(conn, sql_create_transactions_table)
 
+        # Print table contents for verification
         await print_table_contents(conn, 'merchants')
-        await print_table_contents(conn, 'users')
-        await print_table_contents(conn, 'orders')
-        await print_table_contents(conn, 'transactions')
+
         await conn.close()
     else:
         logger.error("Error! Cannot create the database connection.")
+
 if __name__ == '__main__':
     asyncio.run(main())

@@ -3,6 +3,9 @@ from database import insert_or_update_order, get_order_details, update_order_sta
 from binance_order_details import fetch_order_details
 import json
 from common_vars import status_map
+from binance_blacklist import is_blacklisted
+from binance_messages import send_text_message
+from lang_utils import transaction_denied
 import traceback
 import logging
 from logging_config import setup_logging
@@ -18,7 +21,10 @@ class MerchantAccount:
         if not order_details:
             logger.warning("Failed to fetch order details from the external source.")
             return
-
+        seller_name = order_details.get('seller_name')
+        if await is_blacklisted(seller_name):
+            await send_text_message(ws, transaction_denied, order_no)
+            return
         if msg_type == 'system':
             await self._handle_system_type(ws, msg_json, conn, order_no, order_details)
         else:
