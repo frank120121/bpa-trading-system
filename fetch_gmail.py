@@ -9,8 +9,8 @@ SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
 
 async def get_gmail_service():
     creds = None
-    if os.path.exists('token.pickle'):
-        with open('token.pickle', 'rb') as token:
+    if os.path.exists('C:/Users/p7016/Documents/bpa/token.pickle'):
+        with open('C:/Users/p7016/Documents/bpa/token.pickle', 'rb') as token:
             creds = pickle.load(token)
     if not creds or not creds.valid:
         # Handle credential validation or obtain new credentials if needed
@@ -39,7 +39,7 @@ async def gmail_fetch_ip(last_four):
             return desde_match.group(1)
 
 async def main():
-    last_four_digits = '3984'
+    last_four_digits = '3456'
     ip_address = await gmail_fetch_ip(last_four_digits)
     print("Extracted IP Address:", ip_address)
 

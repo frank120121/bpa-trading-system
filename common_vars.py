@@ -46,3 +46,60 @@ MERCHANTS = {
     'GUERRERO LOPEZ MARTHA': 2, 
     'MUNOZ PEREA MARIA FERNANDA': 1
 }
+
+bank_accounts = [
+    {
+        "bank_name": "Nvio",
+        "beneficiary": "Francisco Javier Lopez",
+        "account_number": "710969000007300927",
+        "limit": 90000.00
+    },
+    {
+        "bank_name": "BBVA",
+        "beneficiary": "Francisco Javier Lopez",
+        "account_number": "012778015323351288",
+        "limit": 90000.00
+    },
+    {
+        "bank_name": "Albo",
+        "beneficiary": "Francisco Javier Lopez",
+        "account_number": "646180146006124571",
+        "limit": 90000.00
+    },
+    {
+        "bank_name": "Banregio",
+        "beneficiary": "Francisco Javier Lopez",
+        "account_number": "058597000056476091",
+        "limit": 90000.00
+    },
+    {
+        "bank_name": "Nvio",
+        "beneficiary": "Maria Fernanda Munoz Perea",
+        "account_number": "710969000016348705",
+        "limit": 90000.00
+    },
+    {
+        "bank_name": "BBVA",
+        "beneficiary": "Maria Fernanda Munoz Perea",
+        "account_number": "012778015939990486",
+        "limit": 90000.00
+    },
+    {
+        "bank_name": "Nvio",
+        "beneficiary": "Martha Guerrero Lopez",
+        "account_number": "710969000015306104",
+        "limit": 90000.00
+    },
+    {
+        "bank_name": "Banregio",
+        "beneficiary": "Martha Guerrero Lopez",
+        "account_number": "058597000054265356",
+        "limit": 90000.00
+    },
+    {
+        "bank_name": "Santander",
+        "beneficiary": "Martha Guerrero Lopez",
+        "account_number": "014761655091416464",
+        "limit": 90000.00
+    }
+]

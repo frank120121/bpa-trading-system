@@ -185,3 +185,16 @@ transaction_denied = (
     "For security reasons, I cannot sell to you. Please cancel the order.\n\n"
     "Por razones de seguridad no es posible proceder. Por favor cancele la orden."
 )
+
+payment_warning = (
+    f"Pagos provenientes de {ProhibitedPaymentTypes} estan PROHIBIDOS y seran APELADOS.\n\n"
+    f"Al enviar el pago, está confirmando que está de acuerdo con los términos y que toda responsabilidad del uso y pérdidas de los activos "
+    f"y/o el dinero después de este intercambio son únicamente suyas.\n\n"
+    f"Es su responsabilidad realizar la investigación necesaria antes de cualquier inversión ya que las perdidas son reales e irreversibles.\n\n"
+)
+
+payment_concept = (
+    f"Para el concepto estas son opciones validas: pago, o su nombre.\n\n"
+    f"Para que no se cancele el intercambio de forma automática, puede marcar el intercambio como pagado en la opción que dice 'Realizar Pago'." 
+    f"Para ayuda, escriba la palabra 'ayuda'."
+)

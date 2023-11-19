@@ -22,7 +22,7 @@ class MerchantAccount:
             logger.warning("Failed to fetch order details from the external source.")
             return
         seller_name = order_details.get('seller_name')
-        if await is_blacklisted(seller_name):
+        if await is_blacklisted(conn, seller_name):
             await send_text_message(ws, transaction_denied, order_no)
             return
         if msg_type == 'system':
@@ -48,6 +48,13 @@ class MerchantAccount:
         msg_status = msg_json.get('status')
         if msg_status == 'read':
             return
+        uuid = msg_json.get('uuid', '')
+        is_self_message = uuid.startswith("self_")
+
+        if is_self_message:
+            logger.debug(f"Ignoring self message: {uuid}")
+            return
+
         if msg_type == 'text':
             content =  msg_json.get('content', '').lower()
             await handle_text_message(ws, content, order_no, order_details, conn)

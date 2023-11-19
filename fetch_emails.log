@@ -671,3 +671,54 @@ ValueError: Failed to get access token. Response: {'error': 'unauthorized_client
 2023-11-17 01:05:37,434:ip_info_io:INFO:Getting IP details for: 192.141.246.149
 2023-11-17 01:05:37,769:ip_info_io:INFO:Got IP details: <ipinfo.details.Details object at 0x0000024D668A67A0>
 2023-11-17 01:05:37,769:__main__:INFO:The IP address is from Mexico.
+2023-11-17 14:36:26,001:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-11-17 14:36:27,198:ip_info_io:INFO:Getting IP details for: 168.195.204.169
+2023-11-17 14:36:27,556:__main__:INFO:The IP address is from Mexico.
+2023-11-17 14:37:46,646:__main__:INFO:REFRESH TOKEN: M.C107_SN1.-CWwTpF5wtaIsGsma64HMkLJ0A*nc3OpM7aT0D4bntwMT8uId7R40vRCbyE!0cmvEz4fuF5WEORDqqM6FtW*511TXBzudxh9t4LOqTgsWR4Yr3mS7qvKJEyGs9gwrnRcmrdztUy7eCxirm4TN43zKUeg3toM0HG3VN1xmhwRIvW8EGil8Nv4ERS2zHSUHS7mvTJLMXeblJi!bd8jCUerXr5j22c!w!xVcl1R0*t9XblJSezoIjUdDesHqwPNCdY8mAdjU1rNehagySRQ9eLikZvyIA6SuE1X2bsVL62O!VRKUAbYoDGu9AE3uJ8GZkTlhRrg9MofXzJ1rSOb!Pr5fKy4$
+2023-11-17 22:27:50,972:__main__:INFO:REFRESH TOKEN: M.C107_BAY.-CVY0IjvefPnJMozWyE*WJsSbpN*G50lv4VpSmGfJQrZEiOX5gnKR6Yd!IgbpDcfPGHu0fOhLYsGU9xcy3I6Q5MQ7Cn3OhRG!PLBy3MB*mSUUEd7qhqYmqnWLPklzQNvSE6gfYwyLVrMm8YJshwuS*N0gdvAOK53nlIeGFmacxkjqilNhlro0R4qzhwxKtT*QNVVRb9W2vlKb2aDeapksE7LDx7eRgDgG5kYYid7rldVIXrlbDzkVK1u3fzMkbgE0KT8I*ckm!FvjTRuz49tio261fjcAkWewUTawlqg8QhRYh1PB9T4ZehpdWMnR!HvKa0dcc4GqCHcKswR5U5d8wds$
+2023-11-17 22:32:47,978:__main__:ERROR:Failed to load tokens
+2023-11-17 22:32:47,978:__main__:ERROR:Failed to load tokens
+2023-11-17 22:32:47,978:__main__:INFO:Gettng ACCESS TOKEN
+2023-11-17 22:32:48,532:__main__:ERROR:An error occurred: Failed to get access token. Response: {'error': 'invalid_request', 'error_description': "AADSTS90102: 'redirect_uri' value must be a valid absolute URI. Trace ID: eed7e6c0-edf0-4095-a0bc-ce8f7453b300 Correlation ID: db1e2f2b-e83e-4304-a127-96f98ccdfd7c Timestamp: 2023-11-18 05:32:47Z", 'error_codes': [90102], 'timestamp': '2023-11-18 05:32:47Z', 'trace_id': 'eed7e6c0-edf0-4095-a0bc-ce8f7453b300', 'correlation_id': 'db1e2f2b-e83e-4304-a127-96f98ccdfd7c'}
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_outlook.py", line 73, in get_access_token
+    raise ValueError(f"Failed to get access token. Response: {token_data}")
+ValueError: Failed to get access token. Response: {'error': 'invalid_request', 'error_description': "AADSTS90102: 'redirect_uri' value must be a valid absolute URI. Trace ID: eed7e6c0-edf0-4095-a0bc-ce8f7453b300 Correlation ID: db1e2f2b-e83e-4304-a127-96f98ccdfd7c Timestamp: 2023-11-18 05:32:47Z", 'error_codes': [90102], 'timestamp': '2023-11-18 05:32:47Z', 'trace_id': 'eed7e6c0-edf0-4095-a0bc-ce8f7453b300', 'correlation_id': 'db1e2f2b-e83e-4304-a127-96f98ccdfd7c'}
+
+2023-11-18 14:21:48,668:__main__:INFO:REFRESH TOKEN: M.C107_BAY.-CfxoV1rT!ZGHI9AljFOTSgjmz836kZ4CWKW68tp5zEiXdVFl8sgJY6Vlg!E77DnzPgrOty0wnO2rwdgpNwxIYu4nPynhVcp6ks4lv4Iy2!yhvsvderNXYyaoVYSlfvwQvgzrd1h9!kSJhuyE!rbOSmr3s1iBzVHfxsjAdIqPR22gLW3SX7x*5m5ZHkNyNiU9K1Yni6omCcV88y0AKJzImmSXB*WsRO0hMRILz22lCw4ukPEXdh*aYh!J3gnrkHD*NHI9ex3HcGx2HcfpTLSGXiRjqihmByEOfWtK0spsTqmCaGHGRUWuih3ZdoE4qUOFIEaUQT3tpUbcv8J*moNP0pk$
+2023-11-18 14:50:15,820:__main__:ERROR:Failed to load tokens
+2023-11-18 14:50:15,820:__main__:ERROR:Failed to load tokens
+2023-11-18 14:50:15,821:__main__:INFO:Gettng ACCESS TOKEN
+2023-11-18 14:50:16,268:__main__:ERROR:An error occurred: Failed to get access token. Response: {'error': 'invalid_request', 'error_description': "AADSTS90102: 'redirect_uri' value must be a valid absolute URI. Trace ID: addbe134-5e44-48da-ab8d-e4396b517d00 Correlation ID: 39bafae5-368d-4db5-b1d0-2ecc0f916653 Timestamp: 2023-11-18 21:50:14Z", 'error_codes': [90102], 'timestamp': '2023-11-18 21:50:14Z', 'trace_id': 'addbe134-5e44-48da-ab8d-e4396b517d00', 'correlation_id': '39bafae5-368d-4db5-b1d0-2ecc0f916653'}
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\fetch_outlook.py", line 73, in get_access_token
+    raise ValueError(f"Failed to get access token. Response: {token_data}")
+ValueError: Failed to get access token. Response: {'error': 'invalid_request', 'error_description': "AADSTS90102: 'redirect_uri' value must be a valid absolute URI. Trace ID: addbe134-5e44-48da-ab8d-e4396b517d00 Correlation ID: 39bafae5-368d-4db5-b1d0-2ecc0f916653 Timestamp: 2023-11-18 21:50:14Z", 'error_codes': [90102], 'timestamp': '2023-11-18 21:50:14Z', 'trace_id': 'addbe134-5e44-48da-ab8d-e4396b517d00', 'correlation_id': '39bafae5-368d-4db5-b1d0-2ecc0f916653'}
+
+2023-11-18 15:18:26,471:ip_info_io:INFO:Getting IP details for: 189.151.36.230
+2023-11-18 15:18:26,830:__main__:INFO:The IP address is from Mexico.
+2023-11-18 15:18:44,843:ip_info_io:INFO:Getting IP details for: 189.151.36.230
+2023-11-18 15:18:45,175:__main__:INFO:The IP address is from Mexico.
+2023-11-18 15:28:55,371:__main__:INFO:Fetching from outlook.com
+2023-11-18 15:28:55,747:__main__:ERROR:Could not fetch the IP address for the last four digits: 6704
+2023-11-19 11:00:42,238:__main__:INFO:Fetching from outlook.com
+2023-11-19 11:00:42,613:__main__:ERROR:Could not fetch the IP address for the last four digits: 6704
+2023-11-19 11:07:44,091:__main__:INFO:REFRESH TOKEN: M.C107_BAY.-Cblb02qDbn3TM0u0stVWFkBo1VvoZ427LuaHOkcrlg6!ZHYz7SoPXbI36lENyHJM9tKpsuFT069u1Yf*0n2FeXmP6fiOK4YfI4Ir0HAI!pSEy6WtgHczKRnoh!4Q4otlz1IWuBzT3UFVCxlK0kfxVf*uMznxTkRU69AxL9Hu010KCsZlLw6hGtOi!s5MC!VHZSXTbb1gh6fyqSoIyM5KuwKDyLB0afMQR!y88ngfyAYJpQTCe!tXtdN9YD6SAmTE53ZGzL!vDbw4C*uD06A7J0QlrQXFHrJSbEIw*C3DOId8icdLiXrOvvNY!gGRETdVy3P9cKq2yIpAcH5ELIm*XVI$
+2023-11-19 11:08:00,363:__main__:INFO:REFRESH TOKEN: M.C107_BAY.-CcZ74FaW*V8ozbCGDAGA6y9Yu2RC8fhqWhV6B5*3UfOT10Ol96rTgr91xbtkJtSWWzRjxAJ3Q3mw0BivnKNoBTSCvlEayVDQ7xpyKZptGUY3GW0mZjTcTFk8WbCjuYwmRQzGahmP4GUxlAsurcTlfw8wONIO!jOwHirV0Sc2zdOx5XI8fLtym2ImXa3m1IXBh0vAJFCxaOTGhENBfMhhHl*0I3vVP7kxqnXa1V2z52kwraxdsO8JCcdt2RYBFW0ChlAgj2AT8OERgtgVzA1mvnbS!Ijs01aF8DugeV5vqSqSlvY6GEr!yRLWfyE6WNxz5p!4M7waGfrCwQfNp9dgpGY$
+2023-11-19 11:13:04,231:__main__:INFO:Fetching from outlook.com
+2023-11-19 11:13:05,322:__main__:ERROR:Could not fetch the IP address for the last four digits: 6704
+2023-11-19 11:13:54,681:__main__:INFO:Fetching from outlook.com
+2023-11-19 11:13:57,644:__main__:INFO:IP is: 189.151.36.230
+2023-11-19 11:13:57,644:ip_info_io:INFO:Getting IP details for: 189.151.36.230
+2023-11-19 11:13:58,004:__main__:INFO:IP from Country: MX
+2023-11-19 11:13:58,004:__main__:INFO:The IP address is from Mexico.
+2023-11-19 11:20:06,639:__main__:INFO:Fetching from outlook.com
+2023-11-19 11:20:10,459:__main__:INFO:IP is: 189.151.36.230
+2023-11-19 11:20:10,459:ip_info_io:INFO:Getting IP details for: 189.151.36.230
+2023-11-19 11:20:10,798:__main__:INFO:IP from Country: MX
+2023-11-19 11:20:10,798:__main__:INFO:The IP address is from Mexico.
+2023-11-19 11:20:18,392:__main__:INFO:Fetching from outlook.com
+2023-11-19 11:20:21,567:__main__:INFO:IP is: 189.151.36.230
+2023-11-19 11:20:21,567:ip_info_io:INFO:Getting IP details for: 189.151.36.230
+2023-11-19 11:20:21,896:__main__:INFO:IP from Country: MX
+2023-11-19 11:20:21,896:__main__:INFO:The IP address is from Mexico.

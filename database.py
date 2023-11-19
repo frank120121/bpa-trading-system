@@ -177,7 +177,7 @@ async def calculate_crypto_sold_30d(conn, buyer_name):
     except Exception as e:
         logger.error(f"Error calculating crypto sold in the last 30 days: {e}")
         return 0
-# In your database module
+
 async def get_kyc_status(conn, name):
     async with conn.cursor() as cursor:
         await cursor.execute("SELECT kyc_status FROM users WHERE name=?", (name,))
@@ -185,7 +185,14 @@ async def get_kyc_status(conn, name):
         if result:
             return result[0]
         return None
-
+async def update_kyc_status(conn, name, new_kyc_status):
+    try:
+        sql = "UPDATE users SET kyc_status = ? WHERE name = ?"
+        params = (new_kyc_status, name)
+        await execute_and_commit(conn, sql, params)
+        logger.debug(f"Updated KYC status for user {name} to {new_kyc_status}")
+    except Exception as e:
+        logger.error(f"Error updating KYC status for user {name}: {e}")
 async def get_anti_fraud_stage(conn, name):
     async with conn.cursor() as cursor:
         await cursor.execute("SELECT anti_fraud_stage FROM users WHERE name=?", (name,))
@@ -261,32 +268,6 @@ async def set_menu_presented(conn, order_no, value):
     except Exception as e:
         logger.error(f"Error setting menu_presented for order_no {order_no}: {e}")
 
-async def update_ignore_count(conn, order_no, count):
-    """
-    Update the ignore_count field in the orders table.
-
-    Parameters:
-    - conn: a database connection object
-    - order_no: the order number
-    - count: the ignore count value
-
-    Returns:
-    - None
-    """
-    try:
-        sql = "UPDATE orders SET ignore_count = ? WHERE order_no = ?"
-        params = (count, order_no)
-        await execute_and_commit(conn, sql, params)
-    except Exception as e:
-        logger.error(f"Error updating ignore_count for order_no {order_no}: {e}")
-async def get_ignore_count(conn, order_no):
-    async with conn.cursor() as cursor:
-        await cursor.execute("SELECT ignore_count FROM orders WHERE order_no=?", (order_no,))
-        result = await cursor.fetchone()
-        if result:
-            return result[0]
-        return None
-
 async def print_table_contents(conn, table_name):
     async with conn.cursor() as cursor:
         try:
@@ -303,6 +284,15 @@ async def print_table_contents(conn, table_name):
             print(table)
         except Exception as e:
             print(f"Error reading from table {table_name}: {e}")
+async def add_column_if_not_exists(conn, table_name, column_definition):
+    async with conn.cursor() as cursor:
+        await cursor.execute(f"PRAGMA table_info({table_name})")
+        columns_info = await cursor.fetchall()
+        column_names = [column[1] for column in columns_info]
+
+        if column_definition.split()[0] not in column_names:
+            alter_table_sql = f"ALTER TABLE {table_name} ADD COLUMN {column_definition}"
+            await cursor.execute(alter_table_sql)
 
 async def main():
     database = "C:/Users/p7016/Documents/bpa/orders_data.db"
@@ -338,20 +328,21 @@ async def main():
                               fiat_unit TEXT,
                               asset TEXT,
                               amount REAL,
+                              account_number TEXT,
                               menu_presented BOOLEAN DEFAULT FALSE,
-                              ignore_count INTEGER DEFAULT 0,
                               order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                               );"""
 
 
     conn = await create_connection(database)
     if conn is not None:
-        # await create_table(conn, sql_create_merchants_table)
-        # await create_table(conn, sql_create_orders_table)
-        # await create_table(conn, sql_create_transactions_table)
-
+        await create_table(conn, sql_create_merchants_table)
+        await create_table(conn, sql_create_users_table)
+        await create_table(conn, sql_create_transactions_table)
+        await create_table(conn, sql_create_orders_table)
+        #await add_column_if_not_exists(conn, 'orders', 'account_number TEXT')
         # Print table contents for verification
-        await print_table_contents(conn, 'merchants')
+        await print_table_contents(conn, 'users')
 
         await conn.close()
     else:

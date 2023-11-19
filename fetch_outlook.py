@@ -15,7 +15,7 @@ CLIENT_SECRET = os.environ.get('MFMP_OUTLOOK_SECRET_VALUE')
 REDIRECT_URI = os.environ.get('MFMP_OUTLOOK_REDIRECT_URI')
 AUTHORIZATION_CODE = os.environ.get('MFMP_OUTLOOK_AUTHORIZATION_CODE')
 
-TOKEN_FILE = 'tokens.json'
+TOKEN_FILE = 'C:/Users/p7016/Documents/bpa/tokens.json'
 
 async def save_tokens(access_token, refresh_token):
     try:
@@ -90,7 +90,7 @@ async def outlook_fetch_ip(last_four):
             "Content-Type": "application/json"
         }
         try:
-            response = await session.get("https://graph.microsoft.com/v1.0/me/messages?$top=5", headers=headers)
+            response = await session.get("https://graph.microsoft.com/v1.0/me/messages?$top=100", headers=headers)
             emails_data = await response.json()
             emails = emails_data.get('value', [])
             for email in emails:
@@ -106,7 +106,7 @@ async def outlook_fetch_ip(last_four):
 async def main():
     access_token, refresh_token = await load_tokens()
     try:
-        last_four = '0432 '
+        last_four = '6704'
         ip_info = await outlook_fetch_ip(last_four)
         print(f'IP info:{ip_info}')
         # print("Fetching a new token.")
