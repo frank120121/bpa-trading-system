@@ -11,34 +11,35 @@ DB_FILE = 'C:/Users/p7016/Documents/bpa/orders_data.db'
 
 async def initialize_database(conn):
         await conn.execute('''
-            CREATE TABLE IF NOT EXISTS deposits (
+            CREATE TABLE IF NOT EXISTS mxn_deposits (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 timestamp DATETIME,
-                bank_account_id INTEGER,
+                account_number TEXT,
                 amount_deposited REAL
             )
         ''')
         await conn.execute('''
-            CREATE TABLE IF NOT EXISTS bank_accounts (
+            CREATE TABLE IF NOT EXISTS mxn_bank_accounts (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 account_bank_name TEXT,
                 account_beneficiary TEXT,
-                account_number TEXT,
+                account_number TEXT UNIQUE,
                 account_limit REAL,
-                account_balance REAL DEFAULT 0
+                account_balance REAL DEFAULT 0,
+                last_used_timestamp DATETIME DEFAULT NULL
             )
         ''')
         for account in bank_accounts:
             await conn.execute(
-                'INSERT INTO bank_accounts (account_bank_name, account_beneficiary, account_number, account_limit, account_balance) VALUES (?, ?, ?, ?, ?)',
+                'INSERT INTO mxn_bank_accounts (account_bank_name, account_beneficiary, account_number, account_limit, account_balance) VALUES (?, ?, ?, ?, ?)',
                 (account['bank_name'], account['beneficiary'], account['account_number'], account['limit'], 0))
         await conn.commit()
 
-async def log_deposit(conn, bank_account_id, amount_deposited):
+async def log_deposit(conn, bank_account_number, amount_deposited):
     timestamp = datetime.datetime.now()
-    await conn.execute('INSERT INTO deposits (timestamp, bank_account_id, amount_deposited) VALUES (?, ?, ?)',
-                      (timestamp, bank_account_id, amount_deposited))
-    await conn.execute('UPDATE bank_accounts SET account_balance = account_balance + ? WHERE id = ?', (amount_deposited, bank_account_id))
+    await conn.execute('INSERT INTO mxn_deposits (timestamp, account_number, amount_deposited) VALUES (?, ?, ?)',
+                      (timestamp, bank_account_number, amount_deposited))
+    await conn.execute('UPDATE mxn_bank_accounts SET account_balance = account_balance + ? WHERE account_number = ?', (amount_deposited, bank_account_number))
     await conn.commit()
 
 async def get_payment_details(conn, order_no):
@@ -50,20 +51,36 @@ async def get_payment_details(conn, order_no):
 
         # If no account is assigned, find an appropriate account and update the order
     if not assigned_account_number:
-        cursor = await conn.execute('SELECT id, account_bank_name, account_beneficiary, account_number, account_limit FROM bank_accounts ORDER BY id')
+        # Find the last used account
+        cursor = await conn.execute('SELECT account_number FROM mxn_bank_accounts ORDER BY last_used_timestamp DESC LIMIT 1')
+        last_assigned_account = await cursor.fetchone()
+        last_assigned_account = last_assigned_account[0] if last_assigned_account else None
+
+        # Fetch all accounts, ordered by ID
+        cursor = await conn.execute('SELECT id, account_bank_name, account_beneficiary, account_number, account_limit FROM mxn_bank_accounts ORDER BY id')
         accounts = await cursor.fetchall()
-        for account in accounts:
-            cursor = await conn.execute('SELECT SUM(amount_deposited) FROM deposits WHERE bank_account_id = ? AND timestamp >= ?', (account[0], cutoff_time))
+
+        # Determine the starting index for account selection
+        start_index = next((index for index, account in enumerate(accounts) if account[3] == last_assigned_account), -1) + 1
+
+        # Iterate over accounts starting from the one after the last assigned
+        for i in range(len(accounts)):
+            account = accounts[(start_index + i) % len(accounts)]
+            # Check the total deposited amount for this account
+            cursor = await conn.execute('SELECT SUM(amount_deposited) FROM mxn_deposits WHERE account_number = ? AND timestamp >= ?', (account[3], cutoff_time))
             total_deposited = await cursor.fetchone()
             total_deposited = total_deposited[0] if total_deposited[0] is not None else 0.0
+
             if total_deposited < account[4]:
                 assigned_account_number = account[3]
+                # Update the last used timestamp for this account
+                await conn.execute('UPDATE mxn_bank_accounts SET last_used_timestamp = ? WHERE account_number = ?', (datetime.datetime.now(), assigned_account_number))
                 await update_order_details(conn, order_no, assigned_account_number)
                 break
 
     # If an account number is assigned, fetch its details to return
     if assigned_account_number:
-        cursor = await conn.execute('SELECT account_bank_name, account_beneficiary, account_number FROM bank_accounts WHERE account_number = ?', (assigned_account_number,))
+        cursor = await conn.execute('SELECT account_bank_name, account_beneficiary, account_number FROM mxn_bank_accounts WHERE account_number = ?', (assigned_account_number,))
         account_details = await cursor.fetchone()
         if account_details:
             return (
@@ -77,7 +94,7 @@ async def get_payment_details(conn, order_no):
 
 async def get_total_deposited_last_24_hours(conn):
     cutoff_time = datetime.datetime.now() - datetime.timedelta(days=1)
-    cursor = await conn.execute('SELECT SUM(amount_deposited) FROM deposits WHERE timestamp >= ?', (cutoff_time,))
+    cursor = await conn.execute('SELECT SUM(amount_deposited) FROM mxn_deposits WHERE timestamp >= ?', (cutoff_time,))
     total_deposited = await cursor.fetchone()
     return total_deposited[0] if total_deposited else 0.0
 async def update_order_details(conn, order_no, account_number):
@@ -98,11 +115,11 @@ async def main():
     conn = await create_connection(DB_FILE)
     if conn is not None:
         # Initialize the database (create tables and insert initial data)
-        #await initialize_database()
+        #await initialize_database(conn)
 
         # Print table contents for verification
-        await print_table_contents(conn, 'deposits')
-        await print_table_contents(conn, 'bank_accounts')
+        await print_table_contents(conn, 'mxn_deposits')
+        await print_table_contents(conn, 'mxn_bank_accounts')
 
         await conn.close()
     else:

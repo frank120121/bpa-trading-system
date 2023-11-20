@@ -21,8 +21,8 @@ class MerchantAccount:
         if not order_details:
             logger.warning("Failed to fetch order details from the external source.")
             return
-        seller_name = order_details.get('seller_name')
-        if await is_blacklisted(conn, seller_name):
+        buyer_name = order_details.get('buyer_name')
+        if await is_blacklisted(conn, buyer_name):
             await send_text_message(ws, transaction_denied, order_no)
             return
         if msg_type == 'system':

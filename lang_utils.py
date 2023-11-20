@@ -50,16 +50,13 @@ STATUS_MESSAGES = {
     },
     1: {
         'es': [
-            "Hola soy Nebula, una asistente virtual. Solo se aceptan pagos de cuentas bancarias que estan a su nombre ({buyer_name}).",
-            "Pagos provenientes de {ProhibitedPaymentTypes} estan PROHIBIDOS y seran APELADOS.",
-            "Para el concepto estas son opciones validas: pago, o su nombre ({buyer_name}).",
+            "Hola {buyer_name}. Por su seguridad, antes de poder proceder con el intercambio, es necesario verificar que no esté siendo víctima de un fraude.",
+            "Responda con un 'Si' o un 'No' a las siguientes preguntas.",
 
         ],
         'en': [
-            "Hello, I'm Nebula, an automated assistant here to streamline the trading process. We only accept payments from bank accounts registered in your name, {buyer_name}.",
-            "Payments from {ProhibitedPaymentTypes} are PROHIBITED and will be APPEALED.",
-            "Please send the payment to the details provided in the listing. For the payment reference, you can use 'payment' or your name, {buyer_name}.",
-            "If you have any questions or need assistance, just type 'help' in the chat, and I'll present you with an options menu."
+            "Hello,{buyer_name}. For your safety, before procceding with the order, it is necessary to verify you are not a victim of a scam.",
+            "Respond with a 'yes' or 'no' only please."
         ],
     },
     7: {
@@ -189,7 +186,7 @@ transaction_denied = (
 payment_warning = (
     f"Pagos provenientes de {ProhibitedPaymentTypes} estan PROHIBIDOS y seran APELADOS.\n\n"
     f"Al enviar el pago, está confirmando que está de acuerdo con los términos y que toda responsabilidad del uso y pérdidas de los activos "
-    f"y/o el dinero después de este intercambio son únicamente suyas.\n\n"
+    f"después de este intercambio son únicamente suyas.\n\n"
     f"Es su responsabilidad realizar la investigación necesaria antes de cualquier inversión ya que las perdidas son reales e irreversibles.\n\n"
 )
 
@@ -198,3 +195,4 @@ payment_concept = (
     f"Para que no se cancele el intercambio de forma automática, puede marcar el intercambio como pagado en la opción que dice 'Realizar Pago'." 
     f"Para ayuda, escriba la palabra 'ayuda'."
 )
+

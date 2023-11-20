@@ -3,7 +3,9 @@ import aiohttp
 import traceback
 import re
 import json
+from urllib.parse import quote
 import os
+import datetime
 from dotenv import load_dotenv
 import logging
 from logging_config import setup_logging
@@ -17,12 +19,14 @@ AUTHORIZATION_CODE = os.environ.get('MFMP_OUTLOOK_AUTHORIZATION_CODE')
 
 TOKEN_FILE = 'C:/Users/p7016/Documents/bpa/tokens.json'
 
-async def save_tokens(access_token, refresh_token):
+async def save_tokens(access_token, refresh_token, expires_in):
     try:
+        expiration_time = datetime.datetime.now() + datetime.timedelta(seconds=expires_in)
         with open(TOKEN_FILE, 'w') as f:
             json.dump({
                 'access_token': access_token,
-                'refresh_token': refresh_token
+                'refresh_token': refresh_token,
+                'expiration_time': expiration_time.isoformat()
             }, f)
     except Exception as e:
         logger.error(f"Exception: {e}")
@@ -31,11 +35,12 @@ async def load_tokens():
     try:
         with open(TOKEN_FILE, 'r') as f:
             tokens = json.load(f)
-            return tokens.get('access_token'), tokens.get('refresh_token')
+            expiration_time = datetime.datetime.fromisoformat(tokens.get('expiration_time'))
+            return tokens.get('access_token'), tokens.get('refresh_token'), expiration_time
     except:
         logger.error("Failed to load tokens")
-        return None, None
-
+        return None, None, None
+    
 async def get_access_token(refresh_token=None):
     async with aiohttp.ClientSession() as session:
         try:
@@ -68,18 +73,28 @@ async def get_access_token(refresh_token=None):
             
             access_token = token_data.get('access_token')
             refresh_token = token_data.get('refresh_token')
+            expires_in = token_data.get('expires_in')
 
             if not access_token:
                 raise ValueError(f"Failed to get access token. Response: {token_data}")
+            
+            expiration_time = datetime.datetime.now() + datetime.timedelta(seconds=expires_in)
+            logger.warning(f"Token expires in: {expiration_time}")
 
-            await save_tokens(access_token, refresh_token)
+            await save_tokens(access_token, refresh_token, expires_in)
 
             return access_token
         except Exception as e:
             logger.error(f"An error occurred: {e}\n{traceback.format_exc()}")
 
 async def outlook_fetch_ip(last_four):
-    access_token, refresh_token = await load_tokens()
+    logger.info(f"Searching ip for: {last_four}")
+    access_token, refresh_token, expiration_time = await load_tokens()
+    
+    if datetime.datetime.now() >= expiration_time:
+        print("Access token expired. Fetching a new one.")
+        access_token = await get_access_token(refresh_token)
+
     async with aiohttp.ClientSession() as session:
         if not access_token:
             print("No access token found. Fetching a new one.")
@@ -90,7 +105,7 @@ async def outlook_fetch_ip(last_four):
             "Content-Type": "application/json"
         }
         try:
-            response = await session.get("https://graph.microsoft.com/v1.0/me/messages?$top=100", headers=headers)
+            response = await session.get("https://graph.microsoft.com/v1.0/me/messages?$top=3", headers=headers)
             emails_data = await response.json()
             emails = emails_data.get('value', [])
             for email in emails:
@@ -98,15 +113,18 @@ async def outlook_fetch_ip(last_four):
                 if f"[Binance] Tienes una nueva orden P2P {last_four}" in subject:
                     email_content = email.get("body", {}).get("content", "")
                     ip_match = re.search(r"\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b", email_content)
+                    logger.info(f"Ip found: {ip_match.group(0)}")
                     if ip_match:
                         return ip_match.group(0)
+                        
         except Exception as e:
             logger.error(f"An unexpected error occurred: {e}")
             logger.error(f"Full exception traceback: {traceback.format_exc()}")
+
 async def main():
-    access_token, refresh_token = await load_tokens()
+    access_token, refresh_token, expiration_time = await load_tokens()
     try:
-        last_four = '6704'
+        last_four = '0160'
         ip_info = await outlook_fetch_ip(last_four)
         print(f'IP info:{ip_info}')
         # print("Fetching a new token.")

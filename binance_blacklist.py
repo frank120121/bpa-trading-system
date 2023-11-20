@@ -28,7 +28,7 @@ async def is_blacklisted(conn, name):
     return result is not None
 async def main():
     conn = await create_connection(DB_FILE)
-    await initialize_database(conn)
+    #await initialize_database(conn)
     await print_table_contents(conn, 'blacklist')
 
     await conn.close()

@@ -3,14 +3,10 @@ from binance_messages import send_text_message
 from lang_utils import payment_concept, payment_warning
 from binance_bank_deposit import get_payment_details
 
-async def handle_anti_fraud(buyer_name, seller_name, conn, anti_fraud_stage, response, order_no, ws):
-    def get_next_question(stage, seller_name):
+async def handle_anti_fraud(buyer_name, conn, anti_fraud_stage, response, order_no, ws):
+    def get_next_question(stage):
         if stage == 0:
-            return (
-                    f"Hola {seller_name}. Por su seguridad, antes de poder proceder con el intercambio, es necesario verificar que no esté siendo víctima de un fraude.\n\n"
-                    f"Responda con un 'Si' o un 'No' a las siguientes preguntas.\n\n"
-                    f"¿Le han ofrecido un trabajo, una oportunidad de inversión o una gran oferta que requiere invertir a través de Bitcoin, USDT, o alguna criptomoneda?"
-                )
+            return "¿Le han ofrecido un trabajo, una oportunidad de inversión o una gran oferta que requiere invertir a través de Bitcoin, USDT, o alguna criptomoneda?"
         elif stage == 1:
             return "¿Alguien lo/la está presionando para realizar el pago?"
         elif stage == 2:
@@ -21,7 +17,7 @@ async def handle_anti_fraud(buyer_name, seller_name, conn, anti_fraud_stage, res
 
         # Re-send the previous question as a reminder
         if anti_fraud_stage >= 0:
-            prev_question = get_next_question(anti_fraud_stage, seller_name)
+            prev_question = get_next_question(anti_fraud_stage)
             await send_text_message(ws, prev_question, order_no)
 
         return
@@ -44,7 +40,7 @@ async def handle_anti_fraud(buyer_name, seller_name, conn, anti_fraud_stage, res
 
     # Now return the appropriate response based on the updated stage
     if anti_fraud_stage <= 2:
-        next_question = get_next_question(anti_fraud_stage, seller_name)
+        next_question = get_next_question(anti_fraud_stage)
         await send_text_message(ws, next_question, order_no)
     elif anti_fraud_stage >= 3:
         payment_details = await get_payment_details(conn, order_no)

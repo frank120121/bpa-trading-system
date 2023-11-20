@@ -10,7 +10,7 @@ setup_logging(log_filename='Binance_c2c_logger.log')
 logger = logging.getLogger(__name__)
 
 def filter_ads(ads_data, base_price, all_ads):
-    price_threshold = 1.018
+    price_threshold = 1.02
     own_ads = [entry['advNo'] for entry in all_ads]
     return [
         ad for ad in ads_data

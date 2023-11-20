@@ -48,12 +48,11 @@ async def handle_system_notifications(ws, order_no, order_details, conn, order_s
         seller_name = order_details.get('seller_name')
         buyer_name = order_details.get('buyer_name')
         last_four_digits = order_no[-4:]
-        logger.info(f"Seller Name: {seller_name}.")
-        logger.info(f"Last four: {last_four_digits}.")
         country = await fetch_ip(last_four_digits, seller_name)
         
         if country and country != "MX":
             logger.info("Transaction cannot take place. Seller is not from Mexico.")
+            logger.info(f"Adding {seller_name} to the blacklist.")
             await send_text_message(ws, transaction_denied, order_no)
             await add_to_blacklist(conn, buyer_name)
             return 
@@ -62,7 +61,8 @@ async def handle_system_notifications(ws, order_no, order_details, conn, order_s
 
         if kyc_status == 0:
             anti_fraud_stage = await get_anti_fraud_stage(conn, buyer_name)
-            await handle_anti_fraud(buyer_name, seller_name, conn, anti_fraud_stage, "start_pro", order_no, ws)
+            await generic_reply(ws, order_no, order_details, order_status)
+            await handle_anti_fraud(buyer_name, conn, anti_fraud_stage, "start_pro", order_no, ws)
         else:
             payment_details = await get_payment_details(conn, order_no)
             await send_text_message(ws, payment_warning, order_no)
@@ -89,7 +89,7 @@ async def handle_text_message(ws, content, order_no, order_details, conn):
     anti_fraud_stage = await get_anti_fraud_stage(conn, buyer_name)
 
     if kyc_status == 0 or anti_fraud_stage < 3:
-        await handle_anti_fraud(buyer_name, order_details.get('seller_name'), conn, anti_fraud_stage, content, order_no, ws)
+        await handle_anti_fraud(buyer_name, conn, anti_fraud_stage, content, order_no, ws)
     else:
         logger.debug(f"Handling TEXT: {content}")
 
