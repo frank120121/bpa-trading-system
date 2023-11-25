@@ -1,19 +1,21 @@
 from database import update_anti_fraud_stage, update_kyc_status
 from binance_messages import send_text_message
+from binance_blacklist import add_to_blacklist
+from lang_utils import transaction_denied
 from lang_utils import payment_concept, payment_warning
 from binance_bank_deposit import get_payment_details
 
 async def handle_anti_fraud(buyer_name, conn, anti_fraud_stage, response, order_no, ws):
     def get_next_question(stage):
         if stage == 0:
-            return "¿Le han ofrecido un trabajo, una oportunidad de inversión o una gran oferta que requiere invertir a través de Bitcoin, USDT, o alguna criptomoneda?"
+            return "¿Le han ofrecido un trabajo, una oportunidad de inversión o una gran oferta que requiere invertir a través de Bitcoin, USDT, o alguna criptomoneda?(1/3)"
         elif stage == 1:
-            return "¿Alguien lo/la está presionando para realizar el pago?"
+            return "¿Alguien lo/la está presionando para realizar el pago?(2/3)"
         elif stage == 2:
-            return "¿Está consciente de que las transacciones con este tipo de activos son irreversibles y que, una vez enviados, no hay manera de recuperarlos?"
+            return "¿Está consciente de que las transacciones con este tipo de activos son irreversibles y que, una vez enviados, no hay manera de recuperarlos?(3/3)"
 
     if response.lower() not in ['sí', 'si', 'no', 'start_pro']:
-        await send_text_message(ws, "Respuesta no reconocida. Por favor, responda con 'Si' o 'No'.", order_no)
+        await send_text_message(ws, "Respuesta no reconocida. Por favor, responda exactamente con 'Si' o 'No'.", order_no)
 
         # Re-send the previous question as a reminder
         if anti_fraud_stage >= 0:
@@ -22,8 +24,10 @@ async def handle_anti_fraud(buyer_name, conn, anti_fraud_stage, response, order_
 
         return
 
-    if (anti_fraud_stage in [0, 1] and response.lower() == 'sí') or (anti_fraud_stage in [2] and response.lower() == 'no'):
+    if (anti_fraud_stage in [0, 1] and response.lower() in ['sí', 'si' ]) or (anti_fraud_stage in [2] and response.lower() == 'no'):
         await send_text_message(ws, "Por razones de seguridad, no podemos continuar con este intercambio. Es posible que este siendo víctima de un fraude. Por favor cancele la orden y no realice ninguna transferencia ya que puede perder su dinero.", order_no)
+        await send_text_message(ws, transaction_denied, order_no)
+        await add_to_blacklist(conn, buyer_name)
         return
 
     # Update the stage based on the response

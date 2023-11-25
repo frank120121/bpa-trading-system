@@ -51,7 +51,7 @@ STATUS_MESSAGES = {
     1: {
         'es': [
             "Hola {buyer_name}. Por su seguridad, antes de poder proceder con el intercambio, es necesario verificar que no esté siendo víctima de un fraude.",
-            "Responda con un 'Si' o un 'No' a las siguientes preguntas.",
+            "Responda con un 'Si' o un 'No' a las siguientes 3 preguntas.",
 
         ],
         'en': [

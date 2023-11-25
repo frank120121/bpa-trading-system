@@ -3,13 +3,12 @@ import aiohttp
 import traceback
 import re
 import json
-from urllib.parse import quote
 import os
 import datetime
 from dotenv import load_dotenv
 import logging
 from logging_config import setup_logging
-load_dotenv(".env.email")
+load_dotenv("C:/Users/p7016/Documents/bpa/.env.email")
 setup_logging(log_filename='fetch_emails.log')
 logger = logging.getLogger(__name__)
 CLIENT_ID = os.environ.get('MFMP_OUTLOOK_CLIENT_ID')
@@ -105,7 +104,7 @@ async def outlook_fetch_ip(last_four):
             "Content-Type": "application/json"
         }
         try:
-            response = await session.get("https://graph.microsoft.com/v1.0/me/messages?$top=3", headers=headers)
+            response = await session.get("https://graph.microsoft.com/v1.0/me/messages?$top=2", headers=headers)
             emails_data = await response.json()
             emails = emails_data.get('value', [])
             for email in emails:

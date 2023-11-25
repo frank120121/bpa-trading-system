@@ -52,7 +52,7 @@ async def handle_system_notifications(ws, order_no, order_details, conn, order_s
         
         if country and country != "MX":
             logger.info("Transaction cannot take place. Seller is not from Mexico.")
-            logger.info(f"Adding {seller_name} to the blacklist.")
+            logger.info(f"Adding {buyer_name} to the blacklist.")
             await send_text_message(ws, transaction_denied, order_no)
             await add_to_blacklist(conn, buyer_name)
             return 

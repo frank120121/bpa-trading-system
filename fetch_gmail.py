@@ -39,7 +39,7 @@ async def gmail_fetch_ip(last_four):
             return desde_match.group(1)
 
 async def main():
-    last_four_digits = '2240'
+    last_four_digits = '1920'
     ip_address = await gmail_fetch_ip(last_four_digits)
     print("Extracted IP Address:", ip_address)
 
