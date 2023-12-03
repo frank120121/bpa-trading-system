@@ -1,0 +1,219 @@
+Productos	Cantidad	SKU	Importe 	Estado	Acción
+
+Bolsa cuadrada guateado con diseño con solapa
+
+Negro
+
+$MXN195.00 $MXN195.04
+
+1	sg2204159657483785	
+$MXN146.25
+$MXN195.04
+Todo está enviado	
+
+Set de traje de tartán con tanga
+
+Negro/M
+
+$MXN160.00 $MXN180.02
+
+El artículo no puede ser devuelto, por favor vea nuestra Política de devoluciones	1	swsexy03200508937	
+$MXN120.00
+$MXN180.02
+
+Set de traje de tartán con tanga
+
+Negro/G
+
+$MXN160.00 $MXN180.02
+
+El artículo no puede ser devuelto, por favor vea nuestra Política de devoluciones	1	swsexy03200508937	
+$MXN120.00
+$MXN180.02
+
+SHEIN Top de manga de malla de lunares transparente de puño con fruncido
+
+Negro/M
+
+$MXN164.00 $MXN170.01
+
+1	swtop07201015033	
+$MXN123.00
+$MXN170.01
+
+Shorts deportivos de cintura ancha unicolor
+
+Negro/7
+
+$MXN188.00
+1	swspsho03210316889	
+$MXN141.00
+$MXN187.92
+
+Shorts deportivos de cintura ancha unicolor
+
+Negro/5
+
+$MXN188.00
+1	swspsho03210316889	
+$MXN141.00
+$MXN187.92
+
+Pantalones Canalé Liso Casual
+
+Verde Lima/5
+
+$MXN271.00 $MXN283.99
+
+1	swpants44210414470	
+$MXN203.25
+$MXN283.99
+
+Bañador bikini push up con perla con tira ribete en abanico
+
+Celeste/XG
+
+$MXN285.00 $MXN356.97
+
+El artículo no puede ser devuelto, por favor vea nuestra Política de devoluciones	1	sw2201130100877797	
+$MXN213.75
+$MXN356.97
+
+Bañador bikini push up con perla con tira ribete en abanico
+
+Celeste/M
+
+$MXN285.00 $MXN356.97
+
+El artículo no puede ser devuelto, por favor vea nuestra Política de devoluciones	1	sw2201130100877797	
+$MXN213.75
+$MXN356.97
+
+Bañador bikini push up con perla con tira ribete en abanico
+
+Celeste/CH
+
+$MXN285.00 $MXN356.97
+
+El artículo no puede ser devuelto, por favor vea nuestra Política de devoluciones	1	sw2201130100877797	
+$MXN213.75
+$MXN356.97
+
+Set de lencería floral de malla con aro
+
+Rojo/CH
+
+$MXN281.00
+El artículo no puede ser devuelto, por favor vea nuestra Política de devoluciones	1	si2110117504481175	
+$MXN210.75
+$MXN280.91
+
+Set de lencería floral de malla con aro
+
+Rojo/M
+
+$MXN281.00
+El artículo no puede ser devuelto, por favor vea nuestra Política de devoluciones	1	si2110117504481175	
+$MXN210.75
+$MXN280.91
+
+Set de lencería floral de malla con aro
+
+Rojo/G
+
+$MXN281.00
+El artículo no puede ser devuelto, por favor vea nuestra Política de devoluciones	1	si2110117504481175	
+$MXN210.75
+$MXN280.91
+
+Bolsos cruzados
+
+Negro
+
+$MXN177.00
+1	sw2106212314738503	
+$MXN132.75
+$MXN176.94
+
+Vestido ajustado con fruncido con cordón lateral de espalda abierta con cordón de satén
+
+Marrón/M
+
+$MXN202.00
+1	sw2202217816158736	
+$MXN151.50
+$MXN201.97
+
+Vestido ajustado con fruncido con cordón lateral de espalda abierta con cordón de satén
+
+Marrón/S
+
+$MXN202.00
+1	sw2202217816158736	
+$MXN151.50
+$MXN201.97
+
+Bolsa cuadrada guateado con diseño con solapa
+
+Marrón
+
+$MXN195.00 $MXN195.04
+
+1	sg2204157724215457	
+$MXN146.25
+$MXN195.04
+
+Bolso domo de color combinado con gránulo en relieve
+
+Multicolor
+
+$MXN185.00 $MXN185.03
+
+1	sg2204182657200672	
+$MXN138.75
+$MXN185.03
+
+Shorts deportivos de cintura ancha
+
+Rosa Fucsia/5
+
+$MXN197.00
+1	st2202244115766557	
+$MXN147.75
+$MXN196.97
+
+Shorts deportivos de cintura ancha
+
+Rosa Fucsia/7
+
+$MXN197.00
+1	st2202244115766557	
+$MXN147.75
+$MXN196.97
+
+Set de lencería floral de malla con aro
+
+Café integral/G
+
+$MXN281.00
+El artículo no puede ser devuelto, por favor vea nuestra Política de devoluciones	1	si2203144030479930	
+$MXN210.75
+$MXN280.91
+
+Set de lencería floral de malla con aro
+
+Café integral/M
+
+$MXN281.00
+El artículo no puede ser devuelto, por favor vea nuestra Política de devoluciones	1	si2203144030479930	
+$MXN210.75
+$MXN280.91
+
+Set de lencería floral de malla con aro
+
+Café integral/CH
+
+$MXN281.00
+El artículo no puede ser devuelto, por favor vea nuestra Política de devoluciones	1	si2203144030479930	
+$MXN210.75
+$MXN280.91

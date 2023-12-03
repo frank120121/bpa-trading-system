@@ -1,0 +1,382 @@
+Productos	Cantidad	SKU	Importe 	Estado	Acción
+
+Conjunto de pijama de satén con bordado de corazón con botón
+
+Burdeos/L
+
+$MXN288.00 $MXN344.00
+
+1	swpajama10191031953	
+$MXN221.98
+$MXN344.00
+Todo está enviado	
+
+Conjunto de pijama de satén con bordado de corazón con botón
+
+Burdeos/M
+
+$MXN288.00 $MXN344.00
+
+1	swpajama10191031953	
+$MXN221.98
+$MXN344.00
+
+Conjunto de pijama de satén con bordado de corazón con botón
+
+Burdeos/S
+
+$MXN288.00 $MXN344.00
+
+1	swpajama10191031953	
+$MXN221.98
+$MXN344.00
+
+Conjunto de pijama de satén con estampado de rayas con encaje en contraste
+
+Multicolor/XL
+
+$MXN172.00 $MXN180.00
+
+1	swnight03200714774	
+$MXN132.57
+$MXN180.00
+
+Conjunto de pijama de satén con estampado de rayas con encaje en contraste
+
+Multicolor/L
+
+$MXN172.00 $MXN180.00
+
+1	swnight03200714774	
+$MXN132.57
+$MXN180.00
+
+Conjunto de pijama de satén con estampado de rayas con encaje en contraste
+
+Multicolor/M
+
+$MXN172.00 $MXN180.00
+
+1	swnight03200714774	
+$MXN132.57
+$MXN180.00
+
+Conjunto de pijama de satén con estampado de rayas con encaje en contraste
+
+Multicolor/S
+
+$MXN172.00 $MXN180.00
+
+1	swnight03200714774	
+$MXN132.57
+$MXN180.00
+
+Conjunto de pijama de satén de lunares
+
+Verde Oscuro/XL
+
+$MXN286.00 $MXN342.00
+
+1	night190122011	
+$MXN220.44
+$MXN342.00
+
+Conjunto de pijama de satén de lunares
+
+Verde Oscuro/L
+
+$MXN286.00 $MXN342.00
+
+1	night190122011	
+$MXN220.44
+$MXN342.00
+
+Conjunto de pijama de satén de lunares
+
+Verde Oscuro/M
+
+$MXN286.00 $MXN342.00
+
+1	night190122011	
+$MXN220.44
+$MXN342.00
+
+Conjunto de pijama de satén de lunares
+
+Verde Oscuro/S
+
+$MXN286.00 $MXN342.00
+
+1	night190122011	
+$MXN220.44
+$MXN342.00
+
+SHEIN Top corto de cuello sweetheart girante con pantalones de pierna amplia
+
+Rosa vieja/M
+
+$MXN264.00 $MXN528.00
+
+1	sw2107092323420369	
+$MXN203.33
+$MXN528.00
+
+Conjunto de pijama de satén con estampado tropical
+
+Multicolor/XL
+
+$MXN278.00 $MXN291.00
+
+1	swpajama03190415355	
+$MXN214.27
+$MXN291.00
+
+Conjunto de pijama de satén con estampado tropical
+
+Multicolor/L
+
+$MXN278.00 $MXN291.00
+
+1	swpajama03190415355	
+$MXN214.27
+$MXN291.00
+
+Conjunto de pijama de satén con estampado tropical
+
+Multicolor/M
+
+$MXN278.00 $MXN291.00
+
+1	swpajama03190415355	
+$MXN214.27
+$MXN291.00
+
+Conjunto de pijama de satén con estampado tropical
+
+Multicolor/S
+
+$MXN278.00 $MXN291.00
+
+1	swpajama03190415355	
+$MXN214.27
+$MXN291.00
+
+Conjunto de pijama de satén con estampado de hoja y grulla
+
+Rosa Pálido/XL
+
+$MXN290.00 $MXN303.00
+
+1	swpajama10190517864	
+$MXN223.52
+$MXN303.00
+
+Conjunto de pijama de satén con estampado de hoja y grulla
+
+Rosa Pálido/L
+
+$MXN290.00 $MXN303.00
+
+1	swpajama10190517864	
+$MXN223.52
+$MXN303.00
+
+Conjunto de pijama de satén con estampado de hoja y grulla
+
+Rosa Pálido/M
+
+$MXN290.00 $MXN303.00
+
+1	swpajama10190517864	
+$MXN223.52
+$MXN303.00
+
+Conjunto de pijama de satén con estampado de hoja y grulla
+
+Rosa Pálido/S
+
+$MXN290.00 $MXN303.00
+
+1	swpajama10190517864	
+$MXN223.52
+$MXN303.00
+
+Conjunto de pijama de satén con estampado de cactus
+
+Rosa Pálido/XL
+
+$MXN290.00 $MXN304.00
+
+1	swpajama10190527634	
+$MXN223.52
+$MXN304.00
+
+Conjunto de pijama de satén con estampado de cactus
+
+Rosa Pálido/L
+
+$MXN290.00 $MXN304.00
+
+1	swpajama10190527634	
+$MXN223.52
+$MXN304.00
+
+Conjunto de pijama de satén con estampado de cactus
+
+Rosa Pálido/M
+
+$MXN290.00 $MXN304.00
+
+1	swpajama10190527634	
+$MXN223.52
+$MXN304.00
+
+Conjunto de pijama de satén con estampado de cactus
+
+Rosa Pálido/S
+
+$MXN290.00 $MXN304.00
+
+1	swpajama10190527634	
+$MXN223.52
+$MXN304.00
+
+Conjunto de pijama de satén con estampado de flamenco
+
+Beis/XL
+
+$MXN276.00 $MXN282.00
+
+1	swpajama10190531693	
+$MXN212.73
+$MXN282.00
+
+Conjunto de pijama de satén con estampado de flamenco
+
+Beis/L
+
+$MXN276.00 $MXN282.00
+
+1	swpajama10190531693	
+$MXN212.73
+$MXN282.00
+
+Conjunto de pijama de satén con estampado de flamenco
+
+Beis/M
+
+$MXN276.00 $MXN282.00
+
+1	swpajama10190531693	
+$MXN212.73
+$MXN282.00
+
+Conjunto de pijama de satén con estampado de flamenco
+
+Beis/S
+
+$MXN276.00 $MXN282.00
+
+1	swpajama10190531693	
+$MXN212.73
+$MXN282.00
+
+Conjunto de pijama de satén con estampado de flamenco
+
+Beis/XS
+
+$MXN276.00 $MXN282.00
+
+1	swpajama10190531693	
+$MXN212.73
+$MXN282.00
+
+Conjunto de pijama de satén con estampado floral de hoja
+
+Multicolor/XL
+
+$MXN277.00 $MXN330.00
+
+1	swpajama10190604352	
+$MXN213.50
+$MXN330.00
+
+Conjunto de pijama de satén con estampado floral de hoja
+
+Multicolor/L
+
+$MXN277.00 $MXN330.00
+
+1	swpajama10190604352	
+$MXN213.50
+$MXN330.00
+
+Conjunto de pijama de satén con estampado floral de hoja
+
+Multicolor/M
+
+$MXN277.00 $MXN330.00
+
+1	swpajama10190604352	
+$MXN213.50
+$MXN330.00
+
+Conjunto de pijama de satén con estampado floral de hoja
+
+Multicolor/S
+
+$MXN277.00 $MXN330.00
+
+1	swpajama10190604352	
+$MXN213.50
+$MXN330.00
+
+Conjunto de pijama de satén con estampado de grulla y hoja
+
+Rosa Pálido/XL
+
+$MXN286.00 $MXN342.00
+
+1	swpajama10190723782	
+$MXN220.44
+$MXN342.00
+
+Conjunto de pijama de satén con estampado de grulla y hoja
+
+Rosa Pálido/L
+
+$MXN286.00 $MXN342.00
+
+1	swpajama10190723782	
+$MXN220.44
+$MXN342.00
+
+Conjunto de pijama de satén con estampado de grulla y hoja
+
+Rosa Pálido/M
+
+$MXN286.00 $MXN342.00
+
+1	swpajama10190723782	
+$MXN220.44
+$MXN342.00
+
+Conjunto de pijama de satén con estampado de grulla y hoja
+
+Rosa Pálido/S
+
+$MXN286.00 $MXN342.00
+
+1	swpajama10190723782	
+$MXN220.44
+$MXN342.00
+
+Conjunto de pijama de satén con bordado de corazón con botón
+
+Burdeos/XL
+
+$MXN288.00 $MXN344.00
+
+1	swpajama10191031953	
+$MXN221.98
+$MXN344.00

@@ -35,6 +35,26 @@ async def initialize_database(conn):
                 (account['bank_name'], account['beneficiary'], account['account_number'], account['limit'], 0))
         await conn.commit()
 
+async def add_bank_account(conn, bank_name, beneficiary, account_number, account_limit, account_balance=0):
+    try:
+        await conn.execute(
+            'INSERT INTO mxn_bank_accounts (account_bank_name, account_beneficiary, account_number, account_limit, account_balance) VALUES (?, ?, ?, ?, ?)',
+            (bank_name, beneficiary, account_number, account_limit, account_balance))
+        await conn.commit()
+        logger.info(f"Added new bank account: {account_number}")
+    except Exception as e:
+        logger.error(f"Error adding bank account: {e}")
+        raise
+
+async def remove_bank_account(conn, account_number):
+    try:
+        await conn.execute('DELETE FROM mxn_bank_accounts WHERE account_number = ?', (account_number,))
+        await conn.commit()
+        logger.info(f"Removed bank account: {account_number}")
+    except Exception as e:
+        logger.error(f"Error removing bank account: {e}")
+        raise
+
 async def log_deposit(conn, bank_account_number, amount_deposited):
     timestamp = datetime.datetime.now()
     await conn.execute('INSERT INTO mxn_deposits (timestamp, account_number, amount_deposited) VALUES (?, ?, ?)',
@@ -118,6 +138,7 @@ async def main():
         #await initialize_database(conn)
 
         # Print table contents for verification
+        await remove_bank_account(conn, '058597000054265356')
         await print_table_contents(conn, 'mxn_deposits')
         await print_table_contents(conn, 'mxn_bank_accounts')
 

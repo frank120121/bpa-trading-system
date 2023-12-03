@@ -70,3 +70,4 @@
 2023-11-15 13:01:27,044:__main__:ERROR:Database error: no such column: rfc
 2023-11-15 13:01:36,755:__main__:ERROR:Database error: near ",": syntax error
 2023-11-15 13:01:36,755:__main__:ERROR:Database error: no such column: rfc
+2023-12-02 17:03:36,540:__main__:INFO:Removed bank account: 058597000054265356

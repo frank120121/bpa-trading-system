@@ -24,18 +24,18 @@ async def handle_anti_fraud(buyer_name, conn, anti_fraud_stage, response, order_
 
         return
 
-    if (anti_fraud_stage in [0, 1] and response.lower() in ['sí', 'si' ]) or (anti_fraud_stage in [2] and response.lower() == 'no'):
+    if (anti_fraud_stage in [0, 1] and response.lower() in ['sí', 'si', ' si', 'si ']) or (anti_fraud_stage in [2] and response.lower() in [' no', 'no', 'no ']):
         await send_text_message(ws, "Por razones de seguridad, no podemos continuar con este intercambio. Es posible que este siendo víctima de un fraude. Por favor cancele la orden y no realice ninguna transferencia ya que puede perder su dinero.", order_no)
         await send_text_message(ws, transaction_denied, order_no)
         await add_to_blacklist(conn, buyer_name)
         return
 
     # Update the stage based on the response
-    if anti_fraud_stage == 0 and response.lower() == 'no':
+    if anti_fraud_stage == 0 and response.lower() in [' no', 'no', 'no ']:
         anti_fraud_stage += 1
-    elif anti_fraud_stage == 1 and response.lower() == 'no':
+    elif anti_fraud_stage == 1 and response.lower() in [' no', 'no', 'no ']:
         anti_fraud_stage += 1
-    elif anti_fraud_stage == 2 and response.lower() in ['sí', 'si']:
+    elif anti_fraud_stage == 2 and response.lower() in ['sí', 'si', ' si', 'si ']:
         anti_fraud_stage += 1
         await update_kyc_status(conn, buyer_name, 1)
 

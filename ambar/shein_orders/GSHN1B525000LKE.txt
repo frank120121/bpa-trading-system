@@ -1,0 +1,132 @@
+Productos	Cantidad	SKU	Importe 	Estado	Acción
+
+SHEIN Hombres Cazadora tipo bomber con dibujos animados y letra con parche de rayas ribete
+
+Naranja/M
+
+$MXN352.00 $MXN902.03
+
+1	sm2108245115813719	
+$MXN316.80
+$MXN902.03
+Todo está enviado	
+
+Gorro béisbol de hombres con bordado de figura
+
+Multicolor/Unitalla
+
+$MXN90.00 $MXN90.04
+
+Las ventas finales no pueden ser devueltas.	1	smhatglov18200408672	
+$MXN81.00
+$MXN90.04
+
+Pendientes largos con diseño de estrella
+
+Plateado
+
+$MXN14.00 $MXN56.10
+
+El artículo no puede ser devuelto, por favor vea nuestra Política de devoluciones	1	swear18200811409	
+$MXN12.60
+$MXN56.10
+
+Pendientes largos con diseño de flor
+
+Azul
+
+$MXN15.00 $MXN50.00
+
+El artículo no puede ser devuelto, por favor vea nuestra Política de devoluciones	1	swear18210112588	
+$MXN13.50
+$MXN50.00
+
+Pendientes Casual
+
+Plateado
+
+$MXN14.00 $MXN56.91
+
+El artículo no puede ser devuelto, por favor vea nuestra Política de devoluciones	1	swear18210226958	
+$MXN12.60
+$MXN56.91
+
+Pendientes geométricos con flor
+
+Verde
+
+$MXN20.00 $MXN64.02
+
+El artículo no puede ser devuelto, por favor vea nuestra Política de devoluciones	1	swear18210407875	
+$MXN18.00
+$MXN64.02
+
+Collar con diseño de libélula
+
+Plateado
+
+$MXN17.00 $MXN55.08
+
+El artículo no puede ser devuelto, por favor vea nuestra Política de devoluciones	1	swneck18210518034	
+$MXN15.30
+$MXN55.08
+
+Pendientes con flor
+
+Negro
+
+$MXN18.00 $MXN55.08
+
+El artículo no puede ser devuelto, por favor vea nuestra Política de devoluciones	1	swear18210520419	
+$MXN16.20
+$MXN55.08
+
+Gorro béisbol de hombres con bordado de letra
+
+Azul Marino/Unitalla
+
+$MXN102.00 $MXN130.08
+
+El artículo no puede ser devuelto, por favor vea nuestra Política de devoluciones	1	smhatglov18210604218	
+$MXN91.80
+$MXN130.08
+
+Blusa de guingán ribete fruncido de manga con volante
+
+Blanco y Negro/0XL
+
+$MXN132.00 $MXN285.98
+
+1	sf2111042999744648	
+$MXN118.80
+$MXN285.98
+
+EMERY ROSE Blusa con estampado geométrico de manga con volante
+
+Multicolor/1XL
+
+$MXN132.00 $MXN285.98
+
+1	sf2109171615194664	
+$MXN118.80
+$MXN285.98
+
+SHEIN Hombres Camisa de color combinado con bordado de letra
+
+Azul eléctrico/M
+
+$MXN159.00 $MXN322.97
+
+1	sm2201044505881557	
+$MXN143.10
+$MXN322.97
+
+Blusa peplum con estampado de manga con volante
+
+Multicolor/1XL
+
+$MXN154.00 $MXN330.08
+
+1	sf2110138477563767	
+$MXN138.60
+$MXN330.08

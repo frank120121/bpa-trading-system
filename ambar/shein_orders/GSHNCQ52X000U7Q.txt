@@ -1,0 +1,488 @@
+
+Productos	Cantidad	SKU	Importe 	Estado	Acción
+
+Shorts deportivos inconsútil con estiramiento alto de moldeador cadera
+
+Verde militar/7
+
+$MXN169.00
+1	st2112087869223631	
+$MXN130.31
+$MXN168.94
+Todo está enviado	
+
+Shorts deportivos inconsútil con estiramiento alto de moldeador cadera
+
+Verde militar/9/11
+
+$MXN169.00
+1	st2112087869223631	
+$MXN130.31
+$MXN168.94
+
+Shorts deportivos inconsútil con estiramiento alto de moldeador cadera
+
+Marrón Chocolate/5
+
+$MXN169.00
+1	st2112084475875895	
+$MXN130.31
+$MXN168.94
+
+Shorts deportivos inconsútil con estiramiento alto de moldeador cadera
+
+Marrón Chocolate/7
+
+$MXN169.00
+1	st2112084475875895	
+$MXN130.31
+$MXN168.94
+
+Shorts deportivos inconsútil con estiramiento alto de moldeador cadera
+
+Marrón Chocolate/9/11
+
+$MXN169.00
+1	st2112084475875895	
+$MXN130.31
+$MXN168.94
+
+Shorts biker deportivos inconsútil con estiramiento alto
+
+Rosa vieja/5
+
+$MXN121.00
+1	sW210604403184344	
+$MXN93.30
+$MXN120.91
+
+Shorts biker deportivos inconsútil con estiramiento alto
+
+Rosa vieja/7
+
+$MXN121.00
+1	sW210604403184344	
+$MXN93.30
+$MXN120.91
+
+Bolsos cruzados
+
+Negro
+
+$MXN177.00 $MXN177.02
+
+1	sw2106212314738503	
+$MXN136.48
+$MXN177.02
+
+Shorts deportivos inconsútil de tie dye de cintura ancha
+
+Mostaza Amarilla/5
+
+$MXN212.00 $MXN212.01
+
+1	st2204021348115121	
+$MXN163.47
+$MXN212.01
+
+Shorts deportivos inconsútil de tie dye de cintura ancha
+
+Mostaza Amarilla/7
+
+$MXN212.00 $MXN212.01
+
+1	st2204021348115121	
+$MXN163.47
+$MXN212.01
+
+Shorts deportivos inconsútil de tie dye de cintura ancha
+
+Mostaza Amarilla/9/11
+
+$MXN212.00 $MXN212.01
+
+1	st2204021348115121	
+$MXN163.47
+$MXN212.01
+
+Shorts deportivos de cintura ancha de tie dye
+
+Negro/9/11
+
+$MXN243.00 $MXN243.06
+
+1	st2112038936831853	
+$MXN187.16
+$MXN243.06
+
+Bolsa cuadrada guateada con solapa con asa de cadena
+
+Verde Oscuro
+
+$MXN220.00 $MXN220.08
+
+1	sg2201284885978344	
+$MXN169.64
+$MXN220.08
+
+Bolsa cuadrada guateada con solapa con asa de cadena
+
+Verde Oscuro
+
+$MXN220.00 $MXN220.08
+
+1	sg2201284885978344	
+$MXN169.64
+$MXN220.08
+
+Shorts deportivos inconsútil de cintura ancha fruncido
+
+Burdeos/5
+
+$MXN177.00 $MXN177.02
+
+1	st2112244795411891	
+$MXN136.48
+$MXN177.02
+
+Shorts deportivos inconsútil de cintura ancha fruncido
+
+Burdeos/7
+
+$MXN177.00 $MXN177.02
+
+1	st2112244795411891	
+$MXN136.48
+$MXN177.02
+
+Shorts deportivos inconsútil de cintura ancha fruncido
+
+Burdeos/9/11
+
+$MXN177.00 $MXN177.02
+
+1	st2112244795411891	
+$MXN136.48
+$MXN177.02
+
+Bolsa cuadrada guateado cremallera
+
+Rosa
+
+$MXN193.00
+1	sg2206103588928174	
+$MXN148.82
+$MXN192.96
+
+Leggings deportivos inconsútil de tie dye
+
+Morado Violeta/5
+
+$MXN340.00
+1	st2110186002897380	
+$MXN262.16
+$MXN339.96
+
+Leggings deportivos inconsútil de tie dye
+
+Verde/7
+
+$MXN340.00
+1	st2110187644777352	
+$MXN262.16
+$MXN339.96
+
+Leggings deportivos inconsútil de tie dye
+
+Verde/5
+
+$MXN340.00
+1	st2110187644777352	
+$MXN262.16
+$MXN339.96
+
+Leggings deportivos inconsútil suave de tie dye
+
+Rosa Fucsia/7
+
+$MXN332.00 $MXN332.09
+
+1	st2205059477794279	
+$MXN255.99
+$MXN332.09
+
+Leggings deportivos inconsútil suave de tie dye
+
+Rosa Fucsia/5
+
+$MXN332.00 $MXN332.09
+
+1	st2205059477794279	
+$MXN255.99
+$MXN332.09
+
+Shorts biker deportivos de moldeador cadera de cintura ancha
+
+Rojo/5
+
+$MXN177.00 $MXN177.02
+
+1	st2204167763963257	
+$MXN136.48
+$MXN177.02
+
+Shorts biker deportivos de moldeador cadera de cintura ancha
+
+Rojo/7
+
+$MXN177.00 $MXN177.02
+
+1	st2204167763963257	
+$MXN136.48
+$MXN177.02
+
+Bolsa cuadrada de cheurón guateado con diseño de cadena con solapa
+
+Rosa
+
+$MXN188.00
+1	sg2204032199910185	
+$MXN144.96
+$MXN187.99
+
+Bolsa cuadrada de cheurón guateado con diseño de cadena con solapa
+
+Rosa
+
+$MXN188.00
+1	sg2204032199910185	
+$MXN144.96
+$MXN187.99
+
+Bolsa cuadrada de cheurón con solapa con diseño de cadena
+
+Blanco
+
+$MXN183.00 $MXN183.02
+
+1	sg2204110004045868	
+$MXN141.11
+$MXN183.02
+
+Bolsa cuadrada de cheurón con solapa con diseño de cadena
+
+Blanco
+
+$MXN183.00 $MXN183.02
+
+1	sg2204110004045868	
+$MXN141.11
+$MXN183.02
+
+Shorts biker deportivos inconsútil con estiramiento alto
+
+Morado/5
+
+$MXN131.00 $MXN131.06
+
+1	st2204121249766810	
+$MXN101.01
+$MXN131.06
+
+Shorts biker deportivos inconsútil con estiramiento alto
+
+Morado/7
+
+$MXN131.00 $MXN131.06
+
+1	st2204121249766810	
+$MXN101.01
+$MXN131.06
+
+Bolsa cuadrada con cocodrilo en relieve con solapa
+
+Verde
+
+$MXN215.00
+1	sg2205186099504461	
+$MXN165.78
+$MXN214.91
+
+Bolsa cuadrada con cocodrilo en relieve con solapa
+
+Verde
+
+$MXN215.00
+1	sg2205186099504461	
+$MXN165.78
+$MXN214.91
+
+Shorts deportivos inconsútil de cintura ancha de moldeador cadera
+
+Rosa Fucsia/7
+
+$MXN177.00 $MXN177.02
+
+1	st2205255765116557	
+$MXN136.48
+$MXN177.02
+
+Shorts deportivos inconsútil de cintura ancha de moldeador cadera
+
+Rosa Fucsia/5
+
+$MXN177.00 $MXN177.02
+
+1	st2205255765116557	
+$MXN136.48
+$MXN177.02
+
+Shorts deportivos inconsútil de tie dye
+
+Multicolor/5
+
+$MXN234.00
+1	st2203102848477416	
+$MXN180.43
+$MXN233.95
+
+Shorts deportivos inconsútil de tie dye
+
+Multicolor/7
+
+$MXN234.00
+1	st2203102848477416	
+$MXN180.43
+$MXN233.95
+
+Shorts deportivos inconsútil de tie dye
+
+Multicolor/9/11
+
+$MXN234.00
+1	st2203102848477416	
+$MXN180.43
+$MXN233.95
+
+Shorts deportivos de cintura ancha unicolor
+
+Burdeos/7
+
+$MXN197.00 $MXN197.10
+
+1	st2203106290215222	
+$MXN151.90
+$MXN197.10
+
+Shorts deportivos de cintura ancha unicolor
+
+Burdeos/5
+
+$MXN197.00 $MXN197.10
+
+1	st2203106290215222	
+$MXN151.90
+$MXN197.10
+
+Shorts deportivos de cintura ancha unicolor
+
+Rosa coral/9/11
+
+$MXN160.00 $MXN197.10
+
+1	st2111123428853737	
+$MXN123.37
+$MXN197.10
+
+Shorts deportivos de cintura ancha unicolor
+
+Rosa coral/7
+
+$MXN160.00 $MXN197.10
+
+1	st2111123428853737	
+$MXN123.37
+$MXN197.10
+
+Shorts deportivos de cintura ancha unicolor
+
+Rosa coral/5
+
+$MXN160.00 $MXN197.10
+
+1	st2111123428853737	
+$MXN123.37
+$MXN197.10
+
+Bolso baguette guateado charol artificial
+
+Verde
+
+$MXN176.00
+1	sg2204089638329239	
+$MXN135.71
+$MXN175.98
+
+Bolso baguette guateado charol artificial
+
+Verde
+
+$MXN176.00
+1	sg2204089638329239	
+$MXN135.71
+$MXN175.98
+
+Bolso baguette guateado charol artificial
+
+Rosa Fucsia
+
+$MXN176.00
+1	sg2204089638334994	
+$MXN135.71
+$MXN175.98
+
+Bolso baguette guateado charol artificial
+
+Rosa Fucsia
+
+$MXN176.00
+1	sg2204089638334994	
+$MXN135.71
+$MXN175.98
+
+Leggings deportivos de tie dye inconsútil transpirable suave
+
+Café integral/7
+
+$MXN340.00
+1	st2203261224234550	
+$MXN262.16
+$MXN339.96
+
+Leggings deportivos de tie dye inconsútil transpirable suave
+
+Café integral/5
+
+$MXN340.00
+1	st2203261224234550	
+$MXN262.16
+$MXN339.96
+
+minimalista de pana Bolso baguette con Monedero
+
+Negro
+
+$MXN148.00 $MXN148.03
+
+1	sg2110189989955195	
+$MXN114.12
+$MXN148.03
+
+Shorts deportivos inconsútil con estiramiento alto de moldeador cadera
+
+Verde militar/5
+
+$MXN169.00
+1	st2112087869223631	
+$MXN130.31
+$MXN168.94
