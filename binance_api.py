@@ -51,6 +51,7 @@ class BinanceAPI:
         await self.session.close()
 
     async def get_ad_detail(self, advNo):
+        logger.info(f'calling get_ad_detail')
         return await self.api_call(
             'post',
             "https://api.binance.com/sapi/v1/c2c/ads/getDetailByNo",
@@ -60,7 +61,7 @@ class BinanceAPI:
             }
         )
     async def update_ad(self, advNo, priceFloatingRatio):
-        logger.info(f"Updating ad with rate: {priceFloatingRatio}")
+        logger.info(f"Updating ad: {advNo} with rate: {priceFloatingRatio}")
         return await self.api_call(
             'post',
             "https://api.binance.com/sapi/v1/c2c/ads/update",
@@ -71,6 +72,7 @@ class BinanceAPI:
             }
         )
     async def fetch_ads_search(self, asset_type):
+        logger.info(f'calling fetch_ads_search')
         try:
             result = await fetch_ads_search(self.KEY, self.SECRET, asset_type)
             if not result:

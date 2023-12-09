@@ -54,7 +54,7 @@ async def handle_system_notifications(ws, order_no, order_details, conn, order_s
             logger.info("Transaction cannot take place. Seller is not from Mexico.")
             logger.info(f"Adding {buyer_name} to the blacklist.")
             await send_text_message(ws, transaction_denied, order_no)
-            await add_to_blacklist(conn, buyer_name)
+            await add_to_blacklist(conn, buyer_name, order_no, country)
             return 
         
         kyc_status = await get_kyc_status(conn, buyer_name)

@@ -45,12 +45,12 @@ async def get_invalid_choice_reply(order_details):
 
 STATUS_MESSAGES = {
     2: {
-        'es': "Por favor enviar comprobante de pago(requerido). Si necesita ayuda ingrese la palabra \"AYUDA\"",
+        'es': "Por favor enviar comprobante de pago para poder liberar(requerido).",
         'en': "Please send proof of payment(required). For help type \"HELP\""
     },
     1: {
         'es': [
-            "Hola {buyer_name}. Por su seguridad, antes de poder proceder con el intercambio, es necesario verificar que no esté siendo víctima de un fraude.",
+            "Hola {buyer_name}. Antes de poder brindarle los datos bancarios es necesario verificar que no esté siendo víctima de un fraude.",
             "Responda con un 'Si' o un 'No' a las siguientes 3 preguntas.",
 
         ],

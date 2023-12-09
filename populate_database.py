@@ -44,11 +44,12 @@ async def process_ad(ad_info, api_instance):
         ad_details['target_spot'] = advNo_to_target_spot[advNo]
         logger.debug(f"Updated target_spot for advNo {advNo} to {advNo_to_target_spot[advNo]}")
         await update_ad_in_database(
-            advNo=advNo,
             target_spot=ad_details['target_spot'],
+            advNo=advNo,
             asset_type=ad_details['data']['asset'],
-            price=ad_details['data']['price'],
             floating_ratio=ad_details['data']['priceFloatingRatio'],
+            price=ad_details['data']['price'],
+            surplusAmount=ad_details['data']['surplusAmount'],
             account=ad_info['account']
         )
 if __name__ == "__main__":

@@ -15,7 +15,7 @@ async def handle_anti_fraud(buyer_name, conn, anti_fraud_stage, response, order_
             return "¿Está consciente de que las transacciones con este tipo de activos son irreversibles y que, una vez enviados, no hay manera de recuperarlos?(3/3)"
 
     if response.lower() not in ['sí', 'si', 'no', 'start_pro']:
-        await send_text_message(ws, "Respuesta no reconocida. Por favor, responda exactamente con 'Si' o 'No'.", order_no)
+        await send_text_message(ws, "Para poder brindarle los datos bancarios, por favor responda exactamente con un Si o No.", order_no)
 
         # Re-send the previous question as a reminder
         if anti_fraud_stage >= 0:
@@ -27,7 +27,7 @@ async def handle_anti_fraud(buyer_name, conn, anti_fraud_stage, response, order_
     if (anti_fraud_stage in [0, 1] and response.lower() in ['sí', 'si', ' si', 'si ']) or (anti_fraud_stage in [2] and response.lower() in [' no', 'no', 'no ']):
         await send_text_message(ws, "Por razones de seguridad, no podemos continuar con este intercambio. Es posible que este siendo víctima de un fraude. Por favor cancele la orden y no realice ninguna transferencia ya que puede perder su dinero.", order_no)
         await send_text_message(ws, transaction_denied, order_no)
-        await add_to_blacklist(conn, buyer_name)
+        await add_to_blacklist(conn, buyer_name, order_no, None)
         return
 
     # Update the stage based on the response
