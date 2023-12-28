@@ -342,7 +342,7 @@ async def main():
         await create_table(conn, sql_create_orders_table)
         #await add_column_if_not_exists(conn, 'orders', 'account_number TEXT')
         # Print table contents for verification
-        await print_table_contents(conn, 'users')
+        await print_table_contents(conn, 'orders')
 
         await conn.close()
     else:

@@ -1060,3 +1060,119 @@ RuntimeError: Session is closed
 2023-11-20 13:31:29,589:ip_info_io:INFO:Getting IP details for: 189.151.36.230
 2023-11-20 13:31:29,935:__main__:INFO:IP from Country: MX
 2023-11-20 13:31:29,935:__main__:INFO:The IP address is from Mexico.
+2023-12-25 16:24:46,926:__main__:INFO:Fetching ip for 2272
+2023-12-25 16:24:49,929:__main__:INFO:Fetching from gmail.com
+2023-12-25 16:24:49,929:fetch_gmail:INFO:Searching ip for: 2272
+2023-12-25 16:24:49,929:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 16:45:37,801:__main__:INFO:Searching ip for: 6680
+2023-12-25 16:45:38,305:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 16:45:38,792:__main__:WARNING:No recent emails found for today.
+2023-12-25 16:46:03,373:__main__:INFO:Searching ip for: 6880
+2023-12-25 16:46:03,380:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 16:46:04,275:__main__:INFO:Ip found: 187.198.146.115
+2023-12-25 16:48:50,156:__main__:INFO:Searching ip for: 6880
+2023-12-25 16:48:50,159:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 16:48:50,686:__main__:INFO:Ip found: 187.198.146.115
+2023-12-25 17:13:11,684:__main__:INFO:Searching ip for: 6880
+2023-12-25 17:13:11,684:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 17:13:16,852:__main__:WARNING:No IP address found in today's email content.
+2023-12-25 17:14:00,208:__main__:INFO:Searching ip for: 6880
+2023-12-25 17:14:00,214:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 17:14:01,953:__main__:WARNING:No IP address found in today's email content.
+2023-12-25 17:14:02,440:__main__:INFO:Searching ip for: 6880
+2023-12-25 17:14:02,440:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 17:14:04,229:__main__:WARNING:No IP address found in today's email content.
+2023-12-25 17:14:30,518:__main__:INFO:Searching ip for: 6880
+2023-12-25 17:14:30,534:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 17:14:31,053:__main__:INFO:Ip found: 187.198.146.115
+2023-12-25 19:51:50,910:__main__:INFO:Attempt 1: Searching IP for order ending with 3408
+2023-12-25 19:51:50,910:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 19:51:52,326:__main__:INFO:Attempt 2: Searching IP for order ending with 3408
+2023-12-25 19:51:52,326:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 19:51:53,659:__main__:INFO:Attempt 3: Searching IP for order ending with 3408
+2023-12-25 19:51:53,659:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 19:51:55,902:__main__:INFO:Attempt 4: Searching IP for order ending with 3408
+2023-12-25 19:51:55,902:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 19:51:57,232:__main__:INFO:Attempt 5: Searching IP for order ending with 3408
+2023-12-25 19:51:57,232:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 19:51:58,578:__main__:WARNING:No IP address found in recent emails
+2023-12-25 19:52:09,853:__main__:INFO:Attempt 1: Searching IP for order ending with 3408
+2023-12-25 19:52:09,853:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 19:52:11,588:__main__:INFO:Attempt 2: Searching IP for order ending with 3408
+2023-12-25 19:52:11,588:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 19:52:12,930:__main__:INFO:Attempt 3: Searching IP for order ending with 3408
+2023-12-25 19:52:12,932:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 19:52:14,273:__main__:INFO:Attempt 4: Searching IP for order ending with 3408
+2023-12-25 19:52:14,273:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 19:52:15,668:__main__:INFO:Attempt 5: Searching IP for order ending with 3408
+2023-12-25 19:52:15,668:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 19:52:16,997:__main__:WARNING:No IP address found in recent emails
+2023-12-25 19:53:58,843:__main__:INFO:Attempt 1: Searching IP for order ending with 3408
+2023-12-25 19:53:58,847:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 19:54:23,312:__main__:INFO:Attempt 2: Searching IP for order ending with 3408
+2023-12-25 19:54:23,312:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 19:54:24,648:__main__:INFO:Attempt 3: Searching IP for order ending with 3408
+2023-12-25 19:54:24,649:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 19:54:25,981:__main__:INFO:Attempt 4: Searching IP for order ending with 3408
+2023-12-25 19:54:25,981:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 19:54:27,319:__main__:INFO:Attempt 5: Searching IP for order ending with 3408
+2023-12-25 19:54:27,319:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 19:54:28,640:__main__:WARNING:No IP address found in recent emails
+2023-12-25 19:57:12,982:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 19:57:13,439:__main__:INFO:Total emails fetched: 0
+2023-12-25 19:58:21,664:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 19:58:22,001:__main__:INFO:Total emails fetched: 0
+2023-12-25 19:58:55,246:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 19:58:55,596:__main__:INFO:Total emails fetched: 11
+2023-12-25 19:58:55,768:__main__:INFO:Email subject: [Binance] Tienes una nueva orden P2P 1968 - 2023-12-26 02:49:26(UTC)
+2023-12-25 19:58:55,995:__main__:INFO:Email subject: [Binance] Tienes una nueva orden P2P 1968 - 2023-11-23 00:13:23(UTC)
+2023-12-25 19:58:56,235:__main__:INFO:Email subject: [Binance] Tienes una nueva orden P2P 1968 - 2023-11-03 22:17:45(UTC)
+2023-12-25 19:58:56,416:__main__:INFO:Email subject: [Binance] Tienes una nueva orden P2P 1968 - 2023-09-23 20:44:04(UTC)
+2023-12-25 19:58:56,581:__main__:INFO:Email subject: [Binance] Tienes una nueva orden P2P 1968 - 2023-02-25 06:13:18(UTC)
+2023-12-25 19:58:56,755:__main__:INFO:Email subject: [Binance] You have a new P2P Order 1968 - 2022-06-30 14:59:16(UTC)
+2023-12-25 19:58:56,949:__main__:INFO:Email subject: [Binance] You have a new P2P Order 1968 - 2022-06-20 13:55:37(UTC)
+2023-12-25 19:58:57,136:__main__:INFO:Email subject: [Binance] You have a new P2P Order 1968 - 2022-06-19 22:01:36(UTC)
+2023-12-25 19:58:57,302:__main__:INFO:Email subject: [Binance] You have a new P2P Order 1968 - 2022-06-18 22:58:21(UTC)
+2023-12-25 19:58:57,536:__main__:INFO:Email subject: [Binance] You have a new P2P Order 1968 - 2022-06-15 21:47:09(UTC)
+2023-12-25 19:58:57,721:__main__:INFO:Email subject: [Binance] You have a new P2P Order 1968 - 2022-06-12 22:43:55(UTC)
+2023-12-25 19:59:18,891:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 19:59:19,399:__main__:INFO:Total emails fetched: 9
+2023-12-25 19:59:19,557:__main__:INFO:Email subject: [Binance] Tienes una nueva orden P2P 3408 - 2023-12-26 02:02:28(UTC)
+2023-12-25 19:59:19,734:__main__:INFO:Email subject: [Binance] Tienes una nueva orden P2P 3408 - 2023-12-21 21:34:19(UTC)
+2023-12-25 19:59:19,880:__main__:INFO:Email subject: [Binance] Tienes una nueva orden P2P 3408 - 2023-12-20 01:19:33(UTC)
+2023-12-25 19:59:20,041:__main__:INFO:Email subject: [Binance] Tienes una nueva orden P2P 3408 - 2023-11-08 06:16:59(UTC)
+2023-12-25 19:59:20,201:__main__:INFO:Email subject: [Binance] Tienes una nueva orden P2P 3408 - 2023-10-09 19:20:55(UTC)
+2023-12-25 19:59:20,362:__main__:INFO:Email subject: [Binance] Tienes una nueva orden P2P 3408 - 2023-09-26 12:51:59(UTC)
+2023-12-25 19:59:20,514:__main__:INFO:Email subject: [Binance] You have a new P2P Order 3408 - 2022-07-11 20:13:49(UTC)
+2023-12-25 19:59:20,672:__main__:INFO:Email subject: [Binance] You have a new P2P Order 3408 - 2022-06-25 19:56:13(UTC)
+2023-12-25 19:59:20,866:__main__:INFO:Email subject: [Binance] You have a new P2P Order 3408 - 2022-06-10 23:17:28(UTC)
+2023-12-25 20:00:06,077:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 20:00:08,086:__main__:INFO:Total emails fetched: 0
+2023-12-25 20:00:52,429:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 20:00:54,378:__main__:WARNING:No matching email found
+2023-12-25 20:05:32,953:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 20:05:33,643:__main__:INFO:Processing email with subject: [Binance] Tienes una nueva orden P2P 3408 - 2023-12-26 02:02:28(UTC)
+2023-12-25 20:05:33,823:__main__:INFO:IP found: 200.68.161.104
+2023-12-25 20:05:34,342:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 20:05:34,824:__main__:INFO:Processing email with subject: [Binance] Tienes una nueva orden P2P 3408 - 2023-12-26 02:02:28(UTC)
+2023-12-25 20:05:34,997:__main__:INFO:IP found: 200.68.161.104
+2023-12-25 20:08:10,083:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 20:08:10,592:__main__:INFO:Processing email with subject: [Binance] Tienes una nueva orden P2P 1968 - 2023-12-26 02:49:26(UTC)
+2023-12-25 20:08:10,782:__main__:INFO:Processing email with subject: [Binance] Tienes una nueva orden P2P 1968 - 2023-11-23 00:13:23(UTC)
+2023-12-25 20:08:10,959:__main__:INFO:Processing email with subject: [Binance] Tienes una nueva orden P2P 1968 - 2023-11-03 22:17:45(UTC)
+2023-12-25 20:08:11,118:__main__:INFO:Processing email with subject: [Binance] Tienes una nueva orden P2P 1968 - 2023-09-23 20:44:04(UTC)
+2023-12-25 20:08:11,340:__main__:INFO:Processing email with subject: [Binance] Tienes una nueva orden P2P 1968 - 2023-02-25 06:13:18(UTC)
+2023-12-25 20:08:11,490:__main__:INFO:Processing email with subject: [Binance] You have a new P2P Order 1968 - 2022-06-30 14:59:16(UTC)
+2023-12-25 20:08:11,715:__main__:INFO:Processing email with subject: [Binance] You have a new P2P Order 1968 - 2022-06-20 13:55:37(UTC)
+2023-12-25 20:08:11,982:__main__:INFO:Processing email with subject: [Binance] You have a new P2P Order 1968 - 2022-06-19 22:01:36(UTC)
+2023-12-25 20:08:12,139:__main__:INFO:Processing email with subject: [Binance] You have a new P2P Order 1968 - 2022-06-18 22:58:21(UTC)
+2023-12-25 20:08:12,320:__main__:INFO:Processing email with subject: [Binance] You have a new P2P Order 1968 - 2022-06-15 21:47:09(UTC)
+2023-12-25 20:08:12,493:__main__:INFO:Processing email with subject: [Binance] You have a new P2P Order 1968 - 2022-06-12 22:43:55(UTC)
+2023-12-25 20:08:12,493:__main__:WARNING:No matching email found
+2023-12-25 20:11:54,061:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 20:13:25,214:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 20:13:26,248:__main__:INFO:IP found: 189.140.82.205
+2023-12-25 20:15:06,914:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 20:15:15,357:__main__:WARNING:No matching email found after maximum retries
+2023-12-25 20:15:32,581:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2023-12-25 20:15:33,898:__main__:INFO:IP found: 189.140.82.205

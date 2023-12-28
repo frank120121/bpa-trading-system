@@ -14,7 +14,7 @@ async def handle_anti_fraud(buyer_name, conn, anti_fraud_stage, response, order_
         elif stage == 2:
             return "¿Está consciente de que las transacciones con este tipo de activos son irreversibles y que, una vez enviados, no hay manera de recuperarlos?(3/3)"
 
-    if response.lower() not in ['sí', 'si', 'no', 'start_pro']:
+    if response.lower() not in ['sí', 'si', 'no', 'start_pro', 'si ', 'no ']:
         await send_text_message(ws, "Para poder brindarle los datos bancarios, por favor responda exactamente con un Si o No.", order_no)
 
         # Re-send the previous question as a reminder

@@ -22,14 +22,11 @@ class MerchantAccount:
             logger.warning("Failed to fetch order details from the external source.")
             return
         buyer_name = order_details.get('buyer_name')
-        if await is_blacklisted(conn, buyer_name):
-            await send_text_message(ws, transaction_denied, order_no)
-            return
         if msg_type == 'system':
-            await self._handle_system_type(ws, msg_json, conn, order_no, order_details)
+            await self._handle_system_type(ws, msg_json, conn, order_no, order_details, buyer_name)
         else:
-            await self._handle_other_types(ws, msg_json, msg_type, conn, order_no, order_details)
-    async def _handle_system_type(self, ws, msg_json, conn, order_no, order_details):
+            await self._handle_other_types(ws, msg_json, msg_type, conn, order_no, order_details, buyer_name)
+    async def _handle_system_type(self, ws, msg_json, conn, order_no, order_details, buyer_name):
         try:
             content = msg_json.get('content', '').lower()
             content_dict = json.loads(content)
@@ -41,10 +38,13 @@ class MerchantAccount:
         except json.JSONDecodeError:
             logger.error(f"Failed to decode JSON from content: {content}")
             return
+        if await is_blacklisted(conn, buyer_name):
+            await send_text_message(ws, transaction_denied, order_no)
+            return
         await update_order_status(conn, order_no, order_status)
         order_details = await get_order_details(conn, order_no)
         await handle_system_notifications(ws, order_no, order_details, conn, order_status)
-    async def _handle_other_types(self, ws, msg_json, msg_type, conn, order_no, order_details):
+    async def _handle_other_types(self, ws, msg_json, msg_type, conn, order_no, order_details, buyer_name):
         msg_status = msg_json.get('status')
         if msg_status == 'read':
             return
@@ -54,7 +54,8 @@ class MerchantAccount:
         if is_self_message:
             logger.debug(f"Ignoring self message: {uuid}")
             return
-
+        if await is_blacklisted(conn, buyer_name):
+            return
         if msg_type == 'text':
             content =  msg_json.get('content', '').lower()
             await handle_text_message(ws, content, order_no, order_details, conn)

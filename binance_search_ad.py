@@ -25,7 +25,7 @@ def hashing(query_string, secret):
 async def fetch_ads_search(KEY, SECRET, asset_type):
     timestamp = str(await get_server_timestamp())
     if asset_type == 'BTC':
-        transAmount = 15000
+        transAmount = 5000
         payTypes = None
     else:
         transAmount = 50000

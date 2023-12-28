@@ -1,3 +1,4 @@
+import asyncio
 from lang_utils import get_message_by_language, determine_language, transaction_denied, get_default_reply, payment_concept, payment_warning
 from common_utils import RateLimiter
 from database import update_total_spent, get_kyc_status, get_anti_fraud_stage, is_menu_presented
@@ -45,6 +46,7 @@ async def handle_system_notifications(ws, order_no, order_details, conn, order_s
         await log_deposit(conn, bank_account_number, amount_deposited)
 
     elif order_status == 1:
+        await asyncio.sleep(2)
         seller_name = order_details.get('seller_name')
         buyer_name = order_details.get('buyer_name')
         last_four_digits = order_no[-4:]
