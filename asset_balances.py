@@ -1,28 +1,13 @@
 import sqlite3
-from prettytable import PrettyTable
+import asyncio
+import aiosqlite
 import logging
 from logging_config import setup_logging
+from database import print_table_contents, create_connection
 setup_logging(log_filename='Binance_c2c_logger.log')
 logger = logging.getLogger(__name__)
 
 DATABASE_PATH = 'C:/Users/p7016/Documents/bpa/asset_balances.db'
-
-def setup_total_balances_db():
-    try:
-        connection = sqlite3.connect(DATABASE_PATH)
-        cursor = connection.cursor()
-        cursor.execute('''
-            CREATE TABLE IF NOT EXISTS total_balances (
-                asset TEXT PRIMARY KEY,
-                total_balance FLOAT
-            )
-        ''')
-        connection.commit()
-    except sqlite3.Error as e:
-        logger.error(f"Failed to create total_balances table, Error: {str(e)}")
-    finally:
-        if connection:
-            connection.close()
 
 def setup_bank_accounts_db():
     try:
@@ -44,6 +29,40 @@ def setup_bank_accounts_db():
         if connection:
             connection.close()
 
+def add_bank_account(account_number, account_name, bank_name):
+    try:
+        connection = sqlite3.connect(DATABASE_PATH)
+        cursor = connection.cursor()
+        cursor.execute('''
+            INSERT INTO bank_accounts (account_number, account_name, bank_name)
+            VALUES (?, ?, ?)
+        ''', (account_number, account_name, bank_name))
+
+        connection.commit()
+    except sqlite3.IntegrityError:
+        logger.error(f"Account number {account_number} already exists.")
+    except sqlite3.Error as e:
+        logger.error(f"Failed to add bank account {account_number}, Error: {str(e)}")
+    finally:
+        if connection:
+            connection.close()
+
+def setup_total_balances_db():
+    try:
+        connection = sqlite3.connect(DATABASE_PATH)
+        cursor = connection.cursor()
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS total_balances (
+                asset TEXT PRIMARY KEY,
+                total_balance FLOAT
+            )
+        ''')
+        connection.commit()
+    except sqlite3.Error as e:
+        logger.error(f"Failed to create total_balances table, Error: {str(e)}")
+    finally:
+        if connection:
+            connection.close()
 
 
 def setup_db():
@@ -62,22 +81,6 @@ def setup_db():
     connection.commit()
     connection.close()
 
-def add_bank_account(account_number, account_name, bank_name):
-    try:
-        connection = sqlite3.connect(DATABASE_PATH)
-        cursor = connection.cursor()
-        cursor.execute('''
-            INSERT INTO bank_accounts (account_number, account_name, bank_name)
-            VALUES (?, ?, ?, ?)
-        ''', (account_number, account_name, bank_name))
-        connection.commit()
-    except sqlite3.IntegrityError:
-        logger.error(f"Account number {account_number} already exists.")
-    except sqlite3.Error as e:
-        logger.error(f"Failed to add bank account {account_number}, Error: {str(e)}")
-    finally:
-        if connection:
-            connection.close()
 
 def update_total_balances():
     try:
@@ -158,14 +161,6 @@ def get_all_balances():
             connection.close()
     return balances_data
 
-def print_all_balances():
-    balances_data = get_all_balances()
-    
-    if balances_data:
-        for exchange_id, account, asset, balance in balances_data:
-            print(f"Exchange ID: {exchange_id}, Account: {account}, Asset: {asset}, Balance: {balance}")
-    else:
-        print("No balance data found.")
 def get_total_asset_balances():
     try:
         connection = sqlite3.connect(DATABASE_PATH)
@@ -184,48 +179,34 @@ def get_total_asset_balances():
             connection.close()
     return total_balances
 
-def print_total_asset_balances():
-    total_balances = get_total_asset_balances()
-    
-    if total_balances:
-        for asset, total_balance in total_balances:
-            print(f"Asset: {asset}, Total Balance: {total_balance}")
-    else:
-        print("No balance data found.")
-def print_table_contents(table_name):
+async def total_usd():
     try:
-        connection = sqlite3.connect(DATABASE_PATH)
-        cursor = connection.cursor()
-        
-        cursor.execute(f"PRAGMA table_info({table_name})")
-        columns_info = cursor.fetchall()
-        column_names = [column[1] for column in columns_info]
+        async with aiosqlite.connect(DATABASE_PATH) as connection:
+            async with connection.cursor() as cursor:
+                # Query for USD-related assets
+                await cursor.execute('''
+                    SELECT SUM(balance)
+                    FROM balances
+                    WHERE asset IN ('USD', 'USDC', 'USDT', 'TUSD')
+                ''')
+                total_usd = await cursor.fetchone()
+                total_usd = total_usd[0] if total_usd[0] is not None else 0
 
-        cursor.execute(f"SELECT * FROM {table_name}")
-        rows = cursor.fetchall()
-        
-        table = PrettyTable()
-        table.field_names = column_names
-        for row in rows:
-            table.add_row(row)
-        
-        print(f"\nContents of {table_name}:")
-        print(table)
+                # Query for MXN
+                await cursor.execute('''
+                    SELECT SUM(balance)
+                    FROM balances
+                    WHERE asset = 'MXN'
+                ''')
+                total_mxn = await cursor.fetchone()
+                total_mxn = total_mxn[0] if total_mxn[0] is not None else 0
 
-    except sqlite3.Error as e:
-        print(f"Error reading from table {table_name}: {e}")
-    finally:
-        if connection:
-            connection.close()
+        print(f"Total USD (including USDC, USDT, TUSD): {total_usd}")
+        print(f"Total MXN: {total_mxn}")
+    except Exception as e:
+        print(f"Database error: {e}")
 
+async def main():
+    await total_usd()
 if __name__ == "__main__":
-    # setup_db()
-    # setup_bank_accounts_db()
-    # setup_total_balances_db()
-    # update_total_balances()
-    # print_table_contents("bank_accounts")
-    # print_table_contents("balances")
-    # print_table_contents("total_balances")
-
-    
-    add_bank_account()
+    asyncio.run(main())

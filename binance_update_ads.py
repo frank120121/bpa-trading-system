@@ -9,7 +9,7 @@ from binance_api import BinanceAPI
 setup_logging(log_filename='Binance_c2c_logger.log')
 logger = logging.getLogger(__name__)
 
-PRICE_THRESHOLD = 1.0163
+PRICE_THRESHOLD = 1.0243
 MIN_RATIO = 101.3
 MAX_RATIO = 110
 RATIO_ADJUSTMENT = 0.04

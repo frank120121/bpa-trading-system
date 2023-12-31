@@ -1,47 +1,68 @@
 from common_vars import ProhibitedPaymentTypes
 import logging
 from logging_config import setup_logging
+
+# Setting up logging
 setup_logging(log_filename='Binance_c2c_logger.log')
 logger = logging.getLogger(__name__)
 
+# Language determination function
 def determine_language(order_details):
-    fiat_unit = order_details.get('fiat_unit')
     lang_mappings = {'MXN': 'es', 'USD': 'en'}
-    return lang_mappings.get(fiat_unit, 'en')
+    return lang_mappings.get(order_details.get('fiat_unit', 'en'))
+
+# Async function to get menu for an order
 async def get_menu_for_order(order_details):
     language = determine_language(order_details)
-    menu = get_menu_by_language(language, order_details.get('order_status'))
-    return menu
+    return get_menu_by_language(language, order_details.get('order_status'))
+
+# Async function to get default reply
 async def get_default_reply(order_details):
     language = determine_language(order_details)
-    if language == 'es':
-        return "Si tiene alguna duda o necesita ayuda, solo escriba 'ayuda' en el chat y le presentaré un menú de opciones."
-    else:
-        return "If you have any questions or need assistance, just type 'help' in the chat, and I'll present you with an options menu."
+    return (
+        "Si tiene alguna duda o necesita ayuda, solo escriba 'ayuda' en el chat y le presentaré un menú de opciones."
+        if language == 'es' else
+        "If you have any questions or need assistance, just type 'help' in the chat, and I'll present you with an options menu."
+    )
+
+# Async function to get response for a menu choice
 async def get_response_for_menu_choice(language, status, choice, buyer_name=None):
     response = MENU_RESPONSES.get(status, {}).get(language, {}).get(choice)
-    
-    if response is not None:
+    if response:
         if isinstance(response, list):
-            formatted_response = [msg.format(buyer_name=buyer_name, ProhibitedPaymentTypes=ProhibitedPaymentTypes) for msg in response]
-            return "\n\n".join(formatted_response)
+            response = "\n\n".join(
+                msg.format(buyer_name=buyer_name, ProhibitedPaymentTypes=ProhibitedPaymentTypes) for msg in response
+            )
         else:
-            return response.format(buyer_name=buyer_name, ProhibitedPaymentTypes=ProhibitedPaymentTypes)
+            response = response.format(buyer_name=buyer_name, ProhibitedPaymentTypes=ProhibitedPaymentTypes)
+    return response
 
-    return None
-
-
+# Async function to validate menu choice
 async def is_valid_choice(language, status, choice):
     valid_choices = MENUS.get(status, {}).get(language, [])
     return choice in range(1, len(valid_choices) + 1)
 
+# Async function to get reply for invalid choice
 async def get_invalid_choice_reply(order_details):
     language = determine_language(order_details)
-    if language == 'es':
-        return "Opción no válida."
-    else:
-        return "Invalid choice."
+    return "Opción no válida." if language == 'es' else "Invalid choice."
 
+# Global variables for status messages, menus, and menu responses
+STATUS_MESSAGES, MENUS, MENU_RESPONSES = {}, {}, {}
+
+# Function to get menu by language
+def get_menu_by_language(language, status):
+    return MENUS.get(status, {}).get(language, [])
+
+# Async function to get message by language
+async def get_message_by_language(language, status, buyer_name=None):
+    messages = STATUS_MESSAGES.get(status, {}).get(language, None)
+    if messages:
+        if isinstance(messages, list):
+            messages = [msg.format(buyer_name=buyer_name, ProhibitedPaymentTypes=ProhibitedPaymentTypes) for msg in messages]
+        else:
+            messages = [messages.format(buyer_name=buyer_name, ProhibitedPaymentTypes=ProhibitedPaymentTypes)]
+    return messages
 
 STATUS_MESSAGES = {
     2: {
@@ -60,7 +81,10 @@ STATUS_MESSAGES = {
         ],
     },
     7: {
-        'es': "veo que la orden se cancelo. Si envio el pago y la orden se cancelo no se preocupe, puede abrir una nueva orden sin tener que pagar dos veces. Solo adjunte el comprobante de pago y seleccione la opción que dice 'realizar pago' o 'transferir notificar al vendedor' con gusto lo atendere. (respuesta automatica)",
+        'es': (
+            "veo que la orden se cancelo. Si envio el pago y la orden se cancelo no se preocupe, puede abrir una nueva orden sin tener que pagar dos veces. "
+            "Solo adjunte el comprobante de pago y seleccione la opción que dice 'realizar pago' o 'transferir notificar al vendedor' con gusto lo atendere. (respuesta automatica)"
+        ),
         'en': "Order has been automatically cancelled. If you have sent the payment, please open a new order and attach your proof of your payment."
     },
 
@@ -70,7 +94,13 @@ STATUS_MESSAGES = {
 
     },
     9: {
-        'es': "Debido a que violó los términos del anuncio se procede con el retorno de la transferencia. Me podrías ayudar confirmando el número de CLABE INTERBANCARIA y nombre de BENEFICIARIO para poder proceder lo más rápido posible. Por favor no se desespere, realizaré el retorno en cuanto me sea posible. Tome en cuenta que tengo otras órdenes pendientes. Muchas gracias por su comprensión, estaré enviando lo más rápido posible.(respuesta automatica)",
+        'es': (
+            "Debido a que violó los términos del anuncio se procede con una apelacion de la orden.\n\n"
+            "En caso de cualquier retorno, se require un lapso de hasta 24 horas para poder realizar el retorno.\n" 
+            "En caso de retorno proporcione el número de CLABE INTERBANCARIA y nombre de BENEFICIARIO para poder proceder lo más rápido posible.\n\n"
+            "Por favor no se desespere, realizaré el retorno en cuanto me sea posible. Tome en cuenta que tengo otras órdenes pendientes.\n\n"
+            "Muchas gracias por su comprensión.(respuesta automatica)"
+        ),
         'en': "Order is under appeal due to violation of terms. Please wait while the team resolves your order."
     },
     5: {
@@ -84,7 +114,10 @@ STATUS_MESSAGES = {
     }
     ,
     4: {
-        'es': "Esta orden ya se completo con exito por favor verificar en su billetera de fondos o billetera spot.",
+        'es': (
+            "Esta orden ya se completo con exito por favor verificar en su billetera de fondos o billetera spot. Le agradeceria un 👍 , yo hare lo mismo.\n\n"
+            "Tenga usted un excelente dia."
+        ),
         'en': "This order is now completed, you can check in your funds or spot wallet please."
     }
     ,
@@ -133,7 +166,10 @@ MENUS = {
 MENU_RESPONSES = {
     1: {
         'es': {
-            1: "Para ver las opciones de pago por favor seleccione la opcion Realizar Pago en la parte superior > Seleccione el metodo de pago > Selecione la opcion que dice Transferido, notificar al vendedor despues de realizar el pago.",
+            1: (
+                "Para ver las opciones de pago por favor seleccione la opcion Realizar Pago en la parte superior > Seleccione el metodo de pago "
+                "> Selecione la opcion que dice Transferido, notificar al vendedor despues de realizar el pago."
+            ),
             2: " Para el concepto estas son opciones validas: pago, o su nombre ({buyer_name}).",
             3: "Pagos provenientes de {ProhibitedPaymentTypes} estan PROHIBIDOS y seran APELADOS."
         },
@@ -148,10 +184,17 @@ MENU_RESPONSES = {
             1: "Estamos validando su pago, por favor permitame unos minutos para verificar. Gracias por su paciencia",
             2: "Puedes enviar la prueba de pago selecionando el boton (+) > ALBUM > y la captura que desea adjuntar.",
             3: "Si enviaste una cantidad incorrecta, deberas cancelar esta orden primero y despues abrir una nueva orden por la cantidad correcta.",
-            4: "Si necesitas más tiempo para realizar el pago, debido a que necesitas dar de alta la cuenta podemos esperar. Siempre y cuando no se demore mas de 1 hora, de lo contrario la orden sera APELADA.",
+            4: (
+                "Si necesitas más tiempo para realizar el pago, debido a que necesitas dar de alta la cuenta podemos esperar. "
+                "Siempre y cuando no se demore mas de 1 hora, de lo contrario la orden sera APELADA."
+            ),
             5: [
                 "El tiempo de espera para transacciones BBVA puede llegar a ser hasta de 4 horas.",
-                "Puede verificar el estado de la transferncia en su app BBVA ingresando a la app > selecione la cuenta desde donde realizo el pago > En la parte de abajo seleccione la opcion: Ver todos > el pago que realizo > y entre la cantidad y la fecha la va aparecer Establecido cuando el pago se haga realizado o en transito si aun no se envia.",
+                (
+                    "Puede verificar el estado de la transferncia en su app BBVA ingresando a la app > selecione la cuenta desde donde realizo el pago "
+                    "> En la parte de abajo seleccione la opcion: Ver todos > el pago que realizo > y entre la cantidad y la fecha la va aparecer "
+                    "Establecido cuando el pago se haga realizado o en transito si aun no se envia."
+                ),
                 "Para pagos desde la web le va aparecer como liquidado cuando el pago sea enviado, de lo contrario aparece como pendiente.",
             ],
         },
@@ -164,20 +207,6 @@ MENU_RESPONSES = {
     }
 }
 
-def get_menu_by_language(language, status):
-    return MENUS.get(status, {}).get(language, [])
-
-async def get_message_by_language(language, status, buyer_name=None):
-    messages = STATUS_MESSAGES.get(status, {}).get(language, None)
-
-    if messages:
-        if isinstance(messages, list):
-            formatted_messages = [msg.format(buyer_name=buyer_name, ProhibitedPaymentTypes=ProhibitedPaymentTypes) for msg in messages]
-            return formatted_messages
-        else:
-            return [messages.format(buyer_name=buyer_name, ProhibitedPaymentTypes=ProhibitedPaymentTypes)]
-
-    return None
 transaction_denied = (
     "For security reasons, I cannot sell to you. Please cancel the order.\n\n"
     "Por razones de seguridad no es posible proceder. Por favor cancele la orden."

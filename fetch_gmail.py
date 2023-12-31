@@ -1,8 +1,6 @@
 import asyncio
 import base64
 import re
-import datetime
-import pytz
 from googleapiclient.discovery import build
 import pickle
 import os
@@ -52,35 +50,41 @@ async def gmail_fetch_ip(last_four):
     service = await get_gmail_service()
 
     while retry_count < max_retries:
-        # Fetch the 3 most recent emails
-        messages_request = await asyncio.to_thread(service.users().messages().list, userId='me', maxResults=4)
-        messages_response = messages_request.execute()
-        messages = messages_response.get('messages', [])
+        try:
+            # Fetch the 3 most recent emails
+            messages_request = await asyncio.to_thread(service.users().messages().list, userId='me', maxResults=2)
+            messages_response = messages_request.execute()
+            messages = messages_response.get('messages', [])
 
-        for message in messages:
-            # Get each message's details
-            msg_request = await asyncio.to_thread(service.users().messages().get, userId='me', id=message['id'], format='metadata')
-            msg_response = msg_request.execute()
-            headers = msg_response['payload']['headers']
-
-            # Check if the subject line matches
-            subject_line = next((header['value'] for header in headers if header['name'] == 'Subject'), None)
-            if f"[Binance] Tienes una nueva orden P2P {last_four}" in subject_line:
-                # Fetch the full email content
-                msg_request = await asyncio.to_thread(service.users().messages().get, userId='me', id=message['id'], format='full')
+            for message in messages:
+                # Get each message's details
+                msg_request = await asyncio.to_thread(service.users().messages().get, userId='me', id=message['id'], format='metadata')
                 msg_response = msg_request.execute()
-                msg_body = msg_response['payload']['body']['data']
-                email_content = base64.urlsafe_b64decode(msg_body).decode('utf-8')
+                headers = msg_response['payload']['headers']
 
-                # Extract IP address
-                desde_match = re.search(r'desde\s+(\d+\.\d+\.\d+\.\d+)', email_content, re.IGNORECASE)
-                if desde_match:
-                    logger.info(f"IP found: {desde_match.group(1)}")
-                    return desde_match.group(1)
+                # Check if the subject line matches
+                subject_line = next((header['value'] for header in headers if header['name'] == 'Subject'), None)
+                if f"[Binance] Tienes una nueva orden P2P {last_four}" in subject_line:
+                    # Fetch the full email content
+                    msg_request = await asyncio.to_thread(service.users().messages().get, userId='me', id=message['id'], format='full')
+                    msg_response = msg_request.execute()
+                    msg_body = msg_response['payload']['body']['data']
+                    email_content = base64.urlsafe_b64decode(msg_body).decode('utf-8')
 
-        # If not found, increase retry count and wait
-        retry_count += 1
-        await asyncio.sleep(1)
+                    # Extract IP address
+                    desde_match = re.search(r'desde\s+(\d+\.\d+\.\d+\.\d+)', email_content, re.IGNORECASE)
+                    if desde_match:
+                        ip_address = desde_match.group(1)
+                        logger.info(f"IP found: {ip_address}")
+                        return ip_address
+
+            # If not found, increase retry count and wait
+            retry_count += 1
+            await asyncio.sleep(1)
+
+        except Exception as e:
+            logger.error(f"Error fetching emails: {e}")
+            # Optional: Add logic to handle specific exceptions
 
     logger.warning("No matching email found after maximum retries")
     return None
