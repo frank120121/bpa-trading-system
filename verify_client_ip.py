@@ -15,7 +15,7 @@ async def fetch_ip(last_four_digits, seller_name):
     email_id = MERCHANTS[seller_name]
     ip = None
 
-    for attempt in range(5):
+    for attempt in range(10):
         await asyncio.sleep(3)
         if email_id == 1:
             logger.info(f"Fetching from outlook.com")
@@ -34,7 +34,7 @@ async def fetch_ip(last_four_digits, seller_name):
         logger.info(f"IP from Country: {country}")
         return country
     else:
-        logger.error(f"Failed to fetch the IP address after 3 attempts for the last four digits: {last_four_digits}.")
+        logger.error(f"Failed to fetch the IP address after 10 attempts for the last four digits: {last_four_digits}.")
 
         
 async def main():

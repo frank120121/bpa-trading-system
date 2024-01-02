@@ -10,30 +10,36 @@ logger = logging.getLogger(__name__)
 DB_FILE = 'C:/Users/p7016/Documents/bpa/orders_data.db'
 
 async def initialize_database(conn):
-        await conn.execute('''
-            CREATE TABLE IF NOT EXISTS mxn_deposits (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                timestamp DATETIME,
-                account_number TEXT,
-                amount_deposited REAL
-            )
-        ''')
-        await conn.execute('''
-            CREATE TABLE IF NOT EXISTS mxn_bank_accounts (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                account_bank_name TEXT,
-                account_beneficiary TEXT,
-                account_number TEXT UNIQUE,
-                account_limit REAL,
-                account_balance REAL DEFAULT 0,
-                last_used_timestamp DATETIME DEFAULT NULL
-            )
-        ''')
-        for account in bank_accounts:
+    await conn.execute('''
+        CREATE TABLE IF NOT EXISTS mxn_deposits (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            timestamp DATETIME,
+            account_number TEXT,
+            amount_deposited REAL
+        )
+    ''')
+    await conn.execute('''
+        CREATE TABLE IF NOT EXISTS mxn_bank_accounts (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            account_bank_name TEXT,
+            account_beneficiary TEXT,
+            account_number TEXT UNIQUE,
+            account_limit REAL,
+            account_balance REAL DEFAULT 0,
+            last_used_timestamp DATETIME DEFAULT NULL
+        )
+    ''')
+    for account in bank_accounts:
+        # Check if the account number already exists
+        cursor = await conn.execute("SELECT 1 FROM mxn_bank_accounts WHERE account_number = ?", (account['account_number'],))
+        if not await cursor.fetchone():
             await conn.execute(
                 'INSERT INTO mxn_bank_accounts (account_bank_name, account_beneficiary, account_number, account_limit, account_balance) VALUES (?, ?, ?, ?, ?)',
                 (account['bank_name'], account['beneficiary'], account['account_number'], account['limit'], 0))
-        await conn.commit()
+        else:
+            logger.info(f"Account number {account['account_number']} already exists. Skipping insertion.")
+    await conn.commit()
+
 
 async def add_bank_account(conn, bank_name, beneficiary, account_number, account_limit, account_balance=0):
     try:
@@ -135,10 +141,10 @@ async def main():
     conn = await create_connection(DB_FILE)
     if conn is not None:
         # Initialize the database (create tables and insert initial data)
-        #await initialize_database(conn)
+        await initialize_database(conn)
 
         # Print table contents for verification
-        await remove_bank_account(conn, '058597000054265356')
+        await remove_bank_account(conn, '012778015939990486')
         await print_table_contents(conn, 'mxn_deposits')
         await print_table_contents(conn, 'mxn_bank_accounts')
 

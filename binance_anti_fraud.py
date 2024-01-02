@@ -17,7 +17,9 @@ async def handle_anti_fraud(buyer_name, conn, anti_fraud_stage, response, order_
         Mercado Pago
         STP
         OXXO Spin
-        BanCoppel"""
+        BanCoppel
+        Albo
+        """
         ]
         return questions[stage] if 0 <= stage < len(questions) else None
 

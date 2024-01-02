@@ -71,3 +71,12 @@
 2023-11-15 13:01:36,755:__main__:ERROR:Database error: near ",": syntax error
 2023-11-15 13:01:36,755:__main__:ERROR:Database error: no such column: rfc
 2023-12-02 17:03:36,540:__main__:INFO:Removed bank account: 058597000054265356
+2024-01-01 16:55:29,565:__main__:INFO:Removed bank account: 012778015939990486
+2024-01-01 17:00:57,291:__main__:INFO:Account number 710969000007300927 already exists. Skipping insertion.
+2024-01-01 17:00:57,292:__main__:INFO:Account number 012778015323351288 already exists. Skipping insertion.
+2024-01-01 17:00:57,292:__main__:INFO:Account number 646180146006124571 already exists. Skipping insertion.
+2024-01-01 17:00:57,293:__main__:INFO:Account number 058597000056476091 already exists. Skipping insertion.
+2024-01-01 17:00:57,293:__main__:INFO:Account number 710969000016348705 already exists. Skipping insertion.
+2024-01-01 17:00:57,295:__main__:INFO:Account number 710969000015306104 already exists. Skipping insertion.
+2024-01-01 17:00:57,295:__main__:INFO:Account number 014761655091416464 already exists. Skipping insertion.
+2024-01-01 17:00:57,305:__main__:INFO:Removed bank account: 012778015939990486
