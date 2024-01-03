@@ -28,7 +28,7 @@ async def fetch_ads_search(KEY, SECRET, asset_type):
         transAmount = 5000
         payTypes = None
     else:
-        transAmount = 50000
+        transAmount = 30000
         payTypes = ["BBVABank"]
 
     payload = {

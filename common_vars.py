@@ -73,6 +73,12 @@ bank_accounts = [
         "limit": 90000.00
     },
     {
+        "bank_name": "BBVA",
+        "beneficiary": "Maria Fernanda Munoz Perea",
+        "account_number": "012778004824246573",
+        "limit": 90000.00
+    },
+    {
         "bank_name": "Nvio",
         "beneficiary": "Maria Fernanda Munoz Perea",
         "account_number": "710969000016348705",
