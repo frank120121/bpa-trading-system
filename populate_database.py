@@ -12,6 +12,10 @@ import sys
 if sys.platform == 'win32':
     asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 advNo_to_target_spot = {ad['advNo']: ad['target_spot'] for _, ads in ads_dict.items() for ad in ads}
+advNo_to_fiat = {ad['advNo']: ad['fiat'] for _, ads in ads_dict.items() for ad in ads}
+advNo_to_transAmount = {ad['advNo']: ad['transAmount'] for _, ads in ads_dict.items() for ad in ads}
+
+
 async def populate_ads_with_details():
     api_instances = {}
     async with aiohttp.ClientSession() as session:
@@ -36,12 +40,18 @@ async def delayed_process(delay, ad_info, api_instance):
     """Wait for the specified delay and then process the ad."""
     await asyncio.sleep(delay)
     await process_ad(ad_info, api_instance)
+
 async def process_ad(ad_info, api_instance):
     advNo = ad_info['advNo']
     ad_details = await api_instance.get_ad_detail(advNo)
     logger.debug(f"Ad details fetched from BinanceAPI for advNo {advNo}: {ad_details}")
+
     if ad_details and advNo in advNo_to_target_spot:
+        # Update target_spot, fiat, and transAmount using the mappings
         ad_details['target_spot'] = advNo_to_target_spot[advNo]
+        fiat = advNo_to_fiat.get(advNo)
+        transAmount = advNo_to_transAmount.get(advNo)
+
         logger.debug(f"Updated target_spot for advNo {advNo} to {advNo_to_target_spot[advNo]}")
         await update_ad_in_database(
             target_spot=ad_details['target_spot'],
@@ -50,7 +60,10 @@ async def process_ad(ad_info, api_instance):
             floating_ratio=ad_details['data']['priceFloatingRatio'],
             price=ad_details['data']['price'],
             surplusAmount=ad_details['data']['surplusAmount'],
-            account=ad_info['account']
+            account=ad_info['account'],
+            fiat=fiat,
+            transAmount=transAmount
         )
+
 if __name__ == "__main__":
     asyncio.run(populate_ads_with_details())

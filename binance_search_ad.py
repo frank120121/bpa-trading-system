@@ -22,18 +22,19 @@ def get_credentials():
 def hashing(query_string, secret):
     return hmac.new(secret.encode('utf-8'), query_string.encode('utf-8'), hashlib.sha256).hexdigest()
 
-async def fetch_ads_search(KEY, SECRET, asset_type):
+async def fetch_ads_search(KEY, SECRET, asset_type, fiat, transAmount):
     timestamp = str(await get_server_timestamp())
-    if asset_type == 'BTC':
-        transAmount = 5000
-        payTypes = None
-    else:
-        transAmount = 30000
-        payTypes = ["BBVABank"]
+    if fiat == 'USD':
+            payTypes = ["Zelle"]
+    elif fiat == 'MXN':
+        if asset_type == 'BTC':
+            payTypes = None
+        else:
+            payTypes = ["BBVABank"]
 
     payload = {
         "asset": asset_type,
-        "fiat": "MXN",
+        "fiat": fiat,
         "page": 1,
         "publisherType": "merchant",
         "rows": 10,
@@ -76,10 +77,20 @@ if __name__ == "__main__":
 
     if KEY and SECRET:
         async def main():
-            tasks = [fetch_ads_search(KEY, SECRET, asset_type) for asset_type in ["BTC", "USDT"]]
+            # Define your asset types, fiat, and transAmount combinations
+            search_params = [
+                {'asset_type': 'BTC', 'fiat': 'USD', 'transAmount': 990},
+                # Add more combinations if necessary
+            ]
+
+            # Create tasks for each combination
+            tasks = [fetch_ads_search(KEY, SECRET, param['asset_type'], param['fiat'], param['transAmount']) for param in search_params]
+            
             results = await asyncio.gather(*tasks)
-            for asset_type, ads in zip(["BTC", "USDT"], results):
-                print(f"{asset_type} Ads:\n", ads)
+
+            # Print results
+            for param, ads in zip(search_params, results):
+                print(f"{param['asset_type']} Ads with fiat {param['fiat']} and transAmount {param['transAmount']}:\n", ads)
                 print()
 
         asyncio.run(main())

@@ -11,18 +11,36 @@ DB_PATH = 'C:/Users/p7016/Documents/bpa/ads_data.db'
 
 async def create_database():
     async with aiosqlite.connect(DB_PATH) as conn:
-        await conn.execute('''CREATE TABLE IF NOT EXISTS ads 
-                            (
-                                advNo TEXT PRIMARY KEY, 
-                                target_spot INTEGER NOT NULL,
-                                asset_type TEXT NOT NULL, 
-                                price REAL, 
-                                floating_ratio REAL, 
-                                last_updated TIMESTAMP,
-                                account TEXT NOT NULL,
-                                surplused_amount REAL DEFAULT 0
-                            )''')
+        # Create the table with the initial schema if it doesn't exist
+        await conn.execute('''
+            CREATE TABLE IF NOT EXISTS ads (
+                advNo TEXT PRIMARY KEY, 
+                target_spot INTEGER NOT NULL,
+                asset_type TEXT NOT NULL, 
+                price REAL, 
+                floating_ratio REAL, 
+                last_updated TIMESTAMP,
+                account TEXT NOT NULL,
+                surplused_amount REAL DEFAULT 0
+            )
+        ''')
+
+        # Check if the 'fiat' and 'transAmount' columns exist and add them if they don't
+        cursor = await conn.execute("PRAGMA table_info(ads)")
+        columns = await cursor.fetchall()
+        if not any(column[1] == 'fiat' for column in columns):
+            await conn.execute("ALTER TABLE ads ADD COLUMN fiat TEXT NOT NULL DEFAULT 'Unknown'")
+        if not any(column[1] == 'transAmount' for column in columns):
+            await conn.execute("ALTER TABLE ads ADD COLUMN transAmount REAL")
+
         await conn.commit()
+
+
+async def clear_ads_table():
+    async with aiosqlite.connect(DB_PATH) as conn:
+        await conn.execute("DELETE FROM ads")
+        await conn.commit()
+
 
 async def fetch_all_ads_from_database():
     async with aiosqlite.connect(DB_PATH) as conn:
@@ -38,7 +56,9 @@ async def fetch_all_ads_from_database():
             'floating_ratio': ad[4],
             'last_updated': ad[5],
             'account': ad[6],
-            'surplused_amount': ad[7]
+            'surplused_amount': ad[7],
+            'fiat': ad[8],
+            'transAmount': ad[9]
         }
         for ad in ads
     ]
@@ -58,28 +78,31 @@ async def get_ad_from_database(advNo):
             'floating_ratio': ad[4],
             'last_updated': ad[5],
             'account': ad[6],
-            'surplused_amount': ad[7]
+            'surplused_amount': ad[7],
+            'fiat': ad[8],
+            'transAmount': ad[9]
         }
 
     return None
 
-async def update_ad_in_database(target_spot, advNo, asset_type, floating_ratio, price, surplusAmount, account):
-    logger.debug(f"Attempting to update {advNo} with price: {price}, floating_ratio: {floating_ratio}, asset_type: {asset_type}, target_spot: {target_spot}")
+async def update_ad_in_database(target_spot, advNo, asset_type, floating_ratio, price, surplusAmount, account, fiat, transAmount):
+    logger.debug(f"Attempting to update {advNo} with price: {price}, floating_ratio: {floating_ratio}, asset_type: {asset_type}, target_spot: {target_spot}, fiat: {fiat}, transAmount: {transAmount}")
     
     async with aiosqlite.connect(DB_PATH) as conn:
         c = await conn.cursor()
         try:
             await c.execute("""
             INSERT OR REPLACE INTO ads
-            (advNo, target_spot, asset_type, price, floating_ratio, last_updated, account, surplused_amount) 
-            VALUES (?, ?, ?, ?, ?, datetime('now'), ?, ?)""", 
-            (advNo, target_spot, asset_type, price, floating_ratio, account, surplusAmount))
+            (advNo, target_spot, asset_type, price, floating_ratio, last_updated, account, surplused_amount, fiat, transAmount) 
+            VALUES (?, ?, ?, ?, ?, datetime('now'), ?, ?, ?, ?)""", 
+            (advNo, target_spot, asset_type, price, floating_ratio, account, surplusAmount, fiat, transAmount))
             await conn.commit()
 
             logger.debug(f"Updated ad {advNo} successfully.")
         except Exception as e:
             logger.error(f"Exception during updating ad {advNo}: {e}")
-def insert_initial_ads():
+
+async def insert_initial_ads():
     ads_to_insert = []
     for account_name, ads in ads_dict.items():
         for ad in ads:
@@ -87,26 +110,30 @@ def insert_initial_ads():
                 'advNo': ad['advNo'],
                 'target_spot': ad['target_spot'],
                 'asset_type': ad['asset_type'],
-                'account': account_name 
+                'account': account_name,
+                'fiat': ad['fiat'],
+                'transAmount': ad['transAmount']  # Include transAmount
             })
-    asyncio.run(insert_multiple_ads(ads_to_insert))
+    await insert_multiple_ads(ads_to_insert)  # Directly await the coroutine
+
+
 async def insert_multiple_ads(ads_list):
     async with aiosqlite.connect(DB_PATH) as conn:
         c = await conn.cursor()
         for ad in ads_list:
             await c.execute(
-                """INSERT OR REPLACE INTO ads (advNo, target_spot, asset_type, account) 
-                VALUES (?, ?, ?, ?)""", 
-                (ad['advNo'], ad['target_spot'], ad['asset_type'], ad['account'])
+                """INSERT OR REPLACE INTO ads (advNo, target_spot, asset_type, account, fiat, transAmount) 
+                VALUES (?, ?, ?, ?, ?, ?)""",  # Include transAmount in the query
+                (ad['advNo'], ad['target_spot'], ad['asset_type'], ad['account'], ad['fiat'], ad['transAmount'])
             )
         await conn.commit()
 
 async def main():
-    await create_database()
     conn = await create_connection(DB_PATH)
     if conn is not None:
         await print_table_contents(conn, 'ads')
         await conn.close()
+
 if __name__ == "__main__":
     asyncio.run(main())
 

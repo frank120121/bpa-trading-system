@@ -92,3 +92,45 @@
 2024-01-02 10:30:19,941:__main__:INFO:Account number 014761655091416464 already exists. Skipping insertion.
 2024-01-02 10:30:19,960:__main__:INFO:Removed bank account: 058597000056476091
 2024-01-02 10:30:51,815:__main__:INFO:Removed bank account: 012778015939990486
+2024-01-05 09:37:55,320:__main__:INFO:Account number 710969000007300927 already exists. Skipping insertion.
+2024-01-05 09:37:55,321:__main__:INFO:Account number 012778015323351288 already exists. Skipping insertion.
+2024-01-05 09:37:55,322:__main__:INFO:Account number 646180146006124571 already exists. Skipping insertion.
+2024-01-05 09:37:55,324:__main__:INFO:Account number 012778004824246573 already exists. Skipping insertion.
+2024-01-05 09:37:55,324:__main__:INFO:Account number 710969000016348705 already exists. Skipping insertion.
+2024-01-05 09:37:55,325:__main__:INFO:Account number 710969000015306104 already exists. Skipping insertion.
+2024-01-05 09:37:55,326:__main__:INFO:Account number 058597000054265356 already exists. Skipping insertion.
+2024-01-05 09:37:55,326:__main__:INFO:Account number 014761655091416464 already exists. Skipping insertion.
+2024-01-05 09:37:55,339:__main__:INFO:Removed bank account: 012778004824246573
+2024-01-10 13:41:27,556:__main__:INFO:Account number 710969000007300927 already exists. Skipping insertion.
+2024-01-10 13:41:27,557:__main__:INFO:Account number 012778015323351288 already exists. Skipping insertion.
+2024-01-10 13:41:27,557:__main__:INFO:Account number 646180146006124571 already exists. Skipping insertion.
+2024-01-10 13:41:27,558:__main__:INFO:Account number 058597000056476091 already exists. Skipping insertion.
+2024-01-10 13:41:27,560:__main__:INFO:Account number 710969000016348705 already exists. Skipping insertion.
+2024-01-10 13:41:27,560:__main__:INFO:Account number 012778015939990486 already exists. Skipping insertion.
+2024-01-10 13:41:27,561:__main__:INFO:Account number 710969000015306104 already exists. Skipping insertion.
+2024-01-10 13:41:27,561:__main__:INFO:Account number 058597000054265356 already exists. Skipping insertion.
+2024-01-10 13:41:27,562:__main__:INFO:Account number 014761655091416464 already exists. Skipping insertion.
+2024-01-10 13:42:03,347:__main__:INFO:Removed bank account: 058597000054265356
+2024-01-10 13:42:19,595:__main__:INFO:Removed bank account: 012778004824246573
+2024-01-10 13:42:38,023:__main__:INFO:Removed bank account: 012778004824246573
+2024-01-18 08:28:42,131:__main__:INFO:Account number 710969000007300927 already exists. Skipping insertion.
+2024-01-18 08:28:42,134:__main__:INFO:Account number 012778015323351288 already exists. Skipping insertion.
+2024-01-18 08:28:42,134:__main__:INFO:Account number 646180146006124571 already exists. Skipping insertion.
+2024-01-18 08:28:42,135:__main__:INFO:Account number 058597000056476091 already exists. Skipping insertion.
+2024-01-18 08:28:42,137:__main__:INFO:Account number 710969000016348705 already exists. Skipping insertion.
+2024-01-18 08:28:42,137:__main__:INFO:Account number 012778015939990486 already exists. Skipping insertion.
+2024-01-18 08:28:42,138:__main__:INFO:Account number 710969000015306104 already exists. Skipping insertion.
+2024-01-18 08:28:42,138:__main__:INFO:Account number 014761655091416464 already exists. Skipping insertion.
+2024-01-18 08:29:19,796:__main__:INFO:Removed bank account: 646180146006124571
+2024-01-18 08:29:27,808:__main__:INFO:Account number 710969000007300927 already exists. Skipping insertion.
+2024-01-18 08:29:27,809:__main__:INFO:Account number 012778015323351288 already exists. Skipping insertion.
+2024-01-18 08:29:27,811:__main__:INFO:Account number 058597000056476091 already exists. Skipping insertion.
+2024-01-18 08:29:27,812:__main__:INFO:Account number 012778004824246573 already exists. Skipping insertion.
+2024-01-18 08:29:27,812:__main__:INFO:Account number 710969000016348705 already exists. Skipping insertion.
+2024-01-18 08:29:27,812:__main__:INFO:Account number 012778015939990486 already exists. Skipping insertion.
+2024-01-18 08:29:27,813:__main__:INFO:Account number 710969000015306104 already exists. Skipping insertion.
+2024-01-18 08:29:27,813:__main__:INFO:Account number 058597000054265356 already exists. Skipping insertion.
+2024-01-18 08:29:27,814:__main__:INFO:Account number 014761655091416464 already exists. Skipping insertion.
+2024-01-18 08:29:27,814:__main__:INFO:Account number 646180204200033494 already exists. Skipping insertion.
+2024-01-18 08:29:54,715:__main__:INFO:Removed bank account: 012778004824246573
+2024-01-18 08:30:09,004:__main__:INFO:Removed bank account: 058597000054265356

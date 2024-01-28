@@ -12,11 +12,11 @@ logger = logging.getLogger(__name__)
 def create_signature(secret_key, query_string):
     return hmac.new(secret_key.encode('utf-8'), query_string.encode('utf-8'), hashlib.sha256).hexdigest()
 
-api_key = credentials_dict['account_2']['KEY']
-secret_key = credentials_dict['account_2']['SECRET']
+api_key = credentials_dict['account_1']['KEY']
+secret_key = credentials_dict['account_1']['SECRET']
 
 api_endpoint = "https://api.binance.com/sapi/v1/c2c/ads/getDetailByNo"
-adsNo = "11548220330294321152"
+adsNo = "12578448109213659136"
 timestamp = str(int(time.time() * 1000)) 
 query_string = f"adsNo={adsNo}&timestamp={timestamp}"
 signature = create_signature(secret_key, query_string)

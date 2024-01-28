@@ -13,3 +13,55 @@
 2023-12-06 21:50:18,230:binance_api:INFO:calling get_ad_detail
 2023-12-06 21:50:20,225:binance_api:INFO:calling get_ad_detail
 2023-12-06 21:50:22,218:binance_api:INFO:calling get_ad_detail
+2024-01-10 21:30:49,495:binance_api:INFO:calling get_ad_detail
+2024-01-10 21:30:51,495:binance_api:INFO:calling get_ad_detail
+2024-01-10 21:30:53,501:binance_api:INFO:calling get_ad_detail
+2024-01-10 21:30:55,506:binance_api:INFO:calling get_ad_detail
+2024-01-10 21:30:57,505:binance_api:INFO:calling get_ad_detail
+2024-01-10 21:30:59,505:binance_api:INFO:calling get_ad_detail
+2024-01-10 21:31:01,514:binance_api:INFO:calling get_ad_detail
+2024-01-10 21:31:03,493:binance_api:INFO:calling get_ad_detail
+2024-01-10 21:32:00,633:binance_api:INFO:calling get_ad_detail
+2024-01-10 21:32:02,631:binance_api:INFO:calling get_ad_detail
+2024-01-10 21:32:04,635:binance_api:INFO:calling get_ad_detail
+2024-01-10 21:32:06,645:binance_api:INFO:calling get_ad_detail
+2024-01-10 21:32:08,634:binance_api:INFO:calling get_ad_detail
+2024-01-10 21:32:10,642:binance_api:INFO:calling get_ad_detail
+2024-01-10 21:32:12,643:binance_api:INFO:calling get_ad_detail
+2024-01-10 21:32:14,644:binance_api:INFO:calling get_ad_detail
+2024-01-10 21:51:39,819:binance_api:INFO:calling get_ad_detail
+2024-01-10 21:51:41,830:binance_api:INFO:calling get_ad_detail
+2024-01-10 21:51:43,840:binance_api:INFO:calling get_ad_detail
+2024-01-10 21:51:45,821:binance_api:INFO:calling get_ad_detail
+2024-01-10 21:51:47,830:binance_api:INFO:calling get_ad_detail
+2024-01-10 21:51:49,825:binance_api:INFO:calling get_ad_detail
+2024-01-10 21:51:51,827:binance_api:INFO:calling get_ad_detail
+2024-01-10 21:51:53,836:binance_api:INFO:calling get_ad_detail
+2024-01-11 15:10:57,901:binance_api:INFO:calling get_ad_detail
+2024-01-11 15:10:59,907:binance_api:INFO:calling get_ad_detail
+2024-01-11 15:11:01,898:binance_api:INFO:calling get_ad_detail
+2024-01-11 15:11:03,905:binance_api:INFO:calling get_ad_detail
+2024-01-11 15:11:05,890:binance_api:INFO:calling get_ad_detail
+2024-01-11 15:11:07,908:binance_api:INFO:calling get_ad_detail
+2024-01-11 15:11:09,900:binance_api:INFO:calling get_ad_detail
+2024-01-11 15:11:11,901:binance_api:INFO:calling get_ad_detail
+2024-01-11 15:37:12,543:binance_api:INFO:calling get_ad_detail
+2024-01-11 15:37:14,545:binance_api:INFO:calling get_ad_detail
+2024-01-11 15:37:16,530:binance_api:INFO:calling get_ad_detail
+2024-01-11 15:37:18,558:binance_api:INFO:calling get_ad_detail
+2024-01-11 15:37:20,543:binance_api:INFO:calling get_ad_detail
+2024-01-11 15:37:22,535:binance_api:INFO:calling get_ad_detail
+2024-01-11 15:37:24,530:binance_api:INFO:calling get_ad_detail
+2024-01-11 15:37:26,537:binance_api:INFO:calling get_ad_detail
+2024-01-27 21:40:08,721:asyncio:ERROR:Task exception was never retrieved
+future: <Task finished name='Task-545' coro=<ClientWebSocketResponse.pong() done, defined at C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\client_ws.py:145> exception=ConnectionResetError('Cannot write to closing transport')>
+Traceback (most recent call last):
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\client_ws.py", line 146, in pong
+    await self._writer.pong(message)
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\http_websocket.py", line 670, in pong
+    await self._send_frame(message, WSMsgType.PONG)
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\http_websocket.py", line 646, in _send_frame
+    self._write(header + mask + message)
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\http_websocket.py", line 663, in _write
+    raise ConnectionResetError("Cannot write to closing transport")
+ConnectionResetError: Cannot write to closing transport

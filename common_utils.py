@@ -32,18 +32,35 @@ async def retry_request(func, *args, max_retries=3, delay=5, **kwargs):
 
 def hashing(query_string, secret):
     return hmac.new(secret.encode('utf-8'), query_string.encode('utf-8'), hashlib.sha256).hexdigest()
+
+class ServerTimestampCache:
+    last_timestamp = None
+    last_fetch_time = None
+    rec_window = 3  # seconds
+
+    @classmethod
+    async def get_server_timestamp(cls):
+        current_time = time.time()
+
+        # Check if the last fetched timestamp is still valid
+        if cls.last_timestamp is not None and (current_time - cls.last_fetch_time) < cls.rec_window:
+            return cls.last_timestamp
+
+        async with aiohttp.ClientSession() as session:
+            for endpoint in [TIME_ENDPOINT_V3, TIME_ENDPOINT_V1]:
+                try:
+                    async with session.get(endpoint) as response:
+                        if response.status == 200:
+                            data = await response.json()
+                            cls.last_timestamp = data['serverTime']
+                            cls.last_fetch_time = current_time
+                            return cls.last_timestamp
+                except Exception as e:
+                    logger.error(f"An error occurred while fetching server time from {endpoint}: {e}")
+
+        logger.error("Failed to fetch server time from all endpoints.")
+        return None
+
+# Replace the existing get_server_timestamp function with this
 async def get_server_timestamp():
-    endpoints = [TIME_ENDPOINT_V3, TIME_ENDPOINT_V1]
-
-    for endpoint in endpoints:
-        try:
-            async with aiohttp.ClientSession() as session:
-                async with session.get(endpoint) as response:
-                    if response.status == 200:
-                        data = await response.json()
-                        return data['serverTime']
-        except Exception as e:
-            logger.error(f"An error occurred while fetching server time from {endpoint}: {e}")
-
-    logger.error("Failed to fetch server time from all endpoints.")
-    return None
+    return await ServerTimestampCache.get_server_timestamp()

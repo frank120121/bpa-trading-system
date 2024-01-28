@@ -60,7 +60,7 @@ async def fetch_order_details(KEY, SECRET, order_no):
             else:
                 logger.error(f"Request failed with status code {response.status}: {await response.text()}")
 if __name__ == "__main__":
-    adOrderNo = "20544408550775197696"
+    adOrderNo = "20580430641041174528"
     result = asyncio.run(fetch_order_details(KEY, SECRET, adOrderNo))
     print(result)
     account_number = None
