@@ -45,7 +45,7 @@ async def handle_order_status_1(ws, conn, order_no, order_details):
     if kyc_status == 0:
         anti_fraud_stage = await get_anti_fraud_stage(conn, buyer_name)
         await generic_reply(ws, order_no, order_details, 1)
-        await handle_anti_fraud(buyer_name, conn, anti_fraud_stage, "start_pro", order_no, ws)
+        await handle_anti_fraud(buyer_name, seller_name, conn, anti_fraud_stage, "start_pro", order_no, ws)
     else:
         payment_details = await get_payment_details(conn, order_no)
         await send_messages(ws, order_no, [payment_warning, payment_details, payment_concept])
@@ -82,12 +82,12 @@ async def handle_text_message(ws, content, order_no, order_details, conn):
         logger.debug("Order not in 1 or 2")
         return
 
-    buyer_name = order_details.get('buyer_name')
+    seller_name, buyer_name = order_details.get('seller_name'), order_details.get('buyer_name')
     kyc_status = await get_kyc_status(conn, buyer_name)
     anti_fraud_stage = await get_anti_fraud_stage(conn, buyer_name)
 
     if kyc_status == 0 or anti_fraud_stage < 5:
-        await handle_anti_fraud(buyer_name, conn, anti_fraud_stage, content, order_no, ws)
+        await handle_anti_fraud(buyer_name, seller_name, conn, anti_fraud_stage, content, order_no, ws)
     else:
         logger.debug(f"Handling TEXT: {content}")
 

@@ -1889,3 +1889,73 @@
 2024-01-18 08:48:50,304:root:INFO:Successfully updated bitso_account_MFMP - MXN: 94613.20764002
 2024-01-18 08:48:50,304:root:INFO:Updating bitso_account_MFMP - USDC: 1320.87501218
 2024-01-18 08:48:50,304:root:INFO:Successfully updated bitso_account_MFMP - USDC: 1320.87501218
+2024-02-01 10:30:00,860:__main__:INFO:Fetching balances for bitso_account_MGL
+2024-02-01 10:30:01,237:root:INFO:Updating bitso_account_MGL - BTC: 7.391e-05
+2024-02-01 10:30:01,237:root:INFO:Successfully updated bitso_account_MGL - BTC: 7.391e-05
+2024-02-01 10:30:01,237:root:INFO:Updating bitso_account_MGL - DAI: 0.00040589
+2024-02-01 10:30:01,237:root:INFO:Successfully updated bitso_account_MGL - DAI: 0.00040589
+2024-02-01 10:30:01,237:root:INFO:Updating bitso_account_MGL - TUSD: 407.9187901
+2024-02-01 10:30:01,237:root:INFO:Successfully updated bitso_account_MGL - TUSD: 407.9187901
+2024-02-01 10:30:01,237:root:INFO:Updating bitso_account_MGL - USDT: 9345.85963293
+2024-02-01 10:30:01,237:root:INFO:Successfully updated bitso_account_MGL - USDT: 9345.85963293
+2024-02-01 10:30:01,237:root:INFO:Updating bitso_account_MGL - XRP: 37.36568673
+2024-02-01 10:30:01,237:root:INFO:Successfully updated bitso_account_MGL - XRP: 37.36568673
+2024-02-01 10:30:01,237:root:INFO:Updating bitso_account_MGL - MXN: 0.09957613
+2024-02-01 10:30:01,237:root:INFO:Successfully updated bitso_account_MGL - MXN: 0.09957613
+2024-02-01 10:30:01,237:root:INFO:Updating bitso_account_MGL - USDC: 801.78173385
+2024-02-01 10:30:01,237:root:INFO:Successfully updated bitso_account_MGL - USDC: 801.78173385
+2024-02-01 10:30:01,237:__main__:INFO:Fetching balances for bitso_account_FJL
+2024-02-01 10:30:01,627:root:INFO:Updating bitso_account_FJL - USDT: 6935.58122925
+2024-02-01 10:30:01,627:root:INFO:Successfully updated bitso_account_FJL - USDT: 6935.58122925
+2024-02-01 10:30:01,627:root:INFO:Updating bitso_account_FJL - MXN: 14640.13841258
+2024-02-01 10:30:01,627:root:INFO:Successfully updated bitso_account_FJL - MXN: 14640.13841258
+2024-02-01 10:30:01,627:root:INFO:Updating bitso_account_FJL - USDC: 1782.47403387
+2024-02-01 10:30:01,627:root:INFO:Successfully updated bitso_account_FJL - USDC: 1782.47403387
+2024-02-01 10:30:01,627:__main__:INFO:Fetching balances for bitso_account_MFMP
+2024-02-01 10:30:02,030:root:INFO:Updating bitso_account_MFMP - BTC: 0.00359759
+2024-02-01 10:30:02,030:root:INFO:Successfully updated bitso_account_MFMP - BTC: 0.00359759
+2024-02-01 10:30:02,030:root:INFO:Updating bitso_account_MFMP - TUSD: 14.66777019
+2024-02-01 10:30:02,030:root:INFO:Successfully updated bitso_account_MFMP - TUSD: 14.66777019
+2024-02-01 10:30:02,030:root:INFO:Updating bitso_account_MFMP - USDT: 255.70563294
+2024-02-01 10:30:02,030:root:INFO:Successfully updated bitso_account_MFMP - USDT: 255.70563294
+2024-02-01 10:30:02,030:root:INFO:Updating bitso_account_MFMP - XRP: 1.8e-07
+2024-02-01 10:30:02,030:root:INFO:Successfully updated bitso_account_MFMP - XRP: 1.8e-07
+2024-02-01 10:30:02,030:root:INFO:Updating bitso_account_MFMP - MXN: 153274.58468002
+2024-02-01 10:30:02,030:root:INFO:Successfully updated bitso_account_MFMP - MXN: 153274.58468002
+2024-02-01 10:30:02,030:root:INFO:Updating bitso_account_MFMP - USDC: 1321.87501218
+2024-02-01 10:30:02,030:root:INFO:Successfully updated bitso_account_MFMP - USDC: 1321.87501218
+2024-02-01 19:46:34,144:__main__:INFO:Fetching balances for bitso_account_MGL
+2024-02-01 19:46:34,537:root:INFO:Updating bitso_account_MGL - BTC: 7.391e-05
+2024-02-01 19:46:34,537:root:INFO:Successfully updated bitso_account_MGL - BTC: 7.391e-05
+2024-02-01 19:46:34,537:root:INFO:Updating bitso_account_MGL - DAI: 0.00040589
+2024-02-01 19:46:34,537:root:INFO:Successfully updated bitso_account_MGL - DAI: 0.00040589
+2024-02-01 19:46:34,537:root:INFO:Updating bitso_account_MGL - TUSD: 407.9187901
+2024-02-01 19:46:34,537:root:INFO:Successfully updated bitso_account_MGL - TUSD: 407.9187901
+2024-02-01 19:46:34,537:root:INFO:Updating bitso_account_MGL - USDT: 3496.76616093
+2024-02-01 19:46:34,537:root:INFO:Successfully updated bitso_account_MGL - USDT: 3496.76616093
+2024-02-01 19:46:34,537:root:INFO:Updating bitso_account_MGL - XRP: 37.36568673
+2024-02-01 19:46:34,537:root:INFO:Successfully updated bitso_account_MGL - XRP: 37.36568673
+2024-02-01 19:46:34,537:root:INFO:Updating bitso_account_MGL - MXN: 29634.03742613
+2024-02-01 19:46:34,537:root:INFO:Successfully updated bitso_account_MGL - MXN: 29634.03742613
+2024-02-01 19:46:34,537:root:INFO:Updating bitso_account_MGL - USDC: 801.78173385
+2024-02-01 19:46:34,537:root:INFO:Successfully updated bitso_account_MGL - USDC: 801.78173385
+2024-02-01 19:46:34,537:__main__:INFO:Fetching balances for bitso_account_FJL
+2024-02-01 19:46:34,941:root:INFO:Updating bitso_account_FJL - USDT: 1626.51156525
+2024-02-01 19:46:34,941:root:INFO:Successfully updated bitso_account_FJL - USDT: 1626.51156525
+2024-02-01 19:46:34,941:root:INFO:Updating bitso_account_FJL - MXN: 0.15740258
+2024-02-01 19:46:34,941:root:INFO:Successfully updated bitso_account_FJL - MXN: 0.15740258
+2024-02-01 19:46:34,941:root:INFO:Updating bitso_account_FJL - USDC: 1782.47403387
+2024-02-01 19:46:34,941:root:INFO:Successfully updated bitso_account_FJL - USDC: 1782.47403387
+2024-02-01 19:46:34,941:__main__:INFO:Fetching balances for bitso_account_MFMP
+2024-02-01 19:46:35,298:root:INFO:Updating bitso_account_MFMP - BTC: 0.00359759
+2024-02-01 19:46:35,313:root:INFO:Successfully updated bitso_account_MFMP - BTC: 0.00359759
+2024-02-01 19:46:35,313:root:INFO:Updating bitso_account_MFMP - TUSD: 14.66777019
+2024-02-01 19:46:35,313:root:INFO:Successfully updated bitso_account_MFMP - TUSD: 14.66777019
+2024-02-01 19:46:35,313:root:INFO:Updating bitso_account_MFMP - USDT: 9415.03878493
+2024-02-01 19:46:35,313:root:INFO:Successfully updated bitso_account_MFMP - USDT: 9415.03878493
+2024-02-01 19:46:35,313:root:INFO:Updating bitso_account_MFMP - XRP: 1.8e-07
+2024-02-01 19:46:35,313:root:INFO:Successfully updated bitso_account_MFMP - XRP: 1.8e-07
+2024-02-01 19:46:35,313:root:INFO:Updating bitso_account_MFMP - MXN: 6469.25709002
+2024-02-01 19:46:35,313:root:INFO:Successfully updated bitso_account_MFMP - MXN: 6469.25709002
+2024-02-01 19:46:35,313:root:INFO:Updating bitso_account_MFMP - USDC: 1321.87501218
+2024-02-01 19:46:35,313:root:INFO:Successfully updated bitso_account_MFMP - USDC: 1321.87501218

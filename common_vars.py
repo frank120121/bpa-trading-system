@@ -129,3 +129,5 @@ bank_accounts = [
         "limit": 90000.00
     }
 ]
+
+NOT_ACCEPTED_BANKS = {"banco azteca", "mercado pago", "stp", "oxxo spin", "bancoppel", "albo", "azteca", "mercadopago", "oxxo", "coppel"}
