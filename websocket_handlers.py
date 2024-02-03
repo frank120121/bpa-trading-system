@@ -15,6 +15,9 @@ async def on_message(ws, message, KEY, SECRET):
             logger.debug("message was from self")
             return
         msg_type = msg_json.get('type', '')
+        if msg_type == 'auto_reply':
+            logger.debug("Ignoring auto-reply message")
+            return
         conn = await create_connection("C:/Users/p7016/Documents/bpa/orders_data.db")
         if conn:
             logger.info(message)
