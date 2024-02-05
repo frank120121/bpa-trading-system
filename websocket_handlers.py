@@ -1,5 +1,5 @@
 import json
-from database import create_connection
+from common_utils_db import create_connection
 from merchant_account import MerchantAccount
 import logging
 logger = logging.getLogger(__name__)

@@ -1,35 +1,9 @@
-
-import aiosqlite
 import asyncio
-from prettytable import PrettyTable
+from common_vars import DB_FILE
+from common_utils_db import create_connection, execute_and_commit, handle_error, print_table_contents
 import logging
 logger = logging.getLogger(__name__)
-async def create_connection(db_file, num_retries=3, delay_seconds=5):
-    logger.debug("Inside async_create_connection function")
-    conn = None
-    retries = 0
-    while retries < num_retries:
-        try:
-            conn = await aiosqlite.connect(db_file)
-            return conn
-        except Exception as e:
-            logger.error(f"Failed to connect to database: {e}. Retrying in {delay_seconds} seconds.")
-            await asyncio.sleep(delay_seconds)
-            retries += 1
-    logger.error("Max retries reached. Could not establish the database connection.")
-    return None
-def handle_error(e, message_prefix):
-    if isinstance(e, Exception):
-        logger.error(f"Database error: {e}")
-    else:
-        logger.error(f"{message_prefix}: {e}")
-async def execute_and_commit(conn, sql, params=None):
-    try:
-        cursor = await conn.execute(sql, params)
-        await conn.commit()
-        await cursor.close()
-    except Exception as e:
-        handle_error(e, "Exception in execute_and_commit")
+
 async def update_order_status(conn, order_no, order_status):
     sql = "UPDATE orders SET order_status = ? WHERE order_no = ?"
     params = (order_status, order_no)
@@ -266,32 +240,6 @@ async def set_menu_presented(conn, order_no, value):
     except Exception as e:
         logger.error(f"Error setting menu_presented for order_no {order_no}: {e}")
 
-async def print_table_contents(conn, table_name):
-    async with conn.cursor() as cursor:
-        try:
-            await cursor.execute(f"PRAGMA table_info({table_name})")
-            columns_info = await cursor.fetchall()
-            column_names = [column[1] for column in columns_info]
-            await cursor.execute(f"SELECT * FROM {table_name}")
-            rows = await cursor.fetchall()
-            table = PrettyTable()
-            table.field_names = column_names
-            for row in rows:
-                table.add_row(row)
-            print(f"\nContents of {table_name}:")
-            print(table)
-        except Exception as e:
-            print(f"Error reading from table {table_name}: {e}")
-async def add_column_if_not_exists(conn, table_name, column_definition):
-    async with conn.cursor() as cursor:
-        await cursor.execute(f"PRAGMA table_info({table_name})")
-        columns_info = await cursor.fetchall()
-        column_names = [column[1] for column in columns_info]
-
-        if column_definition.split()[0] not in column_names:
-            alter_table_sql = f"ALTER TABLE {table_name} ADD COLUMN {column_definition}"
-            await cursor.execute(alter_table_sql)
-
 async def update_buyer_bank(conn, order_no, new_buyer_bank):
     """
     Update the buyer_bank field in the orders table for a given order_no.
@@ -341,7 +289,6 @@ async def update_order_details(conn, order_no, account_number):
     # Commit the changes to the database
     await conn.commit()
 async def main():
-    database = "C:/Users/p7016/Documents/bpa/orders_data.db"
     sql_create_merchants_table = """CREATE TABLE IF NOT EXISTS merchants (
                                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                                 sellerName TEXT NOT NULL UNIQUE
@@ -381,14 +328,13 @@ async def main():
                             seller_bank_account TEXT  -- New column for the seller's bank account number
                             );"""
 
-    conn = await create_connection(database)
+    conn = await create_connection(DB_FILE)
     if conn is not None:
         await create_table(conn, sql_create_merchants_table)
         await create_table(conn, sql_create_users_table)
         await create_table(conn, sql_create_transactions_table)
         await create_table(conn, sql_create_orders_table)
 
-        #await add_column_if_not_exists(conn, 'orders', 'account_number TEXT')
         # Print table contents for verification
         await print_table_contents(conn, 'orders')
 

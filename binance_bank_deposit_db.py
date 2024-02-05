@@ -1,10 +1,8 @@
 import asyncio
-from common_vars import bank_accounts
-from database import print_table_contents, create_connection
+from common_vars import bank_accounts, DB_FILE
+from common_utils_db import print_table_contents, create_connection
 import logging
 logger = logging.getLogger(__name__)
-
-DB_FILE = 'C:/Users/p7016/Documents/bpa/orders_data.db'
 
 async def initialize_database(conn):
     await conn.execute('''

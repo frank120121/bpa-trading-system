@@ -1,6 +1,6 @@
 import asyncio
 import aiosqlite
-from database import create_connection, print_table_contents
+from common_utils_db import create_connection, print_table_contents
 
 DB_FILE = "C:/Users/p7016/Documents/bpa/orders_data.db"
 

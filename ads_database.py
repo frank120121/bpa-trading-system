@@ -5,7 +5,7 @@ from logging_config import setup_logging
 setup_logging(log_filename='Binance_c2c_logger.log')
 logger = logging.getLogger(__name__)
 from common_vars import ads_dict
-from database import print_table_contents, create_connection
+from common_utils_db import print_table_contents, create_connection
 
 DB_PATH = 'C:/Users/p7016/Documents/bpa/ads_data.db'
 

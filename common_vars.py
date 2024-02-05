@@ -147,3 +147,5 @@ ACCEPTED_BANKS = {
 
 BBVA_BANKS = ['bbva', 'bbva bancomer', 'bancomer', 'bbva mexico']
 CUTOFF_DAYS = 1
+
+DB_FILE = 'C:/Users/p7016/Documents/bpa/orders_data.db'

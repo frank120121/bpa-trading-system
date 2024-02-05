@@ -7780,3 +7780,217 @@ websockets.exceptions.ConnectionClosedError: no close frame received or sent
 2024-02-04 23:09:51,644:binance_api:ERROR:API call to 'post https://api.binance.com/sapi/v1/c2c/ads/getDetailByNo' with payload '{'adsNo': '12578448109213659136', 'timestamp': 170...' failed with status code 400: {"code":500000001,"msg":"You have entered incomplete information. Please update the data."}
 2024-02-04 23:09:51,644:binance_update_ads:ERROR:Failed to get details for ad number 12578448109213659136
 2024-02-04 23:10:04,939:websocket_handlers:INFO:{"content":"cuantos usdt puedes vender","createTime":1707113404393,"id":"1023755860446362112","orderNo":"20587702502964879360","self":false,"status":"unread","type":"text","uuid":"e1caf27e-ed3b-48e1-8a9c-fdb8b89a78aa"}
+2024-02-04 23:12:32,738:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:12:34,738:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:12:36,739:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:12:38,736:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:12:40,738:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:12:41,415:websocket_handlers:INFO:{"content":"no","createTime":1707113249000,"fromNickname":"","id":"1023753250112879105","orderNo":"20587702502964879360","self":false,"status":"read","type":"text","uuid":"6ccc6256-14ff-44a2-98be-5cf185c76209"}
+2024-02-04 23:12:41,421:websocket_handlers:INFO:{"content":"bvva","createTime":1707113283000,"fromNickname":"","id":"1023753825974041088","orderNo":"20587702502964879360","self":false,"status":"read","type":"text","uuid":"52d16b29-76e6-447c-b3d5-a087ac80aa72"}
+2024-02-04 23:12:41,424:websocket_handlers:INFO:{"content":"si","createTime":1707113325000,"fromNickname":"","id":"1023754530784885249","orderNo":"20587702502964879360","self":false,"status":"read","type":"text","uuid":"ff74f786-2264-46d9-8914-389b5d80d8b9"}
+2024-02-04 23:12:41,426:websocket_handlers:INFO:{"content":"si","createTime":1707113272000,"fromNickname":"","id":"1023753637935004160","orderNo":"20587702502964879360","self":false,"status":"read","type":"text","uuid":"4837a1da-8299-4195-8002-36debbd2cfb8"}
+2024-02-04 23:12:41,431:websocket_handlers:INFO:{"content":"bbva mexico","createTime":1707113317000,"fromNickname":"","id":"1023754396869147136","orderNo":"20587702502964879360","self":false,"status":"read","type":"text","uuid":"c2cbc0b0-28a6-4eff-b96e-a4c2e1a8748b"}
+2024-02-04 23:12:41,434:websocket_handlers:INFO:{"content":"cuantos usdt puedes vender","createTime":1707113404000,"fromNickname":"","id":"1023755860446362112","orderNo":"20587702502964879360","self":false,"status":"read","type":"text","uuid":"e1caf27e-ed3b-48e1-8a9c-fdb8b89a78aa"}
+2024-02-04 23:12:41,436:websocket_handlers:INFO:{"content":"de acuerdo","createTime":1707113359000,"fromNickname":"","id":"1023755095304649217","orderNo":"20587702502964879360","self":false,"status":"read","type":"text","uuid":"61215e52-983d-4fc5-a008-f90804d70f02"}
+2024-02-04 23:12:41,438:websocket_handlers:INFO:{"content":"no","createTime":1707113255000,"fromNickname":"","id":"1023753355658344960","orderNo":"20587702502964879360","self":false,"status":"read","type":"text","uuid":"132f145f-61ed-4253-b050-7b5069f38ff2"}
+2024-02-04 23:12:42,738:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:12:44,737:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:12:46,748:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:12:46,999:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:12:47,519:binance_update_ads:ERROR:Ads data list for asset_type BTC, fiat USD, and transAmount 998.0 is not valid.
+2024-02-04 23:12:52,529:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:12:53,428:binance_update_ads:INFO:Base Price: 17.17
+2024-02-04 23:12:55,452:binance_update_ads:INFO:Base Price: 17.17
+2024-02-04 23:12:58,687:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:12:59,550:binance_update_ads:ERROR:Ads data list for asset_type BTC, fiat USD, and transAmount 998.0 is not valid.
+2024-02-04 23:13:02,473:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:13:03,346:binance_update_ads:INFO:Base Price: 735137.21
+2024-02-04 23:13:03,346:binance_api:INFO:Updating ad: 11531824717949116416 with rate: 102.93
+2024-02-04 23:13:04,562:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:13:05,398:binance_update_ads:INFO:Base Price: 17.17
+2024-02-04 23:13:07,423:binance_update_ads:INFO:Base Price: 17.17
+2024-02-04 23:13:11,111:binance_update_ads:INFO:Base Price: 735137.21
+2024-02-04 23:13:11,111:binance_api:INFO:Updating ad: 11531141756952866816 with rate: 102.96
+2024-02-04 23:13:14,434:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:13:15,301:binance_update_ads:INFO:Base Price: 734465.64
+2024-02-04 23:13:17,295:binance_update_ads:INFO:Base Price: 732216.88
+2024-02-04 23:13:24,136:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:13:24,292:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:13:25,109:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:13:25,140:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:13:25,518:binance_api:ERROR:API call to 'post https://api.binance.com/sapi/v1/c2c/ads/getDetailByNo' with payload '{'adsNo': '12578447747234050048', 'timestamp': 170...' failed with status code 400: {"code":500000001,"msg":"You have entered incomplete information. Please update the data."}
+2024-02-04 23:13:25,519:binance_update_ads:ERROR:Failed to get details for ad number 12578447747234050048
+2024-02-04 23:13:25,581:binance_api:ERROR:API call to 'post https://api.binance.com/sapi/v1/c2c/ads/getDetailByNo' with payload '{'adsNo': '12578447747234050048', 'timestamp': 170...' failed with status code 400: {"code":500000001,"msg":"You have entered incomplete information. Please update the data."}
+2024-02-04 23:13:25,581:binance_update_ads:ERROR:Failed to get details for ad number 12578447747234050048
+2024-02-04 23:13:27,529:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:13:27,590:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:13:28,146:binance_update_ads:INFO:Base Price: 1.0
+2024-02-04 23:13:28,223:binance_update_ads:INFO:Base Price: 1.0
+2024-02-04 23:16:17,065:websocket_handlers:INFO:{"content":"no me permite la banca esta transferencia","createTime":1707113776486,"id":"1023762103729129985","orderNo":"20587702502964879360","self":false,"status":"unread","type":"text","uuid":"36e550be-3f41-4fb8-af01-875a50a33d70"}
+2024-02-04 23:16:17,070:websocket_handlers:INFO:{"content":"no me permite la banca esta transferencia","createTime":1707113776486,"id":"1023762103729129985","orderNo":"20587702502964879360","self":false,"status":"unread","type":"text","uuid":"36e550be-3f41-4fb8-af01-875a50a33d70"}
+2024-02-04 23:16:35,198:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:16:35,242:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:16:36,064:binance_update_ads:ERROR:Ads data list for asset_type BTC, fiat USD, and transAmount 998.0 is not valid.
+2024-02-04 23:16:36,064:binance_update_ads:ERROR:Ads data list for asset_type BTC, fiat USD, and transAmount 998.0 is not valid.
+2024-02-04 23:16:41,073:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:16:41,987:binance_update_ads:INFO:Base Price: 17.17
+2024-02-04 23:16:41,995:binance_update_ads:INFO:Base Price: 17.17
+2024-02-04 23:16:43,989:binance_update_ads:INFO:Base Price: 17.17
+2024-02-04 23:16:44,004:binance_update_ads:INFO:Base Price: 17.17
+2024-02-04 23:16:51,000:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:16:51,016:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:16:51,883:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:16:51,885:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:16:52,304:binance_update_ads:INFO:Base Price: 1.0
+2024-02-04 23:16:52,317:binance_update_ads:INFO:Base Price: 1.0
+2024-02-04 23:16:54,318:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:16:54,954:binance_api:ERROR:API call to 'post https://api.binance.com/sapi/v1/c2c/ads/getDetailByNo' with payload '{'adsNo': '12578448109213659136', 'timestamp': 170...' failed with status code 400: {"code":500000001,"msg":"You have entered incomplete information. Please update the data."}
+2024-02-04 23:16:54,954:binance_update_ads:ERROR:Failed to get details for ad number 12578448109213659136
+2024-02-04 23:16:54,954:binance_update_ads:ERROR:Failed to get details for ad number 12578448109213659136
+2024-02-04 23:17:01,974:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:17:01,975:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:17:02,864:binance_update_ads:INFO:Base Price: 734109.13
+2024-02-04 23:17:02,876:binance_update_ads:INFO:Base Price: 734109.13
+2024-02-04 23:17:04,888:binance_update_ads:INFO:Base Price: 734109.13
+2024-02-04 23:17:04,888:binance_api:INFO:Updating ad: 11531141756952866816 with rate: 103.08
+2024-02-04 23:17:04,888:binance_api:INFO:Updating ad: 11531141756952866816 with rate: 103.08
+2024-02-04 23:17:05,219:binance_api:ERROR:API call to 'post https://api.binance.com/sapi/v1/c2c/ads/update' with payload '{'advNo': '11531141756952866816', 'priceFloatingRa...' failed with status code 400: {"code":83628,"msg":"Too many attempts, please try again after 30s."}
+2024-02-04 23:17:27,759:websocket_handlers:INFO:{"content":"{\"type\":\"seller_cancelled\"}","createTime":1707113847216,"id":"1023763289733151232","orderNo":"20587702502964879360","self":false,"status":"read","type":"system"}
+2024-02-04 23:17:27,768:websocket_handlers:INFO:{"content":"{\"type\":\"seller_cancelled\"}","createTime":1707113847216,"id":"1023763289733151232","orderNo":"20587702502964879360","self":false,"status":"read","type":"system"}
+2024-02-04 23:17:46,615:websocket_handlers:INFO:{"content":"no me permite la banca esta transferencia","createTime":1707113777000,"fromNickname":"","id":"1023762103729129985","orderNo":"20587702502964879360","self":false,"status":"read","type":"text","uuid":"36e550be-3f41-4fb8-af01-875a50a33d70"}
+2024-02-04 23:20:17,269:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:20:17,519:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:20:18,157:binance_update_ads:ERROR:Ads data list for asset_type BTC, fiat USD, and transAmount 998.0 is not valid.
+2024-02-04 23:20:18,366:binance_update_ads:ERROR:Ads data list for asset_type BTC, fiat USD, and transAmount 998.0 is not valid.
+2024-02-04 23:20:23,159:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:20:23,392:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:20:24,041:binance_update_ads:INFO:Base Price: 17.17
+2024-02-04 23:20:24,225:binance_update_ads:INFO:Base Price: 17.17
+2024-02-04 23:20:26,063:binance_update_ads:INFO:Base Price: 17.17
+2024-02-04 23:20:26,247:binance_update_ads:INFO:Base Price: 17.17
+2024-02-04 23:20:33,094:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:20:33,251:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:20:33,986:binance_update_ads:INFO:Base Price: 733661.46
+2024-02-04 23:20:33,988:binance_api:INFO:Updating ad: 11531824717949116416 with rate: 103.02
+2024-02-04 23:20:34,067:binance_update_ads:INFO:Base Price: 733661.46
+2024-02-04 23:20:34,068:binance_api:INFO:Updating ad: 11531824717949116416 with rate: 103.02
+2024-02-04 23:20:34,586:binance_api:ERROR:API call to 'post https://api.binance.com/sapi/v1/c2c/ads/update' with payload '{'advNo': '11531824717949116416', 'priceFloatingRa...' failed with status code 400: {"code":83628,"msg":"Too many attempts, please try again after 30s."}
+2024-02-04 23:20:41,615:binance_update_ads:INFO:Base Price: 733661.46
+2024-02-04 23:20:41,615:binance_api:INFO:Updating ad: 11531141756952866816 with rate: 103.14
+2024-02-04 23:20:41,738:binance_update_ads:INFO:Base Price: 733661.46
+2024-02-04 23:20:41,738:binance_api:INFO:Updating ad: 11531141756952866816 with rate: 103.14
+2024-02-04 23:20:42,436:binance_api:ERROR:API call to 'post https://api.binance.com/sapi/v1/c2c/ads/update' with payload '{'advNo': '11531141756952866816', 'priceFloatingRa...' failed with status code 400: {"code":83628,"msg":"Too many attempts, please try again after 30s."}
+2024-02-04 23:20:54,451:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:20:54,698:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:20:55,429:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:20:55,629:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:20:55,835:binance_api:ERROR:API call to 'post https://api.binance.com/sapi/v1/c2c/ads/getDetailByNo' with payload '{'adsNo': '12578447747234050048', 'timestamp': 170...' failed with status code 400: {"code":500000001,"msg":"You have entered incomplete information. Please update the data."}
+2024-02-04 23:20:55,835:binance_update_ads:ERROR:Failed to get details for ad number 12578447747234050048
+2024-02-04 23:20:56,025:binance_api:ERROR:API call to 'post https://api.binance.com/sapi/v1/c2c/ads/getDetailByNo' with payload '{'adsNo': '12578447747234050048', 'timestamp': 170...' failed with status code 400: {"code":500000001,"msg":"You have entered incomplete information. Please update the data."}
+2024-02-04 23:20:56,026:binance_update_ads:ERROR:Failed to get details for ad number 12578447747234050048
+2024-02-04 23:20:57,842:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:20:58,028:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:20:58,572:binance_update_ads:INFO:Base Price: 1.0
+2024-02-04 23:20:58,667:binance_update_ads:INFO:Base Price: 1.0
+2024-02-04 23:24:05,603:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:24:05,693:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:24:06,489:binance_update_ads:ERROR:Ads data list for asset_type BTC, fiat USD, and transAmount 998.0 is not valid.
+2024-02-04 23:24:06,563:binance_update_ads:ERROR:Ads data list for asset_type BTC, fiat USD, and transAmount 998.0 is not valid.
+2024-02-04 23:24:11,488:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:24:11,566:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:24:12,369:binance_update_ads:INFO:Base Price: 17.17
+2024-02-04 23:24:12,403:binance_update_ads:INFO:Base Price: 17.17
+2024-02-04 23:24:14,368:binance_update_ads:INFO:Base Price: 17.17
+2024-02-04 23:24:14,415:binance_update_ads:INFO:Base Price: 17.17
+2024-02-04 23:24:21,404:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:24:21,420:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:24:22,285:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:24:22,287:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:24:22,715:binance_update_ads:INFO:Base Price: 1.0
+2024-02-04 23:24:22,722:binance_update_ads:INFO:Base Price: 1.0
+2024-02-04 23:24:24,727:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:24:24,727:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:24:25,320:binance_api:ERROR:API call to 'post https://api.binance.com/sapi/v1/c2c/ads/getDetailByNo' with payload '{'adsNo': '12578448109213659136', 'timestamp': 170...' failed with status code 400: {"code":500000001,"msg":"You have entered incomplete information. Please update the data."}
+2024-02-04 23:24:25,320:binance_update_ads:ERROR:Failed to get details for ad number 12578448109213659136
+2024-02-04 23:24:25,331:binance_api:ERROR:API call to 'post https://api.binance.com/sapi/v1/c2c/ads/getDetailByNo' with payload '{'adsNo': '12578448109213659136', 'timestamp': 170...' failed with status code 400: {"code":500000001,"msg":"You have entered incomplete information. Please update the data."}
+2024-02-04 23:24:25,331:binance_update_ads:ERROR:Failed to get details for ad number 12578448109213659136
+2024-02-04 23:24:32,335:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:24:32,351:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:24:33,234:binance_update_ads:INFO:Base Price: 734093.4
+2024-02-04 23:24:33,234:binance_api:INFO:Updating ad: 11531824717949116416 with rate: 102.91
+2024-02-04 23:24:33,271:binance_update_ads:INFO:Base Price: 734093.4
+2024-02-04 23:24:33,271:binance_api:INFO:Updating ad: 11531824717949116416 with rate: 102.91
+2024-02-04 23:24:33,599:binance_api:ERROR:API call to 'post https://api.binance.com/sapi/v1/c2c/ads/update' with payload '{'advNo': '11531824717949116416', 'priceFloatingRa...' failed with status code 400: {"code":83628,"msg":"Too many attempts, please try again after 30s."}
+2024-02-04 23:24:40,628:binance_update_ads:INFO:Base Price: 734093.4
+2024-02-04 23:24:40,628:binance_api:INFO:Updating ad: 11531141756952866816 with rate: 103.08
+2024-02-04 23:24:40,845:binance_update_ads:INFO:Base Price: 734093.4
+2024-02-04 23:24:40,846:binance_api:INFO:Updating ad: 11531141756952866816 with rate: 103.08
+2024-02-04 23:27:53,641:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:27:53,870:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:27:54,569:binance_update_ads:ERROR:Ads data list for asset_type BTC, fiat USD, and transAmount 998.0 is not valid.
+2024-02-04 23:27:54,695:binance_update_ads:ERROR:Ads data list for asset_type BTC, fiat USD, and transAmount 998.0 is not valid.
+2024-02-04 23:27:59,585:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:27:59,723:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:28:00,474:binance_update_ads:INFO:Base Price: 17.16
+2024-02-04 23:28:00,474:binance_api:INFO:Updating ad: 11515582400296718336 with rate: 101.77
+2024-02-04 23:28:00,558:binance_update_ads:INFO:Base Price: 17.16
+2024-02-04 23:28:00,558:binance_api:INFO:Updating ad: 11515582400296718336 with rate: 101.77
+2024-02-04 23:28:01,058:binance_api:ERROR:API call to 'post https://api.binance.com/sapi/v1/c2c/ads/update' with payload '{'advNo': '11515582400296718336', 'priceFloatingRa...' failed with status code 400: {"code":83628,"msg":"Too many attempts, please try again after 30s."}
+2024-02-04 23:28:06,791:websocket_handlers:INFO:{"content":"{\"type\":\"seller_merchant_trading\"}","createTime":1707114486239,"id":"1023774010760397569","orderNo":"20587707898399932416","self":false,"status":"read","type":"system"}
+2024-02-04 23:28:06,792:websocket_handlers:INFO:{"content":"{\"type\":\"seller_merchant_trading\"}","createTime":1707114486239,"id":"1023774010760397569","orderNo":"20587707898399932416","self":false,"status":"read","type":"system"}
+2024-02-04 23:28:08,072:binance_update_ads:INFO:Base Price: 17.16
+2024-02-04 23:28:08,072:binance_api:INFO:Updating ad: 11519225605560729600 with rate: 102.0
+2024-02-04 23:28:08,229:binance_update_ads:INFO:Base Price: 17.16
+2024-02-04 23:28:08,229:binance_api:INFO:Updating ad: 11519225605560729600 with rate: 102.0
+2024-02-04 23:28:20,634:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:28:20,895:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:28:21,525:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:28:21,726:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:28:21,940:binance_api:ERROR:API call to 'post https://api.binance.com/sapi/v1/c2c/ads/getDetailByNo' with payload '{'adsNo': '12578447747234050048', 'timestamp': 170...' failed with status code 400: {"code":500000001,"msg":"You have entered incomplete information. Please update the data."}
+2024-02-04 23:28:21,940:binance_update_ads:ERROR:Failed to get details for ad number 12578447747234050048
+2024-02-04 23:28:21,950:binance_api:ERROR:API call to 'post https://api.binance.com/sapi/v1/c2c/ads/getDetailByNo' with payload '{'adsNo': '12578447747234050048', 'timestamp': 170...' failed with status code 400: {"code":500000001,"msg":"You have entered incomplete information. Please update the data."}
+2024-02-04 23:28:21,950:binance_update_ads:ERROR:Failed to get details for ad number 12578447747234050048
+2024-02-04 23:28:23,949:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:28:23,965:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:28:24,686:binance_update_ads:INFO:Base Price: 1.0
+2024-02-04 23:28:24,799:binance_update_ads:INFO:Base Price: 1.0
+2024-02-04 23:28:31,714:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:28:31,822:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:28:32,589:binance_update_ads:INFO:Base Price: 733799.28
+2024-02-04 23:28:32,589:binance_api:INFO:Updating ad: 11531824717949116416 with rate: 103.01
+2024-02-04 23:28:32,651:binance_update_ads:INFO:Base Price: 733799.28
+2024-02-04 23:28:32,651:binance_api:INFO:Updating ad: 11531824717949116416 with rate: 103.01
+2024-02-04 23:28:33,150:binance_api:ERROR:API call to 'post https://api.binance.com/sapi/v1/c2c/ads/update' with payload '{'advNo': '11531824717949116416', 'priceFloatingRa...' failed with status code 400: {"code":83628,"msg":"Too many attempts, please try again after 30s."}
+2024-02-04 23:28:40,155:binance_update_ads:INFO:Base Price: 733799.27
+2024-02-04 23:28:40,448:binance_update_ads:INFO:Base Price: 733799.27
+2024-02-04 23:31:23,217:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:31:25,228:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:31:47,477:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:31:48,437:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:31:49,086:binance_update_ads:INFO:Base Price: 1.0
+2024-02-04 23:31:51,100:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:31:51,697:binance_api:ERROR:API call to 'post https://api.binance.com/sapi/v1/c2c/ads/getDetailByNo' with payload '{'adsNo': '12578448109213659136', 'timestamp': 170...' failed with status code 400: {"code":500000001,"msg":"You have entered incomplete information. Please update the data."}
+2024-02-04 23:31:51,697:binance_update_ads:ERROR:Failed to get details for ad number 12578448109213659136
+2024-02-04 23:31:58,718:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:31:59,601:binance_update_ads:INFO:Base Price: 733720.33
+2024-02-04 23:31:59,601:binance_api:INFO:Updating ad: 11531824717949116416 with rate: 103.13
+2024-02-04 23:32:07,389:binance_update_ads:INFO:Base Price: 733720.33
+2024-02-04 23:32:07,389:binance_api:INFO:Updating ad: 11531141756952866816 with rate: 104.26
+2024-02-04 23:32:20,416:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:32:21,330:binance_update_ads:INFO:Base Price: 17.16
+2024-02-04 23:32:23,329:binance_update_ads:INFO:Base Price: 17.16
+2024-02-04 23:32:30,339:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:32:31,253:binance_update_ads:ERROR:Ads data list for asset_type BTC, fiat USD, and transAmount 998.0 is not valid.
+2024-02-04 23:36:11,814:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:36:13,815:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:36:15,824:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:36:17,827:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:36:19,816:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:36:21,817:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:36:23,811:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:36:25,831:binance_api:INFO:calling get_ad_detail
+2024-02-04 23:36:26,073:binance_api:INFO:calling fetch_ads_search
+2024-02-04 23:36:26,564:binance_update_ads:INFO:Base Price: 17.17
+2024-02-04 23:36:26,565:binance_api:INFO:Updating ad: 11515582400296718336 with rate: 101.71
+2024-02-04 23:36:34,406:binance_update_ads:INFO:Base Price: 17.17
+2024-02-04 23:36:34,406:binance_api:INFO:Updating ad: 11519225605560729600 with rate: 101.94
