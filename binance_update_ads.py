@@ -66,7 +66,7 @@ async def analyze_and_update_ads(ad, api_instance, ads_data, all_ads):
             our_current_price = float(our_ad_data['adv']['price'])
 
         base_price = compute_base_price(our_current_price, current_priceFloatingRatio)
-        logger.info(f"Base Price: {base_price}")
+        logger.debug(f"Base Price: {base_price}")
         filtered_ads = filter_ads(ads_data, base_price, all_ads)
         adjusted_target_spot = check_if_ads_avail(filtered_ads, target_spot)
 
@@ -121,7 +121,7 @@ async def process_ads(ads_list, api_instances, all_ads):
 
     current_ads_data = ads_data['data']
     if not isinstance(current_ads_data, list) or not current_ads_data:
-        logger.error(f"Ads data list for asset_type {asset_type}, fiat {fiat}, and transAmount {transAmount} is not valid.")
+        logger.debug(f"Ads data list for asset_type {asset_type}, fiat {fiat}, and transAmount {transAmount} is not valid.")
         return
 
     # Sort ads by target_spot within the group
