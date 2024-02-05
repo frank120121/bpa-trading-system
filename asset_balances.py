@@ -2,9 +2,6 @@ import sqlite3
 import asyncio
 import aiosqlite
 import logging
-from logging_config import setup_logging
-from database import print_table_contents, create_connection
-setup_logging(log_filename='Binance_c2c_logger.log')
 logger = logging.getLogger(__name__)
 
 DATABASE_PATH = 'C:/Users/p7016/Documents/bpa/asset_balances.db'

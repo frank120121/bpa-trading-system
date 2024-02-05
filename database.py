@@ -3,8 +3,6 @@ import aiosqlite
 import asyncio
 from prettytable import PrettyTable
 import logging
-from logging_config import setup_logging
-setup_logging(log_filename='Database_logger.log')
 logger = logging.getLogger(__name__)
 async def create_connection(db_file, num_retries=3, delay_seconds=5):
     logger.debug("Inside async_create_connection function")
@@ -294,6 +292,54 @@ async def add_column_if_not_exists(conn, table_name, column_definition):
             alter_table_sql = f"ALTER TABLE {table_name} ADD COLUMN {column_definition}"
             await cursor.execute(alter_table_sql)
 
+async def update_buyer_bank(conn, order_no, new_buyer_bank):
+    """
+    Update the buyer_bank field in the orders table for a given order_no.
+
+    Args:
+    - conn (aiosqlite.Connection): The database connection.
+    - order_no (str): The order number to update.
+    - new_buyer_bank (str): The new name of the buyer's bank.
+
+    Returns:
+    - None
+    """
+    update_query = "UPDATE orders SET buyer_bank = ? WHERE order_no = ?"
+    params = (new_buyer_bank, order_no)
+
+    try:
+        await execute_and_commit(conn, update_query, params)
+        logger.debug(f"Updated buyer_bank for order_no {order_no} to {new_buyer_bank}")
+    except Exception as e:
+        handle_error(e, f"Failed to update buyer_bank for order_no {order_no}")
+
+async def get_buyer_bank(conn, order_no):
+    async with conn.cursor() as cursor:
+        await cursor.execute("SELECT buyer_bank FROM orders WHERE order_no=?", (order_no,))
+        result = await cursor.fetchone()
+        if result:
+            return result[0]
+        return None
+async def get_account_number(conn, order_no):
+    async with conn.cursor() as cursor:
+        await cursor.execute("SELECT account_number FROM orders WHERE order_no=?", (order_no,))
+        result = await cursor.fetchone()
+        if result:
+            return result[0]
+        return None
+async def update_order_details(conn, order_no, account_number):
+        # Prepare the SQL statement for updating the order
+    sql = '''
+        UPDATE orders
+        SET account_number = ?
+        WHERE order_no = ?
+    '''
+
+    # Execute the SQL statement with the provided account number and order number
+    await conn.execute(sql, (account_number, order_no))
+
+    # Commit the changes to the database
+    await conn.commit()
 async def main():
     database = "C:/Users/p7016/Documents/bpa/orders_data.db"
     sql_create_merchants_table = """CREATE TABLE IF NOT EXISTS merchants (
@@ -318,21 +364,22 @@ async def main():
         order_date TIMESTAMP
     );"""
     sql_create_orders_table = """CREATE TABLE IF NOT EXISTS orders (
-                              id INTEGER PRIMARY KEY AUTOINCREMENT,
-                              order_no TEXT NOT NULL UNIQUE,
-                              buyer_name TEXT,
-                              seller_name TEXT,
-                              trade_type TEXT,
-                              order_status INTEGER,
-                              total_price REAL,
-                              fiat_unit TEXT,
-                              asset TEXT,
-                              amount REAL,
-                              account_number TEXT,
-                              menu_presented BOOLEAN DEFAULT FALSE,
-                              order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                              );"""
-
+                            id INTEGER PRIMARY KEY AUTOINCREMENT,
+                            order_no TEXT NOT NULL UNIQUE,
+                            buyer_name TEXT,
+                            seller_name TEXT,
+                            trade_type TEXT,
+                            order_status INTEGER,
+                            total_price REAL,
+                            fiat_unit TEXT,
+                            asset TEXT,
+                            amount REAL,
+                            account_number TEXT,
+                            menu_presented BOOLEAN DEFAULT FALSE,
+                            order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                            buyer_bank TEXT,  -- New column for the name of the buyer's bank
+                            seller_bank_account TEXT  -- New column for the seller's bank account number
+                            );"""
 
     conn = await create_connection(database)
     if conn is not None:
@@ -340,9 +387,10 @@ async def main():
         await create_table(conn, sql_create_users_table)
         await create_table(conn, sql_create_transactions_table)
         await create_table(conn, sql_create_orders_table)
+
         #await add_column_if_not_exists(conn, 'orders', 'account_number TEXT')
         # Print table contents for verification
-        await print_table_contents(conn, 'users')
+        await print_table_contents(conn, 'orders')
 
         await conn.close()
     else:

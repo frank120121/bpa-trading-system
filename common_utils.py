@@ -5,8 +5,6 @@ import time
 import asyncio
 from binance_endpoints import TIME_ENDPOINT_V1, TIME_ENDPOINT_V3
 import logging
-from logging_config import setup_logging
-setup_logging(log_filename='websocket_handler.log')
 logger = logging.getLogger(__name__)
 class RateLimiter:
     def __init__(self, limit_period=3):

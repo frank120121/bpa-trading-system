@@ -8,8 +8,6 @@ from binance_messages import send_text_message
 from lang_utils import transaction_denied
 import traceback
 import logging
-from logging_config import setup_logging
-setup_logging(log_filename='Binance_c2c_logger.log')
 logger = logging.getLogger(__name__)
 class MerchantAccount:
     async def handle_message_by_type(self, ws, KEY, SECRET, msg_json, msg_type, conn):

@@ -3,8 +3,6 @@ from lang_utils import get_response_for_menu_choice, is_valid_choice, get_invali
 from database import set_menu_presented
 import json
 import logging
-from logging_config import setup_logging
-setup_logging(log_filename='Binance_c2c_logger.log')
 logger = logging.getLogger(__name__)
 
 async def send_text_message(ws, text, order_no):

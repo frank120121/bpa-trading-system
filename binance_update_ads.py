@@ -1,12 +1,10 @@
 import asyncio
 import traceback
 import logging
-from logging_config import setup_logging
 from ads_database import update_ad_in_database, fetch_all_ads_from_database
 from credentials import credentials_dict
 from binance_api import BinanceAPI
 
-setup_logging(log_filename='Binance_c2c_logger.log')
 logger = logging.getLogger(__name__)
 
 PRICE_THRESHOLD = 1.0163

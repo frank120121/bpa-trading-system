@@ -130,4 +130,20 @@ bank_accounts = [
     }
 ]
 
-NOT_ACCEPTED_BANKS = {"banco azteca", "mercado pago", "stp", "oxxo spin", "bancoppel", "albo", "azteca", "mercadopago", "oxxo", "coppel"}
+NOT_ACCEPTED_BANKS = {"banco azteca", "mercado pago", "stp", "bancoppel", "albo", "azteca", "mercadopago", "oxxo", "coppel"}
+
+ACCEPTED_BANKS = {
+    'abc capital', 'actinver', 'afirme', 'alternativos', 'arcus', 'asp integra opc',
+    'autofin', 'babien', 'bajio', 'banamex', 'banco covalto', 'banco s3', 'bancomer',
+    'bancomext', 'bancrea', 'banjercito', 'bankaool', 'banobras', 'banorte',
+    'banregio', 'bansi', 'banxico', 'barclays', 'bbase', 'bbva', 'bbva bancomer',
+    'bbva mexico', 'bmonex', 'caja pop mexica', 'cb intercam', 'cibanco', 'compartamos',
+    'consubanco', 'cuenca', 'donde', 'finamex', 'gbm', 'hsbc', 'icbc', 'inbursa',
+    'indeval', 'intercam banco', 'invercap', 'invex', 'kuspit', 'libertad', 'masari',
+    'mifel', 'monex', 'multiva banco', 'nafin', 'nu', 'nu bank', 'nu mexico', 'nvio',
+    'pagatodo', 'profuturo', 'sabadell', 'santander', 'scotia', 'scotiabank', 'shinhan',
+    'tesored', 'transfer', 'unagra', 'valmex', 'value', 've por mas', 'vector', 'spin'
+}
+
+BBVA_BANKS = ['bbva', 'bbva bancomer', 'bancomer', 'bbva mexico']
+CUTOFF_DAYS = 1

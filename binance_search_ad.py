@@ -5,8 +5,6 @@ import asyncio
 from credentials import credentials_dict
 from common_utils import get_server_timestamp
 import logging
-from logging_config import setup_logging
-setup_logging(log_filename='Binance_c2c_logger.log')
 logger = logging.getLogger(__name__)
 
 url = "https://api.binance.com/sapi/v1/c2c/ads/search"

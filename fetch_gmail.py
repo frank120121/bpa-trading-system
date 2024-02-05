@@ -9,8 +9,6 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from dotenv import load_dotenv
 import logging
-from logging_config import setup_logging
-setup_logging(log_filename='fetch_emails.log')
 logger = logging.getLogger(__name__)
 
 load_dotenv('.env.email')

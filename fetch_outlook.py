@@ -7,9 +7,7 @@ import os
 import datetime
 from dotenv import load_dotenv
 import logging
-from logging_config import setup_logging
 load_dotenv("C:/Users/p7016/Documents/bpa/.env.email")
-setup_logging(log_filename='fetch_emails.log')
 logger = logging.getLogger(__name__)
 CLIENT_ID = os.environ.get('MFMP_OUTLOOK_CLIENT_ID')
 CLIENT_SECRET = os.environ.get('MFMP_OUTLOOK_SECRET_VALUE')

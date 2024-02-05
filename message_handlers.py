@@ -1,6 +1,6 @@
 from lang_utils import get_message_by_language, determine_language, transaction_denied, get_default_reply, payment_concept, payment_warning
 from common_utils import RateLimiter
-from database import update_total_spent, get_kyc_status, get_anti_fraud_stage, is_menu_presented
+from database import update_total_spent, get_kyc_status, get_anti_fraud_stage, is_menu_presented, get_account_number
 from binance_bank_deposit import get_payment_details, log_deposit
 from binance_messages import send_text_message, present_menu_based_on_status, handle_menu_response
 from binance_orders import binance_buy_order
@@ -8,9 +8,6 @@ from binance_anti_fraud import handle_anti_fraud
 from binance_blacklist import add_to_blacklist
 from verify_client_ip import fetch_ip
 import logging
-from logging_config import setup_logging
-
-setup_logging(log_filename='Binance_c2c_logger.log')
 logger = logging.getLogger(__name__)
 rate_limiter = RateLimiter(limit_period=10)
 
@@ -25,12 +22,15 @@ async def send_messages(ws, order_no, messages):
         await send_text_message(ws, msg, order_no)
 
 async def handle_order_status_4(ws, conn, order_no, order_details):
+    await generic_reply(ws, order_no, order_details, 4)
     asset_type = order_details.get('asset')
     logger.debug(asset_type)
     if asset_type == 'BTC':
         await binance_buy_order(asset_type)
     await update_total_spent(conn, order_no)
-    await generic_reply(ws, order_no, order_details, 4)
+    amount_deposited = order_details.get('total_price')
+    bank_account_number = await get_account_number(conn, order_no)
+    await log_deposit(conn, bank_account_number, amount_deposited)
 
 async def handle_order_status_1(ws, conn, order_no, order_details):
     seller_name, buyer_name = order_details.get('seller_name'), order_details.get('buyer_name')

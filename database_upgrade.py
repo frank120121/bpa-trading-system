@@ -1,9 +1,10 @@
 import aiosqlite
 import asyncio
 import logging
+logger = logging.getLogger(__name__)
 
 DATABASE = "C:/Users/p7016/Documents/bpa/orders_data.db"
-logging.basicConfig(level=logging.INFO)
+
 
 async def check_bot_replied_column_exists(conn):
     async with conn.cursor() as cursor:

@@ -6,8 +6,6 @@ import hmac
 from credentials import bitso_credentials, BITSO_BASE_URL
 from asset_balances import update_balance
 import logging
-from logging_config import setup_logging
-setup_logging()
 logger = logging.getLogger(__name__)
 class BitsoWallets:
     def __init__(self, api_key, api_secret):

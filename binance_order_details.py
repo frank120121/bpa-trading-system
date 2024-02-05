@@ -7,8 +7,6 @@ import hmac
 import os
 from dotenv import load_dotenv
 import logging
-from logging_config import setup_logging
-setup_logging(log_filename='Binance_c2c_logger.log')
 logger = logging.getLogger(__name__)
 import sys
 

@@ -2,9 +2,7 @@ import asyncio
 import aiohttp
 import websockets
 from credentials import credentials_dict, BASE_URL
-from logging_config import setup_logging
 import logging
-setup_logging()
 logger = logging.getLogger(__name__)
 
 async def send_signed_request(http_method, url_path, api_key, secret_key, params=None):

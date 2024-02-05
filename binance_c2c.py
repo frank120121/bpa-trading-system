@@ -9,8 +9,6 @@ from binance_endpoints import GET_CHAT_CREDENTIALS
 from credentials import credentials_dict
 from websocket_handlers import on_message
 import logging
-from logging_config import setup_logging
-setup_logging(log_filename='Binance_c2c_logger.log')
 logger = logging.getLogger(__name__)
 def hashing(query_string, secret):
     return hmac.new(secret.encode('utf-8'), query_string.encode('utf-8'), hashlib.sha256).hexdigest()
