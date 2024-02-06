@@ -288,6 +288,9 @@ async def update_order_details(conn, order_no, account_number):
 
     # Commit the changes to the database
     await conn.commit()
+async def remove_user(conn, name):
+    await conn.execute("DELETE FROM users WHERE name = ?", (name,))
+    await conn.commit()
 async def main():
     sql_create_merchants_table = """CREATE TABLE IF NOT EXISTS merchants (
                                 id INTEGER PRIMARY KEY AUTOINCREMENT,

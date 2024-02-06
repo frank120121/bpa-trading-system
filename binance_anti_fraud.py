@@ -1,6 +1,7 @@
+import asyncio
 from fuzzywuzzy import process
 from database import update_anti_fraud_stage, update_kyc_status
-from binance_messages import send_text_message
+from binance_messages import send_text_message, send_messages
 from binance_blacklist import add_to_blacklist
 from lang_utils import transaction_denied, payment_concept, payment_warning
 from binance_bank_deposit import get_payment_details
@@ -53,7 +54,6 @@ async def handle_anti_fraud(buyer_name, seller_name, conn, anti_fraud_stage, res
 
     if (anti_fraud_stage, normalized_response) in fraud_responses:
         await send_text_message(ws, "Por razones de seguridad, no podemos continuar con este intercambio. Es posible que esté siendo víctima de un fraude. Por favor cancele la orden y no realice ninguna transferencia ya que puede perder su dinero.", order_no)
-        await send_text_message(ws, transaction_denied, order_no)
         await add_to_blacklist(conn, buyer_name, order_no, None)
         return
 
@@ -67,9 +67,7 @@ async def handle_anti_fraud(buyer_name, seller_name, conn, anti_fraud_stage, res
 
     if anti_fraud_stage == len(questions):
         await update_kyc_status(conn, buyer_name, 1)
-        payment_details = await get_payment_details(conn, order_no)
-        await send_text_message(ws, payment_warning, order_no)
-        await send_text_message(ws, payment_details, order_no)
-        await send_text_message(ws, payment_concept, order_no)
+        payment_details = await get_payment_details(conn, order_no, buyer_name)
+        await send_messages(ws, order_no, [payment_warning, payment_concept, payment_details])
     else:
         await send_text_message(ws, questions[anti_fraud_stage], order_no)

@@ -55,3 +55,12 @@ async def add_column_if_not_exists(conn, table_name, column_definition):
         if column_definition.split()[0] not in column_names:
             alter_table_sql = f"ALTER TABLE {table_name} ADD COLUMN {column_definition}"
             await cursor.execute(alter_table_sql)
+
+async def add_column_if_not_exists(conn, table_name, column_name, column_type):
+    column_exists_query = f"PRAGMA table_info({table_name})"
+    cursor = await conn.execute(column_exists_query)
+    columns_info = await cursor.fetchall()
+    if column_name not in [col[1] for col in columns_info]:  # Column names are in the second position
+        alter_table_query = f"ALTER TABLE {table_name} ADD COLUMN {column_name} {column_type}"
+        await conn.execute(alter_table_query)
+        logger.info(f"Added '{column_name}' column to '{table_name}' table.")

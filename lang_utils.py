@@ -72,12 +72,10 @@ STATUS_MESSAGES = {
     1: {
         'es': [
             "Hola {buyer_name}. Antes de poder brindarle los datos bancarios es necesario verificar que no esté siendo víctima de un fraude.",
-            "Responda con un 'Si' o un 'No' a las siguientes 3 preguntas.",
 
         ],
         'en': [
             "Hello,{buyer_name}. For your safety, before procceding with the order, it is necessary to verify you are not a victim of a scam.",
-            "Respond with a 'yes' or 'no' only please."
         ],
     },
     7: {

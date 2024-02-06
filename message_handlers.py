@@ -2,7 +2,7 @@ from lang_utils import get_message_by_language, determine_language, transaction_
 from common_utils import RateLimiter
 from database import update_total_spent, get_kyc_status, get_anti_fraud_stage, is_menu_presented, get_account_number
 from binance_bank_deposit import get_payment_details, log_deposit
-from binance_messages import send_text_message, present_menu_based_on_status, handle_menu_response
+from binance_messages import send_text_message, present_menu_based_on_status, handle_menu_response, send_messages
 from binance_orders import binance_buy_order
 from binance_anti_fraud import handle_anti_fraud
 from binance_blacklist import add_to_blacklist
@@ -17,10 +17,6 @@ async def check_order_details(order_details):
         return False
     return True
 
-async def send_messages(ws, order_no, messages):
-    for msg in messages:
-        await send_text_message(ws, msg, order_no)
-
 async def handle_order_status_4(ws, conn, order_no, order_details):
     await generic_reply(ws, order_no, order_details, 4)
     asset_type = order_details.get('asset')
@@ -30,7 +26,8 @@ async def handle_order_status_4(ws, conn, order_no, order_details):
     await update_total_spent(conn, order_no)
     amount_deposited = order_details.get('total_price')
     bank_account_number = await get_account_number(conn, order_no)
-    await log_deposit(conn, bank_account_number, amount_deposited)
+    buyer_name = order_details.get('buyer_name')
+    await log_deposit(conn, buyer_name, bank_account_number, amount_deposited)
 
 async def handle_order_status_1(ws, conn, order_no, order_details):
     seller_name, buyer_name = order_details.get('seller_name'), order_details.get('buyer_name')
@@ -47,8 +44,8 @@ async def handle_order_status_1(ws, conn, order_no, order_details):
         await generic_reply(ws, order_no, order_details, 1)
         await handle_anti_fraud(buyer_name, seller_name, conn, anti_fraud_stage, "start_pro", order_no, ws)
     else:
-        payment_details = await get_payment_details(conn, order_no)
-        await send_messages(ws, order_no, [payment_warning, payment_details, payment_concept])
+        payment_details = await get_payment_details(conn, order_no, buyer_name)
+        await send_messages(ws, order_no, [payment_warning, payment_concept, payment_details])
 
 async def generic_reply(ws, order_no, order_details, status_code):
     buyer_name = order_details.get('buyer_name')
@@ -95,7 +92,7 @@ async def handle_text_message(ws, content, order_no, order_details, conn):
             await present_menu_based_on_status(ws, order_details, order_no, conn)
 
         if content.isdigit():
-            await handle_menu_response(ws, int(content), order_details, order_no)
+            await handle_menu_response(ws, int(content), order_details, order_no, conn)
 
 
 async def handle_image_message(ws, order_no, order_details):

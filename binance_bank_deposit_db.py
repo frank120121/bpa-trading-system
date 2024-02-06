@@ -1,7 +1,8 @@
 import asyncio
 from common_vars import bank_accounts, DB_FILE
-from common_utils_db import print_table_contents, create_connection
+from common_utils_db import print_table_contents, create_connection, add_column_if_not_exists
 import logging
+
 logger = logging.getLogger(__name__)
 
 async def initialize_database(conn):
@@ -10,9 +11,13 @@ async def initialize_database(conn):
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             timestamp DATETIME,
             account_number TEXT,
-            amount_deposited REAL
+            amount_deposited REAL,
+            deposit_from TEXT DEFAULT NULL,
+            year INTEGER DEFAULT NULL,
+            month INTEGER DEFAULT NULL
         )
     ''')
+
     await conn.execute('''
         CREATE TABLE IF NOT EXISTS mxn_bank_accounts (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -59,11 +64,11 @@ async def main():
     conn = await create_connection(DB_FILE)
     if conn is not None:
         # Initialize the database (create tables and insert initial data)
-        #await initialize_database(conn)
+        await initialize_database(conn)
 
         # Print table contents for verification
-        #await remove_bank_account(conn, '058597000054265356')
-        await print_table_contents(conn, 'mxn_deposits')
+        #await remove_bank_account(conn, '012778004824246573')
+        await print_table_contents(conn, 'mxn_bank_accounts')
 
         await conn.close()
     else:
