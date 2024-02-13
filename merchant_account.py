@@ -54,6 +54,9 @@ class MerchantAccount:
             return
         if await is_blacklisted(conn, buyer_name):
             return
+        seller_name = order_details.get('seller_name')
+        if seller_name == 'LOPEZ GUERRERO FRANCISCO JAVIER':
+            return
         if msg_type == 'text':
             content =  msg_json.get('content', '').lower()
             await handle_text_message(ws, content, order_no, order_details, conn)

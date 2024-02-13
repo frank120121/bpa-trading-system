@@ -62,9 +62,10 @@ def is_account_eligible(account, deposit_sums, buyer_name):
     if total_deposited_24h >= account[4]:
         return False
 
-    monthly_total_deposited_by_buyer = deposit_sums['monthly'][account_number].get(buyer_name, 0)
-    if monthly_total_deposited_by_buyer >= MONTHLY_DEPOSIT_LIMIT:
-        return False
+    if account_number in deposit_sums['monthly']:
+        monthly_total_deposited_by_buyer = deposit_sums['monthly'][account_number].get(buyer_name, 0)
+        if monthly_total_deposited_by_buyer >= MONTHLY_DEPOSIT_LIMIT:
+            return False
 
     return True
 
@@ -91,5 +92,5 @@ async def get_account_details(conn, account_number):
             f"Los detalles para el pago son:\n\n"
             f"Nombre de banco: {account_details[0]}\n"
             f"Nombre del beneficiario: {account_details[1]}\n"
-            f"Número de CLABE: {account_details[2]}\n"
+            f"Número de cuenta: {account_details[2]}\n"
         )

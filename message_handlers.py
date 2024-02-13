@@ -31,19 +31,24 @@ async def handle_order_status_4(ws, conn, order_no, order_details):
 
 async def handle_order_status_1(ws, conn, order_no, order_details):
     seller_name, buyer_name = order_details.get('seller_name'), order_details.get('buyer_name')
-    country = await fetch_ip(order_no[-4:], seller_name)
-    if country and country != "MX":
-        logger.info(f"Transaction denied. Seller not from Mexico. Buyer: {buyer_name} added to blacklist.")
-        await send_text_message(ws, transaction_denied, order_no)
-        await add_to_blacklist(conn, buyer_name, order_no, country)
-        return
-
     kyc_status = await get_kyc_status(conn, buyer_name)
     if kyc_status == 0:
         anti_fraud_stage = await get_anti_fraud_stage(conn, buyer_name)
         await generic_reply(ws, order_no, order_details, 1)
         await handle_anti_fraud(buyer_name, seller_name, conn, anti_fraud_stage, "start_pro", order_no, ws)
+        country = await fetch_ip(order_no[-4:], seller_name)
+        if country and country != "MX":
+            logger.info(f"Transaction denied. Seller not from Mexico. Buyer: {buyer_name} added to blacklist.")
+            await send_text_message(ws, transaction_denied, order_no)
+            await add_to_blacklist(conn, buyer_name, order_no, country)
+            return
     else:
+        country = await fetch_ip(order_no[-4:], seller_name)
+        if country and country != "MX":
+            logger.info(f"Transaction denied. Seller not from Mexico. Buyer: {buyer_name} added to blacklist.")
+            await send_text_message(ws, transaction_denied, order_no)
+            await add_to_blacklist(conn, buyer_name, order_no, country)
+            return
         payment_details = await get_payment_details(conn, order_no, buyer_name)
         await send_messages(ws, order_no, [payment_warning, payment_concept, payment_details])
 

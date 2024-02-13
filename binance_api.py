@@ -4,7 +4,7 @@ from urllib.parse import urlencode
 import hashlib
 import hmac
 from common_utils import get_server_timestamp
-from binance_search_ad import fetch_ads_search
+from binance_search_ad import search_ads
 import logging
 logger = logging.getLogger(__name__)
 class BinanceAPI:
@@ -49,7 +49,7 @@ class BinanceAPI:
         await self.session.close()
 
     async def get_ad_detail(self, advNo):
-        logger.debug(f'calling get_ad_detail')
+        logger.info(f'calling get_ad_detail')
         return await self.api_call(
             'post',
             "https://api.binance.com/sapi/v1/c2c/ads/getDetailByNo",
@@ -59,7 +59,7 @@ class BinanceAPI:
             }
         )
     async def update_ad(self, advNo, priceFloatingRatio):
-        logger.debug(f"Updating ad: {advNo} with rate: {priceFloatingRatio}")
+        logger.info(f"Updating ad: {advNo} with rate: {priceFloatingRatio}")
         return await self.api_call(
             'post',
             "https://api.binance.com/sapi/v1/c2c/ads/update",
@@ -69,11 +69,11 @@ class BinanceAPI:
                 "timestamp": await get_server_timestamp()
             }
         )
-    async def fetch_ads_search(self, asset_type, fiat, transAmount):
-        logger.debug(f'calling fetch_ads_search')
+    async def fetch_ads_search(self, asset_type, fiat, transAmount, payTypes=None):
+        logger.info(f'calling fetch_ads_search')
         try:
             # Pass asset_type, fiat, and transAmount to the fetch_ads_search function
-            result = await fetch_ads_search(self.KEY, self.SECRET, asset_type, fiat, transAmount)
+            result = await search_ads(self.KEY, self.SECRET, asset_type, fiat, transAmount, payTypes)
             if not result:
                 logger.error("Failed to fetch ads data.")
             

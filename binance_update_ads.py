@@ -101,63 +101,66 @@ async def analyze_and_update_ads(ad, api_instance, ads_data, all_ads):
 
     except Exception as e:
         traceback.print_exc()
-async def process_ads(ads_list, api_instances, all_ads):
-    if not ads_list:
+        
+async def process_ads(ads_group, api_instances, all_ads):
+    if not ads_group:
         return
 
-    # Assuming all ads in the list have the same transAmount, fiat, and asset_type
-    transAmount = ads_list[0]['transAmount']
-    fiat = ads_list[0]['fiat']
-    asset_type = ads_list[0]['asset_type']
+    for ad in ads_group:
+        # Directly use the account of the current ad to get the API instance
+        api_instance = api_instances[ad['account']]
 
-    # Fetch ads data once for the entire group
-    api_instance = api_instances[ads_list[0]['account']]
-    ads_data = await api_instance.fetch_ads_search(asset_type, fiat, transAmount)
+        # Convert payTypes to a list if not None, else default to an empty list
+        payTypes_list = ad['payTypes'] if ad['payTypes'] is not None else []
 
-    # Validate ads_data
-    if ads_data is None or ads_data.get('code') != '000000' or 'data' not in ads_data:
-        logger.error(f"Failed to fetch ads data for asset_type {asset_type}, fiat {fiat}, and transAmount {transAmount}.")
-        return
+        # Perform the fetch_ads_search call for the current ad
+        ads_data = await api_instance.fetch_ads_search(ad['asset_type'], ad['fiat'], ad['transAmount'], payTypes_list)
 
-    current_ads_data = ads_data['data']
-    if not isinstance(current_ads_data, list) or not current_ads_data:
-        logger.debug(f"Ads data list for asset_type {asset_type}, fiat {fiat}, and transAmount {transAmount} is not valid.")
-        return
+        # Validate ads_data
+        if ads_data is None or ads_data.get('code') != '000000' or 'data' not in ads_data:
+            logger.error(f"Failed to fetch ads data for asset_type {ad['asset_type']}, fiat {ad['fiat']}, transAmount {ad['transAmount']}, and payTypes {payTypes_list}.")
+            continue
 
-    # Sort ads by target_spot within the group
-    sorted_ads_list = sorted(ads_list, key=lambda x: x['target_spot'])
+        current_ads_data = ads_data['data']
+        if not isinstance(current_ads_data, list) or not current_ads_data:
+            logger.debug(f"No valid ads data for asset_type {ad['asset_type']}, fiat {ad['fiat']}, transAmount {ad['transAmount']}, and payTypes {payTypes_list}.")
+            continue
 
-    # Process each ad with the fetched ads_data
-    for ad in sorted_ads_list:
+        # Process the current ad with the fetched ads_data
         await analyze_and_update_ads(ad, api_instance, current_ads_data, all_ads)
-        await asyncio.sleep(2)  # Delay between processing each ad
+        await asyncio.sleep(5)
 
 
-async def main_loop():
+
+
+async def main_loop(api_instances):
     all_ads = await fetch_all_ads_from_database()
-    logger.debug(f'all ads: {all_ads}')
+    logger.debug(f"All ads: {len(all_ads)}")
 
-    # Group ads by transAmount
+    # Group ads by Group value
     grouped_ads = {}
     for ad in all_ads:
-        transAmount_group = grouped_ads.setdefault(ad['transAmount'], [])
-        transAmount_group.append(ad)
+        group_key = ad['Group']
+        grouped_ads.setdefault(group_key, []).append(ad)
 
-    api_instances = {account: BinanceAPI(credentials_dict[account]['KEY'], credentials_dict[account]['SECRET']) for account in set(ad['account'] for ad in all_ads)}
-
-    # Process each transAmount group with a delay between each group
-    for transAmount, ads_group in grouped_ads.items():
+    # Process each group of ads
+    for group_key, ads_group in grouped_ads.items():
         await process_ads(ads_group, api_instances, all_ads)
         await asyncio.sleep(DELAY_BETWEEN_ASSET_TYPES)
 
+    # Closing of API instance sessions can be handled outside if they need to be reused
+
+async def start_update_ads():
+    # Initialize API instances once
+    api_instances = {account: BinanceAPI(credentials_dict[account]['KEY'], credentials_dict[account]['SECRET']) for account in set(ad['account'] for ad in await fetch_all_ads_from_database())}
+
+    while True: 
+        await main_loop(api_instances)
+        await asyncio.sleep(DELAY_BETWEEN_MAIN_LOOPS)
+
+    # Optionally close each API instance session after exiting the loop
     for api_instance in api_instances.values():
         await api_instance.close_session()
 
-
-
-async def start_update_ads():
-    while True: 
-        await main_loop()
-        await asyncio.sleep(DELAY_BETWEEN_MAIN_LOOPS)
 if __name__ == "__main__":
     asyncio.get_event_loop().run_until_complete(start_update_ads())

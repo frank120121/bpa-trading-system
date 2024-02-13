@@ -42,6 +42,7 @@ async def remove_from_blacklist(conn, name):
 
 async def main():
     conn = await create_connection(DB_FILE)
+    #await clear_blacklist(conn)
     await print_table_contents(conn, 'P2PBlacklist')
     await conn.close()
 

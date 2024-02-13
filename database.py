@@ -1,6 +1,6 @@
 import asyncio
 from common_vars import DB_FILE
-from common_utils_db import create_connection, execute_and_commit, handle_error, print_table_contents
+from common_utils_db import create_connection, execute_and_commit, handle_error, print_table_contents, clear_table, create_table, remove_from_table
 import logging
 logger = logging.getLogger(__name__)
 
@@ -22,9 +22,7 @@ async def get_order_details(conn, order_no):
     except Exception as e:
         logger.error(f"An error occurred: {e}")
         return None
-async def create_table(conn, create_table_sql):
-    async with conn.cursor() as cursor:
-        await cursor.execute(create_table_sql)
+
 async def order_exists(conn, order_no):
     async with conn.cursor() as cursor:
         await cursor.execute("SELECT id FROM orders WHERE order_no = ?", (order_no,))
@@ -288,9 +286,8 @@ async def update_order_details(conn, order_no, account_number):
 
     # Commit the changes to the database
     await conn.commit()
-async def remove_user(conn, name):
-    await conn.execute("DELETE FROM users WHERE name = ?", (name,))
-    await conn.commit()
+
+
 async def main():
     sql_create_merchants_table = """CREATE TABLE IF NOT EXISTS merchants (
                                 id INTEGER PRIMARY KEY AUTOINCREMENT,

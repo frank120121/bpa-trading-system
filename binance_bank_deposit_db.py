@@ -67,7 +67,8 @@ async def main():
         await initialize_database(conn)
 
         # Print table contents for verification
-        #await remove_bank_account(conn, '012778004824246573')
+        #await remove_bank_account(conn, '1532335128')
+
         await print_table_contents(conn, 'mxn_bank_accounts')
 
         await conn.close()

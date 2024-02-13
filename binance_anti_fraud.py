@@ -1,5 +1,7 @@
-import asyncio
+import logging
+logger = logging.getLogger(__name__)
 from fuzzywuzzy import process
+from verify_client_ip import fetch_ip
 from database import update_anti_fraud_stage, update_kyc_status
 from binance_messages import send_text_message, send_messages
 from binance_blacklist import add_to_blacklist
@@ -10,11 +12,11 @@ from database import update_buyer_bank
 
 async def handle_anti_fraud(buyer_name, seller_name, conn, anti_fraud_stage, response, order_no, ws):
     questions = [
-        f"¿Le han ofrecido un trabajo, una oportunidad de inversión o una gran oferta que requiere invertir a través de Bitcoin, USDT, o alguna criptomoneda? (1/3)",
-        "¿Alguien lo/la está presionando para realizar el pago? (2/3)",
-        f"¿Está de acuerdo que este es solo una orden de compra entre usted y el vendedor, y que además el vendedor no será responsable de ninguna devolución una vez completado la orden con éxito? (3/3)",
+        f"¿Esta usted comprando porque le han ofrecido empleo, inversión con altos retornos o promesas de ganancias a cambio de que usted les envie estas criptomonedas? (1/3)",
+        "¿Siente presión o urgencia inusual por parte de alguien para completar este pago de inmediato? (2/3)",
+        f"¿Está usted de acuerdo que una vez completada la orden({order_no}), no hay posibilidad de reembolso o devolucion por parte del vendedor? (3/3)",
         "Muchas gracias por completar las preguntas, ahora para brindarle un servicio más eficiente, ¿podría indicarnos el nombre del banco que utilizará para realizar el pago?",
-        f"Por ultimo, la cuenta bancaria que utilizará para realizar el pago, ¿está a su nombre? ({buyer_name})",
+        f"Perfecto si aceptamos su banco. Por ultimo, la cuenta bancaria que utilizará para realizar el pago, ¿está a su nombre? ({buyer_name})",
     ]
 
     # Check if the special "start_pro" command is given to start the process

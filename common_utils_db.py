@@ -64,3 +64,28 @@ async def add_column_if_not_exists(conn, table_name, column_name, column_type):
         alter_table_query = f"ALTER TABLE {table_name} ADD COLUMN {column_name} {column_type}"
         await conn.execute(alter_table_query)
         logger.info(f"Added '{column_name}' column to '{table_name}' table.")
+
+async def clear_table(conn, table_name):
+    # Validate the table_name to ensure it's a safe and valid identifier
+    if not table_name.isidentifier():
+        raise ValueError(f"Invalid table name: {table_name}")
+
+    # Execute the DELETE command
+    await conn.execute(f"DELETE FROM {table_name}")
+    await conn.commit()
+
+async def remove_from_table(conn, table_name, column_name, value):
+    # Validate the table_name and column_name to ensure they're safe and valid identifiers
+    if not table_name.isidentifier() or not column_name.isidentifier():
+        raise ValueError("Invalid table or column name")
+
+    # Prepare the DELETE command with placeholders for safety
+    query = f"DELETE FROM {table_name} WHERE {column_name} = ?"
+
+    # Execute the DELETE command
+    await conn.execute(query, (value,))
+    await conn.commit()
+
+async def create_table(conn, create_table_sql):
+    async with conn.cursor() as cursor:
+        await cursor.execute(create_table_sql)
