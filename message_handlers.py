@@ -7,6 +7,7 @@ from binance_orders import binance_buy_order
 from binance_anti_fraud import handle_anti_fraud
 from binance_blacklist import add_to_blacklist
 from verify_client_ip import fetch_ip
+from common_vars import prohibited_countries
 import logging
 logger = logging.getLogger(__name__)
 rate_limiter = RateLimiter(limit_period=10)
@@ -29,13 +30,23 @@ async def handle_order_status_4(ws, conn, order_no, order_details):
     buyer_name = order_details.get('buyer_name')
     await log_deposit(conn, buyer_name, bank_account_number, amount_deposited)
 
+
+
 async def handle_order_status_1(ws, conn, order_no, order_details):
-    seller_name, buyer_name = order_details.get('seller_name'), order_details.get('buyer_name')
+    seller_name, buyer_name, fiat = order_details.get('seller_name'), order_details.get('buyer_name'), order_details.get('fiat_unit')
     kyc_status = await get_kyc_status(conn, buyer_name)
     if kyc_status == 0:
         anti_fraud_stage = await get_anti_fraud_stage(conn, buyer_name)
         await generic_reply(ws, order_no, order_details, 1)
         await handle_anti_fraud(buyer_name, seller_name, conn, anti_fraud_stage, "start_pro", order_no, ws)
+        if fiat == 'USD':
+            country = await fetch_ip(order_no[-4:], seller_name)
+            # Check if the seller's country is in the list of prohibited countries
+            if country in prohibited_countries:
+                logger.info(f"Transaction denied. Seller from prohibited country {country}. Buyer: {buyer_name} added to blacklist.")
+                await send_text_message(ws, "transaction_denied", order_no)  # Make sure "transaction_denied" is defined elsewhere or replace with the appropriate message
+                await add_to_blacklist(conn, buyer_name, order_no, country)
+                return
         country = await fetch_ip(order_no[-4:], seller_name)
         if country and country != "MX":
             logger.info(f"Transaction denied. Seller not from Mexico. Buyer: {buyer_name} added to blacklist.")
@@ -43,6 +54,14 @@ async def handle_order_status_1(ws, conn, order_no, order_details):
             await add_to_blacklist(conn, buyer_name, order_no, country)
             return
     else:
+        if fiat == 'USD':
+            country = await fetch_ip(order_no[-4:], seller_name)
+            # Check if the seller's country is in the list of prohibited countries
+            if country in prohibited_countries:
+                logger.info(f"Transaction denied. Seller from prohibited country {country}. Buyer: {buyer_name} added to blacklist.")
+                await send_text_message(ws, transaction_denied, order_no)
+                await add_to_blacklist(conn, buyer_name, order_no, country)
+                return
         country = await fetch_ip(order_no[-4:], seller_name)
         if country and country != "MX":
             logger.info(f"Transaction denied. Seller not from Mexico. Buyer: {buyer_name} added to blacklist.")

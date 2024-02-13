@@ -57,6 +57,9 @@ class MerchantAccount:
         seller_name = order_details.get('seller_name')
         if seller_name == 'LOPEZ GUERRERO FRANCISCO JAVIER':
             return
+        fiat_unit = order_details.get('fiat_unit')
+        if fiat_unit == 'USD':
+            return
         if msg_type == 'text':
             content =  msg_json.get('content', '').lower()
             await handle_text_message(ws, content, order_no, order_details, conn)

@@ -159,3 +159,10 @@ BBVA_BANKS = ['bbva', 'bbva bancomer', 'bancomer', 'bbva mexico']
 CUTOFF_DAYS = 1
 
 DB_FILE = 'C:/Users/p7016/Documents/bpa/orders_data.db'
+
+prohibited_countries = [
+    "AF", "AL", "AZ", "BY", "BZ", "BA", "BI", "CF", "TD", "CD", "CU", "CY", "ET", "GY",
+    "HT", "HN", "IR", "IQ", "XK", "KG", "LA", "LB", "LY", "MK", "ML", "ME", "MZ", "MM",
+    "NI", "NG", "KP", "PG", "PY", "PK", "PA", "ST", "RS", "SO", "SS", "SD", "SY",
+    "TZ", "TJ", "TT", "TR", "TM", "UA", "UZ", "VU", "YE", "ZW"
+]
