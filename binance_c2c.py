@@ -4,14 +4,13 @@ import hmac
 import aiohttp
 from urllib.parse import urlencode
 import websockets
-from common_utils import get_server_timestamp
+from common_utils import get_server_timestamp, hashing
 from binance_endpoints import GET_CHAT_CREDENTIALS 
 from credentials import credentials_dict
 from websocket_handlers import on_message
 import logging
 logger = logging.getLogger(__name__)
-def hashing(query_string, secret):
-    return hmac.new(secret.encode('utf-8'), query_string.encode('utf-8'), hashlib.sha256).hexdigest()
+
 async def send_signed_request(http_method, url_path, KEY, SECRET, payload={}, dataLoad={}):
     query_string = urlencode(payload)
     query_string = f"{query_string}&timestamp={await get_server_timestamp()}"

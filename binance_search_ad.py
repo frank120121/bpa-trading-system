@@ -1,24 +1,11 @@
 import aiohttp
-import hashlib
-import hmac
 import asyncio
 from credentials import credentials_dict
-from common_utils import get_server_timestamp
+from common_utils import get_server_timestamp, hashing
 import logging
+from binance_endpoints import SEARCH_ADS
 logger = logging.getLogger(__name__)
 
-url = "https://api.binance.com/sapi/v1/c2c/ads/search"
-
-def get_credentials():
-    account = 'account_1' 
-    if account in credentials_dict:
-        return credentials_dict[account]['KEY'], credentials_dict[account]['SECRET']
-    else:
-        logger.error("Account not found in credentials.")
-        return None, None
-
-def hashing(query_string, secret):
-    return hmac.new(secret.encode('utf-8'), query_string.encode('utf-8'), hashlib.sha256).hexdigest()
 
 async def search_ads(KEY, SECRET, asset_type, fiat, transAmount, payTypes=None):
 
@@ -40,7 +27,7 @@ async def search_ads(KEY, SECRET, asset_type, fiat, transAmount, payTypes=None):
     query_string = f"timestamp={timestamp}"
     signature = hashing(query_string, SECRET)
 
-    full_url = f"{url}?{query_string}&signature={signature}"
+    full_url = f"{SEARCH_ADS}?{query_string}&signature={signature}"
 
     headers = {
         "Content-Type": "application/json;charset=utf-8",
@@ -65,6 +52,14 @@ if __name__ == "__main__":
 
     if sys.platform == 'win32':
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
+    def get_credentials():
+        account = 'account_1' 
+        if account in credentials_dict:
+            return credentials_dict[account]['KEY'], credentials_dict[account]['SECRET']
+        else:
+            logger.error("Account not found in credentials.")
+            return None, None
     KEY, SECRET = get_credentials()
 
     if KEY and SECRET:

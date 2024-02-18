@@ -12,3 +12,8 @@ GET_CHAT_CREDENTIALS = f"{BASE_ENDPOINT}/sapi/v1/c2c/chat/retrieveChatCredential
 # User data stream endpoint
 USER_DATA_STREAM_ENDPOINT = f"{BASE_ENDPOINT}/api/v3/userDataStream"
 
+# Retrieve User Order Detail
+USER_ORDER_DETAIL = f"{BASE_ENDPOINT}/sapi/v1/c2c/orderMatch/getUserOrderDetail"
+
+# Search Ads
+SEARCH_ADS = f"{BASE_ENDPOINT}/sapi/v1/c2c/ads/search"

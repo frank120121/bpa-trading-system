@@ -29,7 +29,7 @@ async def order_exists(conn, order_no):
         await cursor.execute("SELECT id FROM orders WHERE order_no = ?", (order_no,))
         row = await cursor.fetchone()
         return bool(row)
-async def find_or_insert_merchant(conn, sellerName):
+async def register_merchant(conn, sellerName):
     if not sellerName: 
         logger.error(f"Provided sellerName is invalid: {sellerName}")
         return None
@@ -136,7 +136,6 @@ async def insert_or_update_order(conn, order_details):
             await execute_and_commit(conn, sql, params)
         else:
             logger.debug("Inserting new order...")
-            await find_or_insert_merchant(conn, seller_name)
             await find_or_insert_buyer(conn, buyer_name)
             await insert_order(conn, (order_no, buyer_name, seller_name, trade_type, order_status, total_price, fiat_unit, asset, amount))
 
@@ -301,11 +300,16 @@ async def update_order_details(conn, order_no, account_number):
 
 
 async def main():
+    # ALTER TABLE Merchants ADD COLUMN email TEXT UNIQUE NOT NULL, ADD COLUMN password_hash TEXT NOT NULL, ADD COLUMN phone_num TEXT NOT NULL
+    
     sql_create_merchants_table = """CREATE TABLE IF NOT EXISTS merchants (
                                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                                 sellerName TEXT NOT NULL UNIQUE,
                                 api_key TEXT,  -- Encrypted API key
-                                api_secret TEXT  -- Encrypted API secret
+                                api_secret TEXT,  -- Encrypted API secret
+                                email TEXT,
+                                password_hash TEXT,
+                                phone_num TEXT
                                 );"""
     sql_create_users_table = """CREATE TABLE IF NOT EXISTS users (
                                     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -352,13 +356,11 @@ async def main():
         # await create_table(conn, sql_create_orders_table)
 
         # Print table contents for verification
-
-
         await print_table_contents(conn, 'merchants')
 
         await conn.close()
     else:
         logger.error("Error! Cannot create the database connection.")
-
+            
 if __name__ == '__main__':
     asyncio.run(main())
