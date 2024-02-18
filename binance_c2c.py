@@ -1,13 +1,11 @@
 import asyncio
-import hashlib
-import hmac
 import aiohttp
 from urllib.parse import urlencode
 import websockets
 from common_utils import get_server_timestamp, hashing
 from binance_endpoints import GET_CHAT_CREDENTIALS 
 from credentials import credentials_dict
-from websocket_handlers import on_message
+from binance_ws_c2c import on_message
 import logging
 logger = logging.getLogger(__name__)
 
