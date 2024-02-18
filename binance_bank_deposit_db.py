@@ -14,7 +14,8 @@ async def initialize_database(conn):
             amount_deposited REAL,
             deposit_from TEXT DEFAULT NULL,
             year INTEGER DEFAULT NULL,
-            month INTEGER DEFAULT NULL
+            month INTEGER DEFAULT NULL,
+            merchant_id INTEGER REFERENCES merchants(id) 
         )
     ''')
 
@@ -26,7 +27,8 @@ async def initialize_database(conn):
             account_number TEXT UNIQUE,
             account_limit REAL,
             account_balance REAL DEFAULT 0,
-            last_used_timestamp DATETIME DEFAULT NULL
+            last_used_timestamp DATETIME DEFAULT NULL,
+            merchant_id INTEGER REFERENCES merchants(id) 
         )
     ''')
     for account in bank_accounts:
@@ -64,10 +66,12 @@ async def main():
     conn = await create_connection(DB_FILE)
     if conn is not None:
         # Initialize the database (create tables and insert initial data)
-        await initialize_database(conn)
+        #await initialize_database(conn)
 
         # Print table contents for verification
-        #await remove_bank_account(conn, '1532335128')
+        #await remove_bank_account(conn, '058597000054265356')
+        await add_column_if_not_exists(conn, "mxn_deposits", "merchant_id", "INTEGER REFERENCES merchants(id)")
+        await add_column_if_not_exists(conn, "mxn_bank_accounts", "merchant_id", "INTEGER REFERENCES merchants(id)")
 
         await print_table_contents(conn, 'mxn_bank_accounts')
 

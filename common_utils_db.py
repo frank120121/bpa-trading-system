@@ -46,15 +46,6 @@ async def print_table_contents(conn, table_name):
             print(table)
         except Exception as e:
             print(f"Error reading from table {table_name}: {e}")
-async def add_column_if_not_exists(conn, table_name, column_definition):
-    async with conn.cursor() as cursor:
-        await cursor.execute(f"PRAGMA table_info({table_name})")
-        columns_info = await cursor.fetchall()
-        column_names = [column[1] for column in columns_info]
-
-        if column_definition.split()[0] not in column_names:
-            alter_table_sql = f"ALTER TABLE {table_name} ADD COLUMN {column_definition}"
-            await cursor.execute(alter_table_sql)
 
 async def add_column_if_not_exists(conn, table_name, column_name, column_type):
     column_exists_query = f"PRAGMA table_info({table_name})"

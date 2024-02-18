@@ -1,14 +1,15 @@
 import asyncio
 import traceback
 import logging
+import time
 from ads_database import update_ad_in_database, fetch_all_ads_from_database
 from credentials import credentials_dict
 from binance_api import BinanceAPI
 
 logger = logging.getLogger(__name__)
 
-PRICE_THRESHOLD = 1.0163
-MIN_RATIO = 101.14
+PRICE_THRESHOLD = 1.022
+MIN_RATIO = 102
 MAX_RATIO = 110
 RATIO_ADJUSTMENT = 0.04
 DIFF_THRESHOLD = 0.09

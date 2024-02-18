@@ -6,7 +6,7 @@ from logging_config import setup_logging
 setup_logging(log_filename='Binance_c2c_logger.log')
 logger = logging.getLogger(__name__)
 from common_vars import ads_dict
-from common_utils_db import print_table_contents, create_connection
+from common_utils_db import print_table_contents, create_connection, add_column_if_not_exists
 
 DB_PATH = 'C:/Users/p7016/Documents/bpa/ads_data.db'
 
@@ -25,7 +25,8 @@ async def create_database():
                 fiat TEXT NOT NULL DEFAULT 'Unknown',
                 transAmount REAL,
                 payTypes TEXT NOT NULL DEFAULT '[]',
-                `Group` TEXT NOT NULL DEFAULT 'Unknown'
+                `Group` TEXT NOT NULL DEFAULT 'Unknown',
+                merchant_id INTEGER REFERENCES merchants(id) 
             )
         ''')
         await conn.commit()
@@ -140,6 +141,8 @@ async def main():
         #await clear_ads_table()
         #await create_database()
         #await insert_initial_ads()
+        await add_column_if_not_exists(conn, "ads", "merchant_id", "INTEGER REFERENCES merchants(id)")
+
         await print_table_contents(conn, 'ads')
         await conn.close()
 

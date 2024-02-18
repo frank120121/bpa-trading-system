@@ -29,7 +29,7 @@ async def search_ads(KEY, SECRET, asset_type, fiat, transAmount, payTypes=None):
         "fiat": fiat,
         "page": 1,
         "publisherType": "merchant",
-        "rows": 10,
+        "rows": 20,
         "tradeType": "BUY",
         "transAmount": transAmount,
     }
@@ -71,7 +71,7 @@ if __name__ == "__main__":
         async def main():
             # Define your asset types, fiat, and transAmount combinations
             search_params = [
-                {'asset_type': 'USDT', 'fiat': 'USD', 'transAmount': 100, 'payTypes': ['Zelle']},
+                {'asset_type': 'USDT', 'fiat': 'USD', 'transAmount': 100, 'payTypes': None},
                 # Add more combinations if necessary
             ]
 

@@ -1,6 +1,7 @@
+import aiosqlite
 import asyncio
 from common_vars import DB_FILE
-from common_utils_db import create_connection, execute_and_commit, handle_error, print_table_contents, clear_table, create_table, remove_from_table
+from common_utils_db import create_connection, execute_and_commit, handle_error, print_table_contents, clear_table, create_table, remove_from_table, add_column_if_not_exists
 import logging
 logger = logging.getLogger(__name__)
 
@@ -39,7 +40,18 @@ async def find_or_insert_merchant(conn, sellerName):
             return row[0]
         else:
             await cursor.execute("INSERT INTO merchants (sellerName) VALUES (?)", (sellerName,))
+
             return cursor.lastrowid
+async def fetch_merchant_credentials(merchant_id):
+    async with aiosqlite.connect(DB_FILE) as conn:  # Use your actual database connection here
+        async with conn.execute("SELECT api_key, api_secret FROM merchants WHERE id = ?", (merchant_id,)) as cursor:
+            row = await cursor.fetchone()
+            if row:
+                return {
+                    'KEY': row[0],  # Assuming the first column is the API key
+                    'SECRET': row[1]  # Assuming the second column is the API secret
+                }
+            return None
 async def find_or_insert_buyer(conn, buyer_name):
     async with conn.cursor() as cursor:
         await cursor.execute(
@@ -291,7 +303,9 @@ async def update_order_details(conn, order_no, account_number):
 async def main():
     sql_create_merchants_table = """CREATE TABLE IF NOT EXISTS merchants (
                                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                sellerName TEXT NOT NULL UNIQUE
+                                sellerName TEXT NOT NULL UNIQUE,
+                                api_key TEXT,  -- Encrypted API key
+                                api_secret TEXT  -- Encrypted API secret
                                 );"""
     sql_create_users_table = """CREATE TABLE IF NOT EXISTS users (
                                     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -308,7 +322,8 @@ async def main():
         buyer_name TEXT,
         seller_name TEXT,
         total_price REAL,
-        order_date TIMESTAMP
+        order_date TIMESTAMP,
+        merchant_id INTEGER REFERENCES merchants(id) 
     );"""
     sql_create_orders_table = """CREATE TABLE IF NOT EXISTS orders (
                             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -324,19 +339,22 @@ async def main():
                             account_number TEXT,
                             menu_presented BOOLEAN DEFAULT FALSE,
                             order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                            buyer_bank TEXT,  -- New column for the name of the buyer's bank
-                            seller_bank_account TEXT  -- New column for the seller's bank account number
+                            buyer_bank TEXT,  -- Name of the buyer's bank
+                            seller_bank_account TEXT,
+                            merchant_id INTEGER REFERENCES merchants(id)  
                             );"""
 
     conn = await create_connection(DB_FILE)
     if conn is not None:
-        await create_table(conn, sql_create_merchants_table)
-        await create_table(conn, sql_create_users_table)
-        await create_table(conn, sql_create_transactions_table)
-        await create_table(conn, sql_create_orders_table)
+        # await create_table(conn, sql_create_merchants_table)
+        # await create_table(conn, sql_create_users_table)
+        # await create_table(conn, sql_create_transactions_table)
+        # await create_table(conn, sql_create_orders_table)
 
         # Print table contents for verification
-        await print_table_contents(conn, 'orders')
+
+
+        await print_table_contents(conn, 'merchants')
 
         await conn.close()
     else:

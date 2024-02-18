@@ -6,7 +6,7 @@ from common_vars import BBVA_BANKS
 
 logger = logging.getLogger(__name__)
 
-MONTHLY_DEPOSIT_LIMIT = 60000.00
+MONTHLY_DEPOSIT_LIMIT = 70000.00
 
 async def log_deposit(conn, deposit_from, bank_account_number, amount_deposited):
     timestamp = datetime.datetime.now()
@@ -88,9 +88,12 @@ async def get_account_details(conn, account_number):
     cursor = await conn.execute('SELECT account_bank_name, account_beneficiary, account_number FROM mxn_bank_accounts WHERE account_number = ?', (account_number,))
     account_details = await cursor.fetchone()
     if account_details:
+        # Determine the account label based on the bank name
+        account_label = "Número de cuenta" if account_details[0].lower() == "bbva" else "Número de CLABE"
+        
         return (
             f"Los detalles para el pago son:\n\n"
             f"Nombre de banco: {account_details[0]}\n"
             f"Nombre del beneficiario: {account_details[1]}\n"
-            f"Número de cuenta: {account_details[2]}\n"
+            f"{account_label}: {account_details[2]}\n"
         )
