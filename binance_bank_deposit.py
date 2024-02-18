@@ -1,7 +1,7 @@
 import datetime
 import random
 import logging
-from database import get_buyer_bank, update_order_details
+from binance_db import get_buyer_bank, update_order_details
 from common_vars import BBVA_BANKS
 
 logger = logging.getLogger(__name__)

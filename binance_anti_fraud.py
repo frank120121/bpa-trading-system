@@ -2,13 +2,13 @@ import logging
 logger = logging.getLogger(__name__)
 from fuzzywuzzy import process
 from verify_client_ip import fetch_ip
-from database import update_anti_fraud_stage, update_kyc_status
+from binance_db import update_anti_fraud_stage, update_kyc_status
 from binance_messages import send_text_message, send_messages
 from binance_blacklist import add_to_blacklist
 from lang_utils import transaction_denied, payment_concept, payment_warning
 from binance_bank_deposit import get_payment_details
 from common_vars import NOT_ACCEPTED_BANKS, ACCEPTED_BANKS
-from database import update_buyer_bank
+from binance_db import update_buyer_bank
 
 async def handle_anti_fraud(buyer_name, seller_name, conn, anti_fraud_stage, response, order_no, ws):
     questions = [

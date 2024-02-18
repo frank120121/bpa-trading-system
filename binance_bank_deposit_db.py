@@ -70,8 +70,6 @@ async def main():
 
         # Print table contents for verification
         #await remove_bank_account(conn, '058597000054265356')
-        await add_column_if_not_exists(conn, "mxn_deposits", "merchant_id", "INTEGER REFERENCES merchants(id)")
-        await add_column_if_not_exists(conn, "mxn_bank_accounts", "merchant_id", "INTEGER REFERENCES merchants(id)")
 
         await print_table_contents(conn, 'mxn_bank_accounts')
 
