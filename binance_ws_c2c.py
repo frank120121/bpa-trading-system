@@ -1,6 +1,6 @@
 import json
 from common_utils_db import create_connection
-from merchant_account import MerchantAccount
+from binance_merchant_handler import MerchantAccount
 import logging
 logger = logging.getLogger(__name__)
 

@@ -1,4 +1,4 @@
-from message_handlers import handle_text_message, handle_system_notifications, handle_image_message
+from binance_msg_handler import handle_text_message, handle_system_notifications, handle_image_message
 from database import insert_or_update_order, get_order_details, update_order_status
 from binance_order_details import fetch_order_details
 import json
