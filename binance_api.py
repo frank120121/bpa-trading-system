@@ -55,7 +55,7 @@ class BinanceAPI:
             "https://api.binance.com/sapi/v1/c2c/ads/getDetailByNo",
             {
                 "adsNo": advNo,
-                "timestamp": await get_server_timestamp()
+                "timestamp": get_server_timestamp()
             }
         )
     async def update_ad(self, advNo, priceFloatingRatio):
@@ -66,7 +66,7 @@ class BinanceAPI:
             {
                 "advNo": advNo,
                 "priceFloatingRatio": priceFloatingRatio,
-                "timestamp": await get_server_timestamp()
+                "timestamp": get_server_timestamp()
             }
         )
     async def fetch_ads_search(self, asset_type, fiat, transAmount, payTypes=None):

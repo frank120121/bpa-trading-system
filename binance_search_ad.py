@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 async def search_ads(KEY, SECRET, asset_type, fiat, transAmount, payTypes=None):
 
-    timestamp = str(await get_server_timestamp())
+    timestamp = str(get_server_timestamp())
 
     payload = {
         "asset": asset_type,

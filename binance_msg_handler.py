@@ -1,5 +1,4 @@
 from lang_utils import get_message_by_language, determine_language, transaction_denied, get_default_reply, payment_concept, payment_warning
-from common_utils import RateLimiter
 from binance_db_get import get_account_number, is_menu_presented, get_kyc_status, get_anti_fraud_stage
 from binance_db_set import update_total_spent
 from binance_bank_deposit import get_payment_details, log_deposit
@@ -11,7 +10,6 @@ from verify_client_ip import fetch_ip
 from common_vars import prohibited_countries
 import logging
 logger = logging.getLogger(__name__)
-rate_limiter = RateLimiter(limit_period=10)
 
 async def check_order_details(order_details):
     if order_details is None:

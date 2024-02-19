@@ -1,64 +1,54 @@
 import hashlib
 import hmac
-import aiohttp
 import time
+import aiohttp
 import asyncio
 from binance_endpoints import TIME_ENDPOINT_V1, TIME_ENDPOINT_V3
 import logging
 logger = logging.getLogger(__name__)
-class RateLimiter:
-    def __init__(self, limit_period=3):
-        self.limit_period = limit_period
-        self.last_message_times = {}
-    
-    def is_limited(self, user_id):
-        current_time = time.time()
-        last_time = self.last_message_times.get(user_id, 0)
-        if current_time - last_time < self.limit_period:
-            return True
-        self.last_message_times[user_id] = current_time
-        return False
-async def retry_request(func, *args, max_retries=3, delay=5, **kwargs):
-    for i in range(max_retries):
-        try:
-            return await func(*args, **kwargs)
-        except aiohttp.client_exceptions.ClientConnectorError as e:
-            if i < max_retries - 1:
-                await asyncio.sleep(delay)
-            else:
-                raise e
 
 def hashing(query_string, secret):
     return hmac.new(secret.encode('utf-8'), query_string.encode('utf-8'), hashlib.sha256).hexdigest()
 
 class ServerTimestampCache:
     last_timestamp = None
-    last_fetch_time = None
-    rec_window = 3  # seconds
+    sync_interval = 1800  # Sync every 30 minutes
+    offset = None
 
     @classmethod
-    async def get_server_timestamp(cls):
-        current_time = time.time()
-
-        # Check if the last fetched timestamp is still valid
-        if cls.last_timestamp is not None and (current_time - cls.last_fetch_time) < cls.rec_window:
-            return cls.last_timestamp
-
+    async def fetch_server_time(cls):
         async with aiohttp.ClientSession() as session:
             for endpoint in [TIME_ENDPOINT_V3, TIME_ENDPOINT_V1]:
                 try:
                     async with session.get(endpoint) as response:
                         if response.status == 200:
                             data = await response.json()
-                            cls.last_timestamp = data['serverTime']
-                            cls.last_fetch_time = current_time
-                            return cls.last_timestamp
+                            server_time = data['serverTime']
+                            cls.offset = server_time - int(time.time() * 1000)
+                            logger.info(f"Updated server timestamp: {server_time}")
+                            return
                 except Exception as e:
-                    logger.error(f"An error occurred while fetching server time from {endpoint}: {e}")
+                    logger.error(f"Failed to fetch server time from {endpoint}: {e}")
+        
+        logger.error("Failed to update server timestamp from all endpoints.")
 
-        logger.error("Failed to fetch server time from all endpoints.")
-        return None
+    @classmethod
+    async def maintain_timestamp(cls):
+        while True:
+            await cls.fetch_server_time()
+            await asyncio.sleep(cls.sync_interval)
 
-# Replace the existing get_server_timestamp function with this
-async def get_server_timestamp():
-    return await ServerTimestampCache.get_server_timestamp()
+    @classmethod
+    def get_server_timestamp(cls):
+        if cls.offset is None:
+            logger.error("Server timestamp offset is not initialized.")
+            return None
+        return int(time.time() * 1000) + cls.offset
+
+# Initialize and start the timestamp update task when your application starts
+async def start_timestamp_maintenance():
+    asyncio.create_task(ServerTimestampCache.maintain_timestamp())
+
+
+def get_server_timestamp():
+    return ServerTimestampCache.get_server_timestamp()
