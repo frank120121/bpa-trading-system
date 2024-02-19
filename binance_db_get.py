@@ -35,11 +35,6 @@ async def get_order_details(conn, order_no):
         logger.error(f"An error occurred: {e}")
         return None
 
-async def order_exists(conn, order_no):
-    async with conn.cursor() as cursor:
-        await cursor.execute("SELECT id FROM orders WHERE order_no = ?", (order_no,))
-        row = await cursor.fetchone()
-        return bool(row)
     
 async def fetch_merchant_credentials(merchant_id):
     async with aiosqlite.connect(DB_FILE) as conn:  # Use your actual database connection here

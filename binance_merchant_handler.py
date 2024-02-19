@@ -1,7 +1,8 @@
 from binance_msg_handler import handle_text_message, handle_system_notifications, handle_image_message
-from binance_db_set import insert_or_update_order, update_order_status
+from binance_db_set import update_order_status
 from binance_db_get import get_order_details
 from binance_order_details import fetch_order_details
+from binance_db import insert_or_update_order
 import json
 from common_vars import status_map
 from binance_blacklist import is_blacklisted
