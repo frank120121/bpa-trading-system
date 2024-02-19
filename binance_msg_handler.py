@@ -1,6 +1,7 @@
 from lang_utils import get_message_by_language, determine_language, transaction_denied, get_default_reply, payment_concept, payment_warning
 from common_utils import RateLimiter
-from binance_db import update_total_spent, get_kyc_status, get_anti_fraud_stage, is_menu_presented, get_account_number
+from binance_db_get import get_account_number, is_menu_presented, get_kyc_status, get_anti_fraud_stage
+from binance_db_set import update_total_spent
 from binance_bank_deposit import get_payment_details, log_deposit
 from binance_messages import send_text_message, present_menu_based_on_status, handle_menu_response, send_messages
 from binance_orders import binance_buy_order

@@ -1,5 +1,6 @@
 import asyncio
 import binance_db
+import binance_db_get
 import random
 
 def generate_random_order_no():
@@ -29,7 +30,7 @@ async def test_order_insertion():
     await binance_db.insert_or_update_order(conn, order_details)
 
     # 3. Fetch the order from the database to verify its presence
-    order_data = await binance_db.get_order_details(conn, order_details['data']['orderNumber'])
+    order_data = await binance_db_get.get_order_details(conn, order_details['data']['orderNumber'])
 
     if order_data:
         print("Order was added successfully!")
