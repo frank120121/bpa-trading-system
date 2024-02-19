@@ -141,7 +141,6 @@ async def main():
         #await clear_ads_table()
         #await create_database()
         #await insert_initial_ads()
-        await add_column_if_not_exists(conn, "ads", "merchant_id", "INTEGER REFERENCES merchants(id)")
 
         await print_table_contents(conn, 'ads')
         await conn.close()

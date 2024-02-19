@@ -1,7 +1,5 @@
 import aiosqlite
-import asyncio
 from common_vars import DB_FILE
-from common_utils_db import create_connection, execute_and_commit, handle_error, print_table_contents, clear_table, create_table, remove_from_table, add_column_if_not_exists
 import logging
 logger = logging.getLogger(__name__)
 
