@@ -18,7 +18,7 @@ async def on_message(ws, message, KEY, SECRET):
             return
         conn = await create_connection("C:/Users/p7016/Documents/bpa/orders_data.db")
         if conn:
-            logger.info(message)
+            logger.debug(message)
             try:
                 await merchant_account.handle_message_by_type(ws, KEY, SECRET, msg_json, msg_type, conn)
                 await conn.commit()               

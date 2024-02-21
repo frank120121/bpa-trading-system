@@ -3,7 +3,6 @@ from binance_c2c import main_binance_c2c
 from binance_update_ads import start_update_ads
 from populate_database import populate_ads_with_details
 import logging
-from common_utils import start_timestamp_maintenance, ServerTimestampCache
 from logging_config import setup_logging
 
 setup_logging(log_filename='Binance_c2c_logger.log')
@@ -27,13 +26,6 @@ async def main():
                 task.cancel()
 
 async def run():
-    # Start the timestamp synchronization task
-    timestamp_task = asyncio.create_task(start_timestamp_maintenance())
-
-    # Wait for the first timestamp synchronization to complete before proceeding
-    await ServerTimestampCache.fetch_server_time()
-
-    # Proceed with the rest of the bot tasks
     await populate_ads_with_details()
     await main()
 

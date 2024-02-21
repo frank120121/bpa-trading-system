@@ -7,8 +7,8 @@ from binance_api import BinanceAPI
 
 logger = logging.getLogger(__name__)
 
-PRICE_THRESHOLD = 1.019
-MIN_RATIO = 102
+PRICE_THRESHOLD = 1.0163
+MIN_RATIO = 101.63
 MAX_RATIO = 110
 RATIO_ADJUSTMENT = 0.04
 DIFF_THRESHOLD = 0.09
@@ -19,7 +19,6 @@ def filter_ads(ads_data, base_price, own_ads):
     own_adv_nos = [ad['advNo'] for ad in own_ads]
     logger.debug(f'own ad numbers: {own_adv_nos}')
     return [ad for ad in ads_data if ad['adv']['advNo'] not in own_adv_nos and float(ad['adv']['price']) >= base_price * PRICE_THRESHOLD]
-
 
 def compute_base_price(price: float, floating_ratio: float) -> float:
     return round(price / (floating_ratio / 100), 2)
@@ -105,33 +104,24 @@ async def analyze_and_update_ads(ad, api_instance, ads_data, all_ads):
 async def process_ads(ads_group, api_instances, all_ads):
     if not ads_group:
         return
-
     for ad in ads_group:
         # Directly use the account of the current ad to get the API instance
         api_instance = api_instances[ad['account']]
-
         # Convert payTypes to a list if not None, else default to an empty list
         payTypes_list = ad['payTypes'] if ad['payTypes'] is not None else []
-
         # Perform the fetch_ads_search call for the current ad
         ads_data = await api_instance.fetch_ads_search(ad['asset_type'], ad['fiat'], ad['transAmount'], payTypes_list)
-
         # Validate ads_data
         if ads_data is None or ads_data.get('code') != '000000' or 'data' not in ads_data:
             logger.error(f"Failed to fetch ads data for asset_type {ad['asset_type']}, fiat {ad['fiat']}, transAmount {ad['transAmount']}, and payTypes {payTypes_list}.")
             continue
-
         current_ads_data = ads_data['data']
         if not isinstance(current_ads_data, list) or not current_ads_data:
             logger.debug(f"No valid ads data for asset_type {ad['asset_type']}, fiat {ad['fiat']}, transAmount {ad['transAmount']}, and payTypes {payTypes_list}.")
             continue
-
         # Process the current ad with the fetched ads_data
         await analyze_and_update_ads(ad, api_instance, current_ads_data, all_ads)
         await asyncio.sleep(5)
-
-
-
 
 async def main_loop(api_instances):
     all_ads = await fetch_all_ads_from_database()

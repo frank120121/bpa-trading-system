@@ -14,7 +14,7 @@ async_sessions = {}
 
 async def send_http_request(method, url, api_key, secret_key, params=None, body=None):
     params = params or {}
-    params['timestamp'] = get_server_timestamp()
+    params['timestamp'] = await get_server_timestamp()
     query_string = urlencode(params)
     signature = hashing(query_string, secret_key)
     final_url = f"{url}?{query_string}&signature={signature}"

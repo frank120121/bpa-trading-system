@@ -73,7 +73,7 @@ async def gmail_fetch_ip(last_four):
                     desde_match = re.search(r'desde\s+(\d+\.\d+\.\d+\.\d+)', email_content, re.IGNORECASE)
                     if desde_match:
                         ip_address = desde_match.group(1)
-                        logger.info(f"IP found: {ip_address}")
+                        logger.debug(f"IP found: {ip_address}")
                         return ip_address
 
             # If not found, increase retry count and wait

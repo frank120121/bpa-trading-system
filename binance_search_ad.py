@@ -4,12 +4,27 @@ from credentials import credentials_dict
 from common_utils import get_server_timestamp, hashing
 import logging
 from binance_endpoints import SEARCH_ADS
+from datetime import datetime, timedelta
+
 logger = logging.getLogger(__name__)
 
+# Initialize a cache dictionary
+cache = {}
 
 async def search_ads(KEY, SECRET, asset_type, fiat, transAmount, payTypes=None):
+    global cache
 
-    timestamp = str(get_server_timestamp())
+    # Create a cache key based on the function's arguments
+    cache_key = (asset_type, fiat, transAmount, tuple(sorted(payTypes)) if payTypes else None)
+
+    # Check if these parameters are in the cache and if the cached result is less than 10 seconds old
+    if cache_key in cache:
+        cached_result, timestamp = cache[cache_key]
+        if datetime.now() - timestamp < timedelta(seconds=30):
+            logger.debug("Returning cached result")
+            return cached_result
+
+    timestamp = str(await get_server_timestamp())
 
     payload = {
         "asset": asset_type,
@@ -34,12 +49,17 @@ async def search_ads(KEY, SECRET, asset_type, fiat, transAmount, payTypes=None):
         "X-MBX-APIKEY": KEY,
         "clientType": "WEB",
     }
-
+    
     async with aiohttp.ClientSession() as session:
+        logger.debug(f'calling fetch_ads_search for {asset_type} {fiat} {transAmount} {payTypes}')
         async with session.post(full_url, json=payload, headers=headers) as response:
             if response.status == 200:
                 response_data = await response.json()
                 logger.debug("Fetched ads search: success")
+                
+                # Cache the result along with the current timestamp
+                cache[cache_key] = (response_data, datetime.now())
+                
                 return response_data
             else:
                 logger.error(f"Request failed with status code {response.status}: {await response.text()}")

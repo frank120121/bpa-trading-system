@@ -62,6 +62,17 @@ async def remove_bank_account(conn, account_number):
         logger.error(f"Error removing bank account: {e}")
         raise
 
+# Create an async function that updates the account balance
+async def update_account_balance(conn, account_number, amount):
+    try:
+        await conn.execute('UPDATE mxn_bank_accounts SET account_balance = ? WHERE account_number = ?', (amount, account_number))
+        await conn.commit()
+        logger.info(f"Updated account balance for account: {account_number}")
+    except Exception as e:
+        logger.error(f"Error updating account balance: {e}")
+        raise
+
+
 async def main():
     conn = await create_connection(DB_FILE)
     if conn is not None:
@@ -69,8 +80,20 @@ async def main():
         #await initialize_database(conn)
 
         # Print table contents for verification
-        #await remove_bank_account(conn, '058597000054265356')
+        #Sawait remove_bank_account(conn, '012778004824246573')
 
+        # await update_account_balance(conn, '710969000007300927', 92846.11)
+        # await update_account_balance(conn, '710969000016348705', 4000.14)
+        # await update_account_balance(conn, '710969000015306104', 37236.06)
+        # await update_account_balance(conn, '014761655091416464', 117805.24)
+        # await update_account_balance(conn, '058597000056476091', 91868.96)
+        # await update_account_balance(conn, '646180204200033494', 86515.32)
+        # await update_account_balance(conn, '646180146006124571', 108598.54)
+        # await update_account_balance(conn, '012778015323351288', 162458.23)
+        # await update_account_balance(conn, '012778015939990486', 139889.38)
+        # await update_account_balance(conn, '058597000054265356', 55932.75)
+
+        
         await print_table_contents(conn, 'mxn_bank_accounts')
 
         await conn.close()

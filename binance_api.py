@@ -55,10 +55,13 @@ class BinanceAPI:
             "https://api.binance.com/sapi/v1/c2c/ads/getDetailByNo",
             {
                 "adsNo": advNo,
-                "timestamp": get_server_timestamp()
+                "timestamp": await get_server_timestamp()
             }
         )
     async def update_ad(self, advNo, priceFloatingRatio):
+        if advNo in ['12590489123493851136','12590488417885061120']:
+            logger.info(f"Ad: {advNo} is in the skip list")
+            return
         logger.info(f"Updating ad: {advNo} with rate: {priceFloatingRatio}")
         return await self.api_call(
             'post',
@@ -66,11 +69,11 @@ class BinanceAPI:
             {
                 "advNo": advNo,
                 "priceFloatingRatio": priceFloatingRatio,
-                "timestamp": get_server_timestamp()
+                "timestamp": await get_server_timestamp()
             }
         )
     async def fetch_ads_search(self, asset_type, fiat, transAmount, payTypes=None):
-        logger.info(f'calling fetch_ads_search')
+    
         try:
             # Pass asset_type, fiat, and transAmount to the fetch_ads_search function
             result = await search_ads(self.KEY, self.SECRET, asset_type, fiat, transAmount, payTypes)

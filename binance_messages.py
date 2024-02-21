@@ -11,7 +11,7 @@ async def send_text_message(ws, text, order_no):
 
     try:
         logger.debug(f"Sending a message: {text}")
-        timestamp = get_server_timestamp()
+        timestamp = await get_server_timestamp()
         uuid_prefix = "self_"
         message = {
             'type': 'text',

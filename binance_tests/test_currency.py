@@ -24,7 +24,7 @@ def hashing(query_string, secret):
 async def search_ads(session, KEY, SECRET, asset_type, fiat, trade_type, global_unique_users, fiat_unique_users):
     page = 1
     while True:
-        timestamp = get_server_timestamp()
+        timestamp = await get_server_timestamp()
 
         payload = {
             "asset": asset_type,

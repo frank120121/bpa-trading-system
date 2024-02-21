@@ -210,6 +210,35 @@ transaction_denied = (
     "Por razones de seguridad no es posible proceder. Por favor cancele la orden."
 )
 
+invalid_country = (
+    "Lo sentimos, actualmente no estamos aceptando pagos de este país. Estamos trabajando constantemente para expandir la lista de países aceptados.\n\n"
+    "Gracias por elegirnos, que tenga un excelente día.\n\n"
+    "sorry, we are not currently accepting payments from this country. We are constantly working to expand the list of accepted countries.\n\n"
+    "Thank you for choosing us, have a great day.\n\n"
+    "\n\n"
+    "En caso de que este utilizando un VPN, por favor desactívelo he intentarlo mas tarde.\n\n"
+    "If you are using a VPN, please disable it and try again later."
+
+)
+
+
+anti_fraud_stage3 = (
+    "Lo sentimos, actualmente no estamos aceptando pagos de este banco. Estamos trabajando constantemente para expandir la lista de bancos aceptados.\n\n"
+    "Gracias por elegirnos, que tenga un excelente día."
+)
+
+anti_fraud_not_valid_response = (
+    "Para poder brindarle los datos bancarios, por favor responda exactamente con un 'Si' o un 'No'."
+)
+
+anti_fraud_user_denied = (
+    "Por razones de seguridad, no podemos continuar con este intercambio. Gracias por su comprensión."
+)
+
+anti_fraud_possible_fraud = (
+    "Por razones de seguridad, no podemos continuar con este intercambio. Es posible que esté siendo víctima de un fraude. Por favor cancele la orden y no realice ninguna transferencia ya que puede perder su dinero."
+)
+
 payment_warning = (
     f"Pagos provenientes de {ProhibitedPaymentTypes} estan PROHIBIDOS y seran APELADOS.\n\n"
     f"Al enviar el pago, está confirmando que está de acuerdo con los términos y que toda responsabilidad del uso y pérdidas de los activos "

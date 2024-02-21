@@ -11,7 +11,7 @@ from binance_endpoints import USER_ORDER_DETAIL
 
 
 async def fetch_order_details(KEY, SECRET, order_no):
-    timestamp = get_server_timestamp()
+    timestamp = await get_server_timestamp()
     payload = {"adOrderNo": order_no, "timestamp": timestamp}
     query_string = urlencode(payload)
     signature = hashing(query_string, SECRET)

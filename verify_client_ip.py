@@ -18,10 +18,10 @@ async def fetch_ip(last_four_digits, seller_name):
     for attempt in range(10):
         await asyncio.sleep(3)
         if email_id == 1:
-            logger.info(f"Fetching from outlook.com")
+            logger.debug(f"Fetching from outlook.com")
             ip = await outlook_fetch_ip(last_four_digits)
         else:
-            logger.info(f"Fetching from gmail.com")
+            logger.debug(f"Fetching from gmail.com")
             ip = await gmail_fetch_ip(last_four_digits)
 
         if ip:

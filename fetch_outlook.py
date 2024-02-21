@@ -44,7 +44,7 @@ async def get_access_token(refresh_token=None):
             token_url = "https://login.microsoftonline.com/common/oauth2/v2.0/token"
             
             if refresh_token:
-                logger.info(f"REFRESH TOKEN: {refresh_token}")
+                logger.debug(f"REFRESH TOKEN: {refresh_token}")
 
                 data = {
                     "client_id": CLIENT_ID,
@@ -55,7 +55,7 @@ async def get_access_token(refresh_token=None):
                     "client_secret": CLIENT_SECRET
                 }
             else:
-                logger.info("Gettng ACCESS TOKEN")
+                logger.debug("Gettng ACCESS TOKEN")
                 data = {
                     "client_id": CLIENT_ID,
                     "scope": "openid offline_access Mail.Read",
@@ -85,16 +85,14 @@ async def get_access_token(refresh_token=None):
             logger.error(f"An error occurred: {e}\n{traceback.format_exc()}")
 
 async def outlook_fetch_ip(last_four):
-    logger.info(f"Searching ip for: {last_four}")
+    logger.debug(f"Searching ip for: {last_four}")
     access_token, refresh_token, expiration_time = await load_tokens()
     
     if datetime.datetime.now() >= expiration_time:
-        print("Access token expired. Fetching a new one.")
         access_token = await get_access_token(refresh_token)
 
     async with aiohttp.ClientSession() as session:
         if not access_token:
-            print("No access token found. Fetching a new one.")
             access_token = await get_access_token(refresh_token)
 
         headers = {
@@ -110,7 +108,7 @@ async def outlook_fetch_ip(last_four):
                 if f"[Binance] Tienes una nueva orden P2P {last_four}" in subject:
                     email_content = email.get("body", {}).get("content", "")
                     ip_match = re.search(r"\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b", email_content)
-                    logger.info(f"Ip found: {ip_match.group(0)}")
+                    logger.debug(f"Ip found: {ip_match.group(0)}")
                     if ip_match:
                         return ip_match.group(0)
                         

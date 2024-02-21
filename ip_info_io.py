@@ -1,19 +1,31 @@
 import ipinfo
 import logging
+import requests
+import time
+
 logger = logging.getLogger(__name__)
-def get_ip_origin(ip_address):
+
+def get_ip_origin(ip_address, max_retries=3, initial_backoff=1, max_backoff=5):
     logger.info(f"Getting IP details for: {ip_address}")
     access_token = '51a4ceb0f429f2'
     handler = ipinfo.getHandler(access_token)
-    details = handler.getDetails(ip_address)
-    logger.debug(f"Got IP details: {details}")
-    return details.country
+    retries = 0
+    backoff = initial_backoff
 
+    while retries < max_retries:
+        try:
+            details = handler.getDetails(ip_address)
+            country = details.country
+            logger.debug(f"Got IP details: {details}")
+            return country
+        except requests.exceptions.Timeout:
+            retries += 1
+            logger.warning(f"Timeout occurred while getting IP details for: {ip_address}. Retry {retries}/{max_retries} in {backoff} seconds.")
+            time.sleep(backoff)
+            backoff = min(backoff * 2, max_backoff) 
+        except Exception as e:
+            logger.error(f"An error occurred while getting IP details for: {ip_address}: {e}")
+            return None
 
-
-# access_token = '51a4ceb0f429f2'  # You get this when you sign up for ipinfo.io
-# handler = ipinfo.getHandler(access_token)
-# ip_address = "200.68.166.226"  # You can replace this with any valid IP address
-# details = handler.getDetails(ip_address)
-
-# print(details.all)
+    logger.error(f"Failed to get IP details for: {ip_address} after {max_retries} retries.")
+    return None

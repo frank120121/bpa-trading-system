@@ -47,14 +47,14 @@ async def print_table_contents(conn, table_name):
         except Exception as e:
             print(f"Error reading from table {table_name}: {e}")
 
-async def add_column_if_not_exists(conn, table_name, column_name, column_type):
-    column_exists_query = f"PRAGMA table_info({table_name})"
-    cursor = await conn.execute(column_exists_query)
-    columns_info = await cursor.fetchall()
-    if column_name not in [col[1] for col in columns_info]:  # Column names are in the second position
-        alter_table_query = f"ALTER TABLE {table_name} ADD COLUMN {column_name} {column_type}"
-        await conn.execute(alter_table_query)
-        logger.info(f"Added '{column_name}' column to '{table_name}' table.")
+async def add_column_if_not_exists(conn, table_name, column_name, data_type, default_value):
+    try:
+        await conn.execute(
+            f"ALTER TABLE {table_name} ADD COLUMN {column_name} {data_type} DEFAULT {default_value}"
+        )
+        await conn.commit()
+    except aiosqlite.OperationalError:
+        pass
 
 async def clear_table(conn, table_name):
     # Validate the table_name to ensure it's a safe and valid identifier
