@@ -62,7 +62,7 @@ async def handle_order_status_1(ws, conn, order_no, order_details):
     else:
         if await check_and_handle_country_restrictions(ws, conn, order_no, seller_name, buyer_name, fiat):
             return
-        payment_details = await get_payment_details(conn, order_no, buyer_name)
+        payment_details = await get_payment_details(conn, order_no)
         await send_messages(ws, order_no, [payment_warning, payment_concept, payment_details])
 
 async def generic_reply(ws, order_no, order_details, status_code):

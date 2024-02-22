@@ -68,7 +68,7 @@ async def handle_anti_fraud(buyer_name, seller_name, conn, anti_fraud_stage, res
 
     if anti_fraud_stage == len(questions):
         await update_kyc_status(conn, buyer_name, 1)
-        payment_details = await get_payment_details(conn, order_no, buyer_name)
+        payment_details = await get_payment_details(conn, order_no)
         await send_messages(ws, order_no, [payment_warning, payment_concept, payment_details])
     else:
         await send_text_message(ws, questions[anti_fraud_stage], order_no)

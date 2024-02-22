@@ -124,7 +124,7 @@ async def main():
         await create_table(conn, sql_create_orders_table)
 
         # Print table contents for verification
-        await print_table_contents(conn, 'merchants')
+        await print_table_contents(conn, 'orders')
 
         await conn.close()
     else:
