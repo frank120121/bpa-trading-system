@@ -1,4 +1,5 @@
 import logging
+import unicodedata
 from fuzzywuzzy import process
 from binance_messages import send_text_message, send_messages
 from binance_blacklist import add_to_blacklist
@@ -9,6 +10,12 @@ from binance_db_set import update_buyer_bank, update_anti_fraud_stage, update_ky
 
 logger = logging.getLogger(__name__)
 
+def normalize_string(input_str):
+    # Normalize the string to NFD form which separates characters and their accents
+    normalized_str = unicodedata.normalize('NFD', input_str)
+    # Filter out the non-spacing marks (accents)
+    return ''.join([c for c in normalized_str if unicodedata.category(c) != 'Mn'])
+
 async def handle_anti_fraud(buyer_name, seller_name, conn, anti_fraud_stage, response, order_no, ws):
     questions = [
         f"¿Esta usted comprando porque le han ofrecido empleo, inversión con altos retornos o promesas de ganancias a cambio de que usted les envie estas criptomonedas? (1/3)",
@@ -18,13 +25,8 @@ async def handle_anti_fraud(buyer_name, seller_name, conn, anti_fraud_stage, res
         f"Perfecto si aceptamos su banco. Por ultimo, la cuenta bancaria que utilizará para realizar el pago, ¿está a su nombre? ({buyer_name})",
     ]
 
-    # Check if the special "start_pro" command is given to start the process
-    if response == "start_pro":
-        anti_fraud_stage = 0
-        await send_text_message(ws, questions[anti_fraud_stage], order_no)  # Send the first question immediately
-        return  # Exit the function to avoid further processing
 
-    normalized_response = response.strip().lower()
+    normalized_response = normalize_string(response.strip().lower())
     if anti_fraud_stage >= len(questions):
         return  # No more questions
 

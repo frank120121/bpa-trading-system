@@ -56,14 +56,15 @@ async def websocket_listener(uri, api_key, secret_key):
         try:
             while True:
                 try:
-                    message = await asyncio.wait_for(ws.recv(), timeout=10 * 60)  # 10 minutes timeout
+                    message = await asyncio.wait_for(ws.recv(), timeout=4 * 60)  # 5 minutes timeout
                     if isinstance(message, (bytes, bytearray)):
-                        await ws.pong(message)  # Respond to pings with pongs
+                        await ws.pong(message) # Respond to pings with pongs
                     else:
                         await on_message(ws, message, api_key, secret_key)
 
                         # Rate limit handling
                         message_count += 1
+                        logger.debug(f"Message count: {message_count}")
                         if message_count >= 5:
                             elapsed_time = asyncio.get_event_loop().time() - start_time
                             if elapsed_time < 1:
@@ -72,8 +73,7 @@ async def websocket_listener(uri, api_key, secret_key):
                             start_time = asyncio.get_event_loop().time()
 
                 except asyncio.TimeoutError:
-                    logger.error("Timeout. Sending ping to keep connection alive.")
-                    await ws.ping()
+                    await ws.pong() # Send a pong to keep the connection alive
 
         except websockets.exceptions.ConnectionClosedOK:
             logger.info("Connection closed normally, attempting to reconnect.")

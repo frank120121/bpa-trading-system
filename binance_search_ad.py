@@ -54,6 +54,7 @@ async def search_ads(KEY, SECRET, asset_type, fiat, transAmount, payTypes=None):
         logger.debug(f'calling fetch_ads_search for {asset_type} {fiat} {transAmount} {payTypes}')
         async with session.post(full_url, json=payload, headers=headers) as response:
             if response.status == 200:
+                
                 response_data = await response.json()
                 logger.debug("Fetched ads search: success")
                 

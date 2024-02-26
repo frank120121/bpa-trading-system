@@ -69,6 +69,12 @@ async def insert_or_update_order(conn, order_details):
         logger.error(f"Error in insert_or_update_order: {e}")
         print(f"Exception details: {e}")
 
+async def remove(conn, order_no):
+    await conn.execute("DELETE FROM orders WHERE order_no = ?", (order_no,))
+    await conn.commit()
+async def remove_user(conn, name):
+    await conn.execute("DELETE FROM users WHERE name = ?", (name,))
+    await conn.commit()
 async def main():  
     sql_create_merchants_table = """CREATE TABLE IF NOT EXISTS merchants (
                                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -118,13 +124,15 @@ async def main():
 
     conn = await create_connection(DB_FILE)
     if conn is not None:
-        await create_table(conn, sql_create_merchants_table)
-        await create_table(conn, sql_create_users_table)
-        await create_table(conn, sql_create_transactions_table)
-        await create_table(conn, sql_create_orders_table)
+        # await create_table(conn, sql_create_merchants_table)
+        # await create_table(conn, sql_create_users_table)
+        # await create_table(conn, sql_create_transactions_table)
+        # await create_table(conn, sql_create_orders_table)
 
         # Print table contents for verification
-        await print_table_contents(conn, 'orders')
+        # await remove(conn, '20594838019662282752')
+        await remove_user(conn, 'LOPEZ GUERRERO FRANCISCO JAVIER')
+        await print_table_contents(conn, 'users')
 
         await conn.close()
     else:

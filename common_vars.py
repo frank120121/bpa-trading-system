@@ -3,8 +3,8 @@ ProhibitedPaymentTypes = "TERCEROS, BANCOPPEL, BANCO AZTECA, STP, MERCADO PAGO, 
 ORDER_STATUS_UNDER_REVIEW = 2
 FIAT_UNIT_MXN = 'MXN'
 FIAT_UNIT_USD = 'USD'
-MGL_SPOT = 1
-MFM_SPOT = 2
+MGL_SPOT = 2
+MFM_SPOT = 1
 MXN_BTC_AMT = '5000'
 MXN_USDT_AMT = '30000'
 USD_AMT_1 = '100'
@@ -71,72 +71,86 @@ MERCHANTS = {
     'MUNOZ PEREA MARIA FERNANDA': 1
 }
 
+MONTHLY_LIMITS = 2000000.00
+DAILY_LIMITS = 100000.00
+
 bank_accounts = [
     {
         "bank_name": "Nvio",
         "beneficiary": "Francisco Javier Lopez",
         "account_number": "710969000007300927",
-        "limit": 90000.00
+        "account_daily_limit": DAILY_LIMITS,
+        "account_monthly_limit": MONTHLY_LIMITS
     },
     {
         "bank_name": "BBVA",
         "beneficiary": "Francisco Javier Lopez",
-        "account_number": "012778015323351288",
-        "limit": 95000.00
+        "account_number": "1532335128",
+        "account_daily_limit": DAILY_LIMITS,
+        "account_monthly_limit": MONTHLY_LIMITS
     },
     {
         "bank_name": "STP",
         "beneficiary": "Francisco Javier Lopez",
         "account_number": "646180146006124571",
-        "limit": 90000.00
+        "account_daily_limit": DAILY_LIMITS,
+        "account_monthly_limit": MONTHLY_LIMITS
     },
     {
         "bank_name": "Banregio",
         "beneficiary": "Francisco Javier Lopez",
         "account_number": "058597000056476091",
-        "limit": 90000.00
+        "account_daily_limit": DAILY_LIMITS,
+        "account_monthly_limit": MONTHLY_LIMITS
     },
     {
         "bank_name": "BBVA",
         "beneficiary": "Maria Fernanda Munoz Perea",
-        "account_number": "012778015939990486",
-        "limit": 95000.00
+        "account_number": "1593999048",
+        "account_daily_limit": DAILY_LIMITS,
+        "account_monthly_limit": MONTHLY_LIMITS
     },
     {
         "bank_name": "Nvio",
         "beneficiary": "Maria Fernanda Munoz Perea",
         "account_number": "710969000016348705",
-        "limit": 90000.00
+        "account_daily_limit": DAILY_LIMITS,
+        "account_monthly_limit": MONTHLY_LIMITS
     },
     {
         "bank_name": "BBVA",
         "beneficiary": "Maria Fernanda Munoz Perea",
-        "account_number": "012778004824246573",
-        "limit": 95000.00
+        "account_number": "0482424657",
+        "account_daily_limit": DAILY_LIMITS,
+        "account_monthly_limit": 250000.00
     },
     {
         "bank_name": "Nvio",
         "beneficiary": "Martha Guerrero Lopez",
         "account_number": "710969000015306104",
-        "limit": 90000.00
+        "account_daily_limit": DAILY_LIMITS,
+        "account_monthly_limit": MONTHLY_LIMITS
     },
     {
         "bank_name": "Banregio",
         "beneficiary": "Martha Guerrero Lopez",
         "account_number": "058597000054265356",
-        "limit": 90000.00
+        "account_daily_limit": DAILY_LIMITS,
+        "account_monthly_limit": MONTHLY_LIMITS
     },
     {
         "bank_name": "Santander",
         "beneficiary": "Martha Guerrero Lopez",
         "account_number": "014761655091416464",
-        "limit": 90000.00
+        "account_daily_limit": DAILY_LIMITS,
+        "account_monthly_limit": MONTHLY_LIMITS
     },
     {
         "bank_name": "STP",
         "beneficiary": "ANBER CAP DE MEXICO SA DE CV",
         "account_number": "646180204200033494",
-        "limit": 90000.00
+        "account_daily_limit": DAILY_LIMITS,
+        "account_monthly_limit": MONTHLY_LIMITS
     }
 ]
 

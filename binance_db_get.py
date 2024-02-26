@@ -4,20 +4,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-async def get_buyer_bank(conn, order_no):
-    async with conn.cursor() as cursor:
-        await cursor.execute("SELECT buyer_bank FROM orders WHERE order_no=?", (order_no,))
-        result = await cursor.fetchone()
-        if result:
-            return result[0]
-        return None
-async def get_account_number(conn, order_no):
-    async with conn.cursor() as cursor:
-        await cursor.execute("SELECT account_number FROM orders WHERE order_no=?", (order_no,))
-        result = await cursor.fetchone()
-        if result:
-            return result[0]
-        return None
     
 async def get_order_details(conn, order_no):
     try:
@@ -130,6 +116,13 @@ async def get_buyer_bank(conn, order_no):
         if result:
             return result[0]
         return None
+async def get_buyer_bank(conn, order_no):
+    async with conn.cursor() as cursor:
+        await cursor.execute("SELECT buyer_bank FROM orders WHERE order_no=?", (order_no,))
+        result = await cursor.fetchone()
+        if result:
+            return result[0]
+        return None
 async def get_account_number(conn, order_no):
     async with conn.cursor() as cursor:
         await cursor.execute("SELECT account_number FROM orders WHERE order_no=?", (order_no,))
@@ -137,4 +130,17 @@ async def get_account_number(conn, order_no):
         if result:
             return result[0]
         return None
-    
+async def get_order_amount(conn, order_no):
+    async with conn.cursor() as cursor:
+        await cursor.execute("SELECT total_price FROM orders WHERE order_no=?", (order_no,))
+        result = await cursor.fetchone()
+        if result:
+            return result[0]
+        return None
+async def get_buyer_name(conn, order_no):
+    async with conn.cursor() as cursor:
+        await cursor.execute("SELECT buyer_name FROM orders WHERE order_no=?", (order_no,))
+        result = await cursor.fetchone()
+        if result:
+            return result[0]
+        return None

@@ -2,7 +2,7 @@ import asyncio
 import json
 import logging
 from common_utils import get_server_timestamp
-from lang_utils import get_response_for_menu_choice, is_valid_choice, get_invalid_choice_reply, determine_language, get_menu_for_order, payment_concept, payment_warning
+from lang_utils import get_response_for_menu_choice, is_valid_choice, get_invalid_choice_reply, determine_language, get_menu_for_order
 from binance_db_set import set_menu_presented
 from binance_bank_deposit import get_payment_details
 logger = logging.getLogger(__name__)
@@ -23,7 +23,6 @@ async def send_text_message(ws, text, order_no):
             'createTime': timestamp,
             'sendStatus': 4
         }
-        logger.info(f"Sending message: {message}")
         await ws.send(json.dumps(message))
 
     except Exception as e:

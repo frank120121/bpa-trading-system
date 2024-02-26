@@ -1,7 +1,8 @@
 from lang_utils import get_message_by_language, determine_language, get_default_reply, payment_concept, payment_warning, invalid_country
 from binance_db_get import get_account_number, is_menu_presented, get_kyc_status, get_anti_fraud_stage
 from binance_db_set import update_total_spent
-from binance_bank_deposit import get_payment_details, log_deposit
+from binance_bank_deposit import get_payment_details
+from binance_bank_deposit_db import log_deposit
 from binance_messages import send_text_message, present_menu_based_on_status, handle_menu_response, send_messages
 from binance_orders import binance_buy_order
 from binance_anti_fraud import handle_anti_fraud
@@ -46,6 +47,7 @@ async def handle_order_status_4(ws, conn, order_no, order_details):
     amount_deposited = order_details.get('total_price')
     bank_account_number = await get_account_number(conn, order_no)
     buyer_name = order_details.get('buyer_name')
+    logger.info(f"Logging deposit for {buyer_name} with bank account {bank_account_number} for {amount_deposited}")
     await log_deposit(conn, buyer_name, bank_account_number, amount_deposited)
 
 
@@ -53,10 +55,10 @@ async def handle_order_status_4(ws, conn, order_no, order_details):
 async def handle_order_status_1(ws, conn, order_no, order_details):
     seller_name, buyer_name, fiat = order_details.get('seller_name'), order_details.get('buyer_name'), order_details.get('fiat_unit')
     kyc_status = await get_kyc_status(conn, buyer_name)
-    if kyc_status == 0:
+    if kyc_status == 0 or kyc_status is None:
         anti_fraud_stage = await get_anti_fraud_stage(conn, buyer_name)
         await generic_reply(ws, order_no, order_details, 1)
-        await handle_anti_fraud(buyer_name, seller_name, conn, anti_fraud_stage, "start_pro", order_no, ws)
+        await handle_anti_fraud(buyer_name, seller_name, conn, anti_fraud_stage, "", order_no, ws)
         if await check_and_handle_country_restrictions(ws, conn, order_no, seller_name, buyer_name, fiat):
             return
     else:
