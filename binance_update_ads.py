@@ -7,8 +7,8 @@ from binance_api import BinanceAPI
 
 logger = logging.getLogger(__name__)
 
-PRICE_THRESHOLD = 1.018
-MIN_RATIO = 101.63
+PRICE_THRESHOLD = 1.0163
+MIN_RATIO = 101.6
 MAX_RATIO = 110
 RATIO_ADJUSTMENT = 0.04
 DIFF_THRESHOLD = 0.09
@@ -70,7 +70,7 @@ async def analyze_and_update_ads(ad, api_instance, ads_data, all_ads):
         adjusted_target_spot = check_if_ads_avail(filtered_ads, target_spot)
 
         if not filtered_ads:
-            logger.info(f"No competitor ads found for {advNo}")
+            logger.debug(f"No competitor ads found for {advNo}")
             return
 
         competitor_ad = filtered_ads[adjusted_target_spot - 1]

@@ -49,7 +49,7 @@ class BinanceAPI:
         await self.session.close()
 
     async def get_ad_detail(self, advNo):
-        logger.info(f'calling get_ad_detail')
+        logger.debug(f'calling get_ad_detail')
         return await self.api_call(
             'post',
             "https://api.binance.com/sapi/v1/c2c/ads/getDetailByNo",
@@ -60,9 +60,9 @@ class BinanceAPI:
         )
     async def update_ad(self, advNo, priceFloatingRatio):
         if advNo in ['12590489123493851136','12590488417885061120']:
-            logger.info(f"Ad: {advNo} is in the skip list")
+            logger.debug(f"Ad: {advNo} is in the skip list")
             return
-        logger.info(f"Updating ad: {advNo} with rate: {priceFloatingRatio}")
+        logger.debug(f"Updating ad: {advNo} with rate: {priceFloatingRatio}")
         return await self.api_call(
             'post',
             "https://api.binance.com/sapi/v1/c2c/ads/update",

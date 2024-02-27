@@ -113,8 +113,8 @@ STATUS_MESSAGES = {
     ,
     4: {
         'es': (
-            "Esta orden ya se completo con exito por favor verificar en su billetera de fondos o billetera spot. Le agradeceria un 👍 , yo hare lo mismo.\n\n"
-            "Tenga usted un excelente dia."
+            "Activo depositado en su billetara de fondos. Por favor no olvide calificar esta transaccion.\n\n"
+            "Muchas gracias por su apoyo pase un excelente dia 😊"
         ),
         'en': "This order is now completed, you can check in your funds or spot wallet please."
     }

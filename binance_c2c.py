@@ -1,25 +1,14 @@
+
 import asyncio
 import aiohttp
 from urllib.parse import urlencode
 import websockets
+from websockets.exceptions import ConnectionClosedError
 import logging
 from common_utils import get_server_timestamp, hashing
 from binance_endpoints import GET_CHAT_CREDENTIALS
 from credentials import credentials_dict
 from binance_ws_c2c import on_message
-
-
-# #Websocket Streams
-# A single connection to stream.binance.com is only valid for 24 hours; expect to be disconnected at the 24 hour mark
-# Websocket server will send a ping frame every 3 minutes.
-# If the websocket server does not receive a pong frame back from the connection within a 10 minute period, the connection will be disconnected.
-# When you receive a ping, you must send a pong with a copy of ping's payload as soon as possible.
-# Unsolicited pong frames are allowed, but will not prevent disconnection. It is recommended that the payload for these pong frames are empty.
-# WebSocket connections have a limit of 5 incoming messages per second. A message is considered:
-# A PING frame
-# A PONG frame
-# A JSON control message (e.g. subscribe, unsubscribe)
-
 
 logger = logging.getLogger(__name__)
 
@@ -50,55 +39,35 @@ async def get_websocket_url(api_key, secret_key):
     return None
 
 async def websocket_listener(uri, api_key, secret_key):
-    async with websockets.connect(uri, ping_interval=None) as ws:  # Disable automatic ping
-        message_count = 0
-        start_time = asyncio.get_event_loop().time()
+    while True:  # Retry indefinitely
         try:
-            while True:
-                try:
-                    message = await asyncio.wait_for(ws.recv(), timeout=4 * 60)  # 5 minutes timeout
-                    if isinstance(message, (bytes, bytearray)):
-                        await ws.pong(message) # Respond to pings with pongs
-                    else:
-                        await on_message(ws, message, api_key, secret_key)
-
-                        # Rate limit handling
-                        message_count += 1
-                        logger.debug(f"Message count: {message_count}")
-                        if message_count >= 5:
-                            elapsed_time = asyncio.get_event_loop().time() - start_time
-                            if elapsed_time < 1:
-                                await asyncio.sleep(1 - elapsed_time)
-                            message_count = 0
-                            start_time = asyncio.get_event_loop().time()
-
-                except asyncio.TimeoutError:
-                    await ws.pong() # Send a pong to keep the connection alive
-
-        except websockets.exceptions.ConnectionClosedOK:
-            logger.info("Connection closed normally, attempting to reconnect.")
-        except websockets.exceptions.ConnectionClosedError as e:
-            logger.error(f"Connection closed with error: {e}")
+            async with websockets.connect(uri) as ws:
+                logger.info(f"WebSocket connection established, listening for messages...")
+                async for message in ws:
+                    await on_message(ws, message, api_key, secret_key)
+            # If the connection was closed normally, exit the loop
+            break
+        except ConnectionClosedError as e:
+            logger.error(f"WebSocket connection closed unexpectedly: {e}. Attempting to reconnect...")
         except Exception as e:
-            logger.exception(f"Unexpected error in WebSocket listener: {e}")
+            logger.exception(f"An unexpected error occurred during WebSocket communication: {e}. Attempting to reconnect..")
+        finally:
+            await asyncio.sleep(1)
 
-async def establish_websocket_connection(account_name, api_key, secret_key, retries=200, backoff=1, max_backoff=10):
-    logger.info(f"Starting WebSocket connection for: {account_name}")  # Log the account for which the connection is starting
-    for attempt in range(retries):
+async def establish_websocket_connection(account_name, api_key, secret_key):
+    logger.info(f"Starting WebSocket connection for: {account_name}")  
+    while True:
         try:
             wss_url = await get_websocket_url(api_key, secret_key)
             if wss_url:
                 await websocket_listener(wss_url, api_key, secret_key)
-                logger.info(f"WebSocket connection established successfully for: {account_name}")
-                return  # Successfully connected and processed messages
+                logger.info(f"WebSocket connection established successfully for: {account_name}") 
             else:
                 logger.error(f"Failed to get WebSocket URL for {account_name}.")
         except Exception as e:
             logger.exception(f"An error occurred during WebSocket connection for {account_name}:", exc_info=e)
-        await asyncio.sleep(backoff)
-        backoff = min(max_backoff, backoff * 2)
-    logger.error(f"Reached maximum retry limit for {account_name}. Exiting.")
-
+        await asyncio.sleep(1)
+        
 async def main_binance_c2c():
     logger.info("Starting WebSocket connections for Binance C2C.")
     tasks = [establish_websocket_connection(account_name, cred['KEY'], cred['SECRET']) for account_name, cred in credentials_dict.items()]

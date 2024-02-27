@@ -47,7 +47,7 @@ async def handle_menu_response(ws, choice, order_details, order_no, conn):
     buyer_name = order_details.get('buyer_name')
     if await is_valid_choice(language, order_status, choice):
         if choice == 1:
-            payment_details = await get_payment_details(conn, order_no)
+            payment_details = await get_payment_details(conn, order_no, buyer_name)
             await send_text_message(ws, payment_details, order_no)
         else:
             response = await get_response_for_menu_choice(language, order_status, choice, buyer_name)

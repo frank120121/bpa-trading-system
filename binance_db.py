@@ -130,9 +130,9 @@ async def main():
         # await create_table(conn, sql_create_orders_table)
 
         # Print table contents for verification
-        # await remove(conn, '20594838019662282752')
+        await remove(conn, '20595528410658930688')
         await remove_user(conn, 'LOPEZ GUERRERO FRANCISCO JAVIER')
-        await print_table_contents(conn, 'users')
+        await print_table_contents(conn, 'orders')
 
         await conn.close()
     else:

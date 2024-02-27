@@ -63,7 +63,7 @@ async def start_merchant_session(merchant_id):
     if credentials and merchant_id not in async_sessions:
         task = asyncio.create_task(establish_websocket_connection(merchant_id, credentials))
         async_sessions[merchant_id] = task
-        logger.info(f"Started bot session for merchant {merchant_id}")
+        logger.debug(f"Started bot session for merchant {merchant_id}")
     else:
         logger.warning(f"Could not start session for merchant {merchant_id} (already active or credentials missing)")
 
@@ -71,6 +71,6 @@ async def stop_merchant_session(merchant_id):
     if merchant_id in async_sessions:
         task = async_sessions.pop(merchant_id)
         task.cancel()
-        logger.info(f"Stopped bot session for merchant {merchant_id}")
+        logger.debug(f"Stopped bot session for merchant {merchant_id}")
     else:
         logger.warning(f"No active session found for merchant {merchant_id}")

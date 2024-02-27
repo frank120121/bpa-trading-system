@@ -115,22 +115,39 @@ async def main():
         # await remove_bank_account(conn, '012778015323351288')
         # await remove_bank_account(conn, '012778015939990486')
 
-        # await update_account_balance(conn, '710969000007300927', 31800.08)
-        # await update_account_balance(conn, '058597000056476091', 92084.33)
-        # # await update_account_balance(conn, '646180146006124571', 77368.91)
-        # await update_account_balance(conn, '1532335128', 120980.47)
 
-        #MARIA FERNANDA MUNOZ PEREA
-        # await update_account_balance(conn, '710969000016348705', 3500.03)    #NVIO
-        # await update_account_balance(conn, '1593999048', 201223.95)
-        # await update_account_balance(conn, '0482424657', 107092.24)    #BBVA
 
-        # MARTHA GUERRERO LOPEZ
-        # await update_account_balance(conn, '710969000015306104', 63970.07)
-        # await update_account_balance(conn, '014761655091416464', 69611.56)    #SANTANDER
-        # await update_account_balance(conn, '058597000054265356', 142037.53)
+        # #FRANCISCO JAVIER LOPEZ GUqERRERO
+        FNVIO = 0.09
+        FSTP = 87061.98
+        FBBVA = 136155.18
+        FHEY = 87227.14
+        
+        # await update_account_balance(conn, '710969000007300927', FNVIO)    #NVIO
+        # await update_account_balance(conn, '058597000056476091', FHEY)    #HEY
+        # await update_account_balance(conn, '646180146006124571', FSTP)    #STP
+        # await update_account_balance(conn, '1532335128', FBBVA)  #BBVA
 
-        # await update_account_balance(conn, '646180204200033494', 60275.06)
+        # # #MARIA FERNANDA MUNOZ PEREA
+        MNVIO = 0.08
+        MBBVA1 = 171688.07
+        MBBVA2 = 165759.44
+
+        # await update_account_balance(conn, '710969000016348705', MNVIO)    #NVIO
+        # await update_account_balance(conn, '1593999048', MBBVA1)   #BBVA
+        # await update_account_balance(conn, '0482424657', MBBVA2)    #BBVA
+
+        # # # MARTHA GUERRERO LOPEZ
+        MGNVIO = 0.04
+        MGHEY = 84764.15
+        MGSANTANDER = 92357.54
+
+        # await update_account_balance(conn, '710969000015306104', MGNVIO)    #NVIO
+        # await update_account_balance(conn, '014761655091416464', MGSANTANDER)    #SANTANDER
+        # await update_account_balance(conn, '058597000054265356', MGHEY)  #HEY
+
+        # # #ANBER CAP DE MEXICO
+        # await update_account_balance(conn, '646180204200033494', 63075.09)    #STP
 
         await print_table_contents(conn, 'mxn_bank_accounts')
 

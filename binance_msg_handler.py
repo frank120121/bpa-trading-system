@@ -23,14 +23,14 @@ async def check_and_handle_country_restrictions(ws, conn, order_no, seller_name,
     if fiat == 'USD':
         country = await fetch_ip(order_no[-4:], seller_name)
         if country in prohibited_countries:
-            logger.info(f"Transaction denied. Seller from prohibited country {country}. Buyer: {buyer_name} added to blacklist.")
+            logger.debug(f"Transaction denied. Seller from prohibited country {country}. Buyer: {buyer_name} added to blacklist.")
             await send_text_message(ws, invalid_country, order_no)
             await add_to_blacklist(conn, buyer_name, order_no, country)
             return
 
     country = await fetch_ip(order_no[-4:], seller_name)
     if country and country != "MX":
-        logger.info(f"Transaction denied. Seller not from Mexico. Buyer: {buyer_name} added to blacklist.")
+        logger.debug(f"Transaction denied. Seller not from Mexico. Buyer: {buyer_name} added to blacklist.")
         await send_text_message(ws, invalid_country, order_no)
         await add_to_blacklist(conn, buyer_name, order_no, country)
         return True  
@@ -47,7 +47,7 @@ async def handle_order_status_4(ws, conn, order_no, order_details):
     amount_deposited = order_details.get('total_price')
     bank_account_number = await get_account_number(conn, order_no)
     buyer_name = order_details.get('buyer_name')
-    logger.info(f"Logging deposit for {buyer_name} with bank account {bank_account_number} for {amount_deposited}")
+    logger.debug(f"Logging deposit for {buyer_name} with bank account {bank_account_number} for {amount_deposited}")
     await log_deposit(conn, buyer_name, bank_account_number, amount_deposited)
 
 
@@ -64,7 +64,7 @@ async def handle_order_status_1(ws, conn, order_no, order_details):
     else:
         if await check_and_handle_country_restrictions(ws, conn, order_no, seller_name, buyer_name, fiat):
             return
-        payment_details = await get_payment_details(conn, order_no)
+        payment_details = await get_payment_details(conn, order_no, buyer_name)
         await send_messages(ws, order_no, [payment_warning, payment_concept, payment_details])
 
 async def generic_reply(ws, order_no, order_details, status_code):
