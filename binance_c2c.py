@@ -5,6 +5,7 @@ from urllib.parse import urlencode
 import websockets
 from websockets.exceptions import ConnectionClosedError
 import logging
+import json
 from common_utils import get_server_timestamp, hashing
 from binance_endpoints import GET_CHAT_CREDENTIALS
 from credentials import credentials_dict
@@ -12,61 +13,110 @@ from binance_ws_c2c import on_message
 
 logger = logging.getLogger(__name__)
 
-async def send_http_request(method, url, api_key, secret_key, params=None, body=None):
-    params = params or {}
-    params['timestamp'] = await get_server_timestamp()
-    query_string = urlencode(params)
-    signature = hashing(query_string, secret_key)
-    final_url = f"{url}?{query_string}&signature={signature}"
-    headers = {
-        "Content-Type": "application/json;charset=utf-8",
-        "X-MBX-APIKEY": api_key,
-        "clientType": "WEB"
-    }
+class ConnectionManager:
+    def __init__(self, uri, api_key, secret_key):
+        self.uri = uri
+        self.api_key = api_key
+        self.secret_key = secret_key
+        self.ws = None
+        self.is_connected = False
 
-    async with aiohttp.ClientSession() as session:
-        async with session.request(method, final_url, json=body, headers=headers) as response:
-            response_data = await response.json()
-            if response.status != 200 or 'data' not in response_data:
-                logger.error(f"Error {response.status} from API: {response_data}")
-                return None
-            return response_data['data']
+    async def connect(self):
+        self.ws = await websockets.connect(self.uri, open_timeout=10)
+        self.is_connected = True
+        logger.info("WebSocket connection established, listening for messages...")
+
+    async def listen(self, on_message_callback):
+        try:
+            await self.connect()
+            async for message in self.ws:
+                await on_message_callback(self.ws, message, self.api_key, self.secret_key)
+        except ConnectionClosedError as e:
+            logger.error(f"WebSocket connection closed unexpectedly: {e}.")
+            self.is_connected = False
+        except asyncio.TimeoutError as e:
+            logger.error(f"WebSocket connection attempt timed out: {e}.")
+            self.is_connected = False
+        except Exception as e:
+            logger.exception(f"An unexpected error occurred during WebSocket communication: {e}.")
+            self.is_connected = False
+        finally:
+            logger.info("Attempting to re-establish WebSocket connection...")
+            await self.reconnect()
+
+    async def reconnect(self):
+        while not self.is_connected:
+            try:
+                await asyncio.sleep(5)  # wait before attempting to reconnect
+                await self.connect()
+            except Exception as e:
+                logger.exception(f"An error occurred while trying to reconnect: {e}")
+
+    async def send_text_message(self, text, order_no):
+        try:
+            logger.debug(f"Sending a message: {text}")
+            timestamp = await get_server_timestamp()
+            uuid_prefix = "self_"
+            message = {
+                'type': 'text',
+                'uuid': f"{uuid_prefix}{timestamp}",
+                'orderNo': order_no,
+                'content': text,
+                'self': False,
+                'clientType': 'web',
+                'createTime': timestamp,
+                'sendStatus': 4
+            }
+            if self.is_connected:
+                await self.ws.send(json.dumps(message))
+            else:
+                logger.error("WebSocket is not connected, message not sent.")
+        except Exception as e:
+            logger.error(f"Error sending message: {e}")
+
+async def establish_websocket_connection(account_name, api_key, secret_key):
+    logger.info(f"Starting WebSocket connection for: {account_name}")  
+    try:
+        wss_url = await get_websocket_url(api_key, secret_key)
+        if wss_url:
+            connection_manager = ConnectionManager(wss_url, api_key, secret_key)
+            await connection_manager.listen(on_message)
+            logger.info(f"WebSocket connection established successfully for: {account_name}") 
+        else:
+            logger.error(f"Failed to get WebSocket URL for {account_name}.")
+    except Exception as e:
+        logger.exception(f"An error occurred during WebSocket connection for {account_name}: {e}")
+
+async def send_http_request(method, url, api_key, secret_key, params=None, body=None):
+    try:
+        params = params or {}
+        params['timestamp'] = await get_server_timestamp()
+        query_string = urlencode(params)
+        signature = hashing(query_string, secret_key)
+        final_url = f"{url}?{query_string}&signature={signature}"
+        headers = {
+            "Content-Type": "application/json;charset=utf-8",
+            "X-MBX-APIKEY": api_key,
+            "clientType": "WEB"
+        }
+
+        async with aiohttp.ClientSession() as session:
+            async with session.request(method, final_url, json=body, headers=headers) as response:
+                response_data = await response.json()
+                if response.status != 200 or 'data' not in response_data:
+                    logger.error(f"Error {response.status} from API: {response_data}")
+                    return None
+                return response_data['data']
+    except Exception as e:
+        logger.exception(f"An error occurred in send_http_request: {e}")
+        return None
+
 
 async def get_websocket_url(api_key, secret_key):
     response_data = await send_http_request("GET", GET_CHAT_CREDENTIALS, api_key, secret_key)
     if response_data and 'chatWssUrl' in response_data and 'listenKey' in response_data:
         return f"{response_data['chatWssUrl']}/{response_data['listenKey']}?token={response_data['listenToken']}&clientType=web"
     return None
-
-async def websocket_listener(uri, api_key, secret_key):
-    while True:  # Retry indefinitely
-        try:
-            async with websockets.connect(uri) as ws:
-                logger.info(f"WebSocket connection established, listening for messages...")
-                async for message in ws:
-                    await on_message(ws, message, api_key, secret_key)
-            # If the connection was closed normally, exit the loop
-            break
-        except ConnectionClosedError as e:
-            logger.error(f"WebSocket connection closed unexpectedly: {e}. Attempting to reconnect...")
-        except Exception as e:
-            logger.exception(f"An unexpected error occurred during WebSocket communication: {e}. Attempting to reconnect..")
-        finally:
-            await asyncio.sleep(1)
-
-async def establish_websocket_connection(account_name, api_key, secret_key):
-    logger.info(f"Starting WebSocket connection for: {account_name}")  
-    while True:
-        try:
-            wss_url = await get_websocket_url(api_key, secret_key)
-            if wss_url:
-                await websocket_listener(wss_url, api_key, secret_key)
-                logger.info(f"WebSocket connection established successfully for: {account_name}") 
-            else:
-                logger.error(f"Failed to get WebSocket URL for {account_name}.")
-        except Exception as e:
-            logger.exception(f"An error occurred during WebSocket connection for {account_name}:", exc_info=e)
-        await asyncio.sleep(1)
         
 async def main_binance_c2c():
     logger.info("Starting WebSocket connections for Binance C2C.")
