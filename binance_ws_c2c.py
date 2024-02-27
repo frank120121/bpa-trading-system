@@ -4,7 +4,7 @@ from binance_merchant_handler import MerchantAccount
 import logging
 logger = logging.getLogger(__name__)
 
-async def on_message(ws, message, KEY, SECRET):
+async def on_message(connection_manager, message, KEY, SECRET):
     merchant_account = MerchantAccount()
     try:
         msg_json = json.loads(message)
@@ -20,7 +20,7 @@ async def on_message(ws, message, KEY, SECRET):
         if conn:
             logger.debug(message)
             try:
-                await merchant_account.handle_message_by_type(ws, KEY, SECRET, msg_json, msg_type, conn)
+                await merchant_account.handle_message_by_type(connection_manager, KEY, SECRET, msg_json, msg_type, conn)
                 await conn.commit()               
             except Exception as e:
                 await conn.rollback()

@@ -278,3 +278,37 @@ client_session: <aiohttp.client.ClientSession object at 0x000001C31DCD1480>
 2024-02-27 16:03:34,907:binance_c2c:INFO:WebSocket connection established, listening for messages...
 2024-02-27 16:03:34,914:binance_c2c:INFO:WebSocket connection established, listening for messages...
 2024-02-27 16:03:34,923:binance_c2c:INFO:WebSocket connection established, listening for messages...
+2024-02-27 16:33:28,566:common_utils:INFO:Updated server timestamp: 1709076807594
+2024-02-27 16:35:37,695:binance_ws_c2c:ERROR:Database operation failed, rolled back: '<' not supported between instances of 'NoneType' and 'int'
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\binance_ws_c2c.py", line 23, in on_message
+    await merchant_account.handle_message_by_type(ws, KEY, SECRET, msg_json, msg_type, conn)
+  File "c:\Users\p7016\Documents\bpa\binance_merchant_handler.py", line 28, in handle_message_by_type
+    content_dict = json.loads(content)
+  File "c:\Users\p7016\Documents\bpa\binance_merchant_handler.py", line 67, in _handle_other_types
+    try:
+  File "c:\Users\p7016\Documents\bpa\binance_msg_handler.py", line 106, in handle_text_message
+    if kyc_status == 0 or anti_fraud_stage < 5:
+TypeError: '<' not supported between instances of 'NoneType' and 'int'
+2024-02-27 16:36:08,291:binance_ws_c2c:ERROR:Database operation failed, rolled back: '<' not supported between instances of 'NoneType' and 'int'
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\binance_ws_c2c.py", line 23, in on_message
+    await merchant_account.handle_message_by_type(ws, KEY, SECRET, msg_json, msg_type, conn)
+  File "c:\Users\p7016\Documents\bpa\binance_merchant_handler.py", line 28, in handle_message_by_type
+    content_dict = json.loads(content)
+  File "c:\Users\p7016\Documents\bpa\binance_merchant_handler.py", line 67, in _handle_other_types
+    try:
+  File "c:\Users\p7016\Documents\bpa\binance_msg_handler.py", line 106, in handle_text_message
+    if kyc_status == 0 or anti_fraud_stage < 5:
+TypeError: '<' not supported between instances of 'NoneType' and 'int'
+2024-02-27 16:36:31,843:binance_ws_c2c:ERROR:Database operation failed, rolled back: '<' not supported between instances of 'NoneType' and 'int'
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\binance_ws_c2c.py", line 23, in on_message
+    await merchant_account.handle_message_by_type(ws, KEY, SECRET, msg_json, msg_type, conn)
+  File "c:\Users\p7016\Documents\bpa\binance_merchant_handler.py", line 28, in handle_message_by_type
+    content_dict = json.loads(content)
+  File "c:\Users\p7016\Documents\bpa\binance_merchant_handler.py", line 67, in _handle_other_types
+    try:
+  File "c:\Users\p7016\Documents\bpa\binance_msg_handler.py", line 106, in handle_text_message
+    if kyc_status == 0 or anti_fraud_stage < 5:
+TypeError: '<' not supported between instances of 'NoneType' and 'int'

@@ -16,7 +16,7 @@ def normalize_string(input_str):
     # Filter out the non-spacing marks (accents)
     return ''.join([c for c in normalized_str if unicodedata.category(c) != 'Mn'])
 
-async def handle_anti_fraud(buyer_name, seller_name, conn, anti_fraud_stage, response, order_no, ws):
+async def handle_anti_fraud(buyer_name, seller_name, conn, anti_fraud_stage, response, order_no, connection_manager):
     questions = [
         f"¿Esta usted comprando porque le han ofrecido empleo, inversión con altos retornos o promesas de ganancias a cambio de que usted les envie estas criptomonedas? (1/3)",
         "¿Siente presión o urgencia inusual por parte de alguien para completar este pago de inmediato? (2/3)",
@@ -33,7 +33,7 @@ async def handle_anti_fraud(buyer_name, seller_name, conn, anti_fraud_stage, res
     if anti_fraud_stage == 3:
         # Direct match for not accepted banks
         if normalized_response in [bank.lower() for bank in NOT_ACCEPTED_BANKS]:
-            await send_text_message(ws, anti_fraud_stage3, order_no)
+            await connection_manager.send_text_message(anti_fraud_stage3, order_no)
             await add_to_blacklist(conn, buyer_name, order_no, None, normalized_response, anti_fraud_stage)
             return
 
@@ -43,25 +43,25 @@ async def handle_anti_fraud(buyer_name, seller_name, conn, anti_fraud_stage, res
             await update_buyer_bank(conn, order_no, closest_match)  # Use the closest match
         else:
             accepted_banks_list = ', '.join(ACCEPTED_BANKS)
-            await send_text_message(ws, f"No pudimos verificar el banco proporcionado. Por favor, asegúrese de elegir uno de los siguientes bancos aceptados: {accepted_banks_list}", order_no)
-            await send_text_message(ws, questions[3], order_no)  # Ask the bank question again
+            await connection_manager.send_text_message(f"No pudimos verificar el banco proporcionado. Por favor, asegúrese de elegir uno de los siguientes bancos aceptados: {accepted_banks_list}", order_no)
+            await connection_manager.send_text_message(questions[3], order_no)  # Ask the bank question again
             return
         
     if anti_fraud_stage in [0, 1, 2, 4] and normalized_response not in ['si', 'no']:
-        await send_text_message(ws, anti_fraud_not_valid_response, order_no)
-        await send_text_message(ws, questions[anti_fraud_stage], order_no)
+        await connection_manager.send_text_message(anti_fraud_not_valid_response, order_no)
+        await connection_manager.send_text_message(questions[anti_fraud_stage], order_no)
         return
 
     fraud_responses = {(0, 'si'), (1, 'si')}
     deny_responses = {(2, 'no'), (4, 'no')}
 
     if (anti_fraud_stage, normalized_response) in fraud_responses:
-        await send_text_message(ws, anti_fraud_possible_fraud, order_no)
+        await connection_manager.send_text_message(anti_fraud_possible_fraud, order_no)
         await add_to_blacklist(conn, buyer_name, order_no, None, normalized_response, anti_fraud_stage)
         return
 
     if (anti_fraud_stage, normalized_response) in deny_responses:
-        await send_text_message(ws, anti_fraud_user_denied, order_no)
+        await connection_manager.send_text_message(anti_fraud_user_denied, order_no)
         await add_to_blacklist(conn, buyer_name, order_no, None, normalized_response, anti_fraud_stage)
         return
 
@@ -71,6 +71,6 @@ async def handle_anti_fraud(buyer_name, seller_name, conn, anti_fraud_stage, res
     if anti_fraud_stage == len(questions):
         await update_kyc_status(conn, buyer_name, 1)
         payment_details = await get_payment_details(conn, order_no, buyer_name)
-        await send_messages(ws, order_no, [payment_warning, payment_concept, payment_details])
+        await send_messages(connection_manager, order_no, [payment_warning, payment_concept, payment_details])
     else:
-        await send_text_message(ws, questions[anti_fraud_stage], order_no)
+        await connection_manager.send_text_message(questions[anti_fraud_stage], order_no)
