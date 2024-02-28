@@ -119,7 +119,7 @@ async def get_payment_details(conn, order_no, buyer_name):
         assigned_account_number = result[0] if result else None
 
         if assigned_account_number:
-            logger.info(f"Account already assigned for order {order_no}.")
+            logger.debug(f"Account already assigned for order {order_no}.")
             return await get_account_details(conn, assigned_account_number)
 
         buyer_bank = await get_buyer_bank(conn, order_no)
@@ -135,7 +135,7 @@ async def get_payment_details(conn, order_no, buyer_name):
                 await update_last_used_timestamp(conn, account_number)
                 return await get_account_details(conn, account_number)
             else:
-                logger.info(f"Account {account_number} exceeded the monthly deposit limit for the buyer.")
+                logger.debug(f"Account {account_number} exceeded the monthly deposit limit for the buyer.")
 
         return "Sorry, no bank accounts available at this time or all suitable accounts exceed the monthly limit."
     except Exception as e:
@@ -145,11 +145,11 @@ async def get_payment_details(conn, order_no, buyer_name):
 async def get_account_details(conn, account_number):
     """Retrieves account details for the given account number."""
     try:
-        logger.info(f"Retrieving details for account {account_number}")
+        logger.debug(f"Retrieving details for account {account_number}")
         cursor = await conn.execute('SELECT account_bank_name, account_beneficiary, account_number FROM mxn_bank_accounts WHERE account_number = ?', (account_number,))
         account_details = await cursor.fetchone()
         if account_details:
-            logger.info(f"Details retrieved for account {account_number}")
+            logger.debug(f"Details retrieved for account {account_number}")
             account_label = "Número de cuenta" if account_details[0].lower() == "bbva" else "Número de CLABE"
             return (
                 f"Los detalles para el pago son:\n\n"

@@ -1,314 +1,67 @@
-2024-02-27 11:33:34,030:binance_bank_deposit_db:INFO:Logged deposit of 4350.0 from NUÑEZ SAN MIGUEL ITZCOATL FRANCISCO to account 710969000015306104
-2024-02-27 11:33:58,231:binance_orders:INFO:Missing balance for BTC: 0
-2024-02-27 11:33:58,231:binance_orders:INFO:No missing balance for BTC; 0
-2024-02-27 11:33:58,245:binance_bank_deposit_db:INFO:Logged deposit of 1500.0 from ZAMORA RAMIREZ CARLOS ALBERTO to account 014761655091416464
-2024-02-27 11:34:19,429:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
-2024-02-27 11:34:20,359:ip_info_io:INFO:Getting IP details for: 197.210.54.77
-2024-02-27 11:34:20,651:verify_client_ip:INFO:IP from Country: NG
-2024-02-27 11:48:03,157:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
-2024-02-27 11:48:03,935:ip_info_io:INFO:Getting IP details for: 189.230.20.224
-2024-02-27 11:48:04,220:verify_client_ip:INFO:IP from Country: MX
-2024-02-27 11:48:04,225:binance_bank_deposit:WARNING:Deposit exceeds the monthly limit of 70000.00 for buyer 'GALLEGOS HERNANDEZ LEONARDO JESUS' on account 710969000007300927.
-2024-02-27 11:48:04,225:binance_bank_deposit:INFO:Account 710969000007300927 exceeded the monthly deposit limit for the buyer.
-2024-02-27 11:48:04,235:binance_bank_deposit_db:INFO:Updated last_used_timestamp for account: 710969000015306104 to 2024-02-27 11:48:04
-2024-02-27 11:48:04,235:binance_bank_deposit:INFO:Retrieving details for account 710969000015306104
-2024-02-27 11:48:04,235:binance_bank_deposit:INFO:Details retrieved for account 710969000015306104
-2024-02-27 11:58:16,282:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
-2024-02-27 11:58:17,097:ip_info_io:INFO:Getting IP details for: 200.34.13.56
-2024-02-27 11:58:17,732:verify_client_ip:INFO:IP from Country: MX
-2024-02-27 12:00:17,683:binance_bank_deposit_db:INFO:Updated last_used_timestamp for account: 0482424657 to 2024-02-27 12:00:17
-2024-02-27 12:00:17,684:binance_bank_deposit:INFO:Retrieving details for account 0482424657
-2024-02-27 12:00:17,684:binance_bank_deposit:INFO:Details retrieved for account 0482424657
-2024-02-27 12:01:04,765:binance_bank_deposit_db:INFO:Logged deposit of 14000.0 from GALLEGOS HERNANDEZ LEONARDO JESUS to account 710969000015306104
-2024-02-27 12:01:52,828:common_utils:INFO:Updated server timestamp: 1709060512045
-2024-02-27 12:06:53,328:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
-2024-02-27 12:06:54,133:ip_info_io:INFO:Getting IP details for: 201.175.156.67
-2024-02-27 12:06:54,441:verify_client_ip:INFO:IP from Country: MX
-2024-02-27 12:07:40,621:binance_bank_deposit_db:INFO:Updated last_used_timestamp for account: 014761655091416464 to 2024-02-27 12:07:40
-2024-02-27 12:07:40,621:binance_bank_deposit:INFO:Retrieving details for account 014761655091416464
-2024-02-27 12:07:40,622:binance_bank_deposit:INFO:Details retrieved for account 014761655091416464
-2024-02-27 12:16:07,060:fetch_outlook:WARNING:Token expires in: 2024-02-27 13:16:07.060763
-2024-02-27 12:16:07,575:verify_client_ip:WARNING:Attempt 1: Could not fetch the IP. Retrying...
-2024-02-27 12:16:10,995:verify_client_ip:WARNING:Attempt 2: Could not fetch the IP. Retrying...
-2024-02-27 12:16:14,465:ip_info_io:INFO:Getting IP details for: 177.227.27.134
-2024-02-27 12:16:14,757:verify_client_ip:INFO:IP from Country: MX
-2024-02-27 12:16:14,771:binance_bank_deposit_db:INFO:Updated last_used_timestamp for account: 710969000007300927 to 2024-02-27 12:16:14
-2024-02-27 12:16:14,771:binance_bank_deposit:INFO:Retrieving details for account 710969000007300927
-2024-02-27 12:16:14,771:binance_bank_deposit:INFO:Details retrieved for account 710969000007300927
-2024-02-27 12:19:13,371:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
-2024-02-27 12:19:15,876:ip_info_io:INFO:Getting IP details for: 185.216.73.102
-2024-02-27 12:19:16,158:verify_client_ip:INFO:IP from Country: CO
-2024-02-27 12:30:26,045:binance_orders:INFO:Missing balance for BTC: 0
-2024-02-27 12:30:26,045:binance_orders:INFO:No missing balance for BTC; 0
-2024-02-27 12:30:26,060:binance_bank_deposit_db:INFO:Logged deposit of 5000.0 from PEREZ VILLARREAL FERNANDO DANIEL to account 0482424657
-2024-02-27 12:31:31,599:binance_orders:INFO:Missing balance for BTC: 0
-2024-02-27 12:31:31,610:binance_orders:INFO:No missing balance for BTC; 0
-2024-02-27 12:31:31,624:binance_bank_deposit_db:INFO:Logged deposit of 10000.0 from MORONES GONZALEZ FRANCO ARTURO to account 014761655091416464
-2024-02-27 12:31:53,219:common_utils:INFO:Updated server timestamp: 1709062312413
-2024-02-27 12:45:20,528:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
-2024-02-27 12:45:21,465:ip_info_io:INFO:Getting IP details for: 187.244.58.192
-2024-02-27 12:45:21,751:verify_client_ip:INFO:IP from Country: MX
-2024-02-27 12:48:52,409:binance_c2c:ERROR:WebSocket connection closed unexpectedly: no close frame received or sent.
-2024-02-27 12:48:52,410:binance_c2c:ERROR:WebSocket connection closed unexpectedly: no close frame received or sent.
-2024-02-27 12:48:52,410:binance_c2c:ERROR:WebSocket connection closed unexpectedly: no close frame received or sent.
-2024-02-27 12:49:03,432:binance_c2c:ERROR:WebSocket connection attempt timed out: .
-2024-02-27 12:49:03,432:binance_c2c:ERROR:WebSocket connection attempt timed out: .
-2024-02-27 12:49:03,432:binance_c2c:ERROR:WebSocket connection attempt timed out: .
-2024-02-27 12:49:14,446:binance_c2c:ERROR:WebSocket connection attempt timed out: .
-2024-02-27 12:49:14,446:binance_c2c:ERROR:WebSocket connection attempt timed out: .
-2024-02-27 12:49:14,446:binance_c2c:ERROR:WebSocket connection attempt timed out: .
-2024-02-27 12:49:25,470:binance_c2c:ERROR:WebSocket connection attempt timed out: .
-2024-02-27 12:49:25,470:binance_c2c:ERROR:WebSocket connection attempt timed out: .
-2024-02-27 12:49:25,470:binance_c2c:ERROR:WebSocket connection attempt timed out: .
-2024-02-27 12:49:32,358:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 12:49:32,359:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 12:49:32,362:binance_merchant_handler:ERROR:WebSocket connection is not open!
-2024-02-27 12:49:32,362:binance_merchant_handler:ERROR:WebSocket connection is not open!
-2024-02-27 12:49:32,473:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 12:49:32,475:binance_merchant_handler:ERROR:WebSocket connection is not open!
-2024-02-27 12:49:32,628:binance_c2c:INFO:WebSocket connection closed normally, exiting listener.
-2024-02-27 12:49:32,632:binance_c2c:INFO:WebSocket connection closed normally, exiting listener.
-2024-02-27 12:49:32,775:binance_c2c:INFO:WebSocket connection closed normally, exiting listener.
-2024-02-27 12:49:33,622:binance_c2c:INFO:WebSocket connection established successfully for: account_2
-2024-02-27 12:49:33,639:binance_c2c:INFO:WebSocket connection established successfully for: account_1
-2024-02-27 12:49:33,756:binance_c2c:INFO:WebSocket connection established successfully for: account_3
-2024-02-27 12:49:44,865:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 12:49:44,869:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 12:49:45,154:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 12:55:07,869:binance_c2c:ERROR:WebSocket connection closed unexpectedly: no close frame received or sent.
-2024-02-27 12:55:08,636:binance_c2c:ERROR:WebSocket connection closed unexpectedly: no close frame received or sent.
-2024-02-27 12:55:08,652:binance_c2c:ERROR:WebSocket connection closed unexpectedly: no close frame received or sent.
-2024-02-27 12:55:12,850:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 12:55:12,850:binance_merchant_handler:ERROR:WebSocket connection is not open!
-2024-02-27 12:55:13,051:binance_c2c:INFO:WebSocket connection closed normally, exiting listener.
-2024-02-27 12:55:13,406:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 12:55:13,406:binance_merchant_handler:ERROR:WebSocket connection is not open!
-2024-02-27 12:55:13,437:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 12:55:13,437:binance_merchant_handler:ERROR:WebSocket connection is not open!
-2024-02-27 12:55:13,668:binance_c2c:INFO:WebSocket connection closed normally, exiting listener.
-2024-02-27 12:55:13,704:binance_c2c:INFO:WebSocket connection closed normally, exiting listener.
-2024-02-27 12:55:14,063:binance_c2c:INFO:WebSocket connection established successfully for: account_2
-2024-02-27 12:55:14,670:binance_c2c:INFO:WebSocket connection established successfully for: account_1
-2024-02-27 12:55:14,705:binance_c2c:INFO:WebSocket connection established successfully for: account_3
-2024-02-27 12:55:15,198:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 12:55:15,707:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 12:55:15,722:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 12:55:29,208:binance_search_ad:ERROR:Request failed with status code 400: {"code":-1021,"msg":"Timestamp for this request is outside of the recvWindow."}
-2024-02-27 12:55:29,208:binance_api:ERROR:Failed to fetch ads data.
-2024-02-27 12:55:29,208:binance_update_ads:ERROR:Failed to fetch ads data for asset_type BTC, fiat MXN, transAmount 5000.0, and payTypes [].
-2024-02-27 12:57:29,536:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
-2024-02-27 12:57:30,446:ip_info_io:INFO:Getting IP details for: 72.143.217.148
-2024-02-27 12:57:30,761:verify_client_ip:INFO:IP from Country: CA
-2024-02-27 13:01:53,630:common_utils:INFO:Updated server timestamp: 1709064112814
-2024-02-27 13:03:42,473:binance_c2c:ERROR:WebSocket connection closed unexpectedly: no close frame received or sent.
-2024-02-27 13:03:53,476:binance_c2c:ERROR:WebSocket connection attempt timed out: .
-2024-02-27 13:04:04,500:binance_c2c:ERROR:WebSocket connection attempt timed out: .
-2024-02-27 13:04:11,359:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 13:04:11,359:binance_merchant_handler:ERROR:WebSocket connection is not open!
-2024-02-27 13:04:11,625:binance_c2c:INFO:WebSocket connection closed normally, exiting listener.
-2024-02-27 13:04:12,636:binance_c2c:INFO:WebSocket connection established successfully for: account_1
-2024-02-27 13:04:13,907:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 13:04:14,369:binance_c2c:ERROR:WebSocket connection closed unexpectedly: no close frame received or sent.
-2024-02-27 13:04:14,369:binance_c2c:ERROR:WebSocket connection closed unexpectedly: no close frame received or sent.
-2024-02-27 13:04:16,038:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 13:04:16,045:binance_merchant_handler:ERROR:WebSocket connection is not open!
-2024-02-27 13:04:16,052:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 13:04:16,052:binance_merchant_handler:ERROR:WebSocket connection is not open!
-2024-02-27 13:04:16,286:binance_c2c:INFO:WebSocket connection closed normally, exiting listener.
-2024-02-27 13:04:16,308:binance_c2c:INFO:WebSocket connection closed normally, exiting listener.
-2024-02-27 13:04:17,295:binance_c2c:INFO:WebSocket connection established successfully for: account_2
-2024-02-27 13:04:17,311:binance_c2c:INFO:WebSocket connection established successfully for: account_3
-2024-02-27 13:04:18,500:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 13:04:18,619:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 13:05:13,390:binance_c2c:ERROR:WebSocket connection closed unexpectedly: no close frame received or sent.
-2024-02-27 13:05:17,407:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 13:05:17,407:binance_merchant_handler:ERROR:WebSocket connection is not open!
-2024-02-27 13:05:17,674:binance_c2c:INFO:WebSocket connection closed normally, exiting listener.
-2024-02-27 13:05:17,945:binance_c2c:ERROR:WebSocket connection closed unexpectedly: no close frame received or sent.
-2024-02-27 13:05:18,062:binance_c2c:ERROR:WebSocket connection closed unexpectedly: no close frame received or sent.
-2024-02-27 13:05:18,676:binance_c2c:INFO:WebSocket connection established successfully for: account_1
-2024-02-27 13:05:19,506:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 13:05:19,632:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 13:05:19,632:binance_merchant_handler:ERROR:WebSocket connection is not open!
-2024-02-27 13:05:19,732:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 13:05:19,760:binance_merchant_handler:ERROR:WebSocket connection is not open!
-2024-02-27 13:05:19,893:binance_c2c:INFO:WebSocket connection closed normally, exiting listener.
-2024-02-27 13:05:20,000:binance_c2c:INFO:WebSocket connection closed normally, exiting listener.
-2024-02-27 13:05:20,891:binance_c2c:INFO:WebSocket connection established successfully for: account_3
-2024-02-27 13:05:20,980:binance_c2c:INFO:WebSocket connection established successfully for: account_2
-2024-02-27 13:05:22,005:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 13:05:22,052:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 13:09:58,748:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
-2024-02-27 13:09:59,594:ip_info_io:INFO:Getting IP details for: 187.190.4.168
-2024-02-27 13:09:59,875:verify_client_ip:INFO:IP from Country: MX
-2024-02-27 13:10:53,023:binance_bank_deposit_db:INFO:Updated last_used_timestamp for account: 710969000016348705 to 2024-02-27 13:10:53
-2024-02-27 13:10:53,023:binance_bank_deposit:INFO:Retrieving details for account 710969000016348705
-2024-02-27 13:10:53,023:binance_bank_deposit:INFO:Details retrieved for account 710969000016348705
-2024-02-27 13:13:52,747:binance_c2c:ERROR:WebSocket connection closed unexpectedly: no close frame received or sent.
-2024-02-27 13:13:52,748:binance_c2c:ERROR:WebSocket connection closed unexpectedly: no close frame received or sent.
-2024-02-27 13:13:52,885:binance_c2c:ERROR:WebSocket connection closed unexpectedly: no close frame received or sent.
-2024-02-27 13:14:02,646:binance_api:ERROR:An error occurred: Cannot connect to host api.binance.com:443 ssl:default [Connect call failed ('99.84.204.43', 443)]
-2024-02-27 13:14:02,646:binance_update_ads:ERROR:Failed to fetch ads data for asset_type BTC, fiat MXN, transAmount 5000.0, and payTypes [].
-2024-02-27 13:14:03,757:binance_c2c:ERROR:WebSocket connection attempt timed out: .
-2024-02-27 13:14:03,757:binance_c2c:ERROR:WebSocket connection attempt timed out: .
-2024-02-27 13:14:03,895:binance_c2c:ERROR:WebSocket connection attempt timed out: .
-2024-02-27 13:14:06,079:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 13:14:06,084:binance_merchant_handler:ERROR:WebSocket connection is not open!
-2024-02-27 13:14:06,101:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 13:14:06,103:binance_merchant_handler:ERROR:WebSocket connection is not open!
-2024-02-27 13:14:06,107:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 13:14:06,108:binance_merchant_handler:ERROR:WebSocket connection is not open!
-2024-02-27 13:14:06,340:binance_c2c:INFO:WebSocket connection closed normally, exiting listener.
-2024-02-27 13:14:06,358:binance_c2c:INFO:WebSocket connection closed normally, exiting listener.
-2024-02-27 13:14:06,364:binance_c2c:INFO:WebSocket connection closed normally, exiting listener.
-2024-02-27 13:14:07,348:binance_c2c:INFO:WebSocket connection established successfully for: account_2
-2024-02-27 13:14:07,364:binance_c2c:INFO:WebSocket connection established successfully for: account_3
-2024-02-27 13:14:07,364:binance_c2c:INFO:WebSocket connection established successfully for: account_1
-2024-02-27 13:14:08,408:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 13:14:08,408:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 13:14:08,408:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 13:19:02,217:binance_orders:INFO:Missing balance for BTC: 0
-2024-02-27 13:19:02,217:binance_orders:INFO:No missing balance for BTC; 0
-2024-02-27 13:19:02,233:binance_bank_deposit_db:INFO:Logged deposit of 5000.0 from JIMENEZ HERNANDEZ DANIEL FERNANDO to account 710969000016348705
-2024-02-27 13:21:38,067:fetch_outlook:WARNING:Token expires in: 2024-02-27 14:21:38.067953
-2024-02-27 13:21:38,583:ip_info_io:INFO:Getting IP details for: 201.108.2.135
-2024-02-27 13:21:38,871:verify_client_ip:INFO:IP from Country: MX
-2024-02-27 13:23:25,397:binance_bank_deposit_db:INFO:Updated last_used_timestamp for account: 0482424657 to 2024-02-27 13:23:25
-2024-02-27 13:23:25,397:binance_bank_deposit:INFO:Retrieving details for account 0482424657
-2024-02-27 13:23:25,397:binance_bank_deposit:INFO:Details retrieved for account 0482424657
-2024-02-27 13:31:53,997:common_utils:INFO:Updated server timestamp: 1709065913153
-2024-02-27 13:53:09,166:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
-2024-02-27 13:53:09,984:ip_info_io:INFO:Getting IP details for: 189.238.211.100
-2024-02-27 13:53:10,280:verify_client_ip:INFO:IP from Country: MX
-2024-02-27 13:53:10,298:binance_bank_deposit_db:INFO:Updated last_used_timestamp for account: 710969000007300927 to 2024-02-27 13:53:10
-2024-02-27 13:53:10,298:binance_bank_deposit:INFO:Retrieving details for account 710969000007300927
-2024-02-27 13:53:10,298:binance_bank_deposit:INFO:Details retrieved for account 710969000007300927
-2024-02-27 13:53:12,190:ip_info_io:INFO:Getting IP details for: 177.240.139.22
-2024-02-27 13:53:12,435:verify_client_ip:INFO:IP from Country: MX
-2024-02-27 13:58:08,249:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
-2024-02-27 13:58:09,040:ip_info_io:INFO:Getting IP details for: 187.190.161.141
-2024-02-27 13:58:09,326:verify_client_ip:INFO:IP from Country: MX
-2024-02-27 13:59:04,328:binance_bank_deposit_db:INFO:Updated last_used_timestamp for account: 0482424657 to 2024-02-27 13:59:04
-2024-02-27 13:59:04,328:binance_bank_deposit:INFO:Retrieving details for account 0482424657
-2024-02-27 13:59:04,329:binance_bank_deposit:INFO:Details retrieved for account 0482424657
-2024-02-27 14:01:54,323:common_utils:INFO:Updated server timestamp: 1709067713453
-2024-02-27 14:04:33,193:common_utils:INFO:Updated server timestamp: 1709067872322
-2024-02-27 14:04:33,518:common_utils:INFO:Updated server timestamp: 1709067872648
-2024-02-27 14:04:36,025:binance_c2c:INFO:Finished all WebSocket connections.
-2024-02-27 14:04:36,027:__main__:ERROR:KeyboardInterrupt received. Exiting...
-2024-02-27 14:04:36,112:asyncio:ERROR:Unclosed client session
-client_session: <aiohttp.client.ClientSession object at 0x000001C31DCD1660>
-2024-02-27 14:04:36,113:asyncio:ERROR:Unclosed client session
-client_session: <aiohttp.client.ClientSession object at 0x000001C31DCD1480>
-2024-02-27 14:04:39,069:binance_c2c:INFO:Starting WebSocket connections for Binance C2C.
-2024-02-27 14:04:39,069:binance_c2c:INFO:Starting WebSocket connection for: account_1
-2024-02-27 14:04:39,070:binance_c2c:INFO:Starting WebSocket connection for: account_2
-2024-02-27 14:04:39,070:binance_c2c:INFO:Starting WebSocket connection for: account_3
-2024-02-27 14:04:40,917:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 14:04:40,921:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 14:04:40,922:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 14:12:46,507:binance_bank_deposit_db:INFO:Logged deposit of 10800.0 from GALLEGOS HERNANDEZ LEONARDO JESUS to account None
-2024-02-27 14:22:26,322:common_utils:INFO:Updated server timestamp: 1709068945445
-2024-02-27 14:22:26,651:common_utils:INFO:Updated server timestamp: 1709068945772
-2024-02-27 14:22:43,780:common_utils:INFO:Updated server timestamp: 1709068962897
-2024-02-27 14:22:44,108:common_utils:INFO:Updated server timestamp: 1709068963224
-2024-02-27 14:22:49,603:binance_c2c:INFO:Starting WebSocket connections for Binance C2C.
-2024-02-27 14:22:49,603:binance_c2c:INFO:Starting WebSocket connection for: account_1
-2024-02-27 14:22:49,604:binance_c2c:INFO:Starting WebSocket connection for: account_2
-2024-02-27 14:22:49,604:binance_c2c:INFO:Starting WebSocket connection for: account_3
-2024-02-27 14:22:51,232:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 14:22:51,236:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 14:22:51,243:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 14:25:27,967:common_utils:INFO:Updated server timestamp: 1709069127082
-2024-02-27 14:25:28,299:common_utils:INFO:Updated server timestamp: 1709069127412
-2024-02-27 14:25:37,983:common_utils:INFO:Updated server timestamp: 1709069137098
-2024-02-27 14:25:38,316:common_utils:INFO:Updated server timestamp: 1709069137428
-2024-02-27 14:25:43,896:binance_c2c:INFO:Starting WebSocket connections for Binance C2C.
-2024-02-27 14:25:43,897:binance_c2c:INFO:Starting WebSocket connection for: account_1
-2024-02-27 14:25:43,897:binance_c2c:INFO:Starting WebSocket connection for: account_2
-2024-02-27 14:25:43,898:binance_c2c:INFO:Starting WebSocket connection for: account_3
-2024-02-27 14:25:45,060:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 14:25:45,069:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 14:25:45,218:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 14:26:16,683:binance_search_ad:ERROR:Request failed with status code 400: {"code":-1021,"msg":"Timestamp for this request is outside of the recvWindow."}
-2024-02-27 14:26:16,683:binance_api:ERROR:Failed to fetch ads data.
-2024-02-27 14:26:16,683:binance_update_ads:ERROR:Failed to fetch ads data for asset_type USDT, fiat MXN, transAmount 30000.0, and payTypes ['BBVABank'].
-2024-02-27 14:54:02,017:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
-2024-02-27 14:54:02,842:ip_info_io:INFO:Getting IP details for: 187.188.228.17
-2024-02-27 14:54:03,122:verify_client_ip:INFO:IP from Country: MX
-2024-02-27 14:54:03,142:binance_bank_deposit_db:INFO:Updated last_used_timestamp for account: 710969000016348705 to 2024-02-27 14:54:03
-2024-02-27 14:54:03,142:binance_bank_deposit:INFO:Retrieving details for account 710969000016348705
-2024-02-27 14:54:03,143:binance_bank_deposit:INFO:Details retrieved for account 710969000016348705
-2024-02-27 14:55:38,673:common_utils:INFO:Updated server timestamp: 1709070937766
-2024-02-27 15:02:08,227:binance_orders:INFO:Missing balance for BTC: 0.00038212999999998054
-2024-02-27 15:02:08,556:binance_wallets:INFO:Order successfully placed: {'symbol': 'BTCUSDT', 'orderId': 25150944034, 'orderListId': -1, 'clientOrderId': 'xbQWGU74yTMu8vPIo3FTeC', 'transactTime': 1709071327644, 'price': '0.00000000', 'origQty': '0.00038000', 'executedQty': '0.00038000', 'cummulativeQuoteQty': '21.53440240', 'status': 'FILLED', 'timeInForce': 'GTC', 'type': 'MARKET', 'side': 'BUY', 'workingTime': 1709071327644, 'fills': [{'price': '56669.48000000', 'qty': '0.00038000', 'commission': '0.00000038', 'commissionAsset': 'BTC', 'tradeId': 3438226712}], 'selfTradePreventionMode': 'EXPIRE_MAKER'}
-2024-02-27 15:02:08,575:binance_bank_deposit_db:INFO:Logged deposit of 11500.0 from VILLANUEVA GUTIERREZ MARCELA to account 710969000015306104
-2024-02-27 15:08:30,625:binance_orders:INFO:Missing balance for BTC: 0.02782496999999995
-2024-02-27 15:08:30,949:binance_wallets:INFO:Order successfully placed: {'symbol': 'BTCUSDT', 'orderId': 25151017064, 'orderListId': -1, 'clientOrderId': 'QLM9L75xOubDqxhax7TnRQ', 'transactTime': 1709071710033, 'price': '0.00000000', 'origQty': '0.02782000', 'executedQty': '0.02782000', 'cummulativeQuoteQty': '1576.74245560', 'status': 'FILLED', 'timeInForce': 'GTC', 'type': 'MARKET', 'side': 'BUY', 'workingTime': 1709071710033, 'fills': [{'price': '56676.58000000', 'qty': '0.00542000', 'commission': '0.00000542', 'commissionAsset': 'BTC', 'tradeId': 3438231897}, {'price': '56676.58000000', 'qty': '0.02240000', 'commission': '0.00002240', 'commissionAsset': 'BTC', 'tradeId': 3438231898}], 'selfTradePreventionMode': 'EXPIRE_MAKER'}
-2024-02-27 15:08:30,966:binance_bank_deposit_db:INFO:Logged deposit of 27360.0 from INUKAI SASHIDA MARIA ELENA IHOKO to account 710969000016348705
-2024-02-27 15:18:40,850:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
-2024-02-27 15:18:43,195:ip_info_io:INFO:Getting IP details for: 177.227.60.100
-2024-02-27 15:18:43,479:verify_client_ip:INFO:IP from Country: MX
-2024-02-27 15:18:43,497:binance_bank_deposit_db:INFO:Updated last_used_timestamp for account: 710969000007300927 to 2024-02-27 15:18:43
-2024-02-27 15:18:43,497:binance_bank_deposit:INFO:Retrieving details for account 710969000007300927
-2024-02-27 15:18:43,498:binance_bank_deposit:INFO:Details retrieved for account 710969000007300927
-2024-02-27 15:25:38,993:common_utils:INFO:Updated server timestamp: 1709072738063
-2024-02-27 15:30:02,731:binance_orders:INFO:Missing balance for BTC: 0.0015572999999999282
-2024-02-27 15:30:03,055:binance_wallets:INFO:Order successfully placed: {'symbol': 'BTCUSDT', 'orderId': 25151283805, 'orderListId': -1, 'clientOrderId': 'fv83IglrvQsPLUnLhjbzKm', 'transactTime': 1709073002125, 'price': '0.00000000', 'origQty': '0.00156000', 'executedQty': '0.00156000', 'cummulativeQuoteQty': '88.74398520', 'status': 'FILLED', 'timeInForce': 'GTC', 'type': 'MARKET', 'side': 'BUY', 'workingTime': 1709073002125, 'fills': [{'price': '56887.17000000', 'qty': '0.00156000', 'commission': '0.00000156', 'commissionAsset': 'BTC', 'tradeId': 3438253049}], 'selfTradePreventionMode': 'EXPIRE_MAKER'}
-2024-02-27 15:30:03,071:binance_bank_deposit_db:INFO:Logged deposit of 1500.0 from JIMENEZ GARCIA NIDYA JANINE to account 710969000007300927
-2024-02-27 15:55:29,736:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
-2024-02-27 15:55:30,937:ip_info_io:INFO:Getting IP details for: 187.187.193.196
-2024-02-27 15:55:31,221:verify_client_ip:INFO:IP from Country: MX
-2024-02-27 15:55:39,651:common_utils:INFO:Updated server timestamp: 1709074538704
-2024-02-27 16:03:08,619:common_utils:INFO:Updated server timestamp: 1709074987666
-2024-02-27 16:03:08,945:common_utils:INFO:Updated server timestamp: 1709074987993
-2024-02-27 16:03:14,148:binance_c2c:INFO:Starting WebSocket connections for Binance C2C.
-2024-02-27 16:03:14,149:binance_c2c:INFO:Starting WebSocket connection for: account_1
-2024-02-27 16:03:14,149:binance_c2c:INFO:Starting WebSocket connection for: account_2
-2024-02-27 16:03:14,150:binance_c2c:INFO:Starting WebSocket connection for: account_3
-2024-02-27 16:03:15,639:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 16:03:15,644:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 16:03:15,673:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 16:03:27,911:common_utils:INFO:Updated server timestamp: 1709075006958
-2024-02-27 16:03:28,238:common_utils:INFO:Updated server timestamp: 1709075007285
-2024-02-27 16:03:33,807:binance_c2c:INFO:Starting WebSocket connections for Binance C2C.
-2024-02-27 16:03:33,807:binance_c2c:INFO:Starting WebSocket connection for: account_1
-2024-02-27 16:03:33,807:binance_c2c:INFO:Starting WebSocket connection for: account_2
-2024-02-27 16:03:33,808:binance_c2c:INFO:Starting WebSocket connection for: account_3
-2024-02-27 16:03:34,907:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 16:03:34,914:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 16:03:34,923:binance_c2c:INFO:WebSocket connection established, listening for messages...
-2024-02-27 16:33:28,566:common_utils:INFO:Updated server timestamp: 1709076807594
-2024-02-27 16:35:37,695:binance_ws_c2c:ERROR:Database operation failed, rolled back: '<' not supported between instances of 'NoneType' and 'int'
-Traceback (most recent call last):
-  File "c:\Users\p7016\Documents\bpa\binance_ws_c2c.py", line 23, in on_message
-    await merchant_account.handle_message_by_type(ws, KEY, SECRET, msg_json, msg_type, conn)
-  File "c:\Users\p7016\Documents\bpa\binance_merchant_handler.py", line 28, in handle_message_by_type
-    content_dict = json.loads(content)
-  File "c:\Users\p7016\Documents\bpa\binance_merchant_handler.py", line 67, in _handle_other_types
-    try:
-  File "c:\Users\p7016\Documents\bpa\binance_msg_handler.py", line 106, in handle_text_message
-    if kyc_status == 0 or anti_fraud_stage < 5:
-TypeError: '<' not supported between instances of 'NoneType' and 'int'
-2024-02-27 16:36:08,291:binance_ws_c2c:ERROR:Database operation failed, rolled back: '<' not supported between instances of 'NoneType' and 'int'
-Traceback (most recent call last):
-  File "c:\Users\p7016\Documents\bpa\binance_ws_c2c.py", line 23, in on_message
-    await merchant_account.handle_message_by_type(ws, KEY, SECRET, msg_json, msg_type, conn)
-  File "c:\Users\p7016\Documents\bpa\binance_merchant_handler.py", line 28, in handle_message_by_type
-    content_dict = json.loads(content)
-  File "c:\Users\p7016\Documents\bpa\binance_merchant_handler.py", line 67, in _handle_other_types
-    try:
-  File "c:\Users\p7016\Documents\bpa\binance_msg_handler.py", line 106, in handle_text_message
-    if kyc_status == 0 or anti_fraud_stage < 5:
-TypeError: '<' not supported between instances of 'NoneType' and 'int'
-2024-02-27 16:36:31,843:binance_ws_c2c:ERROR:Database operation failed, rolled back: '<' not supported between instances of 'NoneType' and 'int'
-Traceback (most recent call last):
-  File "c:\Users\p7016\Documents\bpa\binance_ws_c2c.py", line 23, in on_message
-    await merchant_account.handle_message_by_type(ws, KEY, SECRET, msg_json, msg_type, conn)
-  File "c:\Users\p7016\Documents\bpa\binance_merchant_handler.py", line 28, in handle_message_by_type
-    content_dict = json.loads(content)
-  File "c:\Users\p7016\Documents\bpa\binance_merchant_handler.py", line 67, in _handle_other_types
-    try:
-  File "c:\Users\p7016\Documents\bpa\binance_msg_handler.py", line 106, in handle_text_message
-    if kyc_status == 0 or anti_fraud_stage < 5:
-TypeError: '<' not supported between instances of 'NoneType' and 'int'
+2024-02-27 21:46:50,889:fetch_outlook:WARNING:Token expires in: 2024-02-27 22:46:49.889248
+2024-02-27 21:46:51,349:ip_info_io:INFO:Getting IP details for: 189.159.168.61
+2024-02-27 21:46:51,674:verify_client_ip:INFO:IP from Country: MX
+2024-02-27 21:48:26,905:binance_bank_deposit_db:INFO:Updated last_used_timestamp for account: 1532335128 to 2024-02-27 21:48:26
+2024-02-27 21:48:26,905:binance_bank_deposit:INFO:Retrieving details for account 1532335128
+2024-02-27 21:48:26,906:binance_bank_deposit:INFO:Details retrieved for account 1532335128
+2024-02-27 21:54:25,313:common_utils:INFO:Updated server timestamp: 1709096064104
+2024-02-27 21:54:25,642:common_utils:INFO:Updated server timestamp: 1709096064433
+2024-02-27 21:54:30,061:binance_c2c:INFO:Attempting to re-establish WebSocket connection...
+2024-02-27 21:54:30,061:binance_c2c:INFO:Attempting to re-establish WebSocket connection...
+2024-02-27 21:54:30,061:binance_c2c:INFO:Attempting to re-establish WebSocket connection...
+2024-02-27 21:54:30,061:binance_c2c:INFO:Finished all WebSocket connections.
+2024-02-27 21:54:31,206:binance_c2c:INFO:Starting WebSocket connections for Binance C2C.
+2024-02-27 21:54:31,207:binance_c2c:INFO:Starting WebSocket connection for: account_1
+2024-02-27 21:54:31,208:binance_c2c:INFO:Starting WebSocket connection for: account_2
+2024-02-27 21:54:31,208:binance_c2c:INFO:Starting WebSocket connection for: account_3
+2024-02-27 21:54:32,461:binance_c2c:INFO:connect() successful.
+2024-02-27 21:54:32,467:binance_c2c:INFO:connect() successful.
+2024-02-27 21:54:32,717:binance_c2c:INFO:connect() successful.
+2024-02-27 21:54:40,116:__main__:ERROR:KeyboardInterrupt received. Exiting...
+2024-02-27 21:54:40,138:asyncio:ERROR:Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x000002C703AC4A60>
+2024-02-27 21:54:40,139:asyncio:ERROR:Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x000002C703AC7BE0>
+2024-02-27 22:05:22,170:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-27 22:05:22,984:ip_info_io:INFO:Getting IP details for: 189.203.10.24
+2024-02-27 22:05:23,290:verify_client_ip:INFO:IP from Country: MX
+2024-02-27 22:11:35,133:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-27 22:11:35,951:ip_info_io:INFO:Getting IP details for: 177.245.200.146
+2024-02-27 22:11:36,226:verify_client_ip:INFO:IP from Country: MX
+2024-02-27 22:24:26,015:common_utils:INFO:Updated server timestamp: 1709097864784
+2024-02-27 22:27:46,770:ip_info_io:INFO:Getting IP details for: 189.201.11.113
+2024-02-27 22:27:47,080:verify_client_ip:INFO:IP from Country: MX
+2024-02-27 22:31:16,488:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-27 22:31:17,325:ip_info_io:INFO:Getting IP details for: 189.203.207.148
+2024-02-27 22:31:17,627:verify_client_ip:INFO:IP from Country: MX
+2024-02-27 22:33:27,788:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-27 22:33:28,507:ip_info_io:INFO:Getting IP details for: 102.90.47.142
+2024-02-27 22:33:28,788:verify_client_ip:INFO:IP from Country: NG
+2024-02-27 22:42:26,842:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-27 22:42:28,075:ip_info_io:INFO:Getting IP details for: 173.255.175.54
+2024-02-27 22:42:28,504:verify_client_ip:INFO:IP from Country: MX
+2024-02-27 22:44:11,653:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-27 22:44:12,343:ip_info_io:INFO:Getting IP details for: 189.219.231.141
+2024-02-27 22:44:12,635:verify_client_ip:INFO:IP from Country: MX
+2024-02-27 22:53:55,387:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-27 22:53:56,132:ip_info_io:INFO:Getting IP details for: 201.141.23.70
+2024-02-27 22:53:56,422:verify_client_ip:INFO:IP from Country: MX
+2024-02-27 22:54:26,382:common_utils:INFO:Updated server timestamp: 1709099665129
+2024-02-27 23:24:26,811:common_utils:INFO:Updated server timestamp: 1709101465536
+2024-02-27 23:27:02,595:binance_c2c:ERROR:WebSocket connection closed unexpectedly: no close frame received or sent.
+2024-02-27 23:27:02,596:binance_c2c:INFO:Attempting to re-establish WebSocket connection...
+2024-02-27 23:27:04,533:binance_c2c:INFO:connect() successful.
+2024-02-27 23:27:04,533:binance_c2c:INFO:WebSocket connection established successfully for: account_2
+2024-02-27 23:27:18,416:binance_c2c:ERROR:WebSocket connection closed unexpectedly: no close frame received or sent.
+2024-02-27 23:27:18,416:binance_c2c:INFO:Attempting to re-establish WebSocket connection...
+2024-02-27 23:27:20,359:binance_c2c:INFO:connect() successful.
+2024-02-27 23:27:20,360:binance_c2c:INFO:WebSocket connection established successfully for: account_1
+2024-02-27 23:46:07,682:common_utils:INFO:Updated server timestamp: 1709102766391
+2024-02-27 23:46:07,974:common_utils:INFO:Updated server timestamp: 1709102766681
+2024-02-27 23:46:13,547:binance_c2c:INFO:Starting WebSocket connections for Binance C2C.
+2024-02-27 23:46:13,548:binance_c2c:INFO:Starting WebSocket connection for: account_1
+2024-02-27 23:46:13,548:binance_c2c:INFO:Starting WebSocket connection for: account_2
+2024-02-27 23:46:13,549:binance_c2c:INFO:Starting WebSocket connection for: account_3
+2024-02-27 23:46:14,662:binance_c2c:INFO:connect() successful.
+2024-02-27 23:46:14,672:binance_c2c:INFO:connect() successful.
+2024-02-27 23:46:14,673:binance_c2c:INFO:connect() successful.

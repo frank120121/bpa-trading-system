@@ -24,47 +24,64 @@ async def search_ads(KEY, SECRET, asset_type, fiat, transAmount, payTypes=None):
             logger.debug("Returning cached result")
             return cached_result
 
-    timestamp = str(await get_server_timestamp())
+    attempts = 0
+    max_attempts = 3
 
-    payload = {
-        "asset": asset_type,
-        "fiat": fiat,
-        "page": 1,
-        "publisherType": "merchant",
-        "rows": 20,
-        "tradeType": "BUY",
-        "transAmount": transAmount,
-    }
-    
-    if payTypes:
-        payload["payTypes"] = payTypes
+    while attempts < max_attempts:
+        attempts += 1
+        try:
+            timestamp = str(await get_server_timestamp())
 
-    query_string = f"timestamp={timestamp}"
-    signature = hashing(query_string, SECRET)
+            payload = {
+                "asset": asset_type,
+                "fiat": fiat,
+                "page": 1,
+                "publisherType": "merchant",
+                "rows": 20,
+                "tradeType": "BUY",
+                "transAmount": transAmount,
+            }
+            
+            if payTypes:
+                payload["payTypes"] = payTypes
 
-    full_url = f"{SEARCH_ADS}?{query_string}&signature={signature}"
+            query_string = f"timestamp={timestamp}"
+            signature = hashing(query_string, SECRET)
 
-    headers = {
-        "Content-Type": "application/json;charset=utf-8",
-        "X-MBX-APIKEY": KEY,
-        "clientType": "WEB",
-    }
-    
-    async with aiohttp.ClientSession() as session:
-        logger.debug(f'calling fetch_ads_search for {asset_type} {fiat} {transAmount} {payTypes}')
-        async with session.post(full_url, json=payload, headers=headers) as response:
-            if response.status == 200:
-                
-                response_data = await response.json()
-                logger.debug("Fetched ads search: success")
-                
-                # Cache the result along with the current timestamp
-                cache[cache_key] = (response_data, datetime.now())
-                
-                return response_data
-            else:
-                logger.error(f"Request failed with status code {response.status}: {await response.text()}")
+            full_url = f"{SEARCH_ADS}?{query_string}&signature={signature}"
+
+            headers = {
+                "Content-Type": "application/json;charset=utf-8",
+                "X-MBX-APIKEY": KEY,
+                "clientType": "WEB",
+            }
+            
+            async with aiohttp.ClientSession() as session:
+                logger.debug(f'Calling fetch_ads_search for {asset_type} {fiat} {transAmount} {payTypes}')
+                async with session.post(full_url, json=payload, headers=headers) as response:
+                    if response.status == 200:
+                        response_data = await response.json()
+                        logger.debug("Fetched ads search: success")
+
+                        # Cache the result along with the current timestamp
+                        cache[cache_key] = (response_data, datetime.now())
+                        
+                        return response_data
+                    else:
+                        logger.error(f"Request failed with status code {response.status}: {await response.text()}")
+                        return None
+
+        except Exception as e:
+            logger.error(f"An error occurred: {e}")
+            if attempts >= max_attempts:
+                logger.error("Maximum retry attempts reached, failing...")
                 return None
+            else:
+                logger.info(f"Attempt {attempts}/{max_attempts} failed, retrying after delay...")
+                await asyncio.sleep(2 ** attempts)  # Exponential backoff
+
+    logger.error("Failed to complete request after maximum attempts.")
+    return None
             
 
 if __name__ == "__main__":

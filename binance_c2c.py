@@ -21,17 +21,33 @@ class ConnectionManager:
         self.ws = None
         self.is_connected = False
 
+
     async def connect(self):
-        self.ws = await websockets.connect(self.uri, open_timeout=10)
-        self.is_connected = True
-        logger.info("WebSocket connection established, listening for messages...")
+        # Ensure any existing connection is closed before establishing a new one
+        try:
+            if self.ws:
+                await self.ws.close()
+            self.ws = await websockets.connect(self.uri, open_timeout=10)
+            self.is_connected = True
+            logger.info("connect() successful.")
+        
+        except ConnectionClosedError as e:
+            logger.error(f"connect closed error: {e}.")
+            self.is_connected = False
+        except asyncio.TimeoutError as e:
+            logger.error(f"connect() timeout error: {e}.")
+            self.is_connected = False
+        except Exception as e:
+            logger.exception(f"Generic exception: {e}.")
+            self.is_connected = False
+        
 
     async def listen(self, on_message_callback):
         try:
             await self.connect()
             async for message in self.ws:
-                await on_message_callback(self.ws, message, self.api_key, self.secret_key)
-        except ConnectionClosedError as e:
+                await on_message_callback(self, message, self.api_key, self.secret_key)
+        except websockets.exceptions.ConnectionClosedError as e:
             logger.error(f"WebSocket connection closed unexpectedly: {e}.")
             self.is_connected = False
         except asyncio.TimeoutError as e:
@@ -47,32 +63,43 @@ class ConnectionManager:
     async def reconnect(self):
         while not self.is_connected:
             try:
-                await asyncio.sleep(5)  # wait before attempting to reconnect
-                await self.connect()
+                await asyncio.sleep(1)  # Wait before attempting to reconnect
+                await self.connect()  # Attempt to establish a new connection
             except Exception as e:
                 logger.exception(f"An error occurred while trying to reconnect: {e}")
 
+
     async def send_text_message(self, text, order_no):
+        # Preparing the message payload outside of the try block to avoid
+        # including JSON serialization errors in the reconnection logic
+        message = {
+            'type': 'text',
+            'uuid': f"self_{await get_server_timestamp()}",
+            'orderNo': order_no,
+            'content': text,
+            'self': False,
+            'clientType': 'web',
+            'createTime': await get_server_timestamp(),
+            'sendStatus': 4
+        }
+        message_json = json.dumps(message)
+
         try:
-            logger.debug(f"Sending a message: {text}")
-            timestamp = await get_server_timestamp()
-            uuid_prefix = "self_"
-            message = {
-                'type': 'text',
-                'uuid': f"{uuid_prefix}{timestamp}",
-                'orderNo': order_no,
-                'content': text,
-                'self': False,
-                'clientType': 'web',
-                'createTime': timestamp,
-                'sendStatus': 4
-            }
+            if not self.is_connected:
+                logger.info("WebSocket is not connected, attempting to reconnect before sending.")
+                await self.reconnect()
+
             if self.is_connected:
-                await self.ws.send(json.dumps(message))
+                await self.ws.send(message_json)  # Attempt to send the message
+                logger.debug(f"Message sent successfully: {text}")
             else:
-                logger.error("WebSocket is not connected, message not sent.")
+                # If the connection is still not established after an attempt to reconnect,
+                # it's critical to inform that the message won't be sent.
+                logger.error("Failed to reconnect; message not sent.")
+                # Optionally, you could implement a mechanism to queue the message for later delivery.
+
         except Exception as e:
-            logger.error(f"Error sending message: {e}")
+            logger.error(f"Failed to send message due to an exception: {e}")
 
 async def establish_websocket_connection(account_name, api_key, secret_key):
     logger.info(f"Starting WebSocket connection for: {account_name}")  

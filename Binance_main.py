@@ -1,9 +1,11 @@
 import asyncio
+import logging
+from logging_config import setup_logging
+import traceback
+
 from binance_c2c import main_binance_c2c
 from binance_update_ads import start_update_ads
 from populate_database import populate_ads_with_details
-import logging
-from logging_config import setup_logging
 
 setup_logging(log_filename='Binance_c2c_logger.log')
 logger = logging.getLogger(__name__)
@@ -16,7 +18,8 @@ async def main():
         tasks.append(asyncio.create_task(start_update_ads()))
         await asyncio.gather(*tasks)
     except Exception as e:
-        logger.error(f"An error occurred: {e}")
+        tb_str = traceback.format_exception(etype=type(e), value=e, tb=e.__traceback__)
+        logger.error(f"An error occurred: {''.join(tb_str)}")
         for task in tasks:
             task.cancel()
         await asyncio.gather(*tasks, return_exceptions=True)

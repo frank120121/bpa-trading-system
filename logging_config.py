@@ -43,7 +43,7 @@ def setup_logging(log_filename='application.log', log_level=logging.INFO, log_di
 
     # Set external loggers to WARNING to prevent them from flooding our logs
     logging.getLogger('aiohttp').setLevel(logging.WARNING)
-    logging.getLogger("websockets").setLevel(logging.INFO)
+    logging.getLogger("websockets").setLevel(logging.WARNING)
     logging.getLogger('asyncio').setLevel(logging.WARNING)
 
 # Example usage:

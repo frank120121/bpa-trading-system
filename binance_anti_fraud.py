@@ -1,7 +1,7 @@
 import logging
 import unicodedata
 from fuzzywuzzy import process
-from binance_messages import send_text_message, send_messages
+from binance_messages import send_messages
 from binance_blacklist import add_to_blacklist
 from lang_utils import payment_concept, payment_warning, anti_fraud_stage3, anti_fraud_not_valid_response, anti_fraud_possible_fraud, anti_fraud_user_denied
 from binance_bank_deposit import get_payment_details

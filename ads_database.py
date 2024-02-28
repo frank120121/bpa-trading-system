@@ -6,7 +6,7 @@ from logging_config import setup_logging
 setup_logging(log_filename='Binance_c2c_logger.log')
 logger = logging.getLogger(__name__)
 from common_vars import ads_dict
-from common_utils_db import print_table_contents, create_connection, add_column_if_not_exists
+from common_utils_db import print_table_contents, create_connection
 
 DB_PATH = 'C:/Users/p7016/Documents/bpa/ads_data.db'
 
@@ -138,9 +138,9 @@ async def insert_multiple_ads(ads_list):
 async def main():
     conn = await create_connection(DB_PATH)
     if conn is not None:
-        #await clear_ads_table()
-        #await create_database()
-        #await insert_initial_ads()
+        # await clear_ads_table()
+        # await create_database()
+        # await insert_initial_ads()
 
         await print_table_contents(conn, 'ads')
         await conn.close()

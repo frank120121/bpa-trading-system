@@ -41,7 +41,7 @@ async def initialize_database(conn):
                 'INSERT INTO mxn_bank_accounts (account_bank_name, account_beneficiary, account_number, account_daily_limit, account_monthly_limit, account_balance) VALUES (?, ?, ?, ?, ?, ?)',
                 (account['bank_name'], account['beneficiary'], account['account_number'], account['account_daily_limit'], account['account_monthly_limit'], 0))
         else:
-            logger.info(f"Account number {account['account_number']} already exists. Skipping insertion.")
+            logger.debug(f"Account number {account['account_number']} already exists. Skipping insertion.")
     await conn.commit()
 
 async def add_bank_account(conn, bank_name, beneficiary, account_number, account_daily_limit, account_monthly_limit, account_balance=0):
@@ -50,7 +50,7 @@ async def add_bank_account(conn, bank_name, beneficiary, account_number, account
             'INSERT INTO mxn_bank_accounts (account_bank_name, account_beneficiary, account_number, account_daily_limit, account_monthly_limit, account_balance) VALUES (?, ?, ?, ?, ?, ?)',
             (bank_name, beneficiary, account_number, account_daily_limit, account_monthly_limit, account_balance))
         await conn.commit()
-        logger.info(f"Added new bank account: {account_number}")
+        logger.debug(f"Added new bank account: {account_number}")
     except Exception as e:
         logger.error(f"Error adding bank account: {e}")
         raise
@@ -59,7 +59,7 @@ async def remove_bank_account(conn, account_number):
     try:
         await conn.execute('DELETE FROM mxn_bank_accounts WHERE account_number = ?', (account_number,))
         await conn.commit()
-        logger.info(f"Removed bank account: {account_number}")
+        logger.debug(f"Removed bank account: {account_number}")
     except Exception as e:
         logger.error(f"Error removing bank account: {e}")
         raise
@@ -69,7 +69,7 @@ async def update_account_balance(conn, account_number, amount):
     try:
         await conn.execute('UPDATE mxn_bank_accounts SET account_balance = ? WHERE account_number = ?', (amount, account_number))
         await conn.commit()
-        logger.info(f"Updated account balance for account: {account_number}")
+        logger.debug(f"Updated account balance for account: {account_number}")
     except Exception as e:
         logger.error(f"Error updating account balance: {e}")
         raise
@@ -89,7 +89,7 @@ async def update_last_used_timestamp(conn, account_number):
         await conn.commit()
 
         # Log the successful update
-        logger.info(f"Updated last_used_timestamp for account: {account_number} to {current_timestamp}")
+        logger.debug(f"Updated last_used_timestamp for account: {account_number} to {current_timestamp}")
     except Exception as e:
         # Log the error and re-raise it to maintain the behavior of update_account_balance
         logger.error(f"Error updating last_used_timestamp for account: {account_number}: {e}")
@@ -102,7 +102,7 @@ async def log_deposit(conn, deposit_from, bank_account_number, amount_deposited)
                        (timestamp, bank_account_number, amount_deposited, deposit_from, year, month))
     await conn.execute('UPDATE mxn_bank_accounts SET account_balance = account_balance + ? WHERE account_number = ?', (amount_deposited, bank_account_number))
     await conn.commit()
-    logger.info(f"Logged deposit of {amount_deposited} from {deposit_from} to account {bank_account_number}")
+    logger.debug(f"Logged deposit of {amount_deposited} from {deposit_from} to account {bank_account_number}")
 
 
 async def main():
@@ -118,10 +118,10 @@ async def main():
 
 
         # #FRANCISCO JAVIER LOPEZ GUqERRERO
-        FNVIO = 0.09
-        FSTP = 87061.98
-        FBBVA = 136155.18
-        FHEY = 87227.14
+        FNVIO = 15550.09
+        FSTP = 39732
+        FBBVA = 154038.85
+        FHEY = 48657.46
         
         # await update_account_balance(conn, '710969000007300927', FNVIO)    #NVIO
         # await update_account_balance(conn, '058597000056476091', FHEY)    #HEY
@@ -129,7 +129,7 @@ async def main():
         # await update_account_balance(conn, '1532335128', FBBVA)  #BBVA
 
         # # #MARIA FERNANDA MUNOZ PEREA
-        MNVIO = 0.08
+        MNVIO = 0.05
         MBBVA1 = 171688.07
         MBBVA2 = 165759.44
 
@@ -138,16 +138,17 @@ async def main():
         # await update_account_balance(conn, '0482424657', MBBVA2)    #BBVA
 
         # # # MARTHA GUERRERO LOPEZ
-        MGNVIO = 0.04
-        MGHEY = 84764.15
-        MGSANTANDER = 92357.54
+        MGNVIO = 0.17
+        MGHEY = 37459.38
+        MGSANTANDER = 54377.86
 
         # await update_account_balance(conn, '710969000015306104', MGNVIO)    #NVIO
         # await update_account_balance(conn, '014761655091416464', MGSANTANDER)    #SANTANDER
         # await update_account_balance(conn, '058597000054265356', MGHEY)  #HEY
 
         # # #ANBER CAP DE MEXICO
-        # await update_account_balance(conn, '646180204200033494', 63075.09)    #STP
+        ASTP = 43658.06
+        # await update_account_balance(conn, '646180204200033494', ASTP)    #STP
 
         await print_table_contents(conn, 'mxn_bank_accounts')
 

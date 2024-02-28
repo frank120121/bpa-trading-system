@@ -31,5 +31,5 @@ async def on_message(connection_manager, message, KEY, SECRET):
             logger.error("Failed to connect to the database.")
     except Exception as e:
         logger.exception("An exception occurred: %s", e)
-async def on_close(ws, close_status_code, close_msg, KEY, SECRET):
+async def on_close(wconnection_manager, close_status_code, close_msg, KEY, SECRET):
     logger.debug(f"### closed ###")
