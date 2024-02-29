@@ -6,11 +6,11 @@ today = date.today()
 print("Validating transfer...")
 tr = Transferencia.validar(
     fecha=today,
-    clave_rastreo='MBAN01002401290096686414',
-    emisor='40012',  # BBVA
+    clave_rastreo='085904246950305946',
+    emisor='40072',  # Banorte
     receptor='90646',  # STP
     cuenta='646180204200033494',
-    monto=3000.00,
+    monto=50000.00,
 )
 
 if tr is not None:

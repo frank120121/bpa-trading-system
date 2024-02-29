@@ -6,7 +6,7 @@ import logging
 from common_utils import get_server_timestamp, hashing
 from binance_endpoints import GET_CHAT_CREDENTIALS
 from credentials import credentials_dict
-from binance_ws_c2c import on_message
+from binance_c2c import on_message
 from binance_merchants import fetch_merchant_credentials
 
 logger = logging.getLogger(__name__)

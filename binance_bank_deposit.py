@@ -38,6 +38,7 @@ async def check_deposit_limit(conn, account_number, order_no):
 
         # Calculate the total after the proposed deposit
         total_after_deposit = total_deposited_this_month + amount_to_deposit
+        logger.info(f"Total after deposit: {total_after_deposit}")
 
         # Check if adding the new deposit exceeds the monthly limit
         if total_after_deposit <= MONTHLY_LIMIT:
@@ -105,6 +106,8 @@ async def find_suitable_account(conn, order_no, buyer_name, buyer_bank, ignore_b
 
         cursor = await conn.execute(query, parameters)
         accounts = await cursor.fetchall()
+        logger.info(f"Found {len(accounts)} suitable accounts for order {order_no}")
+        logger.info(f"Suitable accounts: {accounts}")
         return [acc[0] for acc in accounts]
     except Exception as e:
         logger.error(f"Error finding suitable account: {e}")
@@ -135,7 +138,7 @@ async def get_payment_details(conn, order_no, buyer_name):
                 await update_last_used_timestamp(conn, account_number)
                 return await get_account_details(conn, account_number)
             else:
-                logger.debug(f"Account {account_number} exceeded the monthly deposit limit for the buyer.")
+                logger.info(f"Account {account_number} exceeded the monthly deposit limit for the buyer.")
 
         return "Sorry, no bank accounts available at this time or all suitable accounts exceed the monthly limit."
     except Exception as e:

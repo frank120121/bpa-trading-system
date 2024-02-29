@@ -118,10 +118,10 @@ async def main():
 
 
         # #FRANCISCO JAVIER LOPEZ GUqERRERO
-        FNVIO = 15550.09
+        FNVIO = 0
         FSTP = 39732
-        FBBVA = 154038.85
-        FHEY = 48657.46
+        FBBVA = 202122.78
+        FHEY = 113707.46
         
         # await update_account_balance(conn, '710969000007300927', FNVIO)    #NVIO
         # await update_account_balance(conn, '058597000056476091', FHEY)    #HEY
@@ -129,8 +129,8 @@ async def main():
         # await update_account_balance(conn, '1532335128', FBBVA)  #BBVA
 
         # # #MARIA FERNANDA MUNOZ PEREA
-        MNVIO = 0.05
-        MBBVA1 = 171688.07
+        MNVIO = 0
+        MBBVA1 = 203010.46
         MBBVA2 = 165759.44
 
         # await update_account_balance(conn, '710969000016348705', MNVIO)    #NVIO
@@ -138,12 +138,12 @@ async def main():
         # await update_account_balance(conn, '0482424657', MBBVA2)    #BBVA
 
         # # # MARTHA GUERRERO LOPEZ
-        MGNVIO = 0.17
-        MGHEY = 37459.38
+        MGNVIO = 0
+        MGHEY = 72847.38
         MGSANTANDER = 54377.86
 
         # await update_account_balance(conn, '710969000015306104', MGNVIO)    #NVIO
-        # await update_account_balance(conn, '014761655091416464', MGSANTANDER)    #SANTANDER
+        # # await update_account_balance(conn, '014761655091416464', MGSANTANDER)    #SANTANDER
         # await update_account_balance(conn, '058597000054265356', MGHEY)  #HEY
 
         # # #ANBER CAP DE MEXICO

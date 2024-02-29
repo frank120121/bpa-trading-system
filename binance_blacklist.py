@@ -51,7 +51,7 @@ async def remove_from_blacklist_no_country(conn):
 
 async def main():
     conn = await create_connection(DB_FILE)
-    await remove_from_blacklist(conn, 'CEDENO GARCIA ESTEFANIA')
+    await remove_from_blacklist(conn, 'LOPEZ GUERRERO FRANCISCO JAVIER')
     await print_table_contents(conn, 'P2PBlacklist')
     await conn.close()
 
