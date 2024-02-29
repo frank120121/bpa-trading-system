@@ -105,6 +105,31 @@ async def log_deposit(conn, deposit_from, bank_account_number, amount_deposited)
     logger.debug(f"Logged deposit of {amount_deposited} from {deposit_from} to account {bank_account_number}")
 
 
+async def sum_recent_deposits(account_number):
+    conn = await create_connection(DB_FILE)
+    
+    # Calculate the timestamp 24 hours ago from now
+    twenty_four_hours_ago = datetime.datetime.now() - datetime.timedelta(days=1)
+    
+    try:
+        await initialize_database(conn)  # Assuming this function initializes your DB schemas
+        
+        # Query to find the sum of deposits for the given account in the last 24 hours
+        async with conn.execute('''
+            SELECT SUM(amount_deposited) FROM mxn_deposits
+            WHERE account_number = ? AND timestamp > ?
+        ''', (account_number, twenty_four_hours_ago,)) as cursor:
+            sum_deposits = await cursor.fetchone()
+            sum_deposits = sum_deposits[0] if sum_deposits[0] is not None else 0
+        
+        # Log the sum of the deposits
+        logger.info(f"Total deposits for account {account_number} in the last 24 hours: MXN {sum_deposits}")
+        
+    except Exception as e:
+        logger.error(f"Error calculating sum of recent deposits: {e}")
+    finally:
+        await conn.close()
+
 async def main():
     conn = await create_connection(DB_FILE)
     if conn is not None:
@@ -150,11 +175,13 @@ async def main():
         ASTP = 43658.06
         # await update_account_balance(conn, '646180204200033494', ASTP)    #STP
 
-        await print_table_contents(conn, 'mxn_bank_accounts')
+        # await print_table_contents(conn, 'mxn_bank_accounts')
 
+        await sum_recent_deposits('1532335128')
         await conn.close()
     else:
         logger.error("Error! Cannot create the database connection.")
 
 if __name__ == '__main__':
-    asyncio.run(main())
+    # asyncio.run(main())
+    asyncio.run(sum_recent_deposits('1532335128'))

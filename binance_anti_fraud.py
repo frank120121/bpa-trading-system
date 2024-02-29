@@ -5,7 +5,7 @@ from binance_messages import send_messages
 from binance_blacklist import add_to_blacklist
 from lang_utils import payment_concept, payment_warning, anti_fraud_stage3, anti_fraud_not_valid_response, anti_fraud_possible_fraud, anti_fraud_user_denied
 from binance_bank_deposit import get_payment_details
-from common_vars import NOT_ACCEPTED_BANKS, ACCEPTED_BANKS
+from common_vars import NOT_ACCEPTED_BANKS, ACCEPTED_BANKS, BBVA_BANKS
 from binance_db_set import update_buyer_bank, update_anti_fraud_stage, update_kyc_status
 
 logger = logging.getLogger(__name__)
@@ -39,8 +39,13 @@ async def handle_anti_fraud(buyer_name, seller_name, conn, anti_fraud_stage, res
 
         # Fuzzy matching for accepted banks
         closest_match, similarity = process.extractOne(normalized_response, [bank.lower() for bank in ACCEPTED_BANKS])
-        if similarity >= 80:  # Threshold of 80%
-            await update_buyer_bank(conn, order_no, closest_match)  # Use the closest match
+        if similarity >= 90:  # Threshold of 80%
+            if closest_match in BBVA_BANKS:
+                closest_match = 'bbva'  # Normalize to 'bbva' for consistency
+                await update_buyer_bank(conn, order_no, closest_match)  
+
+            else:
+                await update_buyer_bank(conn, order_no, closest_match)  # Use the closest match
         else:
             accepted_banks_list = ', '.join(ACCEPTED_BANKS)
             await connection_manager.send_text_message(f"No pudimos verificar el banco proporcionado. Por favor, asegúrese de elegir uno de los siguientes bancos aceptados: {accepted_banks_list}", order_no)

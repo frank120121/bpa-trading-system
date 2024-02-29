@@ -4,6 +4,7 @@ import os
 from binance_db_get import get_buyer_bank, get_order_amount, get_buyer_name
 from binance_db_set import update_order_details
 from binance_bank_deposit_db import update_last_used_timestamp
+from common_vars import BBVA_BANKS
 
 # Configuration Management
 MONTHLY_LIMIT = float(os.getenv('MONTHLY_LIMIT', '70000.00'))
@@ -61,7 +62,8 @@ async def find_suitable_account(conn, order_no, buyer_name, buyer_bank, ignore_b
         amount_to_deposit = await get_order_amount(conn, order_no)
 
         # Construct the buyer bank condition with SQL Injection Protection
-        buyer_bank_condition = "" if ignore_bank_preference or buyer_bank is None else "AND LOWER(a.account_bank_name) = ?"
+
+        buyer_bank_condition = "AND LOWER(a.account_bank_name) NOT LIKE '%bbva%'" if ignore_bank_preference or buyer_bank is None else "AND LOWER(a.account_bank_name) = ?"
 
         # Parameterized query to avoid SQL Injection
         query = f'''
