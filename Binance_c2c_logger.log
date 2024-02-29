@@ -22057,3 +22057,708 @@ websockets.exceptions.ConnectionClosedError: no close frame received or sent
 2024-02-29 10:17:26,125:binance_c2c:INFO:Message sent
 2024-02-29 10:18:29,403:binance_c2c:INFO:Message sent
 2024-02-29 10:18:34,419:binance_c2c:INFO:Message sent
+2024-02-29 10:24:56,430:__main__:ERROR:KeyboardInterrupt received. Exiting...
+2024-02-29 10:24:56,467:asyncio:ERROR:Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x0000019DAE7CD0C0>
+2024-02-29 10:24:56,468:asyncio:ERROR:Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x0000019DAE7CEE00>
+2024-02-29 10:25:00,539:common_utils:INFO:Updated server timestamp: 1709227500286
+2024-02-29 10:25:01,235:common_utils:INFO:Updated server timestamp: 1709227500983
+2024-02-29 10:26:24,621:binance_c2c:INFO:Message sent
+2024-02-29 10:26:31,724:binance_orders:INFO:Missing balance for BTC: 0.01840913999999999
+2024-02-29 10:26:32,118:binance_wallets:ERROR:Failed to place order: {"code":-2010,"msg":"Account has insufficient balance for requested action."}
+2024-02-29 10:35:34,629:binance_c2c:INFO:Message sent
+2024-02-29 10:36:08,745:common_utils:INFO:Updated server timestamp: 1709228168493
+2024-02-29 10:36:09,069:common_utils:INFO:Updated server timestamp: 1709228168815
+2024-02-29 10:45:56,670:binance_c2c:INFO:Message sent
+2024-02-29 10:46:01,678:binance_c2c:INFO:Message sent
+2024-02-29 10:46:01,678:binance_c2c:INFO:Message sent
+2024-02-29 10:46:04,690:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-29 10:46:05,556:ip_info_io:INFO:Getting IP details for: 45.188.126.247
+2024-02-29 10:46:05,838:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 10:55:01,587:common_utils:INFO:Updated server timestamp: 1709229301325
+2024-02-29 10:56:38,548:binance_c2c:INFO:Message sent
+2024-02-29 10:56:43,547:binance_c2c:INFO:Message sent
+2024-02-29 10:56:43,547:binance_c2c:INFO:Message sent
+2024-02-29 10:56:46,912:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-29 10:56:47,707:ip_info_io:INFO:Getting IP details for: 187.235.173.47
+2024-02-29 10:56:48,079:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 10:57:46,267:binance_c2c:INFO:Message sent
+2024-02-29 10:57:51,279:binance_c2c:INFO:Message sent
+2024-02-29 10:58:02,117:binance_c2c:INFO:Message sent
+2024-02-29 10:58:07,108:binance_c2c:INFO:Message sent
+2024-02-29 10:58:07,108:binance_c2c:INFO:Message sent
+2024-02-29 10:58:10,126:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-29 10:58:11,561:ip_info_io:INFO:Getting IP details for: 187.235.173.47
+2024-02-29 10:58:11,847:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 10:58:44,131:binance_c2c:INFO:Message sent
+2024-02-29 10:58:49,144:binance_c2c:INFO:Message sent
+2024-02-29 10:58:54,041:binance_c2c:INFO:Message sent
+2024-02-29 10:59:03,323:binance_c2c:INFO:Message sent
+2024-02-29 10:59:10,791:binance_c2c:INFO:Message sent
+2024-02-29 10:59:21,375:binance_c2c:INFO:Message sent
+2024-02-29 10:59:35,839:binance_bank_deposit:INFO:Found 3 suitable accounts for order 20596578830012727296
+2024-02-29 10:59:35,839:binance_bank_deposit:INFO:Suitable accounts: [('0482424657', 'BBVA', 0.0), ('1593999048', 'BBVA', 203010.46), ('1532335128', 'BBVA', 207122.78)]
+2024-02-29 10:59:35,839:binance_bank_deposit:INFO:Total after deposit: 5000.0
+2024-02-29 10:59:35,855:binance_c2c:INFO:Message sent
+2024-02-29 10:59:40,868:binance_c2c:INFO:Message sent
+2024-02-29 10:59:45,872:binance_c2c:INFO:Message sent
+2024-02-29 11:04:49,859:binance_c2c:INFO:Message sent
+2024-02-29 11:13:01,552:binance_c2c:INFO:Message sent
+2024-02-29 11:13:06,549:binance_c2c:INFO:Message sent
+2024-02-29 11:15:52,263:common_utils:INFO:Updated server timestamp: 1709230551973
+2024-02-29 11:15:52,589:common_utils:INFO:Updated server timestamp: 1709230552299
+2024-02-29 11:16:26,355:common_utils:INFO:Updated server timestamp: 1709230586075
+2024-02-29 11:16:26,689:common_utils:INFO:Updated server timestamp: 1709230586405
+2024-02-29 11:20:50,421:binance_c2c:INFO:Message sent
+2024-02-29 11:20:55,428:binance_c2c:INFO:Message sent
+2024-02-29 11:20:55,428:binance_c2c:INFO:Message sent
+2024-02-29 11:20:58,432:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-29 11:20:59,201:ip_info_io:INFO:Getting IP details for: 201.152.162.247
+2024-02-29 11:20:59,485:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 11:21:10,463:binance_c2c:INFO:Message sent
+2024-02-29 11:21:17,179:binance_c2c:INFO:Message sent
+2024-02-29 11:21:25,015:binance_bank_deposit:INFO:Found 1 suitable accounts for order 20596584569584951296
+2024-02-29 11:21:25,015:binance_bank_deposit:INFO:Suitable accounts: [('014761655091416464', 'Santander', 99377.86)]
+2024-02-29 11:21:25,015:binance_bank_deposit:INFO:Total after deposit: 15000.0
+2024-02-29 11:21:25,032:binance_c2c:INFO:Message sent
+2024-02-29 11:21:30,044:binance_c2c:INFO:Message sent
+2024-02-29 11:21:35,050:binance_c2c:INFO:Message sent
+2024-02-29 11:22:24,129:binance_c2c:INFO:Message sent
+2024-02-29 11:23:17,422:binance_c2c:INFO:Message sent
+2024-02-29 11:23:22,421:binance_c2c:INFO:Message sent
+2024-02-29 11:23:22,421:binance_c2c:INFO:Message sent
+2024-02-29 11:23:25,452:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-29 11:23:26,418:ip_info_io:INFO:Getting IP details for: 200.68.172.33
+2024-02-29 11:23:26,740:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 11:23:52,088:binance_c2c:INFO:Message sent
+2024-02-29 11:23:57,113:binance_c2c:INFO:Message sent
+2024-02-29 11:25:02,216:common_utils:INFO:Updated server timestamp: 1709231101924
+2024-02-29 11:35:31,029:binance_c2c:INFO:Message sent
+2024-02-29 11:35:36,045:binance_c2c:INFO:Message sent
+2024-02-29 11:35:36,046:binance_c2c:INFO:Message sent
+2024-02-29 11:35:39,829:fetch_outlook:WARNING:Token expires in: 2024-02-29 12:35:39.829366
+2024-02-29 11:35:40,359:verify_client_ip:WARNING:Attempt 1: Could not fetch the IP. Retrying...
+2024-02-29 11:35:43,752:ip_info_io:INFO:Getting IP details for: 189.204.227.17
+2024-02-29 11:35:44,086:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 11:36:24,485:binance_c2c:INFO:Message sent
+2024-02-29 11:36:29,484:binance_c2c:INFO:Message sent
+2024-02-29 11:36:29,484:binance_c2c:INFO:Message sent
+2024-02-29 11:36:32,967:verify_client_ip:WARNING:Attempt 1: Could not fetch the IP. Retrying...
+2024-02-29 11:36:36,353:ip_info_io:INFO:Getting IP details for: 189.129.52.45
+2024-02-29 11:36:36,623:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 11:38:16,900:binance_c2c:INFO:Message sent
+2024-02-29 11:38:21,919:binance_c2c:INFO:Message sent
+2024-02-29 11:48:09,220:binance_c2c:INFO:Message sent
+2024-02-29 11:48:14,224:binance_c2c:INFO:Message sent
+2024-02-29 11:51:24,101:binance_c2c:INFO:Message sent
+2024-02-29 11:51:29,094:binance_c2c:INFO:Message sent
+2024-02-29 11:55:02,588:common_utils:INFO:Updated server timestamp: 1709232902271
+2024-02-29 12:03:29,878:binance_c2c:ERROR:An unexpected error occurred:
+Traceback (most recent call last):
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\websockets\legacy\protocol.py", line 959, in transfer_data
+    message = await self.read_message()
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\websockets\legacy\protocol.py", line 1029, in read_message
+    frame = await self.read_data_frame(max_size=self.max_size)
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\websockets\legacy\protocol.py", line 1104, in read_data_frame
+    frame = await self.read_frame(max_size)
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\websockets\legacy\protocol.py", line 1161, in read_frame
+    frame = await Frame.read(
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\websockets\legacy\framing.py", line 68, in read
+    data = await reader(2)
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\asyncio\streams.py", line 708, in readexactly
+    await self._wait_for_data('readexactly')
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\asyncio\streams.py", line 501, in _wait_for_data
+    await self._waiter
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\asyncio\selector_events.py", line 862, in _read_ready__data_received
+    data = self._sock.recv(self.max_size)
+ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\binance_c2c.py", line 125, in run_websocket
+    async for message in ws:
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\websockets\legacy\protocol.py", line 497, in __aiter__
+    yield await self.recv()
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\websockets\legacy\protocol.py", line 568, in recv
+    await self.ensure_open()
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\websockets\legacy\protocol.py", line 935, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: no close frame received or sent
+2024-02-29 12:03:31,405:binance_c2c:ERROR:An unexpected error occurred:
+Traceback (most recent call last):
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\websockets\legacy\protocol.py", line 959, in transfer_data
+    message = await self.read_message()
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\websockets\legacy\protocol.py", line 1029, in read_message
+    frame = await self.read_data_frame(max_size=self.max_size)
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\websockets\legacy\protocol.py", line 1104, in read_data_frame
+    frame = await self.read_frame(max_size)
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\websockets\legacy\protocol.py", line 1161, in read_frame
+    frame = await Frame.read(
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\websockets\legacy\framing.py", line 68, in read
+    data = await reader(2)
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\asyncio\streams.py", line 708, in readexactly
+    await self._wait_for_data('readexactly')
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\asyncio\streams.py", line 501, in _wait_for_data
+    await self._waiter
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\asyncio\selector_events.py", line 862, in _read_ready__data_received
+    data = self._sock.recv(self.max_size)
+ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\binance_c2c.py", line 125, in run_websocket
+    async for message in ws:
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\websockets\legacy\protocol.py", line 497, in __aiter__
+    yield await self.recv()
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\websockets\legacy\protocol.py", line 568, in recv
+    await self.ensure_open()
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\websockets\legacy\protocol.py", line 935, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: no close frame received or sent
+2024-02-29 12:03:39,593:binance_c2c:ERROR:An unexpected error occurred:
+Traceback (most recent call last):
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\websockets\legacy\protocol.py", line 959, in transfer_data
+    message = await self.read_message()
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\websockets\legacy\protocol.py", line 1029, in read_message
+    frame = await self.read_data_frame(max_size=self.max_size)
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\websockets\legacy\protocol.py", line 1104, in read_data_frame
+    frame = await self.read_frame(max_size)
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\websockets\legacy\protocol.py", line 1161, in read_frame
+    frame = await Frame.read(
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\websockets\legacy\framing.py", line 68, in read
+    data = await reader(2)
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\asyncio\streams.py", line 708, in readexactly
+    await self._wait_for_data('readexactly')
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\asyncio\streams.py", line 501, in _wait_for_data
+    await self._waiter
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\binance_c2c.py", line 125, in run_websocket
+    async for message in ws:
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\websockets\legacy\protocol.py", line 497, in __aiter__
+    yield await self.recv()
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\websockets\legacy\protocol.py", line 568, in recv
+    await self.ensure_open()
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\websockets\legacy\protocol.py", line 944, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: sent 1011 (unexpected error) keepalive ping timeout; no close frame received
+2024-02-29 12:05:11,632:binance_c2c:INFO:Message sent
+2024-02-29 12:05:16,640:binance_c2c:INFO:Message sent
+2024-02-29 12:05:16,640:binance_c2c:INFO:Message sent
+2024-02-29 12:05:20,068:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-29 12:05:21,010:ip_info_io:INFO:Getting IP details for: 189.172.16.227
+2024-02-29 12:05:21,378:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 12:05:56,431:binance_c2c:INFO:Message sent
+2024-02-29 12:06:00,777:binance_c2c:INFO:Message sent
+2024-02-29 12:06:06,541:binance_c2c:INFO:Message sent
+2024-02-29 12:06:16,472:binance_c2c:INFO:Message sent
+2024-02-29 12:06:24,766:binance_bank_deposit:INFO:Found 3 suitable accounts for order 20596595728376860672
+2024-02-29 12:06:24,766:binance_bank_deposit:INFO:Suitable accounts: [('0482424657', 'BBVA', 0.0), ('1593999048', 'BBVA', 203010.46), ('1532335128', 'BBVA', 208822.78)]
+2024-02-29 12:06:24,768:binance_bank_deposit:INFO:Total after deposit: 2800.0
+2024-02-29 12:06:24,771:binance_c2c:INFO:Message sent
+2024-02-29 12:06:29,769:binance_c2c:INFO:Message sent
+2024-02-29 12:06:34,771:binance_c2c:INFO:Message sent
+2024-02-29 12:06:40,302:binance_c2c:INFO:Message sent
+2024-02-29 12:06:45,292:binance_c2c:INFO:Message sent
+2024-02-29 12:06:45,292:binance_c2c:INFO:Message sent
+2024-02-29 12:06:48,303:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-29 12:06:48,992:ip_info_io:INFO:Getting IP details for: 200.94.130.50
+2024-02-29 12:06:49,262:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 12:07:35,190:binance_c2c:INFO:Message sent
+2024-02-29 12:07:46,851:binance_c2c:INFO:Message sent
+2024-02-29 12:07:59,698:binance_c2c:INFO:Message sent
+2024-02-29 12:08:03,981:binance_c2c:INFO:Message sent
+2024-02-29 12:08:08,986:binance_c2c:INFO:Message sent
+2024-02-29 12:08:08,986:binance_c2c:INFO:Message sent
+2024-02-29 12:08:11,991:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-29 12:08:12,846:ip_info_io:INFO:Getting IP details for: 187.221.162.192
+2024-02-29 12:08:13,127:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 12:08:15,977:binance_c2c:INFO:Message sent
+2024-02-29 12:08:25,661:binance_bank_deposit:INFO:Found 0 suitable accounts for order 20596596082366435328
+2024-02-29 12:08:25,662:binance_bank_deposit:INFO:Suitable accounts: []
+2024-02-29 12:08:25,663:binance_bank_deposit:ERROR:Error finding suitable account: Incorrect number of bindings supplied. The current statement uses 6, and there are 7 supplied.
+2024-02-29 12:08:25,663:binance_bank_deposit:ERROR:Error getting payment details: Incorrect number of bindings supplied. The current statement uses 6, and there are 7 supplied.
+2024-02-29 12:08:25,663:binance_c2c:ERROR:Database operation failed, rolled back: Incorrect number of bindings supplied. The current statement uses 6, and there are 7 supplied.
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\binance_c2c.py", line 58, in on_message
+    await merchant_account.handle_message_by_type(connection_manager, KEY, SECRET, msg_json, msg_type, conn)
+  File "c:\Users\p7016\Documents\bpa\binance_merchant_handler.py", line 24, in handle_message_by_type
+    await self._handle_other_types(connection_manager, msg_json, msg_type, conn, order_no, order_details, buyer_name)
+  File "c:\Users\p7016\Documents\bpa\binance_merchant_handler.py", line 63, in _handle_other_types
+    await handle_text_message(connection_manager, content, order_no, order_details, conn)
+  File "c:\Users\p7016\Documents\bpa\binance_msg_handler.py", line 107, in handle_text_message
+    await handle_anti_fraud(buyer_name, seller_name, conn, anti_fraud_stage, content, order_no, connection_manager)
+  File "c:\Users\p7016\Documents\bpa\binance_anti_fraud.py", line 78, in handle_anti_fraud
+    payment_details = await get_payment_details(conn, order_no, buyer_name)
+  File "c:\Users\p7016\Documents\bpa\binance_bank_deposit.py", line 135, in get_payment_details
+    suitable_accounts = await find_suitable_account(conn, order_no, buyer_name, buyer_bank, ignore_bank_preference=True)
+  File "c:\Users\p7016\Documents\bpa\binance_bank_deposit.py", line 109, in find_suitable_account
+    cursor = await conn.execute(query, parameters)
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\aiosqlite\core.py", line 190, in execute
+    cursor = await self._execute(self._conn.execute, sql, parameters)
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\aiosqlite\core.py", line 133, in _execute
+    return await future
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\aiosqlite\core.py", line 106, in run
+    result = function()
+sqlite3.ProgrammingError: Incorrect number of bindings supplied. The current statement uses 6, and there are 7 supplied.
+2024-02-29 12:10:11,266:binance_c2c:INFO:Message sent
+2024-02-29 12:10:16,280:binance_c2c:INFO:Message sent
+2024-02-29 12:11:13,582:binance_c2c:INFO:Message sent
+2024-02-29 12:11:18,577:binance_c2c:INFO:Message sent
+2024-02-29 12:14:30,767:binance_c2c:INFO:Message sent
+2024-02-29 12:18:53,336:__main__:ERROR:KeyboardInterrupt received. Exiting...
+2024-02-29 12:18:53,360:asyncio:ERROR:Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x0000020EF8F755D0>
+2024-02-29 12:18:53,361:asyncio:ERROR:Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x0000020EF8F76E00>
+2024-02-29 12:19:05,766:common_utils:INFO:Updated server timestamp: 1709234345432
+2024-02-29 12:19:06,127:common_utils:INFO:Updated server timestamp: 1709234345784
+2024-02-29 12:20:10,522:binance_c2c:INFO:Message sent
+2024-02-29 12:20:15,523:binance_c2c:INFO:Message sent
+2024-02-29 12:21:49,135:binance_c2c:INFO:Message sent
+2024-02-29 12:21:54,149:binance_c2c:INFO:Message sent
+2024-02-29 12:21:54,149:binance_c2c:INFO:Message sent
+2024-02-29 12:21:57,160:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-29 12:21:58,195:ip_info_io:INFO:Getting IP details for: 187.213.160.158
+2024-02-29 12:21:58,480:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 12:21:58,996:binance_c2c:INFO:Message sent
+2024-02-29 12:22:04,003:binance_c2c:INFO:Message sent
+2024-02-29 12:22:04,003:binance_c2c:INFO:Message sent
+2024-02-29 12:22:07,001:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-29 12:22:07,832:ip_info_io:INFO:Getting IP details for: 187.187.226.46
+2024-02-29 12:22:08,119:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 12:22:35,369:binance_c2c:INFO:Message sent
+2024-02-29 12:22:41,504:binance_c2c:INFO:Message sent
+2024-02-29 12:22:49,374:binance_c2c:INFO:Message sent
+2024-02-29 12:23:11,262:binance_c2c:INFO:Message sent
+2024-02-29 12:23:13,434:binance_c2c:INFO:Message sent
+2024-02-29 12:23:13,435:binance_c2c:INFO:Message sent
+2024-02-29 12:23:45,597:common_utils:INFO:Updated server timestamp: 1709234625199
+2024-02-29 12:23:45,935:common_utils:INFO:Updated server timestamp: 1709234625596
+2024-02-29 12:24:43,548:binance_c2c:INFO:Message sent
+2024-02-29 12:24:43,548:binance_c2c:INFO:Message sent
+2024-02-29 12:24:54,087:binance_c2c:INFO:Message sent
+2024-02-29 12:25:02,257:binance_bank_deposit:INFO:Found 2 suitable accounts for order 20596599914729693184
+2024-02-29 12:25:02,257:binance_bank_deposit:INFO:Suitable accounts: [('1593999048', 'BBVA', 203010.46), ('1532335128', 'BBVA', 208822.78)]
+2024-02-29 12:25:02,259:binance_bank_deposit:INFO:Total after deposit: 10000.0
+2024-02-29 12:25:02,271:binance_c2c:INFO:Message sent
+2024-02-29 12:25:07,271:binance_c2c:INFO:Message sent
+2024-02-29 12:25:12,266:binance_c2c:INFO:Message sent
+2024-02-29 12:26:21,372:binance_c2c:INFO:Message sent
+2024-02-29 12:26:26,383:binance_c2c:INFO:Message sent
+2024-02-29 12:27:23,495:binance_c2c:INFO:Message sent
+2024-02-29 12:27:28,509:binance_c2c:INFO:Message sent
+2024-02-29 12:27:28,509:binance_c2c:INFO:Message sent
+2024-02-29 12:27:31,935:ip_info_io:INFO:Getting IP details for: 187.171.58.117
+2024-02-29 12:27:32,235:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 12:27:55,538:binance_c2c:INFO:Message sent
+2024-02-29 12:28:00,536:binance_c2c:INFO:Message sent
+2024-02-29 12:28:00,536:binance_c2c:INFO:Message sent
+2024-02-29 12:28:03,546:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-29 12:28:04,299:ip_info_io:INFO:Getting IP details for: 187.187.226.46
+2024-02-29 12:28:04,576:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 12:28:49,486:binance_c2c:INFO:Message sent
+2024-02-29 12:28:49,490:binance_c2c:INFO:Message sent
+2024-02-29 12:28:55,073:binance_c2c:INFO:Message sent
+2024-02-29 12:29:00,087:binance_c2c:INFO:Message sent
+2024-02-29 12:30:36,427:binance_c2c:INFO:Message sent
+2024-02-29 12:30:41,433:binance_c2c:INFO:Message sent
+2024-02-29 12:30:41,433:binance_c2c:INFO:Message sent
+2024-02-29 12:30:44,444:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-29 12:30:45,198:ip_info_io:INFO:Getting IP details for: 197.210.54.81
+2024-02-29 12:30:45,477:verify_client_ip:INFO:IP from Country: NG
+2024-02-29 12:30:45,478:binance_c2c:INFO:Message sent
+2024-02-29 12:32:22,599:binance_c2c:INFO:Message sent
+2024-02-29 12:32:27,595:binance_c2c:INFO:Message sent
+2024-02-29 12:33:20,715:binance_c2c:INFO:Message sent
+2024-02-29 12:39:14,691:binance_c2c:INFO:Message sent
+2024-02-29 12:39:22,061:binance_orders:INFO:Missing balance for BTC: 0.009314719999999999
+2024-02-29 12:39:22,388:binance_wallets:INFO:Order successfully placed: {'symbol': 'BTCUSDT', 'orderId': 25225438363, 'orderListId': -1, 'clientOrderId': 'OaqAbsKgWd3LZNP3H54doQ', 'transactTime': 1709235562036, 'price': '0.00000000', 'origQty': '0.00931000', 'executedQty': '0.00931000', 'cummulativeQuoteQty': '570.98211380', 'status': 'FILLED', 'timeInForce': 'GTC', 'type': 'MARKET', 'side': 'BUY', 'workingTime': 1709235562036, 'fills': [{'price': '61329.98000000', 'qty': '0.00931000', 'commission': '0.00000931', 'commissionAsset': 'BTC', 'tradeId': 3444895517}], 'selfTradePreventionMode': 'EXPIRE_MAKER'}
+2024-02-29 12:42:45,251:binance_c2c:INFO:Message sent
+2024-02-29 12:42:50,259:binance_c2c:INFO:Message sent
+2024-02-29 12:42:50,259:binance_c2c:INFO:Message sent
+2024-02-29 12:42:53,280:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-29 12:42:54,347:ip_info_io:INFO:Getting IP details for: 200.63.44.224
+2024-02-29 12:42:54,635:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 12:42:55,152:binance_c2c:INFO:Message sent
+2024-02-29 12:44:09,983:binance_c2c:INFO:Message sent
+2024-02-29 12:44:14,990:binance_c2c:INFO:Message sent
+2024-02-29 12:44:14,990:binance_c2c:INFO:Message sent
+2024-02-29 12:44:18,526:fetch_outlook:WARNING:Token expires in: 2024-02-29 13:44:18.526909
+2024-02-29 12:44:18,955:ip_info_io:INFO:Getting IP details for: 187.188.26.155
+2024-02-29 12:44:19,245:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 12:44:57,465:binance_c2c:INFO:Message sent
+2024-02-29 12:45:09,389:binance_c2c:INFO:Message sent
+2024-02-29 12:45:10,010:binance_c2c:INFO:Message sent
+2024-02-29 12:45:10,010:binance_c2c:INFO:Message sent
+2024-02-29 12:45:44,317:binance_c2c:INFO:Message sent
+2024-02-29 12:46:03,260:binance_c2c:INFO:Message sent
+2024-02-29 12:46:15,383:binance_bank_deposit:INFO:Found 1 suitable accounts for order 20596605538712203264
+2024-02-29 12:46:15,384:binance_bank_deposit:INFO:Suitable accounts: [('1532335128', 'BBVA', 208822.78)]
+2024-02-29 12:46:15,385:binance_bank_deposit:INFO:Total after deposit: 25000.0
+2024-02-29 12:46:15,398:binance_c2c:INFO:Message sent
+2024-02-29 12:46:20,396:binance_c2c:INFO:Message sent
+2024-02-29 12:46:25,403:binance_c2c:INFO:Message sent
+2024-02-29 12:46:25,810:binance_c2c:INFO:Message sent
+2024-02-29 12:46:46,605:binance_c2c:INFO:Message sent
+2024-02-29 12:47:17,988:binance_c2c:INFO:Message sent
+2024-02-29 12:47:17,988:binance_c2c:INFO:Message sent
+2024-02-29 12:47:41,851:binance_c2c:INFO:Message sent
+2024-02-29 12:47:41,852:binance_c2c:INFO:Message sent
+2024-02-29 12:47:49,172:binance_c2c:INFO:Message sent
+2024-02-29 12:47:54,182:binance_c2c:INFO:Message sent
+2024-02-29 12:47:54,182:binance_c2c:INFO:Message sent
+2024-02-29 12:47:57,199:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-29 12:47:58,080:ip_info_io:INFO:Getting IP details for: 192.145.38.89
+2024-02-29 12:47:58,663:verify_client_ip:INFO:IP from Country: ES
+2024-02-29 12:47:58,663:binance_c2c:INFO:Message sent
+2024-02-29 12:47:58,679:binance_c2c:INFO:Message sent
+2024-02-29 12:48:15,960:binance_c2c:INFO:Message sent
+2024-02-29 12:48:27,037:binance_bank_deposit:INFO:Found 1 suitable accounts for order 20596605182997475328
+2024-02-29 12:48:27,037:binance_bank_deposit:INFO:Suitable accounts: [('1593999048', 'BBVA', 213010.46)]
+2024-02-29 12:48:27,039:binance_bank_deposit:INFO:Total after deposit: 2132.0
+2024-02-29 12:48:27,051:binance_c2c:INFO:Message sent
+2024-02-29 12:48:32,059:binance_c2c:INFO:Message sent
+2024-02-29 12:48:37,082:binance_c2c:INFO:Message sent
+2024-02-29 12:53:28,321:binance_c2c:INFO:Message sent
+2024-02-29 12:53:33,328:binance_c2c:INFO:Message sent
+2024-02-29 12:53:46,314:common_utils:INFO:Updated server timestamp: 1709236425953
+2024-02-29 13:00:16,032:binance_c2c:INFO:Message sent
+2024-02-29 13:02:48,784:binance_c2c:INFO:Message sent
+2024-02-29 13:04:41,134:binance_c2c:INFO:Message sent
+2024-02-29 13:09:15,217:binance_c2c:INFO:Message sent
+2024-02-29 13:09:20,224:binance_c2c:INFO:Message sent
+2024-02-29 13:10:30,007:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-29 13:10:30,758:ip_info_io:INFO:Getting IP details for: 187.188.26.155
+2024-02-29 13:10:31,035:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 13:10:31,039:binance_bank_deposit:INFO:Found 8 suitable accounts for order 20596612151284768768
+2024-02-29 13:10:31,040:binance_bank_deposit:INFO:Suitable accounts: [('710969000015306104', 'Nvio', 0.0), ('710969000007300927', 'Nvio', 1600.0), ('710969000016348705', 'Nvio', 10000.0), ('646180146006124571', 'STP', 61160.0), ('058597000054265356', 'Banregio', 72847.38), ('014761655091416464', 'Santander', 99377.86), ('646180204200033494', 'STP', 117158.06), ('058597000056476091', 'Banregio', 132407.46000000002)]
+2024-02-29 13:10:31,041:binance_bank_deposit:INFO:Total after deposit: 5000.0
+2024-02-29 13:10:31,054:binance_c2c:INFO:Message sent
+2024-02-29 13:10:36,046:binance_c2c:INFO:Message sent
+2024-02-29 13:10:41,047:binance_c2c:INFO:Message sent
+2024-02-29 13:14:42,479:binance_c2c:INFO:Message sent
+2024-02-29 13:14:50,638:binance_c2c:INFO:WebSocket connection closed gracefully.
+2024-02-29 13:15:15,563:binance_c2c:INFO:Message sent
+2024-02-29 13:17:34,283:binance_c2c:INFO:Message sent
+2024-02-29 13:17:39,301:binance_c2c:INFO:Message sent
+2024-02-29 13:17:39,307:binance_c2c:INFO:Message sent
+2024-02-29 13:18:55,440:binance_c2c:INFO:Message sent
+2024-02-29 13:19:40,241:binance_c2c:INFO:Message sent
+2024-02-29 13:23:46,682:common_utils:INFO:Updated server timestamp: 1709238226298
+2024-02-29 13:30:36,107:binance_c2c:INFO:Message sent
+2024-02-29 13:32:58,648:binance_c2c:INFO:Message sent
+2024-02-29 13:33:03,636:binance_c2c:INFO:Message sent
+2024-02-29 13:33:03,636:binance_c2c:INFO:Message sent
+2024-02-29 13:33:06,651:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-29 13:33:08,463:ip_info_io:INFO:Getting IP details for: 38.77.70.106
+2024-02-29 13:33:08,752:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 13:35:13,997:binance_c2c:INFO:Message sent
+2024-02-29 13:35:18,995:binance_c2c:INFO:Message sent
+2024-02-29 13:35:18,995:binance_c2c:INFO:Message sent
+2024-02-29 13:35:22,007:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-29 13:35:22,917:ip_info_io:INFO:Getting IP details for: 201.162.243.47
+2024-02-29 13:35:23,239:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 13:35:23,727:binance_c2c:INFO:Message sent
+2024-02-29 13:35:28,726:binance_c2c:INFO:Message sent
+2024-02-29 13:35:28,726:binance_c2c:INFO:Message sent
+2024-02-29 13:35:31,733:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-29 13:35:32,399:ip_info_io:INFO:Getting IP details for: 177.224.183.80
+2024-02-29 13:35:32,678:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 13:35:58,733:binance_c2c:INFO:Message sent
+2024-02-29 13:36:06,650:binance_c2c:INFO:Message sent
+2024-02-29 13:36:18,490:binance_c2c:INFO:Message sent
+2024-02-29 13:36:32,986:binance_c2c:INFO:Message sent
+2024-02-29 13:36:42,098:binance_bank_deposit:INFO:Found 0 suitable accounts for order 20596618390184804352
+2024-02-29 13:36:42,098:binance_bank_deposit:INFO:Suitable accounts: []
+2024-02-29 13:36:42,101:binance_bank_deposit:INFO:Found 7 suitable accounts for order 20596618390184804352
+2024-02-29 13:36:42,102:binance_bank_deposit:INFO:Suitable accounts: [('710969000007300927', 'Nvio', 1600.0), ('710969000016348705', 'Nvio', 10000.0), ('646180146006124571', 'STP', 61160.0), ('058597000054265356', 'Banregio', 72847.38), ('014761655091416464', 'Santander', 99377.86), ('646180204200033494', 'STP', 117158.06), ('058597000056476091', 'Banregio', 132407.46000000002)]
+2024-02-29 13:36:42,104:binance_bank_deposit:INFO:Total after deposit: 6000.0
+2024-02-29 13:36:42,121:binance_c2c:INFO:Message sent
+2024-02-29 13:36:47,125:binance_c2c:INFO:Message sent
+2024-02-29 13:36:52,147:binance_c2c:INFO:Message sent
+2024-02-29 13:46:50,740:binance_c2c:INFO:Message sent
+2024-02-29 13:46:55,731:binance_c2c:INFO:Message sent
+2024-02-29 13:47:58,314:binance_c2c:INFO:Message sent
+2024-02-29 13:48:03,315:binance_c2c:INFO:Message sent
+2024-02-29 13:48:56,816:binance_c2c:INFO:Message sent
+2024-02-29 13:53:47,072:common_utils:INFO:Updated server timestamp: 1709240026668
+2024-02-29 13:57:13,575:binance_c2c:INFO:Message sent
+2024-02-29 13:57:18,580:binance_c2c:INFO:Message sent
+2024-02-29 13:59:23,046:binance_c2c:INFO:Message sent
+2024-02-29 14:00:25,255:binance_c2c:INFO:Message sent
+2024-02-29 14:01:11,438:binance_c2c:INFO:Message sent
+2024-02-29 14:01:20,342:binance_c2c:INFO:Message sent
+2024-02-29 14:01:27,959:binance_orders:INFO:Missing balance for BTC: 0.005539419999999962
+2024-02-29 14:01:28,284:binance_wallets:INFO:Order successfully placed: {'symbol': 'BTCUSDT', 'orderId': 25227280982, 'orderListId': -1, 'clientOrderId': 'bPcsFYIN87JBlS7BPhIGNs', 'transactTime': 1709240487873, 'price': '0.00000000', 'origQty': '0.00554000', 'executedQty': '0.00554000', 'cummulativeQuoteQty': '342.80484020', 'status': 'FILLED', 'timeInForce': 'GTC', 'type': 'MARKET', 'side': 'BUY', 'workingTime': 1709240487873, 'fills': [{'price': '61878.13000000', 'qty': '0.00554000', 'commission': '0.00000554', 'commissionAsset': 'BTC', 'tradeId': 3445065106}], 'selfTradePreventionMode': 'EXPIRE_MAKER'}
+2024-02-29 14:01:55,854:binance_c2c:INFO:Message sent
+2024-02-29 14:08:14,547:fetch_outlook:WARNING:Token expires in: 2024-02-29 15:08:14.547364
+2024-02-29 14:08:15,124:verify_client_ip:WARNING:Attempt 1: Could not fetch the IP. Retrying...
+2024-02-29 14:08:18,502:ip_info_io:INFO:Getting IP details for: 45.188.165.35
+2024-02-29 14:08:18,777:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 14:08:18,780:binance_bank_deposit:INFO:Found 6 suitable accounts for order 20596626680528441344
+2024-02-29 14:08:18,780:binance_bank_deposit:INFO:Suitable accounts: [('710969000015306104', 'Nvio', 45000.0), ('646180146006124571', 'STP', 61160.0), ('058597000054265356', 'Banregio', 72847.38), ('014761655091416464', 'Santander', 99377.86), ('646180204200033494', 'STP', 117158.06), ('058597000056476091', 'Banregio', 132407.46000000002)]
+2024-02-29 14:08:18,783:binance_bank_deposit:INFO:Total after deposit: 17000.0
+2024-02-29 14:08:18,797:binance_c2c:INFO:Message sent
+2024-02-29 14:08:23,778:binance_c2c:INFO:Message sent
+2024-02-29 14:08:28,793:binance_c2c:INFO:Message sent
+2024-02-29 14:10:37,618:binance_c2c:INFO:Message sent
+2024-02-29 14:10:42,641:binance_c2c:INFO:Message sent
+2024-02-29 14:10:42,641:binance_c2c:INFO:Message sent
+2024-02-29 14:10:45,996:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-29 14:10:46,851:ip_info_io:INFO:Getting IP details for: 38.77.70.106
+2024-02-29 14:10:47,213:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 14:13:35,539:binance_c2c:INFO:Message sent
+2024-02-29 14:14:39,252:binance_c2c:INFO:Message sent
+2024-02-29 14:14:44,270:binance_c2c:INFO:Message sent
+2024-02-29 14:14:44,270:binance_c2c:INFO:Message sent
+2024-02-29 14:14:47,744:verify_client_ip:WARNING:Attempt 1: Could not fetch the IP. Retrying...
+2024-02-29 14:14:51,209:ip_info_io:INFO:Getting IP details for: 131.178.102.200
+2024-02-29 14:14:51,484:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 14:14:56,755:binance_c2c:INFO:Message sent
+2024-02-29 14:15:01,311:binance_c2c:INFO:Message sent
+2024-02-29 14:15:07,263:binance_c2c:INFO:Message sent
+2024-02-29 14:15:14,955:binance_c2c:INFO:Message sent
+2024-02-29 14:15:18,889:binance_bank_deposit:INFO:Found 2 suitable accounts for order 20596628310543106048
+2024-02-29 14:15:18,890:binance_bank_deposit:INFO:Suitable accounts: [('1532335128', 'BBVA', 208822.78), ('1593999048', 'BBVA', 215142.46)]
+2024-02-29 14:15:18,891:binance_bank_deposit:INFO:Total after deposit: 2500.0
+2024-02-29 14:15:18,904:binance_c2c:INFO:Message sent
+2024-02-29 14:15:23,917:binance_c2c:INFO:Message sent
+2024-02-29 14:15:28,931:binance_c2c:INFO:Message sent
+2024-02-29 14:16:33,591:binance_c2c:INFO:Message sent
+2024-02-29 14:16:45,447:binance_c2c:INFO:Message sent
+2024-02-29 14:16:50,470:binance_c2c:INFO:Message sent
+2024-02-29 14:17:14,004:binance_c2c:INFO:Message sent
+2024-02-29 14:17:27,067:binance_c2c:INFO:Message sent
+2024-02-29 14:20:10,574:binance_c2c:INFO:Message sent
+2024-02-29 14:20:15,581:binance_c2c:INFO:Message sent
+2024-02-29 14:20:15,582:binance_c2c:INFO:Message sent
+2024-02-29 14:20:18,600:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-29 14:20:19,368:ip_info_io:INFO:Getting IP details for: 189.220.189.6
+2024-02-29 14:20:19,651:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 14:22:48,434:binance_c2c:INFO:Message sent
+2024-02-29 14:22:53,438:binance_c2c:INFO:Message sent
+2024-02-29 14:23:47,479:common_utils:INFO:Updated server timestamp: 1709241827055
+2024-02-29 14:25:37,200:binance_c2c:INFO:Message sent
+2024-02-29 14:25:42,205:binance_c2c:INFO:Message sent
+2024-02-29 14:27:00,853:binance_c2c:INFO:Message sent
+2024-02-29 14:27:05,867:binance_c2c:INFO:Message sent
+2024-02-29 14:27:05,868:binance_c2c:INFO:Message sent
+2024-02-29 14:27:08,885:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-29 14:27:09,838:ip_info_io:INFO:Getting IP details for: 38.77.70.106
+2024-02-29 14:27:10,249:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 14:27:58,566:binance_c2c:INFO:Message sent
+2024-02-29 14:34:16,427:binance_c2c:INFO:Message sent
+2024-02-29 14:34:59,758:binance_c2c:INFO:Message sent
+2024-02-29 14:35:04,758:binance_c2c:INFO:Message sent
+2024-02-29 14:35:04,758:binance_c2c:INFO:Message sent
+2024-02-29 14:35:08,192:verify_client_ip:WARNING:Attempt 1: Could not fetch the IP. Retrying...
+2024-02-29 14:35:12,270:ip_info_io:INFO:Getting IP details for: 189.173.147.54
+2024-02-29 14:35:13,767:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 14:35:18,031:binance_c2c:INFO:Message sent
+2024-02-29 14:35:23,039:binance_c2c:INFO:Message sent
+2024-02-29 14:35:54,961:binance_c2c:INFO:Message sent
+2024-02-29 14:36:08,997:binance_c2c:INFO:Message sent
+2024-02-29 14:36:22,776:binance_c2c:INFO:Message sent
+2024-02-29 14:36:52,306:binance_c2c:INFO:Message sent
+2024-02-29 14:37:09,796:binance_c2c:INFO:Message sent
+2024-02-29 14:37:22,485:binance_bank_deposit:INFO:Found 1 suitable accounts for order 20596633429742755840
+2024-02-29 14:37:22,485:binance_bank_deposit:INFO:Suitable accounts: [('014761655091416464', 'Santander', 99377.86)]
+2024-02-29 14:37:22,488:binance_bank_deposit:INFO:Total after deposit: 45000.0
+2024-02-29 14:37:22,505:binance_c2c:INFO:Message sent
+2024-02-29 14:37:27,511:binance_c2c:INFO:Message sent
+2024-02-29 14:37:32,518:binance_c2c:INFO:Message sent
+2024-02-29 14:44:05,202:binance_c2c:INFO:Message sent
+2024-02-29 14:44:10,201:binance_c2c:INFO:Message sent
+2024-02-29 14:44:10,202:binance_c2c:INFO:Message sent
+2024-02-29 14:44:13,219:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-29 14:44:14,024:ip_info_io:INFO:Getting IP details for: 149.19.171.40
+2024-02-29 14:44:14,310:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 14:44:27,142:binance_c2c:INFO:Message sent
+2024-02-29 14:44:34,841:binance_c2c:INFO:Message sent
+2024-02-29 14:44:44,085:binance_c2c:INFO:Message sent
+2024-02-29 14:44:55,488:binance_c2c:INFO:Message sent
+2024-02-29 14:45:07,333:binance_bank_deposit:INFO:Found 1 suitable accounts for order 20596635717015764992
+2024-02-29 14:45:07,333:binance_bank_deposit:INFO:Suitable accounts: [('1532335128', 'BBVA', 211322.78)]
+2024-02-29 14:45:07,336:binance_bank_deposit:INFO:Total after deposit: 55000.0
+2024-02-29 14:45:07,353:binance_c2c:INFO:Message sent
+2024-02-29 14:45:12,359:binance_c2c:INFO:Message sent
+2024-02-29 14:45:17,374:binance_c2c:INFO:Message sent
+2024-02-29 14:49:55,426:binance_c2c:ERROR:An unexpected error occurred:
+Traceback (most recent call last):
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\websockets\legacy\protocol.py", line 959, in transfer_data
+    message = await self.read_message()
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\websockets\legacy\protocol.py", line 1029, in read_message
+    frame = await self.read_data_frame(max_size=self.max_size)
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\websockets\legacy\protocol.py", line 1104, in read_data_frame
+    frame = await self.read_frame(max_size)
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\websockets\legacy\protocol.py", line 1161, in read_frame
+    frame = await Frame.read(
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\websockets\legacy\framing.py", line 68, in read
+    data = await reader(2)
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\asyncio\streams.py", line 708, in readexactly
+    await self._wait_for_data('readexactly')
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\asyncio\streams.py", line 501, in _wait_for_data
+    await self._waiter
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\asyncio\selector_events.py", line 862, in _read_ready__data_received
+    data = self._sock.recv(self.max_size)
+ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\binance_c2c.py", line 125, in run_websocket
+    async for message in ws:
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\websockets\legacy\protocol.py", line 497, in __aiter__
+    yield await self.recv()
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\websockets\legacy\protocol.py", line 568, in recv
+    await self.ensure_open()
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\websockets\legacy\protocol.py", line 935, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: no close frame received or sent
+2024-02-29 14:49:58,880:binance_c2c:INFO:Message sent
+2024-02-29 14:50:03,876:binance_c2c:INFO:Message sent
+2024-02-29 14:51:47,006:binance_c2c:INFO:Message sent
+2024-02-29 14:53:47,864:common_utils:INFO:Updated server timestamp: 1709243627420
+2024-02-29 14:55:47,825:binance_c2c:INFO:Message sent
+2024-02-29 14:56:25,370:binance_c2c:INFO:Message sent
+2024-02-29 14:56:40,739:binance_c2c:INFO:Message sent
+2024-02-29 14:56:45,753:binance_c2c:INFO:Message sent
+2024-02-29 15:04:03,227:binance_c2c:INFO:Message sent
+2024-02-29 15:05:07,248:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-29 15:05:09,592:ip_info_io:INFO:Getting IP details for: 187.190.224.57
+2024-02-29 15:05:09,877:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 15:05:09,879:binance_bank_deposit:INFO:Found 0 suitable accounts for order 20596640997905858560
+2024-02-29 15:05:09,880:binance_bank_deposit:INFO:Suitable accounts: []
+2024-02-29 15:05:09,881:binance_bank_deposit:INFO:Found 0 suitable accounts for order 20596640997905858560
+2024-02-29 15:05:09,881:binance_bank_deposit:INFO:Suitable accounts: []
+2024-02-29 15:05:09,881:binance_c2c:INFO:Message sent
+2024-02-29 15:05:12,139:binance_c2c:INFO:Message sent
+2024-02-29 15:05:14,883:binance_c2c:INFO:Message sent
+2024-02-29 15:05:19,887:binance_c2c:INFO:Message sent
+2024-02-29 15:08:10,221:binance_c2c:INFO:Message sent
+2024-02-29 15:08:15,233:binance_c2c:INFO:Message sent
+2024-02-29 15:11:24,317:binance_c2c:INFO:Message sent
+2024-02-29 15:11:29,334:binance_c2c:INFO:Message sent
+2024-02-29 15:11:29,335:binance_c2c:INFO:Message sent
+2024-02-29 15:11:32,668:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-29 15:11:33,409:ip_info_io:INFO:Getting IP details for: 201.175.232.169
+2024-02-29 15:11:33,689:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 15:12:39,913:binance_c2c:INFO:Message sent
+2024-02-29 15:12:39,914:binance_c2c:INFO:Message sent
+2024-02-29 15:12:46,174:binance_c2c:INFO:Message sent
+2024-02-29 15:14:39,024:binance_c2c:INFO:Message sent
+2024-02-29 15:14:44,034:binance_c2c:INFO:Message sent
+2024-02-29 15:14:49,049:binance_c2c:INFO:Message sent
+2024-02-29 15:19:34,518:binance_c2c:INFO:Message sent
+2024-02-29 15:19:39,522:binance_c2c:INFO:Message sent
+2024-02-29 15:19:39,522:binance_c2c:INFO:Message sent
+2024-02-29 15:19:42,535:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-29 15:19:43,359:ip_info_io:INFO:Getting IP details for: 187.190.189.84
+2024-02-29 15:19:43,659:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 15:20:07,453:binance_c2c:INFO:Message sent
+2024-02-29 15:20:15,485:binance_c2c:INFO:Message sent
+2024-02-29 15:20:29,677:binance_c2c:INFO:Message sent
+2024-02-29 15:20:39,636:binance_c2c:INFO:Message sent
+2024-02-29 15:20:49,183:binance_bank_deposit:INFO:Found 0 suitable accounts for order 20596644648800653312
+2024-02-29 15:20:49,184:binance_bank_deposit:INFO:Suitable accounts: []
+2024-02-29 15:20:49,189:binance_bank_deposit:INFO:Found 8 suitable accounts for order 20596644648800653312
+2024-02-29 15:20:49,189:binance_bank_deposit:INFO:Suitable accounts: [('710969000007300927', 'Nvio', 7600.0), ('710969000016348705', 'Nvio', 10000.0), ('710969000015306104', 'Nvio', 45000.0), ('646180146006124571', 'STP', 61160.0), ('058597000054265356', 'Banregio', 72847.38), ('646180204200033494', 'STP', 117158.06), ('058597000056476091', 'Banregio', 132407.46000000002), ('014761655091416464', 'Santander', 144377.86)]
+2024-02-29 15:20:49,193:binance_bank_deposit:INFO:Total after deposit: 25000.0
+2024-02-29 15:20:49,211:binance_c2c:INFO:Message sent
+2024-02-29 15:20:54,208:binance_c2c:INFO:Message sent
+2024-02-29 15:20:59,214:binance_c2c:INFO:Message sent
+2024-02-29 15:23:37,067:binance_order_details:ERROR:An error occurred on attempt 1: Cannot connect to host api.binance.com:443 ssl:default [Connect call failed ('108.138.166.86', 443)]
+Traceback (most recent call last):
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 980, in _wrap_create_connection
+    return await self._loop.create_connection(*args, **kwargs)  # type: ignore[return-value]  # noqa
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1076, in create_connection
+    raise exceptions[0]
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1060, in create_connection
+    sock = await self._connect_sock(
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 969, in _connect_sock
+    await self.sock_connect(sock, address)
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\asyncio\selector_events.py", line 501, in sock_connect
+    return await fut
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\asyncio\selector_events.py", line 541, in _sock_connect_cb
+    raise OSError(err, f'Connect call failed {address}')
+TimeoutError: [Errno 10060] Connect call failed ('108.138.166.86', 443)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\p7016\Documents\bpa\binance_order_details.py", line 31, in fetch_order_details
+    async with session.post(f"{USER_ORDER_DETAIL}?{query_string}", json=payload, headers=headers) as response:
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\client.py", line 1167, in __aenter__
+    self._resp = await self._coro
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\client.py", line 562, in _request
+    conn = await self._connector.connect(
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 540, in connect
+    proto = await self._create_connection(req, traces, timeout)
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 901, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 1209, in _create_direct_connection
+    raise last_exc
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 1178, in _create_direct_connection
+    transp, proto = await self._wrap_create_connection(
+  File "C:\Users\p7016\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 988, in _wrap_create_connection
+    raise client_error(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorError: Cannot connect to host api.binance.com:443 ssl:default [Connect call failed ('108.138.166.86', 443)]
+2024-02-29 15:23:38,604:binance_c2c:INFO:Message sent
+2024-02-29 15:23:43,618:binance_c2c:INFO:Message sent
+2024-02-29 15:23:43,619:binance_c2c:INFO:Message sent
+2024-02-29 15:23:46,638:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-29 15:23:47,425:ip_info_io:INFO:Getting IP details for: 187.188.8.229
+2024-02-29 15:23:47,707:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 15:23:48,236:common_utils:INFO:Updated server timestamp: 1709245427772
+2024-02-29 15:25:11,696:binance_c2c:INFO:Message sent
+2024-02-29 15:26:23,955:binance_c2c:INFO:Message sent
+2024-02-29 15:27:00,980:binance_c2c:INFO:Message sent
+2024-02-29 15:27:05,990:binance_c2c:INFO:Message sent
+2024-02-29 15:33:58,243:binance_c2c:INFO:Message sent
+2024-02-29 15:33:58,244:binance_c2c:INFO:Message sent
+2024-02-29 15:34:06,682:binance_c2c:INFO:Message sent
+2024-02-29 15:34:14,591:binance_c2c:INFO:Message sent
+2024-02-29 15:35:34,444:binance_c2c:INFO:Message sent
+2024-02-29 15:35:34,445:binance_c2c:INFO:Message sent
+2024-02-29 15:37:38,405:binance_c2c:INFO:Message sent
+2024-02-29 15:38:16,103:binance_c2c:INFO:Message sent
+2024-02-29 15:38:21,113:binance_c2c:INFO:Message sent
+2024-02-29 15:38:32,114:binance_c2c:INFO:Message sent
+2024-02-29 15:38:37,123:binance_c2c:INFO:Message sent
+2024-02-29 15:38:37,123:binance_c2c:INFO:Message sent
+2024-02-29 15:38:40,134:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-02-29 15:38:40,893:ip_info_io:INFO:Getting IP details for: 189.214.18.64
+2024-02-29 15:38:41,186:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 15:38:58,579:binance_c2c:INFO:Message sent
+2024-02-29 15:39:12,807:binance_c2c:INFO:Message sent
+2024-02-29 15:39:25,560:binance_c2c:INFO:Message sent
+2024-02-29 15:39:44,244:binance_c2c:INFO:Message sent
+2024-02-29 15:39:52,593:binance_c2c:INFO:Message sent
+2024-02-29 15:40:03,516:binance_c2c:INFO:Message sent
+2024-02-29 15:40:10,509:binance_bank_deposit:INFO:Found 2 suitable accounts for order 20596649419616190464
+2024-02-29 15:40:10,509:binance_bank_deposit:INFO:Suitable accounts: [('1593999048', 'BBVA', 215142.46), ('1532335128', 'BBVA', 266322.78)]
+2024-02-29 15:40:10,512:binance_bank_deposit:INFO:Total after deposit: 4001.0
+2024-02-29 15:40:10,524:binance_c2c:INFO:Message sent
+2024-02-29 15:40:15,552:binance_c2c:INFO:Message sent
+2024-02-29 15:40:20,563:binance_c2c:INFO:Message sent
+2024-02-29 15:40:27,401:fetch_outlook:WARNING:Token expires in: 2024-02-29 16:40:27.401678
+2024-02-29 15:40:27,901:verify_client_ip:WARNING:Attempt 1: Could not fetch the IP. Retrying...
+2024-02-29 15:40:31,339:ip_info_io:INFO:Getting IP details for: 187.170.65.94
+2024-02-29 15:40:31,616:verify_client_ip:INFO:IP from Country: MX
+2024-02-29 15:40:31,620:binance_bank_deposit:INFO:Found 8 suitable accounts for order 20596649887791534080
+2024-02-29 15:40:31,621:binance_bank_deposit:INFO:Suitable accounts: [('710969000007300927', 'Nvio', 7600.0), ('710969000016348705', 'Nvio', 10000.0), ('710969000015306104', 'Nvio', 45000.0), ('646180146006124571', 'STP', 61160.0), ('058597000054265356', 'Banregio', 72847.38), ('646180204200033494', 'STP', 117158.06), ('058597000056476091', 'Banregio', 132407.46000000002), ('014761655091416464', 'Santander', 144377.86)]
+2024-02-29 15:40:31,622:binance_bank_deposit:INFO:Total after deposit: 7200.0
+2024-02-29 15:40:31,635:binance_c2c:INFO:Message sent
+2024-02-29 15:40:36,659:binance_c2c:INFO:Message sent
+2024-02-29 15:40:41,665:binance_c2c:INFO:Message sent
+2024-02-29 15:41:57,798:binance_c2c:INFO:Message sent
+2024-02-29 15:42:59,447:binance_c2c:INFO:Message sent
+2024-02-29 15:43:04,463:binance_c2c:INFO:Message sent
+2024-02-29 15:43:04,470:binance_c2c:INFO:Message sent

@@ -174,14 +174,14 @@ async def main():
         # # #ANBER CAP DE MEXICO
         ASTP = 43658.06
         # await update_account_balance(conn, '646180204200033494', ASTP)    #STP
+        # await remove_bank_account(conn, '0482424657')
+        await print_table_contents(conn, 'mxn_deposits')
 
-        # await print_table_contents(conn, 'mxn_bank_accounts')
-
-        await sum_recent_deposits('1532335128')
+        # await sum_recent_deposits('1532335128')
         await conn.close()
     else:
         logger.error("Error! Cannot create the database connection.")
 
 if __name__ == '__main__':
-    # asyncio.run(main())
-    asyncio.run(sum_recent_deposits('1532335128'))
+    asyncio.run(main())
+    # asyncio.run(sum_recent_deposits('1532335128'))

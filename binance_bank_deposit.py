@@ -14,11 +14,12 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 async def check_deposit_limit(conn, account_number, order_no):
-    """Checks if the deposit for the given account number and order number exceeds the monthly limit."""
+    """Checks if the deposit for the given account number and order number exceeds the buyer's monthly limit."""
     try:
         # Use of Time Zones
-        current_month = datetime.datetime.now(datetime.timezone.utc).month
-        current_year = datetime.datetime.now(datetime.timezone.utc).year
+        current_date = datetime.datetime.now(datetime.timezone.utc)
+        current_month = current_date.month
+        current_year = current_date.year
 
         # Get the buyer's name for the order
         buyer_name = await get_buyer_name(conn, order_no)
@@ -28,22 +29,22 @@ async def check_deposit_limit(conn, account_number, order_no):
 
         # SQL Injection Protection: Using parameterized queries
         query = '''
-            SELECT SUM(amount_deposited)
+            SELECT IFNULL(SUM(amount_deposited), 0)
             FROM mxn_deposits
             WHERE account_number = ? AND deposit_from = ? AND year = ? AND month = ?
         '''
 
         cursor = await conn.execute(query, (account_number, buyer_name, current_year, current_month))
-        total_deposited_this_month = await cursor.fetchone()
-        total_deposited_this_month = total_deposited_this_month[0] if total_deposited_this_month[0] is not None else 0
+        total_deposited_this_month = await cursor.fetchone()[0]
 
         # Calculate the total after the proposed deposit
         total_after_deposit = total_deposited_this_month + amount_to_deposit
-        logger.info(f"Total after deposit: {total_after_deposit}")
+        logger.info(f"Total after deposit for buyer '{buyer_name}' on account {account_number}: {total_after_deposit}")
 
-        # Check if adding the new deposit exceeds the monthly limit
+        # Check if adding the new deposit exceeds the monthly limit for the buyer to this account
         if total_after_deposit <= MONTHLY_LIMIT:
-            return True  # The deposit does not exceed the limit
+            logger.info(f"The deposit does not exceed the buyer's monthly limit of {MONTHLY_LIMIT:.2f}.")
+            return True
         else:
             logger.warning(f"Deposit exceeds the monthly limit of {MONTHLY_LIMIT:.2f} for buyer '{buyer_name}' on account {account_number}.")
             return False
@@ -60,11 +61,10 @@ async def find_suitable_account(conn, order_no, buyer_name, buyer_bank, ignore_b
 
         # Get the amount to deposit from the current order
         amount_to_deposit = await get_order_amount(conn, order_no)
-
+        logger.info(f"Amount to deposit: {amount_to_deposit}")
         # Construct the buyer bank condition with SQL Injection Protection
-
         buyer_bank_condition = "AND LOWER(a.account_bank_name) NOT LIKE '%bbva%'" if ignore_bank_preference or buyer_bank is None else "AND LOWER(a.account_bank_name) = ?"
-
+        logger.info(f"Buyer bank condition: {buyer_bank_condition}")
         # Parameterized query to avoid SQL Injection
         query = f'''
             WITH LastAccount AS (
@@ -79,7 +79,7 @@ async def find_suitable_account(conn, order_no, buyer_name, buyer_bank, ignore_b
                 ORDER BY last_used_timestamp DESC
                 LIMIT 1
             )
-            SELECT a.account_number, a.account_bank_name, a.account_balance
+            SELECT a.account_number, a.account_bank_name
             FROM mxn_bank_accounts a
             LEFT JOIN (
                 SELECT account_number, SUM(amount_deposited) AS total_deposited_today
@@ -95,15 +95,15 @@ async def find_suitable_account(conn, order_no, buyer_name, buyer_bank, ignore_b
             ) m ON a.account_number = m.account_number
             WHERE (d.total_deposited_today + ? < a.account_daily_limit OR d.total_deposited_today IS NULL)
             AND (m.total_deposited_this_month + ? < a.account_monthly_limit OR m.total_deposited_this_month IS NULL)
-            AND a.account_balance + ? < a.account_monthly_limit
             AND a.account_number NOT IN (SELECT account_number FROM LastAccount)
             AND a.account_number NOT IN (SELECT account_number FROM MostRecentlyUsedAccount)
             {buyer_bank_condition}
             ORDER BY a.account_balance ASC
         '''
 
-        parameters = [buyer_name, current_date_str, current_month_str, amount_to_deposit, amount_to_deposit, amount_to_deposit]
-        if buyer_bank_condition:
+        parameters = [buyer_name, current_date_str, current_month_str, amount_to_deposit, amount_to_deposit]
+        # Adjust the logic to append buyer_bank.lower() only when necessary
+        if not ignore_bank_preference and buyer_bank is not None:
             parameters.append(buyer_bank.lower())
 
         cursor = await conn.execute(query, parameters)
