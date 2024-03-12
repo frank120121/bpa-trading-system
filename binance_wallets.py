@@ -6,7 +6,11 @@ import hashlib
 import aiohttp
 import asyncio
 import platform
+
+
 import logging
+from logging_config import setup_logging
+setup_logging(log_filename='Binance_c2c_logger.log')
 logger = logging.getLogger(__name__)
 
 class BinanceWallets:
@@ -83,7 +87,11 @@ class BinanceWallets:
                 'USDT': sum(float(data.get('free', 0)) for data in asset_data if data['asset'] == 'USDT')
             }
         
-    def check_asset_balance(self, asset, target):
+    def check_asset_balance(self, asset):
+        if asset == 'BTC':
+            target = 0.25
+        elif asset == 'ETH':
+            target = 1.000
         balance = self.combined_balances.get(asset, 0)
         if balance < target:
             return target - balance
