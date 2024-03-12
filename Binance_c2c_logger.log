@@ -1811,3 +1811,5 @@ client_session: <aiohttp.client.ClientSession object at 0x000001BE0E6BBE80>
 2024-03-11 18:35:49,016:binance_bank_deposit:INFO:Total after deposit for buyer 'OROZCO SARAZ GUILLERMO' on account 1532335128: 4000.0
 2024-03-11 18:35:49,016:binance_bank_deposit:INFO:The deposit does not exceed the buyer's monthly limit of 70000.00.
 2024-03-11 18:35:49,030:binance_c2c:INFO:Message sent
+2024-03-11 18:35:54,055:binance_c2c:INFO:Message sent
+2024-03-11 18:35:59,056:binance_c2c:INFO:Message sent
