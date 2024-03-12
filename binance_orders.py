@@ -28,7 +28,7 @@ async def new_order(wallets, account_to_use, most_usd_asset, missing_balance):
 
 async def binance_buy_order(asset_type):
     try: 
-        btc_target = 0.35000
+        btc_target = 0.25000
         wallets = await get_wallets()
         missing_balance = wallets.check_asset_balance(asset_type, btc_target)
 

@@ -1764,3 +1764,37 @@ client_session: <aiohttp.client.ClientSession object at 0x000001BE0E6BBE80>
 2024-03-11 17:56:33,061:binance_search_ad:INFO:Attempt 2/3 failed, retrying after delay...
 2024-03-11 17:57:35,504:common_utils:INFO:Updated server timestamp: 1710205056079
 2024-03-11 17:57:36,041:common_utils:INFO:Updated server timestamp: 1710205056612
+2024-03-11 18:22:44,003:binance_c2c:INFO:Message sent
+2024-03-11 18:22:49,018:binance_c2c:INFO:Message sent
+2024-03-11 18:22:49,018:binance_c2c:INFO:Message sent
+2024-03-11 18:22:52,480:googleapiclient.discovery_cache:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-03-11 18:22:53,327:ip_info_io:INFO:Getting IP details for: 200.63.40.125
+2024-03-11 18:22:53,660:verify_client_ip:INFO:IP from Country: MX
+2024-03-11 18:23:23,260:binance_c2c:INFO:Message sent
+2024-03-11 18:23:32,888:binance_c2c:INFO:Message sent
+2024-03-11 18:23:40,669:binance_c2c:INFO:Message sent
+2024-03-11 18:23:47,747:binance_c2c:INFO:Message sent
+2024-03-11 18:23:52,760:binance_c2c:INFO:Message sent
+2024-03-11 18:23:52,760:binance_c2c:INFO:Message sent
+2024-03-11 18:23:54,309:binance_c2c:INFO:Message sent
+2024-03-11 18:23:56,402:fetch_outlook:WARNING:Token expires in: 2024-03-11 19:23:56.402354
+2024-03-11 18:23:56,933:ip_info_io:INFO:Getting IP details for: 187.147.248.196
+2024-03-11 18:23:57,295:verify_client_ip:INFO:IP from Country: MX
+2024-03-11 18:24:06,992:binance_bank_deposit:INFO:Amount to deposit: 5000.0
+2024-03-11 18:24:06,992:binance_bank_deposit:INFO:Buyer bank condition: AND LOWER(a.account_bank_name) = ?
+2024-03-11 18:24:07,006:binance_bank_deposit:INFO:Found 2 suitable accounts for order 20600677011667038208
+2024-03-11 18:24:07,006:binance_bank_deposit:INFO:Suitable accounts: [('1593999048', 'BBVA'), ('1532335128', 'BBVA')]
+2024-03-11 18:24:07,023:binance_bank_deposit:INFO:Total after deposit for buyer 'PANTALEON GONZALEZ GENARO' on account 1593999048: 5000.0
+2024-03-11 18:24:07,023:binance_bank_deposit:INFO:The deposit does not exceed the buyer's monthly limit of 70000.00.
+2024-03-11 18:24:07,039:binance_c2c:INFO:Message sent
+2024-03-11 18:24:12,058:binance_c2c:INFO:Message sent
+2024-03-11 18:24:17,066:binance_c2c:INFO:Message sent
+2024-03-11 18:25:21,322:binance_c2c:INFO:Message sent
+2024-03-11 18:25:29,214:binance_c2c:INFO:Message sent
+2024-03-11 18:26:35,774:binance_c2c:INFO:Message sent
+2024-03-11 18:26:40,779:binance_c2c:INFO:Message sent
+2024-03-11 18:27:36,450:common_utils:INFO:Updated server timestamp: 1710206857032
+2024-03-11 18:27:36,848:binance_c2c:INFO:Message sent
+2024-03-11 18:28:56,262:binance_c2c:INFO:Message sent
+2024-03-11 18:29:01,272:binance_c2c:INFO:Message sent
+2024-03-11 18:29:33,825:binance_c2c:INFO:Message sent

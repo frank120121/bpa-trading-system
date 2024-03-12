@@ -7,8 +7,8 @@ from binance_api import BinanceAPI
 
 logger = logging.getLogger(__name__)
 
-PRICE_THRESHOLD = 1.0163
-MIN_RATIO = 101.6
+PRICE_THRESHOLD = 1.017
+MIN_RATIO = 101.63
 MAX_RATIO = 110
 RATIO_ADJUSTMENT = 0.04
 DIFF_THRESHOLD = 0.09
@@ -85,7 +85,7 @@ async def analyze_and_update_ads(ad, api_instance, ads_data, all_ads):
             if diff_ratio > DIFF_THRESHOLD:
                 new_ratio_unbounded = competitor_ratio - RATIO_ADJUSTMENT
             else:
-                logger.debug(f"Competitor ad - spot: {adjusted_target_spot}, price: {competitor_price}, base: {base_price}, ratio: {competitor_ratio}. Not enough diff: {diff_ratio}")
+                logger.info(f"Competitor ad - spot: {adjusted_target_spot}, price: {competitor_price}, base: {base_price}, ratio: {competitor_ratio}. Not enough diff: {diff_ratio}")
                 return
 
         new_ratio = max(MIN_RATIO, min(MAX_RATIO, round(new_ratio_unbounded, 2)))
@@ -94,7 +94,7 @@ async def analyze_and_update_ads(ad, api_instance, ads_data, all_ads):
             return
         else:
             await api_instance.update_ad(advNo, new_ratio)
-            await update_ad_in_database(target_spot, advNo, asset_type, new_ratio, None, surplusAmount, ad['account'], fiat, transAmount)
+            await update_ad_in_database(target_spot, advNo, asset_type, new_ratio, our_current_price, surplusAmount, ad['account'], fiat, transAmount)
             logger.debug(f"Ad: {asset_type} - start price: {our_current_price}, ratio: {current_priceFloatingRatio}. Competitor ad - spot: {adjusted_target_spot}, price: {competitor_price}, base: {base_price}, ratio: {competitor_ratio}")
             await asyncio.sleep(5)
 

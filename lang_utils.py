@@ -228,7 +228,7 @@ anti_fraud_stage3 = (
 )
 
 anti_fraud_not_valid_response = (
-    "Por favor responda exactamente con un 'Si' o un 'No'."
+    "Por favor responda exactamente con un 'Si' o un 'No' a la siguiente pregunta:"
 )
 
 anti_fraud_user_denied = (
