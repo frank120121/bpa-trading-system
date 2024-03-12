@@ -134,7 +134,7 @@ async def main():
     conn = await create_connection(DB_FILE)
     if conn is not None:
         # Initialize the database (create tables and insert initial data)
-        #await initialize_database(conn)
+        await initialize_database(conn)
         # Print table contents for verification
         # await remove_bank_account(conn, '0482424657')
         # await remove_bank_account(conn, '012778015323351288')
