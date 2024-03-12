@@ -139,6 +139,7 @@ async def main():
         # await remove_bank_account(conn, '0482424657')
         # await remove_bank_account(conn, '012778015323351288')
         # await remove_bank_account(conn, '012778015939990486')
+        await remove_bank_account(conn, '646180146006124571')
 
 
 
