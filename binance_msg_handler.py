@@ -103,6 +103,7 @@ async def handle_text_message(connection_manager, content, order_no, order_detai
     kyc_status = await get_kyc_status(conn, buyer_name)
     anti_fraud_stage = await get_anti_fraud_stage(conn, buyer_name)
 
+
     if kyc_status == 0 or anti_fraud_stage < 5:
         await handle_anti_fraud(buyer_name, seller_name, conn, anti_fraud_stage, content, order_no, connection_manager)
     else:

@@ -17,6 +17,11 @@ class MerchantAccount:
         if not order_details:
             logger.warning("Failed to fetch order details from the external source.")
             return
+        # Check for specific bank identifiers
+        if await has_specific_bank_identifiers(conn, order_no, ['OXXO', 'SkrillMoneybookers']):
+            logger.info(f"Order {order_no} uses payment method (OXXO or Skrill).")
+            return  # Skip further processing for now
+        
         buyer_name = order_details.get('buyer_name')
         if msg_type == 'system':
             await self._handle_system_type(connection_manager, msg_json, conn, order_no, order_details, buyer_name)
@@ -76,3 +81,11 @@ class MerchantAccount:
         except Exception as e:
             logger.error(f"An error occurred: {e}\n{traceback.format_exc()}")
             return None
+async def has_specific_bank_identifiers(conn, order_no, identifiers):
+    async with conn.cursor() as cursor:
+        await cursor.execute("""
+            SELECT COUNT(*) FROM order_bank_identifiers
+            WHERE order_no = ? AND bank_identifier IN ({})
+        """.format(','.join('?'*len(identifiers))), (order_no, *identifiers))
+        result = await cursor.fetchone()
+        return result[0] > 0  # True if any of the specified identifiers are found

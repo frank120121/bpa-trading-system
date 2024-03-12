@@ -35,8 +35,8 @@ async def check_deposit_limit(conn, account_number, order_no):
         '''
 
         cursor = await conn.execute(query, (account_number, buyer_name, current_year, current_month))
-        total_deposited_this_month = await cursor.fetchone()[0]
-
+        total_deposited_this_month_row = await cursor.fetchone()
+        total_deposited_this_month = total_deposited_this_month_row[0]
         # Calculate the total after the proposed deposit
         total_after_deposit = total_deposited_this_month + amount_to_deposit
         logger.info(f"Total after deposit for buyer '{buyer_name}' on account {account_number}: {total_after_deposit}")

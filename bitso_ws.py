@@ -5,7 +5,7 @@ import json
 async def subscribe_to_bitso_websocket():
     async with websockets.connect("wss://ws.bitso.com") as websocket:
         # Define a list of trading pairs to subscribe to
-        trading_pairs = ["btc_mxn", "usdt_mxn", "usd_mxn", "dai_mxn", "tusd_mxn"]
+        trading_pairs = ["usdt_mxn"]
         
         # Subscribe to the channels for each trading pair
         for pair in trading_pairs:
