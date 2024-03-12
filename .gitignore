@@ -6,5 +6,6 @@ gmail_credentilas.json
 token.pickle
 tokens.json
 *.log
-
+.gitconfig
+.lesshst
 ```
