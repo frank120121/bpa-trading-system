@@ -1798,3 +1798,16 @@ client_session: <aiohttp.client.ClientSession object at 0x000001BE0E6BBE80>
 2024-03-11 18:28:56,262:binance_c2c:INFO:Message sent
 2024-03-11 18:29:01,272:binance_c2c:INFO:Message sent
 2024-03-11 18:29:33,825:binance_c2c:INFO:Message sent
+2024-03-11 18:34:34,802:binance_c2c:INFO:Message sent
+2024-03-11 18:34:34,802:binance_c2c:INFO:Message sent
+2024-03-11 18:35:01,625:binance_c2c:INFO:Message sent
+2024-03-11 18:35:12,030:binance_c2c:INFO:Message sent
+2024-03-11 18:35:20,851:binance_c2c:INFO:Message sent
+2024-03-11 18:35:38,925:binance_c2c:INFO:Message sent
+2024-03-11 18:35:48,997:binance_bank_deposit:INFO:Amount to deposit: 4000.0
+2024-03-11 18:35:49,001:binance_bank_deposit:INFO:Buyer bank condition: AND LOWER(a.account_bank_name) = ?
+2024-03-11 18:35:49,002:binance_bank_deposit:INFO:Found 1 suitable accounts for order 20600679260982374400
+2024-03-11 18:35:49,002:binance_bank_deposit:INFO:Suitable accounts: [('1532335128', 'BBVA')]
+2024-03-11 18:35:49,016:binance_bank_deposit:INFO:Total after deposit for buyer 'OROZCO SARAZ GUILLERMO' on account 1532335128: 4000.0
+2024-03-11 18:35:49,016:binance_bank_deposit:INFO:The deposit does not exceed the buyer's monthly limit of 70000.00.
+2024-03-11 18:35:49,030:binance_c2c:INFO:Message sent
