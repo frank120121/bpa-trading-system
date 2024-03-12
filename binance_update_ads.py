@@ -85,7 +85,7 @@ async def analyze_and_update_ads(ad, api_instance, ads_data, all_ads):
             if diff_ratio > DIFF_THRESHOLD:
                 new_ratio_unbounded = competitor_ratio - RATIO_ADJUSTMENT
             else:
-                logger.info(f"Competitor ad - spot: {adjusted_target_spot}, price: {competitor_price}, base: {base_price}, ratio: {competitor_ratio}. Not enough diff: {diff_ratio}")
+                logger.debugx   (f"Competitor ad - spot: {adjusted_target_spot}, price: {competitor_price}, base: {base_price}, ratio: {competitor_ratio}. Not enough diff: {diff_ratio}")
                 return
 
         new_ratio = max(MIN_RATIO, min(MAX_RATIO, round(new_ratio_unbounded, 2)))
