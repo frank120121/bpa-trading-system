@@ -153,6 +153,14 @@ bank_accounts = [
         "account_number": "646180204200033494",
         "account_daily_limit": DAILY_LIMITS,
         "account_monthly_limit": MONTHLY_LIMITS
+    },
+    #new bank accounts
+    {
+        "bank_name": "BBVA",
+        "beneficiary": "ANBER CAP DE MEXICO SA DE CV",
+        "account_number": "0122819805",
+        "account_daily_limit": DAILY_LIMITS,
+        "account_monthly_limit": MONTHLY_LIMITS
     }
 ]
 
