@@ -12,13 +12,18 @@ MIN_RATIO = 101.63
 MAX_RATIO = 110
 RATIO_ADJUSTMENT = 0.04
 DIFF_THRESHOLD = 0.09
-DELAY_BETWEEN_ASSET_TYPES = 5
+DELAY_BETWEEN_ASSET_TYPES = 2
 DELAY_BETWEEN_MAIN_LOOPS = 180
+AMOUNT_THRESHOLD = 5000
 
 def filter_ads(ads_data, base_price, own_ads):
     own_adv_nos = [ad['advNo'] for ad in own_ads]
     logger.debug(f'own ad numbers: {own_adv_nos}')
-    return [ad for ad in ads_data if ad['adv']['advNo'] not in own_adv_nos and float(ad['adv']['price']) >= base_price * PRICE_THRESHOLD]
+    return [ad for ad in ads_data 
+            if ad['adv']['advNo'] not in own_adv_nos 
+            and float(ad['adv']['price']) >= base_price * PRICE_THRESHOLD
+            and float(ad['adv']['dynamicMaxSingleTransAmount']) >= AMOUNT_THRESHOLD]
+
 
 def compute_base_price(price: float, floating_ratio: float) -> float:
     return round(price / (floating_ratio / 100), 2)
@@ -85,7 +90,7 @@ async def analyze_and_update_ads(ad, api_instance, ads_data, all_ads):
             if diff_ratio > DIFF_THRESHOLD:
                 new_ratio_unbounded = competitor_ratio - RATIO_ADJUSTMENT
             else:
-                logger.debugx   (f"Competitor ad - spot: {adjusted_target_spot}, price: {competitor_price}, base: {base_price}, ratio: {competitor_ratio}. Not enough diff: {diff_ratio}")
+                logger.debug(f"Competitor ad - spot: {adjusted_target_spot}, price: {competitor_price}, base: {base_price}, ratio: {competitor_ratio}. Not enough diff: {diff_ratio}")
                 return
 
         new_ratio = max(MIN_RATIO, min(MAX_RATIO, round(new_ratio_unbounded, 2)))
@@ -96,7 +101,7 @@ async def analyze_and_update_ads(ad, api_instance, ads_data, all_ads):
             await api_instance.update_ad(advNo, new_ratio)
             await update_ad_in_database(target_spot, advNo, asset_type, new_ratio, our_current_price, surplusAmount, ad['account'], fiat, transAmount)
             logger.debug(f"Ad: {asset_type} - start price: {our_current_price}, ratio: {current_priceFloatingRatio}. Competitor ad - spot: {adjusted_target_spot}, price: {competitor_price}, base: {base_price}, ratio: {competitor_ratio}")
-            await asyncio.sleep(5)
+            await asyncio.sleep(2)
 
     except Exception as e:
         traceback.print_exc()
@@ -121,7 +126,7 @@ async def process_ads(ads_group, api_instances, all_ads):
             continue
         # Process the current ad with the fetched ads_data
         await analyze_and_update_ads(ad, api_instance, current_ads_data, all_ads)
-        await asyncio.sleep(5)
+        await asyncio.sleep(1)
 
 async def main_loop(api_instances):
     all_ads = await fetch_all_ads_from_database()
