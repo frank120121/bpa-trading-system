@@ -10,9 +10,9 @@ from datetime import datetime, timedelta
 from asyncio import Lock
 from traceback import format_exc
 
-from utils.common_utils import get_server_timestamp
-from data.cache.share_data import SharedSession
-from utils.logging_config import setup_logging
+from src.utils.common_utils import get_server_timestamp
+from src.data.cache.share_data import SharedSession
+from src.utils.logging_config import setup_logging
 
 logger = setup_logging(log_filename='binance_main.log')
 

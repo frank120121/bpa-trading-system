@@ -13,8 +13,8 @@ from typing import Dict, Set, Optional, Any
 from datetime import datetime, timezone
 
 from websocket import WebSocketApp
-from exchanges.polymarket.opportunities import shared_opportunities, OpportunityData
-from utils.logging_config import setup_logging
+from src.connectors.polymarket.opportunities import shared_opportunities, OpportunityData
+from src.utils.logging_config import setup_logging
 
 logger = setup_logging(log_filename='binance_main.log')
 

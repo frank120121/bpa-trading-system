@@ -5,9 +5,9 @@ import aiohttp
 import asyncio
 import platform
 from src.connectors.credentials import credentials_dict
-from utils.common_utils import get_server_timestamp
-from exchanges.asset_balances import update_balance, get_balance
-from utils.logging_config import setup_logging
+from src.utils.common_utils import get_server_timestamp
+from src.connectors.asset_balances import update_balance, get_balance
+from src.utils.logging_config import setup_logging
 
 logger = setup_logging(log_filename='binance_main.log')
 

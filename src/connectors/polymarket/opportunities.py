@@ -7,7 +7,7 @@ import threading
 from datetime import datetime, timezone
 from decimal import Decimal
 from typing import Dict, Any, List, Optional, Set
-from utils.logging_config import setup_logging
+from src.utils.logging_config import setup_logging
 
 logger = setup_logging(log_filename='binance_main.log')
 

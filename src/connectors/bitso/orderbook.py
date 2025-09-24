@@ -4,8 +4,8 @@ import websockets
 import requests
 
 from collections import deque
-import data.cache.bitso_cache as bitso_cache 
-from utils.logging_config import setup_logging
+import src.data.cache.bitso_cache as bitso_cache 
+from src.utils.logging_config import setup_logging
 
 logger = setup_logging(log_filename='binance_main.log')
 

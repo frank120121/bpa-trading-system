@@ -14,8 +14,8 @@ Key Features:
 
 import sqlite3
 import aiosqlite
-from utils.logging_config import setup_logging
-from data.database.connection import DB_FILE
+from src.utils.logging_config import setup_logging
+from src.data.database.connection import DB_FILE
 
 logger = setup_logging(log_filename='binance_main.log')
 

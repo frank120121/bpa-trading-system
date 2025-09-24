@@ -1,8 +1,8 @@
 # bpa/binance_orders.py
 import asyncio
-from exchanges.binance.wallets import BinanceWallets
+from src.connectors.binance.wallets import BinanceWallets
 import traceback
-from utils.logging_config import setup_logging
+from src.utils.logging_config import setup_logging
 logger = setup_logging(log_filename='binance_main.log')
 
 async def get_wallets():

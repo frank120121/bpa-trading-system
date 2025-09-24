@@ -6,9 +6,9 @@ import aiohttp
 import asyncio
 from PIL import Image
 from io import BytesIO
-from exchanges.binance.endpoints import TIME_ENDPOINT_V1, TIME_ENDPOINT_V3
+from src.connectors.binance.endpoints import TIME_ENDPOINT_V1, TIME_ENDPOINT_V3
 
-from utils.logging_config import setup_logging
+from src.utils.logging_config import setup_logging
 
 logger = setup_logging(log_filename='binance_main.log')
 

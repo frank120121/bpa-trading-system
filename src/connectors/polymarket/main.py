@@ -15,17 +15,17 @@ from typing import Dict, Any, List
 
 # Import modules
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from exchanges.binance.client import BinanceClient
-from exchanges.polymarket.risk_hedge import HedgeCalculator, RiskAnalyzer
-from exchanges.polymarket.scanner import GammaClient, PolymarketScanner
-from exchanges.polymarket.client import PolymarketClient
-from exchanges.polymarket.websocket_manager import PolymarketWebSocketManager
-from exchanges.polymarket.opportunities import shared_opportunities
+from src.connectors.binance.client import BinanceClient
+from src.connectors.polymarket.risk_hedge import HedgeCalculator, RiskAnalyzer
+from src.connectors.polymarket.scanner import GammaClient, PolymarketScanner
+from src.connectors.polymarket.client import PolymarketClient
+from src.connectors.polymarket.websocket_manager import PolymarketWebSocketManager
+from src.connectors.polymarket.opportunities import shared_opportunities
 
 
 # --- Configuration and Logging ---
 
-from utils.logging_config import setup_logging
+from src.utils.logging_config import setup_logging
 
 logger = setup_logging(log_filename='binance_main.log')
 
