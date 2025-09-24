@@ -1,3 +1,5 @@
+# polymarket/opportunities.py
+
 """
 Shared Opportunities Resource
 Thread-safe storage for market opportunities that can be accessed by multiple components.
@@ -34,11 +36,20 @@ class OpportunityData:
         
         # Status tracking
         self.active = True
-        
-    def update_price(self, new_price: Decimal):
-        """Update the current NO token price."""
-        self.current_no_price = new_price
-        self.last_price_update = datetime.now(timezone.utc)
+            
+    def update_price(self, no_token_id: str, new_price: Decimal) -> bool:
+        """Update the current price for a NO token."""
+        with self._lock:
+            logger.info(f"DEBUG: Attempting to update price for token {no_token_id}: ${new_price}")
+            opp = self.get_opportunity_by_token(no_token_id)
+            if opp:
+                logger.info(f"DEBUG: Found opportunity for token, updating price from {opp.current_no_price} to {new_price}")
+                opp.update_price(new_price)
+                logger.info(f"DEBUG: Updated price for {no_token_id}: ${new_price}")
+                return True
+            else:
+                logger.warning(f"DEBUG: No opportunity found for token {no_token_id}")
+                return False
         
     def should_unsubscribe(self) -> bool:
         """Check if this opportunity should be unsubscribed based on price thresholds."""

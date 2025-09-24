@@ -1,3 +1,5 @@
+## polymarket/websocket_manager.py
+
 """
 Polymarket WebSocket Manager
 Manages WebSocket connections to Polymarket for real-time price updates.
@@ -184,38 +186,27 @@ class PolymarketWebSocketManager:
             logger.error(f"Error handling price update: {e}")
 
     def _extract_price_from_polymarket_message(self, market_data: Dict[str, Any]) -> Optional[Decimal]:
-        """
-        Extract the appropriate price for buying NO shares from Polymarket WebSocket message.
-        
-        For buying NO shares, we want to use bid + 0.001 to get filled quickly at the best price.
-        """
         try:
-            # Handle both message types: "book" and "price_change"
             event_type = market_data.get("event_type", "")
             
             if event_type == "price_change":
-                # New price_change format - find our subscribed asset
                 price_changes = market_data.get("price_changes", [])
                 for change in price_changes:
                     asset_id = change.get("asset_id")
+                    logger.info(f"DEBUG: Processing price change for asset_id: {asset_id}")
+                    logger.info(f"DEBUG: Subscribed tokens: {list(self.subscribed_tokens)}")
+                    logger.info(f"DEBUG: Asset ID in subscribed: {asset_id in self.subscribed_tokens}")
+                    
                     if asset_id and asset_id in self.subscribed_tokens:
                         best_bid = change.get("best_bid")
-                        best_ask = change.get("best_ask")
-                        
                         if best_bid:
                             try:
                                 bid_price = Decimal(str(best_bid))
-                                
-                                # Use bid + 0.001 for competitive pricing that should fill quickly
                                 competitive_price = bid_price + Decimal('0.001')
-                                
-                                # Ensure we don't exceed the ask price
-                                if best_ask:
-                                    ask_price = Decimal(str(best_ask))
-                                    competitive_price = min(competitive_price, ask_price)
-                                
-                                logger.debug(f"Asset {asset_id}: bid={bid_price}, competitive_price={competitive_price}")
+                                logger.info(f"DEBUG: Calculated competitive price: {competitive_price} from bid: {bid_price}")
                                 return competitive_price
+                            except (ValueError, TypeError) as e:
+                                logger.error(f"DEBUG: Error converting bid price: {e}")
                                 
                             except (ValueError, TypeError):
                                 continue
@@ -250,13 +241,16 @@ class PolymarketWebSocketManager:
             return None
 
     def _handle_price_update(self, token_id: str, new_price: Decimal):
-        """Handle price update in a thread-safe way."""
         try:
+            logger.info(f"DEBUG: Handling price update for token {token_id}: ${new_price}")
+            
             # Update price in shared resource (this is thread-safe)
             updated = shared_opportunities.update_price(token_id, new_price)
             
+            logger.info(f"DEBUG: Price update result: updated={updated}")
+            
             if updated:
-                logger.debug(f"Updated price for {token_id}: ${new_price}")
+                logger.info(f"Updated price for {token_id}: ${new_price}")
                 
                 # Check if we should unsubscribe due to price thresholds
                 if (new_price <= self.min_price_threshold or 

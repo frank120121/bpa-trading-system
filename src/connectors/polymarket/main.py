@@ -1,4 +1,4 @@
-# bpa/polymarket/polymarket.py
+# polymarket/main.py
 """
 Main Polymarket-Binance Hedged Betting System
 Refactored main file that orchestrates the three main components.

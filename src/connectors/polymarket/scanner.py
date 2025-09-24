@@ -1,3 +1,5 @@
+## polymarket/scanner.py
+
 """
 Polymarket Scanner Module
 Focuses purely on scanning markets and identifying trading opportunities.
