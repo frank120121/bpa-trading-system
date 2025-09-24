@@ -13,14 +13,16 @@ from datetime import datetime
 from decimal import Decimal
 from typing import Dict, Any, List
 
-# Import modules
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# Add project root to Python path - need 4 dirname() calls to get from main.py to bpa/
+project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+sys.path.insert(0, project_root)
+
 from src.connectors.binance.client import BinanceClient
-from src.connectors.polymarket.risk_hedge import HedgeCalculator, RiskAnalyzer
-from src.connectors.polymarket.scanner import GammaClient, PolymarketScanner
-from src.connectors.polymarket.client import PolymarketClient
-from src.connectors.polymarket.websocket_manager import PolymarketWebSocketManager
-from src.connectors.polymarket.opportunities import shared_opportunities
+from risk_hedge import HedgeCalculator, RiskAnalyzer
+from scanner import GammaClient, PolymarketScanner
+from client import PolymarketClient
+from websocket_manager import PolymarketWebSocketManager
+from opportunities import shared_opportunities
 
 
 # --- Configuration and Logging ---

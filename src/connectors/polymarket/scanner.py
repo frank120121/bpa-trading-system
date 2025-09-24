@@ -289,7 +289,7 @@ class PolymarketScanner:
         Returns:
             List of opportunity dictionaries that were newly added to shared resource
         """
-        from exchanges.polymarket.opportunities import shared_opportunities
+        from opportunities import shared_opportunities
         
         logger.info("Scanning Polymarket for opportunities across all assets...")
 
