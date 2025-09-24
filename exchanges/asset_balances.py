@@ -13,13 +13,11 @@ Key Features:
 """
 
 import sqlite3
-import asyncio
 import aiosqlite
 from utils.logging_config import setup_logging
-from data.database.connection import print_table_contents, create_connection, DB_FILE
+from data.database.connection import DB_FILE
 
-logger = setup_logging(log_filename='balance_manager.log')
-
+logger = setup_logging(log_filename='binance_main.log')
 
 def setup_database():
     """Initialize database tables for balance tracking"""

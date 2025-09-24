@@ -81,7 +81,6 @@ async def handle_bank_verification(
         if standard_bank_name in [normalize_bank_name(bank) for bank in ACCEPTED_BANKS]:
             await OrderCache.update_fields(orderNumber, {'buyer_bank': standard_bank_name})
             await update_buyer_bank(conn, buyerName, standard_bank_name)
-            logger.info(f"Bank {standard_bank_name} verified successfully for buyer {buyerName}")
             return standard_bank_name
         
         # Get localized verification messages

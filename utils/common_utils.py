@@ -89,7 +89,6 @@ async def get_server_timestamp(resync=False):
         return int(time.time() * 1000)
 
     current_timestamp = int(time.time() * 1000) + ServerTimestampCache.offset + ServerTimestampCache.buffer_ms
-    logger.debug(f"Returning server timestamp: {current_timestamp} (Local time: {int(time.time() * 1000)}, Offset: {ServerTimestampCache.offset}, Buffer: {ServerTimestampCache.buffer_ms} ms)")
     return current_timestamp
 
 async def download_image(url, retries=3, initial_delay=1):
