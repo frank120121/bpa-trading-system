@@ -4,7 +4,6 @@ import asyncio
 from typing import Optional
 
 from utils.logging_config import setup_logging
-from data.database.connection import DB_FILE, create_connection, print_table_schema, print_table_contents
 from utils.common_vars import payment_accounts 
 
 logger = setup_logging(log_filename='binance_main.log')
@@ -134,21 +133,3 @@ async def sum_monthly_deposits(conn, account_details: str, buyer_name: Optional[
     cursor = await conn.execute(query, tuple(params))
     result = await cursor.fetchone()
     return result[0] if result and result[0] is not None else 0.0
-
-
-async def main():
-    conn = await create_connection(DB_FILE)
-    if conn is not None:
-        # Initialize the database (create tables and insert initial data)
-        await initialize_database(conn)
-        await print_table_schema(conn, 'payment_accounts')
-        await print_table_schema(conn, 'deposits')
-        await print_table_contents(conn, 'deposits')
-        await print_table_contents(conn, 'payment_accounts')
-
-        await conn.close()
-    else:
-        logger.error("Error! Cannot create the database connection.")
-
-if __name__ == '__main__':
-    asyncio.run(main())

@@ -61,15 +61,3 @@ def place_order(book, side, order_type, major=None, minor=None, price=None):
 
     response = send_request("POST", "/v3/orders/", order_payload)
     return response
-
-balance_response = send_request("GET", "/v3/balance/")
-print("balance was success")
-print(balance_response)
-
-# buy_order_response = place_order("btc_mxn", "buy", "limit", major=0.00011, price=445115.67)
-# print(buy_order_response)
-
-# sell_order_response = place_order("btc_mxn", "sell", "limit", major=0.00016, price=150000)
-# print(sell_order_response)
-
-

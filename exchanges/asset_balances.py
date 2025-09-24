@@ -287,30 +287,3 @@ async def generate_balance_report():
     except Exception as e:
         logger.error(f"Failed to generate balance report: {e}")
         return None
-
-
-async def main():
-    """Demo function showing system usage"""
-    try:
-        # Initialize database
-        setup_database()
-        
-        # Generate and display report
-        report = await generate_balance_report()
-        if report:
-            logger.info("Balance report generated successfully")
-        
-        # Display raw table data
-        conn = await create_connection(DB_FILE)
-        if conn:
-            await print_table_contents(conn, 'balances')
-            await conn.close()
-        else:
-            logger.error("Cannot create database connection")
-            
-    except Exception as e:
-        logger.error(f"Application error: {e}")
-
-
-if __name__ == "__main__":
-    asyncio.run(main())

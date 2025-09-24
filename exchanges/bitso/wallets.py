@@ -69,14 +69,6 @@ class BitsoWallets:
          "USD": "USDC"
         }
         return conversion_map.get(currency_code.upper(), currency_code)
-async def bitso_main():
-    for account_name, credentials in bitso_credentials.items():
-        logger.info(f"Fetching balances for {account_name}")
-        wallets = BitsoWallets(credentials['KEY'], credentials['SECRET'])
-        await wallets.save_balances_to_db(account_name)
-if __name__ == "__main__":
-    import asyncio
-    asyncio.run(bitso_main())
 
 
 

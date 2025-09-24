@@ -224,25 +224,3 @@ async def convert_to_c2c_format(ad_data):
         "saveAsTemplate": 0,
         "takerAdditionalKycRequired": 0,
     }
-
-
-async def main():
-    """Main function for testing and setup"""
-    # Drop and recreate database from scratch
-    await recreate_database()
-    
-    # Create connection and populate with initial data
-    conn = await create_connection(DB_FILE)
-    if conn is not None:
-        # Insert initial ads data
-        logger.info("Populating table with initial ads...")
-        await insert_initial_ads()
-        
-        # Show the results
-        await print_table_schema(conn, 'ads')
-        await print_table_contents(conn, 'ads')
-        await conn.close()
-
-
-if __name__ == "__main__":
-    asyncio.run(main())

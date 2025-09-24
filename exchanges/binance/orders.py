@@ -53,7 +53,3 @@ async def binance_orders_main(loop):
         binance_buy_order('BTC'),
         binance_buy_order('ETH'),
     )
-
-if __name__ == "__main__":
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(binance_orders_main(loop))

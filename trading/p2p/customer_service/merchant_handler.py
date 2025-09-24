@@ -29,7 +29,7 @@ from data.database.operations.binance_db_set import (
 )
 from data.database.deposits.binance_bank_deposit_db import log_deposit
 from exchanges.binance.orders import binance_buy_order
-from trading.p2p.binance_anti_fraud import handle_user_verification
+from trading.p2p.kyc.initial_verification import handle_user_verification
 from trading.p2p.kyc.blacklist import is_blacklisted
 from utils.common_vars import status_map
 from utils.common_utils import send_messages
