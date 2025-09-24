@@ -4,17 +4,17 @@ import unicodedata
 import traceback
 from typing import Optional, List
 
-from data.cache.order_cache import OrderCache
-from trading.p2p.kyc.blacklist import add_to_blacklist
-from trading.p2p.kyc.binance_language_selection import LanguageSelector
-from localization.lang_utils import (
+from src.data.cache.order_cache import OrderCache
+from src.customer_service.kyc.blacklist import add_to_blacklist
+from src.customer_service.kyc.language_selection import LanguageSelector
+from src.localization.lang_utils import (
     get_anti_fraud_stage3, get_anti_fraud_not_valid_response, 
     get_anti_fraud_user_denied, get_customer_verification_messages
 )
-from utils.common_vars import NOT_ACCEPTED_BANKS, ACCEPTED_BANKS, normalize_bank_name
-from data.database.operations.binance_db_set import update_buyer_bank, update_returning_customer_stage
-from utils.common_utils import send_messages
-from utils.logging_config import setup_logging
+from src.utils.common_vars import NOT_ACCEPTED_BANKS, ACCEPTED_BANKS, normalize_bank_name
+from src.data.database.operations.binance_db_set import update_buyer_bank, update_returning_customer_stage
+from src.utils.common_utils import send_messages
+from src.utils.logging_config import setup_logging
 
 logger = setup_logging(log_filename='binance_main.log')
 

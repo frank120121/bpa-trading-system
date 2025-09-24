@@ -6,8 +6,8 @@ from src.data.database.operations.ads_database import fetch_all_ads_from_databas
 from src.utils.common_vars import ads_dict
 from src.connectors.credentials import credentials_dict
 from src.connectors.binance.api import BinanceAPI
-from data.cache.share_data import SharedData, SharedSession
-from utils.logging_config import setup_logging
+from src.data.cache.share_data import SharedData, SharedSession
+from src.utils.logging_config import setup_logging
 
 logger = setup_logging(log_filename='binance_main.log')
 if sys.platform == 'win32':

@@ -6,7 +6,7 @@ from src.utils.logging_config import setup_logging
 
 logger = setup_logging(log_filename='binance_main.log')
 
-DB_FILE = 'C:/Users/p7016/Documents/bpa/data/database/binance_main.db'
+DB_FILE = 'C:/Users/p7016/Documents/bpa/src/data/database/binance_main.db'
 
 async def create_connection(db_file, num_retries=3, delay_seconds=5):
     logger.debug("Inside async_create_connection function")

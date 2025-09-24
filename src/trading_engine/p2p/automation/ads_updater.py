@@ -16,13 +16,13 @@ import asyncio
 import traceback
 
 from src.connectors.credentials import credentials_dict
-from data.cache.share_data import SharedSession, SharedData
-from data.database.operations.ads_database import update_ad_in_database
+from src.data.cache.share_data import SharedSession, SharedData
+from src.data.database.operations.ads_database import update_ad_in_database
 from src.connectors.binance.api import BinanceAPI
-from data.cache.bitso_cache import reference_prices
-from data.database.populate_database import populate_ads_with_details
+from src.data.cache.bitso_cache import reference_prices
+from src.data.database.populate_database import populate_ads_with_details
 from src.connectors.bitso.orderbook import start_bitso_order_book
-from utils.logging_config import setup_logging
+from src.utils.logging_config import setup_logging
 
 logger = setup_logging(log_filename='binance_main.log')
 

@@ -18,20 +18,20 @@ import traceback
 from typing import List, Optional, Dict, Any
 from enum import Enum
 
-from data.cache.order_cache import OrderCache
-from trading.p2p.kyc.blacklist import add_to_blacklist
-from data.database.operations.binance_db_set import update_anti_fraud_stage, update_buyer_bank, update_kyc_status, update_order_details
-from data.database.operations.binance_db_get import get_order_details
-from trading.p2p.kyc.binance_language_selection import LanguageSelector
-from localization.lang_utils import (
+from src.data.cache.order_cache import OrderCache
+from src.customer_service.kyc.blacklist import add_to_blacklist
+from src.data.database.operations.binance_db_set import update_anti_fraud_stage, update_buyer_bank, update_kyc_status, update_order_details
+from src.data.database.operations.binance_db_get import get_order_details
+from src.customer_service.kyc.language_selection import LanguageSelector
+from src.localization.lang_utils import (
     payment_warning_mxn, payment_warning_usd,
     get_anti_fraud_messages, get_anti_fraud_not_valid_response,
     get_anti_fraud_possible_fraud, get_anti_fraud_user_denied,
     get_anti_fraud_stage3
 )
-from utils.common_vars import NOT_ACCEPTED_BANKS, ACCEPTED_BANKS, normalize_bank_name
-from utils.common_utils import send_messages
-from utils.logging_config import setup_logging
+from src.utils.common_vars import NOT_ACCEPTED_BANKS, ACCEPTED_BANKS, normalize_bank_name
+from src.utils.common_utils import send_messages
+from src.utils.logging_config import setup_logging
 
 logger = setup_logging(log_filename='balance_manager.log')
 
