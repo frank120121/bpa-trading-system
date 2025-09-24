@@ -1,0 +1,45 @@
+# bpa/config/.gitignore
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Logs & databases
+*.log
+*.db
+
+# Credentials & tokens
+.env
+.env.*
+.env.email
+gmail_credentials.json
+token.pickle
+tokens.json
+outlook tokens.txt
+gmail_auth.py
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+*.egg-info/
+*.egg
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+binance_env/
+
+# IDE / editor
+.idea/
+.vscode/
+*.swp
+
+
+*.sqlite
+*.sqlite3
+credentials.py
+secrets.json
+config.ini
