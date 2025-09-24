@@ -5,9 +5,12 @@ from typing import Optional
 
 from src.utils.common_vars import BBVA_BANKS
 from src.data.database.connection import DB_FILE
+import logging
 from src.utils.logging_config import setup_logging
 
-logger = setup_logging(log_filename='binance_main.log')
+setup_logging(log_filename='binance_main.log')
+logger = logging.getLogger(__name__)
+
 
 # Helper functions for existence checks
 async def user_exists(conn, user_name):

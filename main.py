@@ -10,9 +10,11 @@ from src.data.database.deposits.binance_bank_deposit import PaymentManager
 from src.connectors.binance.api import BinanceAPI
 from src.data.cache.share_data import SharedData, SharedSession
 from src.connectors.bitso.orderbook import start_bitso_order_book
+import logging
 from src.utils.logging_config import setup_logging
 
-logger = setup_logging(log_filename='binance_main.log')
+setup_logging(log_filename='binance_main.log')
+logger = logging.getLogger(__name__)
 
 try:
     loop = asyncio.get_running_loop()

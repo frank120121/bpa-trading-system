@@ -13,10 +13,11 @@ from typing import Dict, Any, Optional
 from py_clob_client.client import ClobClient
 from py_clob_client.clob_types import ApiCreds, OrderArgs, OrderType
 from py_clob_client.order_builder.constants import BUY, SELL
+import logging
 from src.utils.logging_config import setup_logging
 
-logger = setup_logging(log_filename='binance_main.log')
-
+setup_logging(log_filename='binance_main.log')
+logger = logging.getLogger(__name__)
 class PolymarketClient:
     """Official Polymarket CLOB client wrapper for order execution and position management."""
 
@@ -98,40 +99,6 @@ class PolymarketClient:
             return {"status": "success", "data": response}
         except Exception as e:
             logger.error(f"Failed to place Polymarket FOK order: {e}")
-            return {"status": "error", "message": str(e)}
-
-    async def place_market_order(self, token_id: str, num_shares: Decimal, side: str = "BUY") -> Dict[str, Any]:
-        """Place a market order (immediate or cancel)."""
-        logger.info(f"Placing Polymarket market {side}: {num_shares:.2f} shares token={token_id}")
-        try:
-            # Get current best price for the side
-            current_price = await self.get_price(token_id, side=side)
-            if not current_price:
-                return {"status": "error", "message": "Could not get current price"}
-
-            # Add some slippage for market orders
-            if side.upper() == "BUY":
-                order_price = current_price * Decimal('1.02')  # 2% above current price
-            else:
-                order_price = current_price * Decimal('0.98')  # 2% below current price
-
-            order_args = OrderArgs(
-                price=float(order_price),
-                size=float(num_shares),
-                side=BUY if side.upper() == "BUY" else SELL,
-                token_id=token_id,
-            )
-            signed_order = await asyncio.to_thread(self.clob_client.create_order, order_args)
-            response = await asyncio.to_thread(self.clob_client.post_order, signed_order, OrderType.IOC)
-
-            if isinstance(response, dict):
-                status_code = response.get("status_code", 200)
-                if 200 <= int(status_code) < 300:
-                    return {"status": "success", "data": response}
-                return {"status": "error", "message": response}
-            return {"status": "success", "data": response}
-        except Exception as e:
-            logger.error(f"Failed to place Polymarket market order: {e}")
             return {"status": "error", "message": str(e)}
 
     async def place_limit_order(self, token_id: str, num_shares: Decimal, price: Decimal, 

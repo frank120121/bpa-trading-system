@@ -5,11 +5,13 @@ import asyncio
 from src.data.database.operations.ads_database import fetch_all_ads_from_database, update_ad_in_database
 from src.utils.common_vars import ads_dict
 from src.connectors.credentials import credentials_dict
-from src.connectors.binance.api import BinanceAPI
-from src.data.cache.share_data import SharedData, SharedSession
+from src.data.cache.share_data import SharedData
+import logging
 from src.utils.logging_config import setup_logging
 
-logger = setup_logging(log_filename='binance_main.log')
+setup_logging(log_filename='binance_main.log')
+logger = logging.getLogger(__name__)
+
 if sys.platform == 'win32':
     asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 

@@ -5,9 +5,12 @@ import aiosqlite
 
 from src.utils.common_vars import ads_dict
 from src.data.database.connection import DB_FILE
+import logging
 from src.utils.logging_config import setup_logging
 
-logger = setup_logging(log_filename='binance_main.log')
+setup_logging(log_filename='binance_main.log')
+logger = logging.getLogger(__name__)
+
 
 
 async def recreate_database():

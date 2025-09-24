@@ -1,12 +1,13 @@
 # bpa/binance_bank_deposit_db.py
 import datetime
-import asyncio
 from typing import Optional
 
-from src.utils.logging_config import setup_logging
 from src.utils.common_vars import payment_accounts 
+import logging
+from src.utils.logging_config import setup_logging
 
-logger = setup_logging(log_filename='binance_main.log')
+setup_logging(log_filename='binance_main.log')
+logger = logging.getLogger(__name__)
 
 async def initialize_database(conn):
     """

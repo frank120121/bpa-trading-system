@@ -1,10 +1,12 @@
 # bpa/common_utils_db.py
 import aiosqlite
 import asyncio
-
+import logging
 from src.utils.logging_config import setup_logging
 
-logger = setup_logging(log_filename='binance_main.log')
+setup_logging(log_filename='binance_main.log')
+logger = logging.getLogger(__name__)
+
 
 DB_FILE = 'C:/Users/p7016/Documents/bpa/src/data/database/binance_main.db'
 

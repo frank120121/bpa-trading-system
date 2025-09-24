@@ -12,9 +12,11 @@ import re
 from datetime import datetime, timezone as _tz
 from decimal import Decimal
 from typing import Dict, Any, Optional, List, Tuple
+import logging
 from src.utils.logging_config import setup_logging
 
-logger = setup_logging(log_filename='binance_main.log')
+setup_logging(log_filename='binance_main.log')
+logger = logging.getLogger(__name__)
 
 # Helper functions
 def _safe_json_list(x):
@@ -110,7 +112,6 @@ class GammaClient:
                             markets = data if isinstance(data, list) else data.get("data", [])
                             
                             if not markets:
-                                logger.info(f"No more markets found on page {page}, stopping pagination")
                                 return all_markets
                             
                             all_markets.extend(markets)
@@ -159,9 +160,6 @@ class GammaClient:
                 assets_found.add("SOL")
             elif "xrp" in question or "ripple" in question:
                 assets_found.add("XRP")
-        
-        logger.info(f"Final result: {len(all_markets)} total markets across {page - 1} pages")
-        logger.info(f"Assets found in complete response: {sorted(assets_found)}")
         
         return all_markets
 
@@ -302,9 +300,6 @@ class PolymarketScanner:
 
         tradable = self._filter_tradable_markets(gamma_markets)
         relevant_markets = self._match_markets_to_assets(tradable, assets_config)
-        
-        logger.debug(f"Gamma: tradable markets={len(tradable)}; asset-matched markets={len(relevant_markets)}")
-
         spot_prices = await self._get_spot_prices(assets_config)
         opportunities = await self._process_markets_to_opportunities(relevant_markets, spot_prices, days_min)
 
@@ -408,15 +403,11 @@ class PolymarketScanner:
                 days_to_expiry = (expiry - datetime.now(_tz.utc)).days
                 
                 if days_to_expiry >= 130:  
-                    logger.debug(f"Exclude (days_to_expiry {days_to_expiry} >= 130): {q}")
                     continue
                 if days_to_expiry < days_min:
-                    logger.debug(f"Exclude (days_to_expiry {days_to_expiry} < {days_min}): {q}")
                     continue
-
                 strike = self._extract_strike(q)
                 if not strike:
-                    logger.debug(f"Exclude (no strike parsed): {q}")
                     continue
 
                 no_token_id, best_price = await self._resolve_no_token_and_price(m)
@@ -431,7 +422,6 @@ class PolymarketScanner:
                         continue
 
                 if best_price > max_no_price:
-                    logger.debug(f"Exclude (NO price {best_price} > max {max_no_price}): {q}")
                     continue
 
                 opportunities.append({
@@ -445,7 +435,7 @@ class PolymarketScanner:
                     "binance_symbol": symbol,
                     "_trade_amount": asset_config['trade_amount']
                 })
-                logger.debug(f"Viable: {q} | strike ${strike} | NO ${best_price} | {days_to_expiry}d | token={no_token_id}")
+                logger.info(f"Viable: {q} | strike ${strike} | NO ${best_price} | {days_to_expiry}d | token={no_token_id}")
                 
             except Exception as e:
                 logger.info(f"Skip market due to parse/validate error: {q} -> {e}")

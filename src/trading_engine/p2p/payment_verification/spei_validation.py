@@ -19,11 +19,11 @@ from cep import Transferencia
 from src.utils.common_utils import download_image
 from src.customer_service.kyc.language_selection import LanguageSelector
 from src.utils.common_vars import BANK_SPEI_CODES
+import logging
 from src.utils.logging_config import setup_logging
 
-# Configure logging
-logger = setup_logging(log_filename='binance_main.log')
-
+setup_logging(log_filename='binance_main.log')
+logger = logging.getLogger(__name__)
 
 # ==========================================
 # CEP VALIDATION FUNCTIONS

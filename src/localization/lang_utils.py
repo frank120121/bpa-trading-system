@@ -1,9 +1,12 @@
 # bpa/lang_utils.py
 from typing import Callable, Dict, Union
 from src.utils.common_vars import ProhibitedPaymentTypes
+import logging
 from src.utils.logging_config import setup_logging
 
-logger = setup_logging(log_filename='binance_main.log')
+setup_logging(log_filename='binance_main.log')
+logger = logging.getLogger(__name__)
+
 
 # DEPRECATED: Keep for emergency fallback only
 def determine_language(fiat_unit):

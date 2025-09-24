@@ -2,8 +2,11 @@
 import asyncio
 from src.connectors.binance.wallets import BinanceWallets
 import traceback
+import logging
 from src.utils.logging_config import setup_logging
-logger = setup_logging(log_filename='binance_main.log')
+
+setup_logging(log_filename='binance_main.log')
+logger = logging.getLogger(__name__)
 
 async def get_wallets():
     wallets = BinanceWallets()

@@ -5,9 +5,11 @@ import requests
 
 from collections import deque
 import src.data.cache.bitso_cache as bitso_cache 
+import logging
 from src.utils.logging_config import setup_logging
 
-logger = setup_logging(log_filename='binance_main.log')
+setup_logging(log_filename='binance_main.log')
+logger = logging.getLogger(__name__)
 
 class BitsoOrderBook:
     def __init__(self, book):

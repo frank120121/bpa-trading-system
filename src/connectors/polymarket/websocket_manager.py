@@ -12,14 +12,14 @@ import threading
 import time
 from decimal import Decimal
 from typing import Dict, Set, Optional, Any
-from datetime import datetime, timezone
-
 from websocket import WebSocketApp
-from opportunities import shared_opportunities, OpportunityData
+
+from opportunities import shared_opportunities
+import logging
 from src.utils.logging_config import setup_logging
 
-logger = setup_logging(log_filename='binance_main.log')
-
+setup_logging(log_filename='binance_main.log')
+logger = logging.getLogger(__name__)
 class PolymarketWebSocketManager:
     """
     Manages WebSocket connections to Polymarket for real-time price monitoring.
@@ -139,119 +139,105 @@ class PolymarketWebSocketManager:
         """Handle incoming WebSocket messages."""
         try:
             if message == "PONG":
-                return  # Ignore pong responses
-            
-            # Log the raw message for debugging
-            logger.info(f"WebSocket message received: {message}")
-            
+                return  
             data = json.loads(message)
             
-            # Polymarket sends an array of market updates
+            # Handle both array and single object formats
             if isinstance(data, list):
                 for market_update in data:
-                    if isinstance(market_update, dict):
-                        asset_id = market_update.get("asset_id")
-                        if asset_id and asset_id in self.subscribed_tokens:
-                            # Extract price from orderbook data
-                            price = self._extract_price_from_polymarket_message(market_update)
-                            if price is not None:
-                                # Since we're in a separate thread, we need to handle the async call differently
-                                self._handle_price_update(asset_id, price)
+                    self._process_market_update(market_update)
+            elif isinstance(data, dict):
+                self._process_market_update(data)
             
         except json.JSONDecodeError:
-            logger.debug(f"Non-JSON message received: {message}")
+            logger.info(f"Non-JSON message received: {message}")
         except Exception as e:
             logger.error(f"Error handling WebSocket message: {e}")
 
-    def _handle_price_update(self, token_id: str, new_price: Decimal):
-        """Handle price update in a thread-safe way."""
+    def _process_market_update(self, market_update: dict):
+        """Process a single market update message."""
         try:
-            # Update price in shared resource (this is thread-safe)
-            updated = shared_opportunities.update_price(token_id, new_price)
-            
-            if updated:
-                logger.debug(f"Updated price for {token_id}: ${new_price}")
-                
-                # Check if we should unsubscribe due to price thresholds
-                if (new_price <= self.min_price_threshold or 
-                    new_price >= self.max_price_threshold):
-                    
-                    logger.info(f"Price threshold hit for {token_id}: ${new_price}. Will unsubscribe on next connection cycle...")
-                    
-                    # Remove from shared opportunities
-                    opp = shared_opportunities.get_opportunity_by_token(token_id)
-                    if opp:
-                        shared_opportunities.remove_opportunity(opp.condition_id)
-        except Exception as e:
-            logger.error(f"Error handling price update: {e}")
-
-    def _extract_price_from_polymarket_message(self, market_data: Dict[str, Any]) -> Optional[Decimal]:
-        try:
-            event_type = market_data.get("event_type", "")
+            event_type = market_update.get("event_type", "")
             
             if event_type == "price_change":
-                price_changes = market_data.get("price_changes", [])
+                # Handle price_change format
+                price_changes = market_update.get("price_changes", [])
                 for change in price_changes:
                     asset_id = change.get("asset_id")
-                    logger.info(f"DEBUG: Processing price change for asset_id: {asset_id}")
-                    logger.info(f"DEBUG: Subscribed tokens: {list(self.subscribed_tokens)}")
-                    logger.info(f"DEBUG: Asset ID in subscribed: {asset_id in self.subscribed_tokens}")
-                    
                     if asset_id and asset_id in self.subscribed_tokens:
-                        best_bid = change.get("best_bid")
-                        if best_bid:
-                            try:
-                                bid_price = Decimal(str(best_bid))
-                                competitive_price = bid_price + Decimal('0.001')
-                                logger.info(f"DEBUG: Calculated competitive price: {competitive_price} from bid: {bid_price}")
-                                return competitive_price
-                            except (ValueError, TypeError) as e:
-                                logger.error(f"DEBUG: Error converting bid price: {e}")
-                                
-                            except (ValueError, TypeError):
-                                continue
+                        price = self._extract_price_from_price_change(change)
+                        if price is not None:
+                            self._handle_price_update(asset_id, price)
             
             elif event_type == "book":
-                # Original book format - use bids to calculate competitive price
-                bids = market_data.get("bids", [])
-                if not bids:
-                    logger.debug(f"No bids found in market data for asset {market_data.get('asset_id')}")
-                    return None
-                
-                # Find the best (highest) bid price
-                best_bid = None
-                for bid in bids:
-                    if isinstance(bid, dict) and "price" in bid:
-                        try:
-                            price = Decimal(str(bid["price"]))
-                            if best_bid is None or price > best_bid:
-                                best_bid = price
-                        except (ValueError, TypeError):
-                            continue
-                
-                if best_bid:
-                    # Return bid + 0.001
-                    return best_bid + Decimal('0.001')
+                # Handle book format
+                asset_id = market_update.get("asset_id")
+                if asset_id and asset_id in self.subscribed_tokens:
+                    price = self._extract_price_from_book(market_update)
+                    if price is not None:
+                        self._handle_price_update(asset_id, price)
+                        
+        except Exception as e:
+            logger.error(f"Error processing market update: {e}")
+
+    def _extract_price_from_price_change(self, change: dict) -> Optional[Decimal]:
+        """Extract price from a price_change event."""
+        try:
+            best_bid = change.get("best_bid")
+            best_ask = change.get("best_ask")
             
-            logger.debug(f"No valid price found in message: {market_data}")
+            if best_bid:
+                bid_price = Decimal(str(best_bid))
+                competitive_price = bid_price + Decimal('0.001')
+                
+                # Ensure we don't exceed the ask price
+                if best_ask:
+                    ask_price = Decimal(str(best_ask))
+                    competitive_price = min(competitive_price, ask_price)                
+                return competitive_price
+            
+            return None
+            
+        except (ValueError, TypeError) as e:
+            logger.error(f"Error extracting price from price_change: {e}")
+            return None
+
+    def _extract_price_from_book(self, market_data: dict) -> Optional[Decimal]:
+        """Extract price from a book event."""
+        try:
+            bids = market_data.get("bids", [])
+            if not bids:
+                return None
+            
+            # Find the best (highest) bid price
+            best_bid = None
+            for bid in bids:
+                if isinstance(bid, dict) and "price" in bid:
+                    try:
+                        price = Decimal(str(bid["price"]))
+                        if best_bid is None or price > best_bid:
+                            best_bid = price
+                    except (ValueError, TypeError):
+                        continue
+            
+            if best_bid:
+                competitive_price = best_bid + Decimal('0.001')
+                return competitive_price
+            
             return None
             
         except Exception as e:
-            logger.error(f"Error extracting price from Polymarket message: {e}")
+            logger.error(f"Error extracting price from book: {e}")
             return None
 
     def _handle_price_update(self, token_id: str, new_price: Decimal):
+        """Handle price update in a thread-safe way. FIXED VERSION - only one copy!"""
         try:
-            logger.info(f"DEBUG: Handling price update for token {token_id}: ${new_price}")
             
             # Update price in shared resource (this is thread-safe)
             updated = shared_opportunities.update_price(token_id, new_price)
-            
-            logger.info(f"DEBUG: Price update result: updated={updated}")
-            
-            if updated:
-                logger.info(f"Updated price for {token_id}: ${new_price}")
-                
+                        
+            if updated:                
                 # Check if we should unsubscribe due to price thresholds
                 if (new_price <= self.min_price_threshold or 
                     new_price >= self.max_price_threshold):
@@ -262,6 +248,7 @@ class PolymarketWebSocketManager:
                     opp = shared_opportunities.get_opportunity_by_token(token_id)
                     if opp:
                         shared_opportunities.remove_opportunity(opp.condition_id)
+                        
         except Exception as e:
             logger.error(f"Error handling price update: {e}")
 

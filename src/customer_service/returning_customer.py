@@ -14,9 +14,11 @@ from src.localization.lang_utils import (
 from src.utils.common_vars import NOT_ACCEPTED_BANKS, ACCEPTED_BANKS, normalize_bank_name
 from src.data.database.operations.binance_db_set import update_buyer_bank, update_returning_customer_stage
 from src.utils.common_utils import send_messages
+import logging
 from src.utils.logging_config import setup_logging
 
-logger = setup_logging(log_filename='binance_main.log')
+setup_logging(log_filename='binance_main.log')
+logger = logging.getLogger(__name__)
 
 def normalize_string(input_str: str) -> str:
     """Normalize string by removing diacritics and converting to lowercase."""

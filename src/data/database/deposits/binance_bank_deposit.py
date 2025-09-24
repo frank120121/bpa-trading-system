@@ -5,9 +5,12 @@ from typing import Dict, Optional, Any
 from src.data.database.operations.binance_db_get import get_order_details
 from src.data.database.operations.binance_db_set import update_order_details
 from src.data.database.deposits.binance_bank_deposit_db import update_last_used_timestamp, sum_recent_deposits, sum_monthly_deposits
+import logging
 from src.utils.logging_config import setup_logging
 
-logger = setup_logging(log_filename='binance_main.log')
+setup_logging(log_filename='binance_main.log')
+logger = logging.getLogger(__name__)
+
 
 
 # --- Start of New Buyer Limit Constants ---

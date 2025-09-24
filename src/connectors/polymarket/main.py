@@ -27,10 +27,11 @@ from opportunities import shared_opportunities
 
 # --- Configuration and Logging ---
 
+import logging
 from src.utils.logging_config import setup_logging
 
-logger = setup_logging(log_filename='binance_main.log')
-
+setup_logging(log_filename='binance_main.log')
+logger = logging.getLogger(__name__)
 def load_config(filename="config.ini"):
     """Loads configuration from an INI file."""
     if not os.path.exists(filename):
@@ -325,7 +326,7 @@ class PolymarketBinanceHedgingBot:
                         
                         await self.execute_hedge(best_opportunity)
                     else:
-                        logger.debug("No suitable opportunities available for execution")
+                        logger.info("No suitable opportunities available for execution")
                 
                 await asyncio.sleep(15)  # 15 seconds between scans
                 

@@ -34,9 +34,12 @@ from src.customer_service.kyc.blacklist import is_blacklisted
 from src.utils.common_vars import status_map
 from src.utils.common_utils import send_messages
 from src.customer_service.returning_customer import returning_customer
+import logging
 from src.utils.logging_config import setup_logging
 
-logger = setup_logging(log_filename='binance_main.log')
+setup_logging(log_filename='binance_main.log')
+logger = logging.getLogger(__name__)
+
 
 @dataclass
 class OrderData:

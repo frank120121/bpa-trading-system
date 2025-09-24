@@ -7,10 +7,12 @@ import asyncio
 from PIL import Image
 from io import BytesIO
 from src.connectors.binance.endpoints import TIME_ENDPOINT_V1, TIME_ENDPOINT_V3
-
+import logging
 from src.utils.logging_config import setup_logging
 
-logger = setup_logging(log_filename='binance_main.log')
+setup_logging(log_filename='binance_main.log')
+logger = logging.getLogger(__name__)
+
 
 def hashing(query_string, secret):
     return hmac.new(secret.encode('utf-8'), query_string.encode('utf-8'), hashlib.sha256).hexdigest()

@@ -9,9 +9,11 @@ import threading
 from datetime import datetime, timezone
 from decimal import Decimal
 from typing import Dict, Any, List, Optional, Set
+import logging
 from src.utils.logging_config import setup_logging
 
-logger = setup_logging(log_filename='binance_main.log')
+setup_logging(log_filename='binance_main.log')
+logger = logging.getLogger(__name__)
 
 class OpportunityData:
     """Represents a single market opportunity with metadata."""
@@ -36,20 +38,11 @@ class OpportunityData:
         
         # Status tracking
         self.active = True
-            
-    def update_price(self, no_token_id: str, new_price: Decimal) -> bool:
-        """Update the current price for a NO token."""
-        with self._lock:
-            logger.info(f"DEBUG: Attempting to update price for token {no_token_id}: ${new_price}")
-            opp = self.get_opportunity_by_token(no_token_id)
-            if opp:
-                logger.info(f"DEBUG: Found opportunity for token, updating price from {opp.current_no_price} to {new_price}")
-                opp.update_price(new_price)
-                logger.info(f"DEBUG: Updated price for {no_token_id}: ${new_price}")
-                return True
-            else:
-                logger.warning(f"DEBUG: No opportunity found for token {no_token_id}")
-                return False
+        
+    def update_price(self, new_price: Decimal):
+        """Update the current NO token price."""
+        self.current_no_price = new_price
+        self.last_price_update = datetime.now(timezone.utc)
         
     def should_unsubscribe(self) -> bool:
         """Check if this opportunity should be unsubscribed based on price thresholds."""
@@ -112,7 +105,6 @@ class SharedOpportunities:
                 existing = self._opportunities[condition_id]
                 existing.days_to_expiry = opportunity_dict['days_to_expiry']
                 existing.active = True  # Refresh active status
-                logger.debug(f"Updated existing opportunity: {condition_id}")
                 return False
             
             # Create new opportunity
@@ -142,9 +134,17 @@ class SharedOpportunities:
         """Remove an opportunity from the shared resource."""
         with self._lock:
             if condition_id not in self._opportunities:
+                logger.warning(f"DEBUG: Attempted to remove non-existent opportunity: {condition_id}")
                 return False
                 
             opp = self._opportunities[condition_id]
+            
+            # Add stack trace to see WHO is calling this remove
+            import traceback
+            stack = traceback.format_stack()
+            logger.info(f"DEBUG: Removing opportunity {condition_id}. Called from:")
+            for line in stack[-3:-1]:  # Show the last 2 stack frames (excluding this one)
+                logger.info(f"DEBUG: {line.strip()}")
             
             # Clean up mappings
             if opp.no_token_id in self._token_to_condition:
@@ -209,12 +209,22 @@ class SharedOpportunities:
         Returns True if price was updated, False if token not found.
         """
         with self._lock:
-            opp = self.get_opportunity_by_token(no_token_id)
-            if opp:
-                opp.update_price(new_price)
-                logger.debug(f"Updated price for {no_token_id}: ${new_price}")
-                return True
-            return False
+            
+            # Find the opportunity by token ID
+            condition_id = self._token_to_condition.get(no_token_id)
+            if not condition_id:
+                logger.warning(f"DEBUG: No condition_id found for token {no_token_id}")
+                return False
+            
+            # Get the opportunity
+            opp = self._opportunities.get(condition_id)
+            if not opp:
+                logger.warning(f"DEBUG: No opportunity found for condition_id {condition_id}")
+                return False
+            
+            # Update the price
+            opp.update_price(new_price)
+            return True
     
     def get_current_price(self, no_token_id: str) -> Optional[Decimal]:
         """Get the current cached price for a NO token."""
