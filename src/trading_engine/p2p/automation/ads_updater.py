@@ -15,13 +15,13 @@ Key Features:
 import asyncio
 import traceback
 
-from core.credentials import credentials_dict
+from src.connectors.credentials import credentials_dict
 from data.cache.share_data import SharedSession, SharedData
 from data.database.operations.ads_database import update_ad_in_database
-from exchanges.binance.api import BinanceAPI
+from src.connectors.binance.api import BinanceAPI
 from data.cache.bitso_cache import reference_prices
 from data.database.populate_database import populate_ads_with_details
-from exchanges.bitso.orderbook import start_bitso_order_book
+from src.connectors.bitso.orderbook import start_bitso_order_book
 from utils.logging_config import setup_logging
 
 logger = setup_logging(log_filename='binance_main.log')

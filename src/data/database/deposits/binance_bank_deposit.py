@@ -2,10 +2,10 @@
 import asyncio
 from typing import Dict, Optional, Any
 
-from data.database.operations.binance_db_get import get_order_details
-from data.database.operations.binance_db_set import update_order_details
-from data.database.deposits.binance_bank_deposit_db import update_last_used_timestamp, sum_recent_deposits, sum_monthly_deposits
-from utils.logging_config import setup_logging
+from src.data.database.operations.binance_db_get import get_order_details
+from src.data.database.operations.binance_db_set import update_order_details
+from src.data.database.deposits.binance_bank_deposit_db import update_last_used_timestamp, sum_recent_deposits, sum_monthly_deposits
+from src.utils.logging_config import setup_logging
 
 logger = setup_logging(log_filename='binance_main.log')
 

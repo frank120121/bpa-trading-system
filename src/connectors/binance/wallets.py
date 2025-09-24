@@ -4,7 +4,7 @@ import hashlib
 import aiohttp
 import asyncio
 import platform
-from core.credentials import credentials_dict
+from src.connectors.credentials import credentials_dict
 from utils.common_utils import get_server_timestamp
 from exchanges.asset_balances import update_balance, get_balance
 from utils.logging_config import setup_logging

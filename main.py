@@ -2,16 +2,15 @@
 import asyncio
 import traceback
 
-from utils.logging_config import setup_logging
-from trading.p2p.customer_service.c2c_websocket import main_binance_c2c
-from trading.p2p.automation.ads_updater import update_ads_main
-from data.database.populate_database import populate_ads_with_details
-from data.database.connection import create_connection, DB_FILE
-from data.database.deposits.binance_bank_deposit import PaymentManager
-from exchanges.binance.api import BinanceAPI
-from data.cache.share_data import SharedData, SharedSession
-from exchanges.bitso.orderbook import start_bitso_order_book
-from utils.logging_config import setup_logging
+from src.customer_service.c2c_websocket import main_binance_c2c
+from src.trading_engine.p2p.automation.ads_updater import update_ads_main
+from src.data.database.populate_database import populate_ads_with_details
+from src.data.database.connection import create_connection, DB_FILE
+from src.data.database.deposits.binance_bank_deposit import PaymentManager
+from src.connectors.binance.api import BinanceAPI
+from src.data.cache.share_data import SharedData, SharedSession
+from src.connectors.bitso.orderbook import start_bitso_order_book
+from src.utils.logging_config import setup_logging
 
 logger = setup_logging(log_filename='binance_main.log')
 

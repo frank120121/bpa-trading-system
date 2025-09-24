@@ -16,10 +16,10 @@ from typing import List, Optional
 from abc import ABC, abstractmethod
 
 from cep import Transferencia
-from utils.common_utils import download_image
-from trading.p2p.kyc.binance_language_selection import LanguageSelector
-from utils.common_vars import BANK_SPEI_CODES
-from utils.logging_config import setup_logging
+from src.utils.common_utils import download_image
+from src.customer_service.kyc.language_selection import LanguageSelector
+from src.utils.common_vars import BANK_SPEI_CODES
+from src.utils.logging_config import setup_logging
 
 # Configure logging
 logger = setup_logging(log_filename='binance_main.log')

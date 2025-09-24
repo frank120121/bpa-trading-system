@@ -2,9 +2,9 @@
 import aiosqlite
 from typing import Any, Dict, Union
 
-from data.cache.share_data import SharedData
-from data.database.connection import execute_and_commit
-from utils.logging_config import setup_logging
+from src.data.cache.share_data import SharedData
+from src.data.database.connection import execute_and_commit
+from src.utils.logging_config import setup_logging
 
 
 logger = setup_logging(log_filename='binance_main.log')

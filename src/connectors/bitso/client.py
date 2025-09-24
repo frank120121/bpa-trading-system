@@ -3,7 +3,7 @@ import requests
 import time
 import hashlib
 import hmac
-from core.credentials import bitso_credentials
+from src.connectors.credentials import bitso_credentials
 
 API_KEY = bitso_credentials['bitso_account_MGL']['KEY']
 API_SECRET = bitso_credentials['bitso_account_MGL']['SECRET']

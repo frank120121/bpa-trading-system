@@ -2,7 +2,7 @@ import aiohttp
 import hashlib
 import hmac
 import asyncio
-from core.credentials import credentials_dict
+from src.connectors.credentials import credentials_dict
 from utils.common_utils import get_server_timestamp
 import logging
 

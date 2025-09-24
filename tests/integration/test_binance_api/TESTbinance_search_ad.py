@@ -2,7 +2,7 @@ import asyncio
 import logging
 import sys
 
-from core.credentials import credentials_dict
+from src.connectors.credentials import credentials_dict
 from exchanges.binance.api import BinanceAPI
 
 logger = logging.getLogger(__name__)

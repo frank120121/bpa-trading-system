@@ -118,7 +118,7 @@ if __name__ == "__main__":
         sys.path.append('C:\\Users\\p7016\\Documents\\bpa')
 
         try:
-            from core.credentials import credentials_dict
+            from src.connectors.credentials import credentials_dict
         except ModuleNotFoundError:
             print("Failed to import credentials. Please check the path and ensure credentials.py is in the specified directory.")
             sys.exit(1)

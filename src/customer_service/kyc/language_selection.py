@@ -1,9 +1,9 @@
 # binance_language_selection.py
 from typing import Optional, Tuple
 
-from data.database.operations.binance_db_get import get_user_language_preference, get_language_selection_stage
-from data.database.operations.binance_db_set import set_user_language_preference, set_language_selection_stage
-from utils.logging_config import setup_logging
+from src.data.database.operations.binance_db_get import get_user_language_preference, get_language_selection_stage
+from src.data.database.operations.binance_db_set import set_user_language_preference, set_language_selection_stage
+from src.utils.logging_config import setup_logging
 
 logger = setup_logging(log_filename='binance_main.log')
 

@@ -2,7 +2,7 @@ import logging
 import asyncio
 
 from exchanges.binance.api import BinanceAPI
-from core.credentials import credentials_dict
+from src.connectors.credentials import credentials_dict
 from data.cache.share_data import SharedSession
 
 # Configure logging

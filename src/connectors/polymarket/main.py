@@ -388,7 +388,7 @@ def main():
     
     # Import credentials (you'll need to create this file)
     try:
-        from core.credentials import credentials_dict, polymarket_credentials
+        from src.connectors.credentials import credentials_dict, polymarket_credentials
         binance_account = 'account_1'
     except ImportError:
         logger.critical("CRITICAL: credentials.py file not found. Please create it with your API credentials.")

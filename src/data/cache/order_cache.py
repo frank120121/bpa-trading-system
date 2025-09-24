@@ -1,9 +1,9 @@
 # bpa/binance_order_cache.py
 import asyncio
 from typing import Dict, Any, Optional
-from data.cache.async_dict import AsyncSafeDict
 
-from utils.logging_config import setup_logging
+from src.data.cache.async_dict import AsyncSafeDict
+from src.utils.logging_config import setup_logging
 
 logger = setup_logging(log_filename='binance_main.log')
 

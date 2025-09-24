@@ -1,8 +1,7 @@
 # bpa/binance_db.py
-import asyncio
 import aiosqlite
-from data.database.connection import DB_FILE
-from utils.logging_config import setup_logging
+from src.data.database.connection import DB_FILE
+from src.utils.logging_config import setup_logging
 
 logger = setup_logging(log_filename='binance_main.log')
 

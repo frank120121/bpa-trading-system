@@ -1,4 +1,4 @@
-from core.credentials import credentials_dict
+from src.connectors.credentials import credentials_dict
 import requests
 import hashlib
 import hmac

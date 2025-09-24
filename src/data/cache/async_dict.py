@@ -1,9 +1,8 @@
 # bpa/async_safe_dict.py
 import asyncio
-import logging
+from src.utils.logging_config import setup_logging
 
-logger = logging.getLogger(__name__)
-
+logger = setup_logging(log_filename='binance_main.log')
 class AsyncSafeDict:
     def __init__(self):
         self._dict = {}

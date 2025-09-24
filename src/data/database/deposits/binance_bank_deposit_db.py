@@ -3,8 +3,8 @@ import datetime
 import asyncio
 from typing import Optional
 
-from utils.logging_config import setup_logging
-from utils.common_vars import payment_accounts 
+from src.utils.logging_config import setup_logging
+from src.utils.common_vars import payment_accounts 
 
 logger = setup_logging(log_filename='binance_main.log')
 

@@ -2,9 +2,9 @@
 import aiohttp
 import asyncio
 
-from data.cache.async_dict import AsyncSafeDict
-from data.database.operations.ads_database import update_ad_in_database
-from utils.logging_config import setup_logging
+from src.data.cache.async_dict import AsyncSafeDict
+from src.data.database.operations.ads_database import update_ad_in_database
+from src.utils.logging_config import setup_logging
 
 logger = setup_logging(log_filename='binance_main.log')
 

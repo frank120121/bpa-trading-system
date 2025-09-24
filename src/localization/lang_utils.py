@@ -1,7 +1,7 @@
 # bpa/lang_utils.py
 from typing import Callable, Dict, Union
-from utils.common_vars import ProhibitedPaymentTypes
-from utils.logging_config import setup_logging
+from src.utils.common_vars import ProhibitedPaymentTypes
+from src.utils.logging_config import setup_logging
 
 logger = setup_logging(log_filename='binance_main.log')
 

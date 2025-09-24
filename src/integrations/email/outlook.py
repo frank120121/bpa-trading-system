@@ -7,7 +7,7 @@ import os
 import datetime
 from dotenv import load_dotenv
 
-from utils.logging_config import setup_logging
+from src.utils.logging_config import setup_logging
 
 logger = setup_logging(log_filename='binance_main.log')
 

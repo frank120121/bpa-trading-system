@@ -1,6 +1,6 @@
 #TESTbinance_getAdDetails.py
 import asyncio
-from core.credentials import credentials_dict
+from src.connectors.credentials import credentials_dict
 from exchanges.binance.api import BinanceAPI
 from data.cache.share_data import SharedSession
 import logging

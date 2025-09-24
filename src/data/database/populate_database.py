@@ -2,10 +2,10 @@
 import sys
 import asyncio
 
-from data.database.operations.ads_database import fetch_all_ads_from_database, update_ad_in_database
-from utils.common_vars import ads_dict
-from core.credentials import credentials_dict
-from exchanges.binance.api import BinanceAPI
+from src.data.database.operations.ads_database import fetch_all_ads_from_database, update_ad_in_database
+from src.utils.common_vars import ads_dict
+from src.connectors.credentials import credentials_dict
+from src.connectors.binance.api import BinanceAPI
 from data.cache.share_data import SharedData, SharedSession
 from utils.logging_config import setup_logging
 

@@ -1,6 +1,6 @@
 from binance.client import Client
 from binance.enums import ORDER_TYPE_MARKET
-from core.credentials import credentials_dict
+from src.connectors.credentials import credentials_dict
 
 # Select the account for which you want to place an order
 selected_account = "account_2"

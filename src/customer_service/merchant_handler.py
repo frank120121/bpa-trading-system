@@ -5,36 +5,36 @@ import asyncio
 from typing import Optional, Dict, Any
 from dataclasses import dataclass
 
-from data.cache.order_cache import OrderCache
-from trading.p2p.payment_verification.spei_validation import TransferValidationQueue, TransferValidator
-from data.database.operations.binance_db_set import insert_or_update_order
-from trading.p2p.kyc.binance_language_selection import LanguageSelector
+from src.data.cache.order_cache import OrderCache
+from src.trading_engine.p2p.payment_verification.spei_validation import TransferValidationQueue, TransferValidator
+from src.data.database.operations.binance_db_set import insert_or_update_order
+from src.customer_service.kyc.language_selection import LanguageSelector
 
-from localization.lang_utils import (
+from src.localization.lang_utils import (
     get_message_by_language, get_default_help, 
     verified_customer_greeting, transaction_denied,
     get_response_for_menu_choice, is_valid_choice,
     get_invalid_choice_reply, get_menu_for_order,
     determine_language
 )
-from data.database.operations.binance_db_get import (
+from src.data.database.operations.binance_db_get import (
     get_account_number, is_menu_presented, get_kyc_status,
     get_anti_fraud_stage, get_buyer_bank, get_order_details,
     get_returning_customer_stage
 )
 
-from data.database.operations.binance_db_set import (
+from src.data.database.operations.binance_db_set import (
     update_order_status, update_total_spent, update_buyer_bank,
     set_menu_presented
 )
-from data.database.deposits.binance_bank_deposit_db import log_deposit
-from exchanges.binance.orders import binance_buy_order
-from trading.p2p.kyc.initial_verification import handle_user_verification
-from trading.p2p.kyc.blacklist import is_blacklisted
-from utils.common_vars import status_map
-from utils.common_utils import send_messages
-from trading.p2p.customer_service.returning_customer import returning_customer
-from utils.logging_config import setup_logging
+from src.data.database.deposits.binance_bank_deposit_db import log_deposit
+from src.connectors.binance.orders import binance_buy_order
+from src.customer_service.kyc.initial_verification import handle_user_verification
+from src.customer_service.kyc.blacklist import is_blacklisted
+from src.utils.common_vars import status_map
+from src.utils.common_utils import send_messages
+from src.customer_service.returning_customer import returning_customer
+from src.utils.logging_config import setup_logging
 
 logger = setup_logging(log_filename='binance_main.log')
 

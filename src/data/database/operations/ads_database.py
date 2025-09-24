@@ -2,11 +2,10 @@
 
 import json
 import aiosqlite
-import asyncio
 
-from utils.common_vars import ads_dict
-from data.database.connection import DB_FILE, print_table_contents, create_connection, print_table_schema
-from utils.logging_config import setup_logging
+from src.utils.common_vars import ads_dict
+from src.data.database.connection import DB_FILE
+from src.utils.logging_config import setup_logging
 
 logger = setup_logging(log_filename='binance_main.log')
 

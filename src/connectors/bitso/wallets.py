@@ -4,7 +4,7 @@ import time
 import hashlib
 import hmac
 
-from core.credentials import bitso_credentials, BITSO_BASE_URL
+from src.connectors.credentials import bitso_credentials, BITSO_BASE_URL
 from exchanges.asset_balances import update_balance
 from utils.logging_config import setup_logging
 

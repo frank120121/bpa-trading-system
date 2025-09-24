@@ -3,9 +3,9 @@ from datetime import datetime
 import aiosqlite
 from typing import Optional
 
-from utils.common_vars import BBVA_BANKS
-from data.database.connection import DB_FILE
-from utils.logging_config import setup_logging
+from src.utils.common_vars import BBVA_BANKS
+from src.data.database.connection import DB_FILE
+from src.utils.logging_config import setup_logging
 
 logger = setup_logging(log_filename='binance_main.log')
 

@@ -3,14 +3,14 @@ import asyncio
 import json
 import websockets
 
-from trading.p2p.customer_service.merchant_handler import MerchantAccount
-from utils.common_utils import get_server_timestamp
-from data.database.connection import create_connection, DB_FILE
-from core.credentials import credentials_dict
-from data.cache.share_data import SharedSession
-from data.database.deposits.binance_bank_deposit import PaymentManager
-from exchanges.binance.api import BinanceAPI
-from utils.logging_config import setup_logging
+from src.customer_service.merchant_handler import MerchantAccount
+from src.utils.common_utils import get_server_timestamp
+from src.data.database.connection import create_connection, DB_FILE
+from src.connectors.credentials import credentials_dict
+from src.data.cache.share_data import SharedSession
+from src.data.database.deposits.binance_bank_deposit import PaymentManager
+from src.connectors.binance.api import BinanceAPI
+from src.utils.logging_config import setup_logging
 
 RETRY_DELAY = 0.1
 MAX_RETRY_DELAY = 1

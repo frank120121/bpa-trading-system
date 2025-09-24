@@ -2,7 +2,7 @@
 import asyncio
 import traceback
 import logging
-from core.credentials import credentials_dict
+from src.connectors.credentials import credentials_dict
 from data.cache.share_data import SharedSession, SharedData
 from data.database.operations.ads_database import update_ad_in_database
 from exchanges.binance.api import BinanceAPI
